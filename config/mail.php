@@ -53,11 +53,11 @@ return [
     | the same address. Here, you may specify a name and address that is
     | used globally for all e-mails that are sent by your application.
     |
-    */
-
+    */ 
+   
     'from' => [
-        'address' => 'hello@example.com',
-        'name' => 'Example',
+        'address' => 'noreply@sendright.com',
+        'name' => 'Send Right Team',
     ],
 
     /*

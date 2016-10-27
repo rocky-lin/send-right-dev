@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en"  ng-app="myApp" >
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -12,6 +12,10 @@
 
     <!-- Styles -->
     <link href="<?php print url('/'); ?>/public/css/app.css" rel="stylesheet">
+    <link href="<?php print url('/'); ?>/public/css/custom_style.css" rel="stylesheet">
+
+    <script src="<?php print url('/'); ?>/public/js/src/1.5.8-angular.min.js"></script> 
+
 
     <!-- Scripts -->
     <script>
@@ -32,12 +36,12 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
-                    </button>
+                    </button> 
 
                     <!-- Branding Image -->
-                    <a class="navbar-brand" href="{{ url('/') }}">
-                        {{ config('app.name', 'Laravel') }}
-                    </a>
+                    <a class="navbar-brand" href="{{ url('/') }}">{{ config('app.name', 'Laravel') }}</a>
+                    <a class="navbar-brand dropdown" href="{{ url('/user/contact') }}">Contacts</a>      
+
                 </div>
 
                 <div class="collapse navbar-collapse" id="app-navbar-collapse">
@@ -76,12 +80,19 @@
                     </ul>
                 </div>
             </div>
-        </nav>
-
+        </nav> 
         @yield('content')
-    </div>
+    </div> 
 
-    <!-- Scripts -->
-    <script src="<?php print url('/'); ?>/public/js/app.js"></script>
+    <!-- Scripts src -->
+        <script src="<?php print url('/'); ?>/public/js/src/jquery-3.1.1.min.js"></script>
+        <script src="<?php print url('/'); ?>/public/js/src/3.3.7-bootstrap.min.js"></script>
+
+        <script src="<?php print url('/'); ?>/public/js/src/1.4.8-angular-route.js"></script>
+        <script src="<?php print url('/'); ?>/public/js/src/jquery-ui.min.js"></script>
+     <!-- Scripts custom --> 
+        <script src="<?php print url('/'); ?>/public/js/custom_jquery.js"></script>
+        <script src="<?php print url('/'); ?>/public/js/custom_angular_js.js"></script>
+        <script src="<?php print url('/'); ?>/public/js/custom_js.js"></script> 
 </body>
 </html>

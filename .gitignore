@@ -1,6 +1,8 @@
+/config/database.php
 /vendor
-/.idea
-   
+/.idea 
+.env  
+
  # Windows image file caches
 Thumbs.db
 ehthumbs.db
@@ -31,6 +33,8 @@ $RECYCLE.BIN/
 .AppleDouble
 .LSOverride
 
+
+
 # Thumbnails
 ._*
 
@@ -48,3 +52,4 @@ $RECYCLE.BIN/
 Network Trash Folder
 Temporary Items
 .apdisk
+.env
