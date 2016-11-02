@@ -42,4 +42,13 @@ class User extends Authenticatable
     public static function getUserAccountContacts() {
         return self::find(Auth::user()->id)->user_account->account->contacts;
     }
+
+    public function routeNotificationForSlack() {
+        // https://hooks.slack.com/services/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 - #payments
+        // https://hooks.slack.com/services/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 - #jesus143
+        return 'https://hooks.slack.com/services/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'; 
+
+
+ 
+    }
 }

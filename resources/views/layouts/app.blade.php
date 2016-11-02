@@ -10,13 +10,12 @@
 
     <title>{{ config('app.name', 'Laravel') }}</title>
 
-    <!-- Styles -->
-    <link href="<?php print url('/'); ?>/public/css/app.css" rel="stylesheet">
-    <link href="<?php print url('/'); ?>/public/css/custom_style.css" rel="stylesheet">
-
-    <script src="<?php print url('/'); ?>/public/js/src/1.5.8-angular.min.js"></script> 
-
-
+    <!-- Styles --> 
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">  
+    <link href="<?php print url('/'); ?>/public/css/custom_style.css" rel="stylesheet"> 
+    <script src="<?php print url('/'); ?>/public/js/src/1.5.8-angular.min.js"></script>   
+    <script src="<?php print url('/'); ?>/public/js/src/ui-bootstrap-tpls-2.2.0.min.js"></script> 
+ 
     <!-- Scripts -->
     <script>
         window.Laravel = <?php echo json_encode([
@@ -40,7 +39,7 @@
 
                     <!-- Branding Image -->
                     <a class="navbar-brand" href="{{ url('/') }}">{{ config('app.name', 'Laravel') }}</a>
-                    <a class="navbar-brand dropdown" href="{{ url('/user/contact') }}">Contacts</a>      
+                    <a class="navbar-brand dropdown navbar-menu" href="{{ url('/user/contact') }}">Contacts</a>      
 
                 </div>
 
@@ -86,8 +85,7 @@
 
     <!-- Scripts src -->
         <script src="<?php print url('/'); ?>/public/js/src/jquery-3.1.1.min.js"></script>
-        <script src="<?php print url('/'); ?>/public/js/src/3.3.7-bootstrap.min.js"></script>
-
+        <script src="<?php print url('/'); ?>/public/js/src/3.3.7-bootstrap.min.js"></script> 
         <script src="<?php print url('/'); ?>/public/js/src/1.4.8-angular-route.js"></script>
         <script src="<?php print url('/'); ?>/public/js/src/jquery-ui.min.js"></script>
      <!-- Scripts custom --> 

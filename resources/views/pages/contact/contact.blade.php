@@ -3,7 +3,6 @@
 <div class="container"> 
     <div class="row">
         <div class="col-sm-12"> 
-        
             <div class="panel panel-default"> 
                 <div class="panel-heading">Dashboard</div>   
                 <div class="panel-body">  
@@ -23,29 +22,48 @@
                             <div/> 
                         </div>
                     </div>
-  
                     <div class="row" style="margin-left:0px; margin-right:0px"> 
                         <div  class="col-sm-12">
                             <table class="table table-hover">
                                 <thead>
                                     <tr>
-                                        <th>Firstname</th>
-                                        <th>Email</th>
-                                        <th>Contact Type</th> 
-                                        <th>Delete</th>
-                                        <th>Edit</th>
+                                        <th>
+                                        <label>First Name </label>
+                                          <a href="#" title="First Name" data-toggle="popover" data-trigger="hover" data-content="First name of your contact.">(?)</a>  
+                                        </th>
+                                        <th> 
+                                            <label>Email </label>
+                                            <a href="#" title="Email" data-toggle="popover" data-trigger="hover" data-content="Email of your contact.">(?)</a> 
+                                        </th>
+                                        <th> 
+                                            <label>Contact Type </label>
+                                            <a href="#" title="Email" data-toggle="popover" data-trigger="hover" data-content="Type of your contact, subscriber or contact">(?)</a> 
+                                        </th> 
+                                        <th> 
+                                            <label>Delete </label>
+                                            <a href="#" title="Delete" data-toggle="popover" data-trigger="hover" data-content="Delete your contact forever.">(?)</a> 
+                                        </th>
+                                        <th>
+                                            <label>Edit </label>
+                                            <a href="#" title="Edit" data-toggle="popover" data-trigger="hover" data-content="Update your contact.">(?)</a> 
+                                        </th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr  ng-repeat="item in data | filter:q | startFrom:currentPage*pageSize | limitTo:pageSize" >
-                                        <td>@{{item.first_name}} @{{item.last_name}}</td>
-                                        <td>@{{item.email}}</td>
-                                        <td>@{{item.type}}</td> 
-                                        <td> delete </td>
-                                        <td> edit</td>
+                                    <tr data-ng-hide="deleteContact[contact.id]"  ng-repeat="contact in data | filter:q | startFrom:currentPage*pageSize | limitTo:pageSize | orderBy : email" >
+                                        <td>@{{contact.first_name}} @{{contact.last_name}}</td>
+                                        <td>@{{contact.email}}</td>
+                                        <td>@{{contact.type}} </td> 
+
+                                        <td>   
+                                            <span class="glyphicon glyphicon-trash" aria-hidden="true" data-ng-click="deleteContact(contact)"></span>   
+                                        </td>
+                                        <td>
+                                             <span class="glyphicon glyphicon-pencil" aria-hidden="true" data-ng-click="editContact(contact)"></span> 
+                                        </td>
                                     </tr> 
                                 </tbody>
-                            </table> 
+                            </table>  
                             <button class="btn btn-info" ng-disabled="currentPage == 0" ng-click="currentPage=currentPage-1">
                                 Previous
                             </button>
@@ -55,8 +73,7 @@
                             </button>
                         </div>
                     </div>
-                </div>   
- 
+                </div>     
                 <hr>     
                 <a href="{{ route('contact.create')}}" title="">
                     <button type="button" class="btn btn-primary"> Add New Contact</button>
@@ -65,4 +82,4 @@
         </div>
     </div>
 </div>
-@endsection
+@endsection 

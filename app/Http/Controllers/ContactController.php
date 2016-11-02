@@ -10,6 +10,8 @@ use App\Contact;
 
 use App\User;
 
+
+
 class ContactController extends Controller
 {
     /**
@@ -21,8 +23,11 @@ class ContactController extends Controller
     {  
         return view("pages.contact.contact"); 
     }
-    public function getUserAccountContacts() {
-            return User::getUserAccountContacts();
+    public function getUserAccountContacts() { 
+            $contacts = User::getUserAccountContacts(); 
+            $collection = collect( $contacts ); 
+            $sorted = $collection->sortBy('id', SORT_REGULAR, true); 
+            return $sorted->values()->all();
     }
  
 
@@ -72,8 +77,14 @@ class ContactController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
-    {
-        return "edit sepcific contact";
+    { 
+ 
+        $contact = Contact::find($id); 
+        return view("pages.contact.contact-edit", compact('id', 'contact'));
+    }
+
+    public function getById($id) {
+        return Contact::find($id);
     }
 
     /**
@@ -84,10 +95,12 @@ class ContactController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
-    {
-        return "update sprecific contact";
+    {   
+        $input = $request->except(['_token', '_method']);  
+        Contact::where('id', $id)->update($input);    
+        return redirect()->back()->with('status', 'Successfully updated!'); 
     }
-
+    
     /**
      * Remove the specified resource from storage.
      *
@@ -95,7 +108,11 @@ class ContactController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
-    {
-        return "delete specific contact";
+    {  
+        if(Contact::find($id)->delete()){
+            return "Successfully deleted contact! id " . $id;
+        } else {
+            return "Failed to delete contact! id = " . $id; 
+        } 
     }
 }
