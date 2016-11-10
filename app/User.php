@@ -39,6 +39,10 @@ class User extends Authenticatable
         return self::find(Auth::user()->id)->user_account->account->id; 
     } 
 
+    public static function getUserAccountForms() {
+        return self::find(Auth::user()->id)->user_account->account->forms;
+    }
+
     public static function getUserAccountContacts() {
         return self::find(Auth::user()->id)->user_account->account->contacts;
     }

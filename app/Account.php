@@ -15,4 +15,7 @@ class Account extends Model
  	public function contacts() {
  		return $this->hasMany('App\Contact');
  	}
+ 	public function forms(){
+ 		return $this->hasMany('App\Form', 'account_id', 'id');
+ 	}
 }

@@ -1,21 +1,11 @@
-@if (count($errors) > 0)
-<div class="alert alert-danger">
-    <ul>
-        @foreach ($errors->all() as $error)
-            <li>{{ $error }}</li>
-        @endforeach
-    </ul>
-</div>
-@endif  
-@if (session('status'))
-<div class="alert alert-success">
-    {{ session('status') }}
-</div>
-@endif 
+
+
 
 @if(!empty($contact)) 
+<div ng-controller="myEditContactCtrl" data-ng-init="contactId={{$id}}" >  
 {{ Form::open(['route' => ['contact.update', $id], 'method'=>'PATCH', 'name'=>'addContactFrm', 'autocomplete'=>'off'])}}    
 @else
+<div ng-controller="myAddContactCtrl">
 {{ Form::open(['route' => 'contact.store', 'method'=>'post', 'name'=>'addContactFrm', 'autocomplete'=>'off'])}}    
 @endif 
     <div class="form-group">
@@ -65,12 +55,13 @@
         @endif  
 
    </div>  
-    </div>
     <div class="form-group">
         @if(!empty($contact)) 
             {{Form::submit('Update', ['class'=>'btn btn-default', 'ng-disabled'=>'addContactFrm.$invalid'])}}
         @else
              {{Form::submit('Create', ['class'=>'btn btn-default', 'ng-disabled'=>'addContactFrm.$invalid'])}}
         @endif  
-    </div>  
+    </div>   
+   
 {{ Form::close()}}  
+ 

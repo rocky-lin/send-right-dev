@@ -22,8 +22,10 @@ class CreateContactsTable extends Migration
             $table->string('location');
             $table->string('phone_number', 50);
             $table->string('telephone_number', 50); 
-            $table->string('type');  
-            $table->timestamps();   
+            $table->string('status',50)->default('active'); 
+            $table->string('type', 50);  
+            $table->string('history')->default('Added from the site');  
+            $table->timestamps();  
             $table->softDeletes();
         });
     }

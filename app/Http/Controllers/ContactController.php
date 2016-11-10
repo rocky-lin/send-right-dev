@@ -1,19 +1,18 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers; 
 
-use Illuminate\Http\Request;
-
-use App\Http\Requests;
-
-use App\Contact;
-
-use App\User;
-
-
-
+use Illuminate\Http\Request; 
+use App\Http\Requests; 
+use App\Contact; 
+use App\User; 
+use App\ListContact;
+use Storage; 
+use Excel;
 class ContactController extends Controller
 {
+
+    private $excelPath='';
     /**
      * Display a listing of the resource.
      *
@@ -40,6 +39,45 @@ class ContactController extends Controller
     {
           return view("pages.contact.contact-create"); 
        //return "show form to create a contact";
+    }
+        
+
+    public function import() {
+        return view('pages/contact/contact-import');
+    }
+
+    /**
+     * [import This will handle in importing files for create contact]
+     * @param  Request $request [description]
+     * @return [type]           [description]
+     */
+    public function importStore(Requests\StoreContactFileRequest $request) {  
+     
+        //save file to the server
+        $this->excelPath = $request->file('importFile')->store('contact/import/files');   
+
+        // extract file content to contact table
+        Excel::load('storage/app/' . $this->excelPath, function($reader) {  
+             $contacts = $reader->get();   
+             foreach ($contacts as $contact) { 
+                $contacArray['account_id']        = User::getUserAccount();
+                $contacArray['first_name']        = (!empty($contact->first_name)) ? $contact->first_name : '';
+                $contacArray['last_name']         = (!empty($contact->last_name)) ? $contact->last_name : '';
+                $contacArray['email']             = (!empty($contact->email)) ? $contact->email : '';
+                $contacArray['location']          = (!empty($contact->location)) ? $contact->location : '';
+                $contacArray['phone_number']      = (!empty($contact->phone_number)) ? $contact->phone_number : '';
+                $contacArray['telephone_number']  = (!empty($contact->telephone_number)) ? $contact->telephone_number : '';
+                $contacArray['status']            = (!empty($contact->status)) ? $contact->status : 'not active'; 
+                $contacArray['type']              = (!empty($contact->type)) ? $contact->type : 'import contact';  
+                $contacArray['history']           = (!empty($contact->history)) ? $contact->history : "Imported from  storage/app/$this->excelPath";  
+
+                $contactCreated = Contact::firstOrCreate($contacArray);   
+             } 
+        }); 
+        
+
+        return redirect()->back()->with('status1', 'successfully imported and extracted to contacts');
+        
     }
 
     /**
@@ -102,17 +140,16 @@ class ContactController extends Controller
     }
     
     /**
-     * Remove the specified resource from storage.
-     *
+     * Remove the specified resource from storage. 
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\Response    
+     * Delete specific contact
+     * Delete contact from the list details  
      */
     public function destroy($id)
-    {  
-        if(Contact::find($id)->delete()){
-            return "Successfully deleted contact! id " . $id;
-        } else {
-            return "Failed to delete contact! id = " . $id; 
-        } 
+    {   
+        ListContact::where('contact_id', $id)->delete(); 
+        Contact::find($id)->delete();  
+        return "Successfully deleted contact!";  
     }
 }

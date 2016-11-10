@@ -23,7 +23,7 @@
         ]); ?>
     </script>
 </head>
-<body>
+<body data-ng-init="document">
     <div id="app">
         <nav class="navbar navbar-default navbar-static-top">
             <div class="container">
@@ -39,7 +39,12 @@
 
                     <!-- Branding Image -->
                     <a class="navbar-brand" href="{{ url('/') }}">{{ config('app.name', 'Laravel') }}</a>
-                    <a class="navbar-brand dropdown navbar-menu" href="{{ url('/user/contact') }}">Contacts</a>      
+ 
+                    @if (!Auth::guest())   
+                        <a class="navbar-brand dropdown navbar-menu" href="{{ url('/user/contact') }}">Contacts</a>    
+                        <a class="navbar-brand dropdown navbar-menu" href="{{ url('/user/list') }}">List</a>      
+                        <a class="navbar-brand dropdown navbar-menu" href="{{ url('/user/form') }}">Form</a>      
+                    @endif 
 
                 </div>
 
@@ -79,9 +84,18 @@
                     </ul>
                 </div>
             </div>
-        </nav> 
-        @yield('content')
+        </nav>  
+        <div class='container'>
+            @yield('content')  
+        </div>
     </div> 
+
+        {{--   <footer class="footer">
+            <div class="container">
+                <br>
+                <p class="text-muted"> Copy right @ Send Right </p>
+            </div>
+        </footer> --}}
 
     <!-- Scripts src -->
         <script src="<?php print url('/'); ?>/public/js/src/jquery-3.1.1.min.js"></script>
@@ -92,5 +106,7 @@
         <script src="<?php print url('/'); ?>/public/js/custom_jquery.js"></script>
         <script src="<?php print url('/'); ?>/public/js/custom_angular_js.js"></script>
         <script src="<?php print url('/'); ?>/public/js/custom_js.js"></script> 
+
+
 </body>
 </html>

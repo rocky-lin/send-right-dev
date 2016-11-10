@@ -7,8 +7,7 @@
 
                 <div class="panel-heading">Dashboard</div>   
                 <div class="panel-body">  
-                    @include('pages/include/contact/contact-view')
-      
+                    @include('pages/include/form/form-view') 
             </div>
         </div>
     </div>

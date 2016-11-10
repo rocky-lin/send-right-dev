@@ -1,6 +1,10 @@
 /config/database.php
 /vendor
 /.idea 
+/debugging
+/.
+/.zip
+.zip
 .env  
 
  # Windows image file caches

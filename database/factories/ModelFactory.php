@@ -38,11 +38,7 @@ $factory->define(App\UserAccount::class, function (Faker\Generator $faker) {
         'account_id' => App\Account::create()->id, 
     ];
 });
-
-
-
-
-
+ 
 $factory->define(App\Contact::class, function (Faker\Generator $faker) { 
     static $password;
     return [
@@ -56,6 +52,52 @@ $factory->define(App\Contact::class, function (Faker\Generator $faker) {
             'type' =>'contact',
     ];
 });
+
+ 
+$factory->define(App\List1::class, function (Faker\Generator $faker) { 
+    static $password; 
+    return [ 
+            'account_id'=>1,
+            'name' => $faker->firstName . ' ' . $faker->lastName,
+            'url' => 'http://wwww.google.com',
+            'reminder' => $faker->sentence,
+    ];
+});
+ 
+$factory->define(App\ListContact::class, function (Faker\Generator $faker) { 
+    static $password; 
+    return [
+           'list_id' => rand(1,App\List1::count()),
+            'contact_id' => rand(1,App\Contact::count()) 
+    ];
+});
+ 
+
+
+$factory->define(App\Form::class, function (Faker\Generator $faker) { 
+    static $password; 
+    return [
+           'account_id' => 1, 
+            'name' => $faker->firstName,
+            'content' => $faker->paragraph,
+            'redirect_url' =>  'http://www.google.com',
+            'response' => $faker->sentence,
+            'opt_in_message' => $faker->paragraph  
+    ];
+});
+ 
+$factory->define(App\FormList::class, function (Faker\Generator $faker) { 
+    static $password; 
+    return [ 
+            'form_id' => rand(1,App\Form::count()),
+            'list_id' => rand(1,App\List1::count())
+    ];
+});
+
+ 
+
+
+
 
 
  

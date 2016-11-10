@@ -5,6 +5,10 @@ use App\UserAccount;
 use App\User;
 use App\Account; 
 use App\Contact;
+use App\List1;
+use App\ListContact;
+use App\Form;
+use App\FormList;
  
 class DatabaseSeeder extends Seeder
 {
@@ -21,12 +25,19 @@ class DatabaseSeeder extends Seeder
     	UserAccount::truncate(); 
     	Account::truncate();
         Contact::truncate();
-
+        List1::truncate(); 
+        ListContact::truncate(); 
+        Form::truncate(); 
+        FormList::truncate(); 
         // DB::table('users')->truncate();
         // DB::table('users')->truncate();
         // DB::table('users')->truncate(); 
-        factory(UserAccount::class, 10)->create();  
-        factory(Contact::class, 200)->create();
-        // Model::reguarded(); 
+        factory(UserAccount::class, 20)->create();  
+        factory(Contact::class, 20)->create();
+        factory(List1::class, 20)->create();  
+        factory(ListContact::class, 20)->create();  
+        factory(Form::class, 20)->create();
+        factory(FormList::class, 40)->create();
+        // Model::reguarded();  
     }
-}
+}  
