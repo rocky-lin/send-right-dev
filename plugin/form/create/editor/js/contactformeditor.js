@@ -16,8 +16,8 @@ jQuery(function(){
 	var aweber_authorizationcode_cache = {};
 	var span_required = '<span class="cfgen-required">*</span>';
 	var saveform_btn = jQuery('#cfgenwp-saveform');
-	var saveform_btn_add = 'Save and create source files';
-	var saveform_btn_update = 'Save and update';
+	var saveform_btn_add = 'Save and create source files 3';
+	var saveform_btn_update = 'Save and update 4';
 	var form_editor = jQuery('#cfgenwp-fb-form');
 	var form_settings = jQuery('#cfgenwp-formsettings');
 	var form_id = jQuery('#cfgenwp-form-id');
@@ -2685,9 +2685,8 @@ jQuery(function(){
 	// SAVE FORM
 	saveform_btn.click(function(){
 
+ 		alert("button clicked saved");
 
-
-	//	alert("button clicked saved");
 		var cfgenwp_saveform_error_message = '';
 		var cfgenwp_saveform_error_buttons = '';
 		
@@ -4150,6 +4149,8 @@ jQuery(function(){
 
 		var jqxhr_saveform = jQuery.post('inc/saveform.php',
 			   	{
+
+
 					'json_export':post_json_export,
 					'cf_f':jQuery('#copyright-header:visible').html()
 				},

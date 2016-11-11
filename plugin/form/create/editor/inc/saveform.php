@@ -28,10 +28,10 @@ $cfgenwpapi_editor_obj = new cfgenwpApiEditor();
 
 
 // ERROR: WRITABLE FORM INDEX FILE
-if($contactform_obj->demo != 1){
+if($contactform_obj->demo != 1) {
 	
 	// Write the form index file if it's missing
-	if(!is_file($editor_obj->formsindex_filename_path)){
+	if(!is_file($editor_obj->formsindex_filename_path)) {
 		$editor_obj->resetFormsIndex();
 	}
 	

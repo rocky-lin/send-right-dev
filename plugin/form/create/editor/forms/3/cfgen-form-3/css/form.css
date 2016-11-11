@@ -262,6 +262,14 @@ body{
 #cfgen-element-3-4-inputgroup-c{
 	max-width:300px;
 }
+#cfgen-element-3-4-paragraph{
+	font-family:Arial;
+	font-weight:normal;
+	font-style:normal;
+	font-size:37px;
+	color:#000000;
+	width:300px;
+}
 #cfgen-form-3 #cfgen-element-3-4{
 	height:140px;
 }

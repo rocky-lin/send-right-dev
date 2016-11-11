@@ -89,6 +89,9 @@ We will get back to you as soon as possible.
 	<label class="cfgen-label" id="cfgen-element-3-4-label" ><span class="cfgen-label-value">Your message</span></label>
 
 	<div class="cfgen-e-set" id="cfgen-element-3-4-set-c">
+		<div class="cfgen-paragraph" id="cfgen-element-3-4-paragraph">
+		This is the title
+		</div>
 		<div class="cfgen-input-group" id="cfgen-element-3-4-inputgroup-c">
 			<div class="cfgen-input-c" id="cfgen-element-3-4-input-c">
 				<textarea class="cfgen-type-textarea cfgen-form-value " name="cfgen-element-3-4" id="cfgen-element-3-4"></textarea>

@@ -262,6 +262,13 @@ body{
 #cfgen-form-5 #cfgen-element-5-4{
 	height:140px;
 }
+#cfgen-element-5-7-set-c{
+	width:129px;
+	max-width:100%;
+}
+#cfgen-element-5-7-inputgroup-c{
+	max-width:129px;
+}
 #cfgen-element-5-5-set-c{
 	width:140px;
 }
@@ -281,19 +288,6 @@ body{
 	border-radius:5px;
 	margin-left:0px;
 	height:45px;
-}
-@media only screen and (min-width: 600px){
-#cfgen-element-5-5{
-	margin-left:0px;
-}
-
-}
-#cfgen-element-5-7-set-c{
-	width:129px;
-	max-width:100%;
-}
-#cfgen-element-5-7-inputgroup-c{
-	max-width:129px;
 }
 @media only screen and (min-width: 600px){
 #cfgen-element-5-5{

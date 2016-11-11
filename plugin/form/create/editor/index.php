@@ -2089,7 +2089,7 @@ echo $cfgenwp_editor_obj->buildFormDefaultCss($cfgenwp_form_css, array('body'));
 				<div>
 				
 					<span id="cfgenwp-notice-loadinglists" class="cfgenwp-savenotice cfgenwp-button-position">Your lists are loading. The save button will reappear as soon as everything is loaded.</span>
-					<span id="cfgenwp-notice-savingform" class="cfgenwp-savenotice cfgenwp-button-position">Creating source files2</span><span id="cfgenwp-saveform" class="cfgenwp-button cfgenwp-button-blue cfgenwp-button-position">Save and create source files 1</span><span id="cfgenwp-returntoformedition" class="cfgenwp-button cfgenwp-button-position cfgenwp-button-grey">Return to the form</span>
+					<span id="cfgenwp-notice-savingform" class="cfgenwp-savenotice cfgenwp-button-position">Creating source files2</span><span id="cfgenwp-saveform" class="cfgenwp-button cfgenwp-button-blue cfgenwp-button-position">Save and create source files 1</span><span id="cfgenwp-returntoformedition" class="cfgenwp-button cfgenwp-button-position cfgenwp-button-grey">Return to the form 6</span>
 					
 					<img id="cfgenwp-scrolltotop" src="img/scrolltotop.png" id="cfgenwp-scrolltotop">
 					

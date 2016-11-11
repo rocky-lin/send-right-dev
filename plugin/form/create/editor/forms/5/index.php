@@ -140,19 +140,6 @@ We will get back to you as soon as possible.
 
 <div class="cfgen-e-c">
 
-	<div class="cfgen-e-set" id="cfgen-element-5-5-set-c">
-		<div class="cfgen-input-group" id="cfgen-element-5-5-inputgroup-c">
-			<div class="cfgen-input-c" id="cfgen-element-5-5-input-c">
-				<input type="submit" class="cfgen-submit" name="cfgen-element-5-5" id="cfgen-element-5-5" value="Send">
-			</div>
-		</div>
-	</div>
-
-</div>
-
-
-<div class="cfgen-e-c">
-
 	<label class="cfgen-label" id="cfgen-element-5-7-label" ><span class="cfgen-label-value">Captcha: type the characters below</span></label>
 
 	<div class="cfgen-e-set" id="cfgen-element-5-7-set-c">
@@ -167,6 +154,19 @@ We will get back to you as soon as possible.
 	</div>
 
 	<div class="cfgen-clear"></div>
+
+</div>
+
+
+<div class="cfgen-e-c">
+
+	<div class="cfgen-e-set" id="cfgen-element-5-5-set-c">
+		<div class="cfgen-input-group" id="cfgen-element-5-5-inputgroup-c">
+			<div class="cfgen-input-c" id="cfgen-element-5-5-input-c">
+				<input type="submit" class="cfgen-submit" name="cfgen-element-5-5" id="cfgen-element-5-5" value="Send">
+			</div>
+		</div>
+	</div>
 
 </div>
 

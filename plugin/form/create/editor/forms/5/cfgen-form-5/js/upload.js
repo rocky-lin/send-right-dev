@@ -3,7 +3,7 @@ var swfupload_cfgen_element_5_6; // this variable name is also used in onclick="
 					var swfupload_cfgen_element_5_6 = new SWFUpload({
 											flash_url : "cfgen-form-5/js/swfupload/swfupload.swf",
 											upload_url: "cfgen-form-5/inc/upload.php?btn_upload_id=uploadbutton_cfgen_element_5_6",
-											post_params: {"PHPSESSID" : "34lgos9im7trh3v8k1dulc13c6"},
+											post_params: {"PHPSESSID" : "emj8ajnp1qu2bv854r3t9dkf16"},
 											file_size_limit : "1MB",
 											file_types : "*.*",
 											file_types_description : "All Files",

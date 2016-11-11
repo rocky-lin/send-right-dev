@@ -27,7 +27,7 @@ $cfg['smtp_password'] = '';
 
 $cfg['timezone'] = 'Europe/Berlin';
 
-$cfg['form_id'] = '';
+$cfg['form_id'] = '5';
 
 $cfg['form_name'] = 'My Contact Form';
 
