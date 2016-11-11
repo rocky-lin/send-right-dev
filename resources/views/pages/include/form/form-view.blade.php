@@ -60,7 +60,7 @@
                 </div>    
 
 				<hr>     
-                <a href="{{ url('plugin/form/create') }}" title="">
+                <a href="{{ url('extension/form/create') }}" title="">
                     <button type="button" class="btn btn-primary"> Add New Forms</button>
                 </a> 
          

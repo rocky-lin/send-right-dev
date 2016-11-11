@@ -79,6 +79,7 @@ $factory->define(App\Form::class, function (Faker\Generator $faker) {
     return [
            'account_id' => 1, 
             'name' => $faker->firstName,
+            'folder_name' => $faker->name,
             'content' => $faker->paragraph,
             'redirect_url' =>  'http://www.google.com',
             'response' => $faker->sentence,

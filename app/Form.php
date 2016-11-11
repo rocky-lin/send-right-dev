@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Form extends Model
 {
    protected $table = 'forms';  
-   protected $fillable = ['account_id', 'name', 'content', 'redirect_url', 'response', 'opt_in_message']; 
+   protected $fillable = ['account_id', 'name', 'folder_name', 'content', 'redirect_url', 'response', 'opt_in_message']; 
    protected $hidden = []; 
 
    public function acccount() {

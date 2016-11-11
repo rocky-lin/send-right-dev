@@ -16,6 +16,7 @@ class CreateFormsTable extends Migration
         Schema::create('forms', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('account_id')->usigned(); 
+            $table->string('folder_name'); // this has to be addeded in erd and should be migrated to database using artisan command
             $table->string('name');
             $table->text('content');
             $table->string('redirect_url');

@@ -5,6 +5,7 @@
   
     <div class="row">
         <div class="">
+        {{-- {{ "user status " . Auth::user()->status}} --}}
             @if(Auth::user()->status == 'inactive') 
                     <div class="alert alert-danger"  > {{  "your account is currently in active, please visit your email and hit comfirm, thank you!" }} </div>
                 @endif

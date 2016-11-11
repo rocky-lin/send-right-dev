@@ -1,5 +1,5 @@
-<?php  
-  Auth::loginUsingId(1);  
+<?php   
+// Auth::loginUsingId(1);  
 // welcome page for loggedout
 Route::get('/', function () { 
     return view('welcome');

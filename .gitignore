@@ -6,7 +6,8 @@
 /.zip
 .zip
 .env  
-plugin/form/create/editor/forms 
+extension/form/create/editor/forms  
+ 
  # Windows image file caches
 Thumbs.db
 ehthumbs.db
