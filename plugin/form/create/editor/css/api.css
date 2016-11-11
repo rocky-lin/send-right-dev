@@ -1,0 +1,367 @@
+.cfgenwp-api-user-accounts{
+	/*border-bottom:1px solid #40B9E7;*/
+}
+.cfgenwp-editor-api-c:last-child .cfgenwp-api-user-accounts{
+	border-bottom:none;
+}
+
+.cfgenwp-api-list-c{
+	margin:0 0 6px 0;
+	padding:6px 5px 1px 7px;
+	border:1px solid #fff;
+}
+
+.cfgenwp-api-list-c-selected{
+	border:1px solid #E7E7E7;
+	background-color:#fbfbfb;
+	-webkit-border-radius:3px;
+	-moz-border-radius:3px;
+	border-radius:3px;
+}
+
+.cfgenwp-api-list-settings{
+	display:none;
+}
+.cfgenwp-api-list-grouping-container{
+	margin-bottom:9px;
+}
+.cfgenwp-api-list-grouping-title{
+	font-family:'Open Sans', Arial, sans-serif;
+	font-weight:600;
+	font-size:13px;
+	margin-bottom:4px;
+}
+.cfgenwp-editor-api-c{
+	/*margin-bottom:7px;*/
+}
+
+#cfgenwp-formsettings .cfgenwp-editor-api-c{
+	display:none;
+}
+
+.cfgenwp-editor-api-c:last-child{
+}
+#cfgenwp-formsettings .cfgenwp-editor-api-c input[type=button]{
+	-webkit-appearance: none;
+}
+#cfgenwp-formsettings .cfgenwp-editor-api-c input[type=text],
+#cfgenwp-formsettings .cfgenwp-editor-api-c input[type=password],
+#cfgenwp-formsettings .cfgenwp-editor-api-c input[type=button],
+#cfgenwp-formsettings .cfgenwp-editor-api-c textarea,
+#cfgenwp-formsettings .cfgenwp-integrate-api{
+	width:100%;
+	-webkit-box-sizing:border-box;
+	-moz-box-sizing:border-box;
+	-ms-box-sizing:border-box;
+	box-sizing:border-box;
+}
+.cfgenwp-api-authorizationcode{
+	height:60px;
+}
+.cfgenwp-formconfig-r-l a{
+	text-decoration:underline;
+}
+.cfgenwp-api-status-error{
+	padding:4px 8px 4px 65px;
+	color:#777;
+	background:url('../img/cross-flat.png') no-repeat 45px 3px;
+}
+.cfgenwp-editor-api-builder{
+	display:none;
+	padding-top:7px;
+	padding-bottom:7px;
+}
+.cfgenwp-settings-container .cfgenwp-editor-api-builder{
+	display:block;
+}
+
+.cfgenwp-editor-api-name, .cfgenwp-config-api-name{
+	font-family:'Open Sans', Arial, sans-serif;
+	font-weight:600;
+	font-size:14px;
+	padding-top:12px;
+	padding-bottom:12px;
+	padding-left:48px;
+	background-position:7px 5px;
+	background-repeat:no-repeat;
+}
+.cfgenwp-editor-api-name{
+	cursor:pointer;
+	border-top:1px solid #ddd;/* same color as menu ico */
+	min-height:20px; /* to show the icon entirely when hidding the api name when using small screen sizes*/
+}
+
+.cfgenwp-api-list-name{
+	font-family:'Open Sans', Arial, sans-serif;
+	font-size:14px;
+	cursor:pointer;
+}
+
+.cfgenwp-api-ico-aweber{background-image:url('../img/api-ico-aweber.png');}
+.cfgenwp-api-ico-campaignmonitor{background-image:url('../img/api-ico-campaignmonitor.png');}
+.cfgenwp-api-ico-constantcontact{background-image:url('../img/api-ico-constantcontact.png');}
+.cfgenwp-api-ico-getresponse{background-image:url('../img/api-ico-getresponse.png');}
+.cfgenwp-api-ico-icontact{background-image:url('../img/api-ico-icontact.png');}
+.cfgenwp-api-ico-mailchimp{background-image:url('../img/api-ico-mailchimp.png');}
+.cfgenwp-api-ico-salesforce{background-image:url('../img/api-ico-salesforce.png');}
+
+
+.cfgenwp-service-menu-ico{
+	cursor:pointer;
+	border:1px solid #ddd;/* same color as api name */
+	background-color:#fff;
+	float:left;
+	background-repeat:no-repeat;
+	padding-left:2px;
+	padding-right:2px;
+	padding-top:29px;
+	padding-bottom:0;
+	height:51px;
+	-webkit-border-radius:5px;
+	-moz-border-radius:5px;
+	border-radius:5px;
+	-webkit-box-sizing:border-box;
+	-moz-box-sizing:border-box;
+	-ms-box-sizing:border-box;
+	box-sizing:border-box;
+}
+.cfgenwp-service-menu-ico:hover, .cfgenwp-service-menu-ico-selected{
+	border:1px solid #50C0E9;
+}
+.cfgenwp-service-menu-ico:hover{
+
+}
+.cfgenwp-service-menu-ico-selected, .cfgenwp-service-menu-ico-selected:hover{
+
+}
+.cfgenwp-service-menu-ico-selected{
+	/*
+	-webkit-box-shadow:inset 0 -3px #50C0E9;
+	-moz-box-shadow:inset 0 -3px #50C0E9;
+	box-shadow:inset 0 -3px #50C0E9;
+	border-bottom-color:#079DD0;
+	*/
+}
+
+.cfgenwp-service-menu-ico-deactivated, .cfgenwp-service-menu-ico-deactivated:hover{
+	opacity: 0.4;
+	filter: alpha(opacity=40);/* ie */
+	border:1px solid #aaa;
+	border-bottom-color:#999;
+	cursor:not-allowed;
+	/*
+	-webkit-box-shadow:inset 0 -3px #ccc;
+	-moz-box-shadow:inset 0 -3px #ccc;
+	box-shadow:inset 0 -3px #ccc;
+	*/
+}
+.cfgenwp-service-menu-btn{
+	text-align:center;
+
+	font-family:Roboto, Arial, sans-serif;
+	
+	-webkit-border-radius:3px;
+	-moz-border-radius:3px;
+	border-radius:3px;
+	padding:3px 0;
+	-webkit-box-sizing:border-box;
+	-moz-box-sizing:border-box;
+	-ms-box-sizing:border-box;
+	box-sizing:border-box;
+}
+.cfgenwp-service-menu-add .fa{
+	font-size:14px;
+}
+
+#cfgenwp-service-menu-aweber{
+	background-image:url('../img/service-menu-aweber.png');
+	background-position:50% 11px;
+}
+#cfgenwp-service-menu-campaignmonitor{
+	background-image:url('../img/service-menu-campaignmonitor.png');
+	background-position:50% 1px;
+}
+#cfgenwp-service-menu-constantcontact{
+	background-image:url('../img/service-menu-constantcontact.png');
+	background-position:50% -1px;
+}
+#cfgenwp-service-menu-getresponse{
+	background-image:url('../img/service-menu-getresponse.png');
+	background-position:50% 1px;
+}
+#cfgenwp-service-menu-googlecontacts{
+	background-image:url('../img/service-menu-googlecontacts.png');
+	background-position:50% 21px;
+}
+#cfgenwp-service-menu-icontact{
+	background-image:url('../img/service-menu-icontact.png');
+	background-position:50% 9px;
+}
+#cfgenwp-service-menu-mailchimp{
+	background-image:url('../img/service-menu-mailchimp.png');
+	background-position:50% 3px;
+}
+#cfgenwp-service-menu-salesforce{
+	background-image:url('../img/service-menu-salesforce.png');
+	background-position:50% 12px;
+}
+
+#cfgenwp-service-menu-mailchimp{background-position-y: ;}
+
+.cfgenwp-api-loading{
+	display:none;
+	float:right;
+	margin-right:8px;
+	padding:6px 0 12px 21px;
+	color:#666;
+	background:url('../img/loading.gif') no-repeat 0 7px;
+	-webkit-box-sizing:border-box;
+	-moz-box-sizing:border-box;
+	-ms-box-sizing:border-box;
+	box-sizing:border-box;
+}
+.cfgenwp-api-list-required-field, .cfgenwp-api-list-subtitle-required{
+	color:#cc0000;
+	font-weight:bold;
+}
+
+.cfgenwp-editor-api-name:hover{
+
+}
+
+.cfgenwp-editor-api-c-open .cfgenwp-editor-api-name{
+	color:#09C;
+}
+.cfgenwp-editor-api-c-selected.cfgenwp-editor-api-c-open .cfgenwp-editor-api-name
+, .cfgenwp-editor-api-c-selected .cfgenwp-editor-api-name
+, .cfgenwp-editor-api-c-selected .cfgenwp-editor-api-name:hover{
+	color:#fff;
+}
+.cfgenwp-editor-api-c-selected .cfgenwp-editor-api-name{
+	-webkit-box-shadow:none;
+	-moz-box-shadow:none;
+	box-shadow:none;
+}
+
+.cfgenwp-api-list-c-selected .cfgenwp-api-list-name{
+	font-weight:600;
+	color:#0DA5D4;
+}
+.cfgenwp-api-selectlisttitle{
+	margin-bottom:8px;
+}
+.cfgenwp-api-list-field-id-selected{
+	/*
+	font-weight:600;
+	*/
+}
+.cfgenwp-api-buttons-c{
+	display:none;
+	float:right;
+}
+.cfgenwp-api-button{
+	display:inline-block;
+	cursor:pointer;
+	background-color:#24ADDE;
+	font-family:'Open Sans', Arial, sans-serif;
+	font-size:13px;
+	color:#fff;
+	padding:6px 7px;
+	margin:8px 0 5px 2px;
+	-webkit-border-radius:3px;
+	-moz-border-radius:3px;
+	border-radius:3px;
+	text-align:center;
+	-webkit-box-shadow:inset 0 -2px 0 #0FA1D3;
+	-moz-box-shadow:inset 0 -2px 0 #0FA1D3;
+	box-shadow:inset 0 -2px 0 #0FA1D3;	
+}
+.cfgenwp-api-button:hover{
+	background-color:#0fa1d3;
+}
+.cfgenwp-api-remove{
+	width:19px;
+	float:right;
+	margin-right:2px;
+	background-color:#eee;
+	color:#777;
+	-webkit-box-shadow:inset 0 -2px 0 #ccc;
+	-moz-box-shadow:inset 0 -2px 0 #ccc;
+	box-shadow:inset 0 -2px 0 #ccc;
+}
+.cfgenwp-api-remove:hover{
+	background-color:#ddd;
+}
+.cfgenwp-api-list-subtitle{
+	font-family:'Open Sans', Arial, sans-serif;
+	font-weight:600;
+	font-size:13px;
+	color:#222;
+	margin:10px 0 6px 0;
+	padding-top:6px;
+}
+.cfgenwp-api-list-option{
+	margin-bottom:10px;
+}
+.cfgenwp-api-validcredential{
+	background-color:#f5f5f5;
+	padding:6px;
+	word-wrap:break-word;
+	width:100%;
+	font-family:Arial, Helvetica, sans-serif;
+	font-size:12px;
+	line-height:20px;
+	margin-bottom:6px;
+	-webkit-box-sizing:border-box;
+	-moz-box-sizing:border-box;
+	-ms-box-sizing:border-box;
+	box-sizing:border-box;
+}
+.cfgenwp-api-help{
+	cursor:pointer;
+	margin-bottom:-3px;
+	margin-left:2px;
+}
+.cfgenwp-service-menu-btn-add{
+	color:#09C;
+	font-size:13px;
+}
+.cfgenwp-service-menu-btn-remove{
+	display:none;
+	color:#24ADDE;
+	font-size:13px;
+}
+.cfgenwp-editor-api-name span{
+	display:none;
+}
+
+/* iPhone 4, iPhone 5 320x */
+@media only screen and (min-width:320px){
+	.cfgenwp-service-menu-ico{
+		margin-right:9px;
+		margin-bottom:9px;
+		width:116px;
+	}
+}
+/* iPhone 6 375x667 */
+@media only screen and (min-width:375px){
+	.cfgenwp-service-menu-ico{
+		margin-right:6px;
+		margin-bottom:6px;
+		width:108px;
+	}
+}
+/* iPhone 6 Plus 414x736 */
+@media only screen and (min-width:414px){
+	.cfgenwp-service-menu-ico{
+		margin-right:8px;
+		margin-bottom:8px;
+		width:116px;
+	}
+}
+
+@media only screen and (min-width:1024px){
+	.cfgenwp-editor-api-name span{
+		display:block;
+	}
+}

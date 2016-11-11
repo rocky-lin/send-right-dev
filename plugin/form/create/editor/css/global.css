@@ -1,0 +1,229 @@
+body{
+	margin:0;
+	background:#f9f9f9;
+}
+.ui-widget-overlay{background:#aaa;}
+.ui-button-text-only .ui-button-text{font-family:Arial, Helvetica, sans-serif; font-size:14px; padding:10px 12px;}
+.ui-dialog{padding:4px;}
+.ui-dialog .ui-dialog-title{font-family:Arial, Helvetica, sans-serif; font-size:16px;}
+.ui-dialog .ui-dialog-titlebar{background:transparent; border:none; padding:9px 9px;}
+.ui-dialog .ui-dialog-content{padding:2px 10px;}
+.ui-dialog .ui-button{outline:none;}
+.ui-widget-content a{outline:none;}
+.ui-dialog .ui-dialog-buttonpane{padding-right:0;}
+.ui-dialog .ui-dialog-titlebar-close{background:transparent; border:none;}
+
+a, .cfgenwp-a{
+	cursor:pointer;
+	text-decoration:none;
+}
+a, .cfgenwp-a-text:hover, .cfgenwp-a, .cfgenwp-a:focus, .cfgenwp-text-blue, .cfgenwp-option-selected, .ui-widget-content a{
+	color:#09C;
+}
+a:hover, .cfgenwp-a:hover{
+	text-decoration:underline;
+}
+
+.cfgenwp-header, .cfgenwp-a-text{
+ 	color:#3E3E3E;
+}
+.cfgenwp-a-text, .cfgenwp-a-text:hover{
+	text-decoration:none;
+}
+.cfgenwp-small{
+	font-size:12px;
+}
+
+#cfgenwp-dialog-message{
+	display:none;
+}
+
+#cfgenwp-dialog-message p{
+	font-family:Arial, Helvetica, sans-serif;
+	font-size:14px;
+	line-height:24px;
+}
+
+.cfgenwp-error, .cfgenwp-validation{
+	margin-bottom:20px;
+	text-align:left;
+	font-family:Verdana, Geneva, sans-serif;
+	border-radius:4px;
+}
+
+.cfgenwp-error{
+	background-color:#F83A3A;
+	color:#fff;
+}
+
+.cfgenwp-validation{
+	background-color:#92C500;
+	color:#fff;
+}
+
+.cfgenwp-error a, .cfgenwp-validation a{
+	color:#fff;
+	text-decoration:underline;
+}
+
+.cfgenwp-button,
+a.cfgenwp-button,
+span.cfgenwp-button,
+.cfgenwp-button-small,
+a.cfgenwp-button-small,
+span.cfgenwp-button-small{
+	display:inline-block;
+	font-family:Arial, Helvetica, sans-serif;
+	text-align:center;
+	cursor:pointer;
+	text-decoration: none;
+	outline:none;
+	border-width:1px;
+	border-style:solid;
+	-webkit-box-sizing:border-box;
+	-moz-box-sizing:border-box;
+	-ms-box-sizing:border-box;
+	box-sizing:border-box;
+}
+
+.cfgenwp-button, a.cfgenwp-button, span.cfgenwp-button{
+	font-weight:bold;
+	font-size:16px; 
+	border-radius:7px;
+	margin-left:0; /* set the same alignment for a and input elements with cfgenwp-button class */
+	padding:15px 18px;
+}
+.cfgenwp-button-floatright{
+	float:right;
+}
+
+.cfgenwp-button-fullwidth{
+	width:100%;
+}
+
+.cfgenwp-button-small
+,a.cfgenwp-button-small
+,span.cfgenwp-button-small{
+	
+	font-weight:normal;
+	font-size:13px; 
+	padding:9px 10px;
+	border-radius:4px;
+	outline:none;
+}
+
+
+.cfgenwp-button-blue{
+	color:#fff;
+	background:#33B5E5;
+	border-top-color:#2cb1e1;
+	border-left-color:#2cb1e1;
+	border-right-color:#2cb1e1;
+	
+	border-bottom-color:#0099cc;
+	-webkit-box-shadow:inset 0 -2px 0 #0099cc;
+	-moz-box-shadow:inset 0 -2px 0 #0099cc;
+	box-shadow:inset 0 -2px 0 #0099cc;
+
+}
+.cfgenwp-button-blue:hover{
+	background:#1da9da;	
+}
+
+.cfgenwp-button-yellow{
+	color:#fff;
+	background:#ffb61c;
+	border-top-color:#ffb61c;
+	border-left-color:#ffb61c;
+	border-right-color:#ffb61c;
+	
+	border-bottom-color:#ff8a00;
+	-webkit-box-shadow:inset 0 -2px 0 #ff8a00;
+	-moz-box-shadow:inset 0 -2px 0 #ff8a00;
+	box-shadow:inset 0 -2px 0 #ff8a00;
+	
+}
+.cfgenwp-button-yellow:hover{
+	background:#ffa713;
+}
+
+.cfgenwp-button-grey, .ui-dialog .ui-button-text-only{
+	color:#555;
+	border:1px solid #E9E9E9;
+	border-bottom-color:#BBB;
+	background:#E9E9E9;
+	-webkit-box-shadow:inset 0 -1px 0 #BBB;
+	-moz-box-shadow:inset 0 -1px 0 #BBB;
+	box-shadow:inset 0 -1px 0 #BBB;
+}
+.cfgenwp-button-grey:hover, .ui-dialog .ui-button-text-only:hover{
+	border:1px solid #E1E1E1;
+	background:#E1E1E1;
+}
+
+.cfgenwp-button-position{
+	display:inline-block;
+	margin-top:6px;
+	margin-right:20px;
+}
+
+.warning{
+	background-color:#fef6ca;
+	border:1px solid #f9dd34;
+	padding:6px;
+	margin:4px 0;
+	border-radius:3px;
+	font-family:Verdana, Geneva, sans-serif;
+	font-size:13px;
+}
+
+.warning p{
+	margin:0 0 8px 0;
+	line-height:16px;
+	display:block;
+	width:540px;
+	text-align:left;
+}
+
+.cfgenwp-clear{
+	clear:both;	
+}
+.ui-draggable-dragging.cfgenwp-menu-addelement-dragging,
+.cfgenwp-addelement:hover,
+.cfgenwp-editor-api-c-selected.cfgenwp-editor-api-c-open .cfgenwp-editor-api-name,
+.cfgenwp-editor-api-c-selected .cfgenwp-editor-api-name,
+.cfgenwp-editor-api-c-selected .cfgenwp-editor-api-name:hover,
+.cfgenwp-div-listitem.cfgenwp-selected{
+	background-color:#50C0E9;
+}
+.cfgenwp-editor-api-c-selected .cfgenwp-editor-api-name,
+.cfgenwp-div-listitem.cfgenwp-selected{
+	border-top:1px solid #6DCAEC;
+	border-bottom:1px solid #33B5E5;
+
+}
+
+.cfgenwp-api-notice{
+	font-family:Arial, Helvetica, sans-serif;
+	font-size:14px;
+	margin-top:3px;
+	margin-bottom:7px;
+}
+
+.cfgenwp-install-form input[type=text]:focus,
+#cfgenwp-formsettings input[type=text]:focus,
+#cfgenwp-formsettings input[type=password]:focus,
+#cfgenwp-formsettings textarea:focus,
+#cfgenwp-formsettings select:focus,
+.cfgenwp-settings-container input[type=text]:focus,
+.cfgenwp-settings-container input[type=password]:focus,
+.cfgenwp-settings-container textarea:focus,
+.cfgenwp-settings-container select:focus,
+.cfgenwp-e-property-c input[type=text]:focus,
+.cfgenwp-e-property-c textarea:focus,
+.cfgenwp-e-property-c select:focus{
+	outline:none;
+	border:1px solid #6dcaec;
+
+}
+

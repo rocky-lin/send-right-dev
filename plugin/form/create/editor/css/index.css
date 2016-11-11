@@ -1,0 +1,329 @@
+p{
+	font-family:"Open Sans", Arial, sans-serif;
+	font-size:13px;
+}
+.ui-widget {
+	font-size: 11px;
+}
+.ui-widget p{
+	font-family:Verdana, Geneva, sans-serif;
+	font-size: 11px;
+}
+h2{
+	font-family:"Open Sans", Arial, sans-serif;
+	font-weight:400;
+	font-size:23px;
+	color:#333;
+	margin-bottom:14px;
+	line-height:22px;
+}
+h3{
+	font-family:"Open Sans", Arial, sans-serif;
+	font-weight:600;
+	font-size:18px;
+	color:#333;
+	margin-top:0;
+	margin-bottom:10px;
+}
+
+input:-webkit-autofill {
+	-webkit-box-shadow: 0 0 0px 1000px white inset;
+}
+
+#cfgenwp-index-content{
+	margin-top:100px;
+	margin-left:auto;
+	margin-right:auto;
+	width:900px;
+}
+
+
+#cfgenwp-index-logo{
+	margin-bottom:10px;
+}
+
+#copyright{
+	margin-bottom:6px;
+}
+
+#label-rememberme{
+	font-family:Arial, Helvetica, sans-serif;
+	font-weight:normal;
+	font-size:12px;
+	cursor:pointer;
+	display:inline;
+}
+#cfg-resetpassword-container{
+	text-align:center;
+	margin-top:50px;
+}
+#cfg-resetpassword{
+	font-family:Arial, Helvetica, sans-serif;
+	font-size:12px;
+	cursor:pointer;
+}
+#cfg-resetpassword:hover{
+	text-decoration:underline;
+}
+
+.cfgenwp-index-menu{
+	text-align:right;
+	font-family:Arial, Helvetica, sans-serif;
+	font-size:14px;
+	margin-bottom:12px;
+}
+
+.cfgenwp-header{
+	font-family:'Open Sans', Arial, Helvetica, sans-serif;
+	font-size:13px;
+	text-align:center;
+	border-bottom:1px solid #D6D6D6;
+	padding:4px 10px 14px 10px;
+	margin-bottom:16px;
+	-webkit-box-shadow:0 1px 0 #fff;
+	-moz-box-shadow:0 1px 0 #fff;
+	box-shadow:0 1px 0 #fff;
+}
+
+.cfgenwp-selectall{
+	margin-bottom:6px;
+}
+
+.cfgenwp-deleteselected.cfgenwp-disabled{
+	color:#aaa;
+}
+.cfgenwp-deleteselected.cfgenwp-enabled{
+	color:#cc0000;
+	cursor:pointer;
+}
+.cfgenwp-deleteselected.cfgenwp-enabled:hover{
+	text-decoration:underline;
+	color:#cc0000;
+}
+
+.cfgenwp-label-selectall{
+	cursor:pointer;
+}
+.cfgenwp-label-selectall:hover{
+	color:#09F;
+}
+
+
+.cfgenwp-div-listitem.cfgenwp-selected a{
+	color:#FFF;
+}
+.cfgenwp-div-listitem.cfgenwp-selected .cfgenwp-list-item-c{
+	color:#fff;
+}
+.cfgenwp-list-item-c{
+	display:inline-block;
+	margin-right:26px;
+}
+.cfgenwp-list-item-name{
+	width:352px;
+	margin-right:10px;
+	word-wrap:break-word;
+	font-weight:600;
+}
+.cfgenwp-list-item-id {
+	width:40px;
+	margin-right:10px;
+	text-align:center;
+}
+.cfgenwp-list-item-id, .cfgenwp-list-item-date{
+	color:#787878;
+}
+.cfgen-loading{
+	display:none;
+}
+
+
+
+.cfgenwp-error, .cfgenwp-validation{
+	padding:2px 12px;
+	font-size:13px;
+}
+.cfgenwp-error p, .cfgenwp-validation p{
+	font-family:Verdana, Geneva, sans-serif;
+	font-size:13px;
+	margin:12px 0;
+	line-height:20px;
+}
+.cfgenwp-index-panel{
+	font-family:"Open Sans", Arial, sans-serif;
+	font-size:13px;
+	margin-bottom:18px;
+	background-color:#fff;
+	border:1px solid #E3E3E3;
+	padding:11px 0;
+	border-radius:5px;
+}
+.cfgenwp-index-panel input[type=radio]
+,.cfgenwp-index-panel input[type=checkbox]{
+	vertical-align: middle;
+	margin-left:1px;
+	margin-bottom: 5px;
+}
+
+.cfgenwp-index-panel-c{
+	padding-left:12px;
+	padding-right:12px;
+}
+
+/* CONFIG */
+.cfgenwp-settings-container input[type=text],
+.cfgenwp-settings-container input[type=password],
+.cfgenwp-settings-container textarea,
+.cfgenwp-settings-container select,
+.cfgenwp-settings-container .cfgenwp-button-small,
+.cfgenwp-install-form input[type=text],
+.cfgenwp-install-form input[type=password],
+.cfgenwp-form-user, 
+.cfgenwp-form-purchasecode,
+.cfgenwp-form-settings-l{
+	-webkit-box-sizing:border-box;
+	-moz-box-sizing:border-box;
+	-ms-box-sizing:border-box;
+	box-sizing:border-box;
+}
+.cfgenwp-settings-container input[type=text],
+.cfgenwp-settings-container input[type=password],
+.cfgenwp-settings-container textarea,
+.cfgenwp-settings-container select,
+.cfgenwp-settings-container .cfgenwp-button-small{
+	width:250px;
+}
+.cfgenwp-settings-container input[type=text],
+.cfgenwp-settings-container input[type=password],
+.cfgenwp-settings-container textarea,
+.cfgenwp-settings-container select{
+	font-family:Arial, Helvetica, sans-serif;
+	font-size:12px;
+	border:1px solid #C8C8C8;
+	padding:5px 4px;
+	line-height:16px;
+	border-radius:3px;
+}
+
+.cfgenwp-install-form input[type=text],
+.cfgenwp-install-form input[type=password],
+.cfgenwp-install-form label{
+	display:block;
+	font-family:Arial, Helvetica, sans-serif;
+	font-size:16px;
+}
+.cfgenwp-install-form label{
+	font-weight:bold;
+}
+
+.cfgenwp-install-form input[type=text],
+.cfgenwp-install-form input[type=password]{
+	width:100%;
+	border:1px solid #ddd;
+	padding:4px;
+	margin-bottom:12px;
+	color:#333;
+	border-radius:4px;	
+}
+.cfgenwp-form-required{
+	font-style:italic;
+	color:#666;
+}
+.cfgenwp-option-status-img{
+	margin-bottom:-5px;
+	margin-right:7px;
+}
+
+.cfgenwp-form-settings-l, .cfgenwp-form-settings-r{
+	float:left;
+	display:block;
+	padding-bottom:5px;
+}
+.cfgenwp-form-settings-l{
+	text-align:right;
+	width:186px;
+	padding-top:4px;
+	padding-right:10px;
+	font-size:13px;
+}
+#cfgenwp_config_googlewebfontsapikey{
+	width:360px;
+}
+.cfgenwp-server-settings p{
+	margin:0 0 4px 0;
+}
+.cfgenwp-server-settings th{
+	text-align:left;
+	width:200px;
+	font-weight:normal;
+}
+.cfgenwp-server-settings-title{
+	font-family:'Open Sans', Arial, Helvetica, sans-serif;
+	font-weight:600;
+	font-size:14px;
+}
+.cfgenwp-server-settings-info{
+	font-family:Arial, Helvetica, sans-serif;
+	font-style:italic;
+	font-size:12px;
+	color:#999;
+}
+.cfgenwp-server-settings td.cfgenwp-config-option-status{
+	width:40px;
+	padding-top:2px;
+	text-align:center;
+}
+
+.cfgenwp-requirements-ul{
+	list-style-type:square;
+	margin-left:0;
+	padding-left:18px;
+}
+.cfgenwp-requirements-ul li{
+	margin-bottom:10px;
+}
+.cfgenwp-requirements-ul strong{
+	font-weight:600;
+}
+.cfgenwp-div-listitem{
+	border-top:1px solid #fff;
+	border-bottom:1px solid #eaeaea;
+	padding:13px 12px 12px 12px;
+	font-family:"Open Sans", Arial, sans-serif;
+	font-size:14px;
+}
+.cfgenwp-div-listitem:last-child{
+	border-bottom:none;
+}
+
+.cfgenwp-index-panel .cfgenwp-editor-api-c{
+	padding-bottom:13px;
+	margin-bottom:5px;
+}
+.cfgenwp-getyourpurchasecode{
+	font-family:Arial, Helvetica, sans-serif;
+	font-size:16px;
+	margin:0 0 16px 0;
+	text-align:center;
+}
+.cfgenwp-pleaseactivate{
+	font-family:Arial, Helvetica, sans-serif;
+	font-size:16px;
+	margin:12px 0;
+	text-align:center;
+}
+.cfgenwp-thankyou{
+	font-family:'Open Sans', Arial, Helvetica, sans-serif;
+	font-size:28px;
+	text-align:center;
+}
+.cfgenwp-form-user{
+	width:380px;
+}
+.cfgenwp-form-purchasecode{
+	width:383px;
+}
+.cfgenwp-form-user, .cfgenwp-form-purchasecode{
+	padding:20px 16px;
+	margin:auto;
+}

@@ -22,6 +22,7 @@ class ContactController extends Controller
     {  
         return view("pages.contact.contact"); 
     }
+
     public function getUserAccountContacts() { 
             $contacts = User::getUserAccountContacts(); 
             $collection = collect( $contacts ); 
