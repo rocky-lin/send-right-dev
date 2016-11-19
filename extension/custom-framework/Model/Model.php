@@ -38,9 +38,9 @@ class Model {
 
     function __construct() {
         if($this->connect()) {
-            print "<br>successfully connected";
+            // print "<br>successfully connected";
         } else {
-            print "<br> failed to connect";
+            // print "<br> failed to connect";
         }
     } 
 	// Function to make connection to database

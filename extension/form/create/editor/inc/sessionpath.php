@@ -34,5 +34,5 @@ if($cfgenwp_phpconfig_sessionsavepath
 	}
 }
 
-session_start();
+ @session_start();
 ?>

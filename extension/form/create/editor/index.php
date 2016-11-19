@@ -1,4 +1,5 @@
 <?php
+session_start();
 /**********************************************************************************
  * Contact Form Generator is (c) Top Studio
  * It is strictly forbidden to use or copy all or part of an element other than for your 
@@ -6,6 +7,14 @@
  * Copies or reproductions are strictly reserved for the private use of the person 
  * making the copy and not intended for a collective use.
  *********************************************************************************/
+
+ 
+// print "this is the form creation"; 
+// print_r($_SESSION['formEntryStep1']); 
+$id = (!empty($_GET['id'])) ? $_GET['id'] : false;
+require '../../../autoload.php';  
+$formController = new FormController(new Model()); 
+
 
 require 'inc/sessionpath.php';
 
@@ -228,9 +237,9 @@ echo $cfgenwp_editor_obj->buildFormDefaultCss($cfgenwp_form_css, array('body'));
 			
 			<div>
 			
-				<div class="cfgenwp-toolbar-btn" id="cfgenwp-newform">New</div>
+				<!-- <div class="cfgenwp-toolbar-btn" id="cfgenwp-newform">New</div> -->
 		
-				<div class="cfgenwp-toolbar-btn cfgenwp-openform-closed" id="cfgenwp-openform-btn">Open</div>
+				<!-- <div class="cfgenwp-toolbar-btn cfgenwp-openform-closed" id="cfgenwp-openform-btn">Open</div> -->
 		
 				<div class="cfgenwp-toolbar-btn cfgenwp-toolbaraction" id="cfgenwp-style-all">Colors<span class="cfgenwp-responsive-hide-inline"> and fonts</span></div>
 				
@@ -244,7 +253,7 @@ echo $cfgenwp_editor_obj->buildFormDefaultCss($cfgenwp_form_css, array('body'));
 				
 				<?php
 				if($contactform_obj->demo != 1){?>
-					<div class="cfgenwp-toolbar-btn" id="cfgenwp-exit-form"><a href="../">Exit</a></div>
+					<div class="cfgenwp-toolbar-btn" id="cfgenwp-exit-form"><a href="http://localhost/rocky/send-right-dev/user/form">Exit</a></div>
 				<?php } ?>
 				
 			</div>
@@ -542,7 +551,7 @@ echo $cfgenwp_editor_obj->buildFormDefaultCss($cfgenwp_form_css, array('body'));
 				
 				<div id="cfgenwp-fb-form"></div>
 
-				<span id="cfgenwp-gotoformconfiguration" class="cfgenwp-button cfgenwp-button-blue">Next step: go to form settings 1</span>
+				<span id="cfgenwp-gotoformconfiguration" class="cfgenwp-button cfgenwp-button-blue">Next step: go to form settings</span>
 
 			</div><!-- cfgenwp-fb-editor-c -->
 		
@@ -589,16 +598,20 @@ echo $cfgenwp_editor_obj->buildFormDefaultCss($cfgenwp_form_css, array('body'));
 						$this->form_name = $value;
 					}
 					
-					function getFormName(){
-						return $this->form_name;
+					function getFormName() {  
+						return (!empty($_SESSION['formEntryStep1']['formName'])) ? $_SESSION['formEntryStep1']['formName'] : $this->form_name;  
 					}
-					
+					function getSelectedList() {
+						return $_SESSION['formEntryStep1']['selectedList']; 
+					}
 					function setFormEmail($value){
 						$this->form_email = $value;
 					}
 					
 					function getFormEmail(){
-						return isset($this->form_email) ? $this->form_email : null;
+
+
+						return isset($this->form_email) ? $this->form_email : $_SESSION['formEntryStep1']['email'];
 					}
 					
 					function setFormEmailFrom($value){
@@ -868,12 +881,23 @@ echo $cfgenwp_editor_obj->buildFormDefaultCss($cfgenwp_form_css, array('body'));
 				
 				// FORM NAME
 				$tscfgenform_setting = new TsCfgenFormSetting();
-				$tscfgenform_setting->setFormSettingTitle('Form name');
+				$tscfgenform_setting->setFormSettingTitle('Form name 2');
 				$tscfgenform_setting->setFormSettingLabelFor('cfgenwp-config-form-name');
 				$tscfgenform_setting->setFormSettingValue('<input type="text" id="cfgenwp-config-form-name" value="'.$cfgenwp_editor_obj->htmlEntities($tscfgenform->getFormName()).'">'
 															.'<input type="hidden" id="cfgenwp-form-id" value="'.$tscfgenform->getFormId().'">');
 				$tscfgenform_setting->printFormSettingHtml();
 
+				// selected list display
+				$tscfgenform_setting = new TsCfgenFormSetting();
+				$tscfgenform_setting->setFormSettingTitle('Selected List ');
+				$tscfgenform_setting->setFormSettingLabelFor('cfgenwp-config-form-name');
+				$tscfgenform_setting->setFormSettingValue('<input type="text" id="cfgenwp-config-form-name" value="'.$tscfgenform->getSelectedList().'"  disabled  />');
+				$tscfgenform_setting->printFormSettingHtml();
+
+
+
+
+ 
 				// EMAIL
 				if(!empty($cfgenwp_form_load['config_email_address'])) $tscfgenform->setFormEmail($cfgenwp_form_load['config_email_address']);
 				
@@ -1120,9 +1144,27 @@ echo $cfgenwp_editor_obj->buildFormDefaultCss($cfgenwp_form_css, array('body'));
 				
 				<div class="cfgenwp-formconfig-separator"></div>
 
-				<h3>Email marketing integration</h3>
+				 
+		<!-- 		<div class="cfgenwp-formconfig-c">
+				<div class="cfgenwp-formconfig-l">
+				 	<h3>Redirect Url</h3>
+				</div>  
+					<div class="cfgenwp-formconfig-r">
+					 	<input type="text" id="cfgenwp-redirect-url" value="" placeholder="http://www.yourdomain.com" /> 
+				 	</div>
+				 	<div class="cfgenwp-clear"></div>
+				</div>
+ -->
+
+
+
+
+
+
+			<div class="cfgenwp-formconfig-separator"></div>
+				<h3 class="un-used-elements">Email marketing integration</h3>
 				
-				<div class="cfgenwp-formconfig-c">
+				<div class="cfgenwp-formconfig-c un-used-elements">
 					
 					<div class="cfgenwp-formconfig-l">
 					</div>
@@ -1237,6 +1279,8 @@ echo $cfgenwp_editor_obj->buildFormDefaultCss($cfgenwp_form_css, array('body'));
 											$cfgenwp_service_input['attr']['class'] = 'cfgenwp-api-'.$cfgenwp_api_access_requirement_k;
 											$cfgenwp_service_input['attr']['value'] = $cfgenwp_editor_obj->htmlEntities($cfgenw_api_auth_val[$cfgenwp_api_access_requirement_k]);
 											$cfgenwp_service_input['attr']['id'] = 'cfgenwp_'.$cfgenwp_api_service['id'].'_'.$cfgenwp_api_access_requirement_k;
+
+
 											?>
 
 											<div class="cfgenwp-formconfig-r-c">
@@ -2075,9 +2119,22 @@ echo $cfgenwp_editor_obj->buildFormDefaultCss($cfgenwp_form_css, array('body'));
 					?>
 					
 				</div><!-- cfgenwp-smtpconfiguration-c -->
+ 
+
+
+ 
+			<h3>Embeded Code</h3>
+				<div class='cfg-simple-embeded-code' id='cfg-simple-embeded-code' >
+					<?php 
+						if(!empty($id )) {
+							print $formController->getSimpleEmbedded($_GET['id']); 	
+						} else {
+							print "Will generate after saved and published form..";
+						}
+					 ?>
+				</div>
 				
-				
-				<h2>Ready? Create your form!</h2>
+				<h2>Ready? Create your form! 1</h2>
 
 				<div id="cfgenwp-notice-savevalidation" class="cfgenwp-aftersave">
 					Your form is ready!
@@ -2089,7 +2146,7 @@ echo $cfgenwp_editor_obj->buildFormDefaultCss($cfgenwp_form_css, array('body'));
 				<div>
 				
 					<span id="cfgenwp-notice-loadinglists" class="cfgenwp-savenotice cfgenwp-button-position">Your lists are loading. The save button will reappear as soon as everything is loaded.</span>
-					<span id="cfgenwp-notice-savingform" class="cfgenwp-savenotice cfgenwp-button-position">Creating source files2</span><span id="cfgenwp-saveform" class="cfgenwp-button cfgenwp-button-blue cfgenwp-button-position">Save and create source files 1</span><span id="cfgenwp-returntoformedition" class="cfgenwp-button cfgenwp-button-position cfgenwp-button-grey">Return to the form 6</span>
+					<span id="cfgenwp-notice-savingform" class="cfgenwp-savenotice cfgenwp-button-position">Creating source files</span><span id="cfgenwp-saveform" class="cfgenwp-button cfgenwp-button-blue cfgenwp-button-position">Save and create source files</span><span id="cfgenwp-returntoformedition" class="cfgenwp-button cfgenwp-button-position cfgenwp-button-grey">Return to the form</span>
 					
 					<img id="cfgenwp-scrolltotop" src="img/scrolltotop.png" id="cfgenwp-scrolltotop">
 					
@@ -2126,7 +2183,7 @@ echo $cfgenwp_editor_obj->buildFormDefaultCss($cfgenwp_form_css, array('body'));
 
 
 	<div id="copyright">
-	© <?php echo @date('Y');?> <a href="http://www.topstudiodev.com" target="_blank" class="cfgenwp-a-text">Top Studio</a>
+	© <?php echo @date('Y');?> <a href="http://www.topstudiodev.com" target="_blank" class="cfgenwp-a-text">Send Right</a>
 	</div>
 
 </div><!-- cfgenwp-formbuilder-wrap -->

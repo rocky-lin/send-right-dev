@@ -228,7 +228,7 @@
 							
 							if(response['redirect_url']){
 								// we do not hide the loading animation because the redirection can take some time (prevents wondering what is happening)
-								window.location.href = response['redirect_url'];
+								window.top.location.href = response['redirect_url'];
 							} else{
 								
 								loading.hide();
@@ -236,7 +236,7 @@
 								var elementcontainer_collection = formcontainer.find('.cfgen-e-c');
 								
 								elementcontainer_collection.each(function(){
-								
+									console.log("successfully filed up the form");
 									jQuery(this).slideUp('fast', function(){
 		
 										if(!--elementcontainer_collection.length){
@@ -257,6 +257,8 @@
 
 						} else{
 							
+
+							console.log("failed fully filed up the form");
 							loading.hide();
 							
 							submit_btn.show();

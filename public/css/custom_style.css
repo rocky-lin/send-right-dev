@@ -27,3 +27,11 @@ body {
 }
 
  
+
+ /**
+  * Hide this elements
+  */
+ 
+ .un-used-elements {
+  display:none;
+ }

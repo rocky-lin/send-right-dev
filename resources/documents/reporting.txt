@@ -1,0 +1,340 @@
+Update For October 17, 2016C
+1.) Discuss with Rocky/Setup slack
+2.) Search software that we can use in planning and timeframes
+3.) Arrange timeline in goole docs spreedsheets
+4.) install jing
+5.) setup database in the server name (sendright) 
+6.) Try Connect cpanel using windows command  
+8.) setup files in the server (laravel5.3) live
+10. upgrade php version to 5.6.25
+9.) how to generate ssh key:   
+    https://www.youtube.com/watch?v=1LwNQ35w2MA 
+    - issue in connecting the server
+10.) In place some informations.
+
+Todo For October  18, 2016
+1. Go through specific documentations
+2. Gather requirements and data needed
+3. Understand how each task works 
+4. Setup wrike
+5. I setup summary documentation of what I have please refer to this link https://docs.google.com/document/d/1EJca3eQpah66fO9yLXxDbHJl64SeQpNgo5ABw4vAiUE/edit?usp=sharing
+
+Todo for Ocotober 19, 2016 
+1. Continue the documentation 
+2. Continue gather requirements
+2. understand the system process and Create Data flow diagram 
+https://drive.google.com/file/d/0B4KsaaMoH8XDMFVvTmttZ3FJclU/view?usp=sharing
+4. Understand system database structure and create entity relationship diagram
+https://drive.google.com/file/d/0B4KsaaMoH8XDaERhejdfNVE2S1U/view?usp=sharing
+ 
+Todo For October 20, 2016
+1. Continue understanding the process 
+2. Continue the documentation for data flow diagram and create explaination video
+http://screencast.com/t/40M2GC707
+3. Continue the documentation for entity relationship diagram and create explaination video
+http://screencast.com/t/NlTARFaVy
+
+
+Todo For October 21, 2016
+1. Setup task in wrike
+2. Setup github 
+3. Setup bitucket
+4. Setup local development
+5. Setup editor
+6. Prepare for coding..
+ 
+
+----------------------------------------------------------------------------
+Update for October 24, 2016
+Create users table
+Fix registration with confirmation page
+Set send to email cofirmation page 
+Forgot password 
+
+Todo for October 25, 2016
+Set confirm email
+Add throtolling 
+Checkout db seedings laravel 
+Setup databae table for user, user_account and account
+Add databse relationship
+ 
+Todo for October 26, 2016
+Get current account of a user
+Add resources such as css, jquery, javascript, angularjs  
+Enable to save the new contact to database
+validation 
+ - realtime check required for firstname 
+ - realtime check required for lastname
+ - realtime check required for email
+ - realtime check valid for real emai
+
+
+
+
+	Hi Rocky,  
+
+	Update for October 26, 2016  
+	Create contact view design
+	Create pagination for contact view 
+	Create limit for contact view pagination 
+	Load all contact when contact page is visited or refreshed  
+	Show contact order by latest added  
+
+	Todo for October 27, 2016
+	Enable user to search over all his contact  
+	Add mouse over to the table list of the contact
+	Overall test with current done task 
+	Connect user account when register
+ 
+	Todo for October 27, 2016
+ 	Add icon for delete
+ 	Add icon for edit
+ 	when hit delete icon asking if continue delete or not if yes then delete it in realtime 
+ 	   - for now delete only the contact
+ 	   - The thing is that this contact may have list and other feature of the site connected so this functionality has to be 
+ 	     improve to remove all of the connections. 
+
+ 	When hit edit redirect to a form that the use able to edit his contact and update it and if success then it should show a success message if failed of-course it's failed message. 
+ 
+-----------------------------------------------------------------------
+	delete works in real time 
+		
+ 	Hit idit icon
+ 	redirect to edit contact page
+ 	populate the content to the fields
+ 	populate dropdown for subscriber type
+ 	when hit  update button then update execute to the expecific contact
+    same validation should work like adding new contact 
+
+    in populate default values fix issue of not populating the contact type
+ 
+
+
+
+
+
+	Update for Oct 31, 2016
+ 
+	Delete specific contact and this mean that only 1 removed per deleted execution.
+	When successfully deleted, contact will automatically disappear from the list with out any refresh of the page.
+	When hit delete a popup should show asking "Are you sure to delete this contact?"
+	Hit edit icon, redirect to edit contact page
+ 
+	Todo for Nov 2, 2016 
+
+	When page in edit contact, field should be populated specific contact info with currently editing contact
+	Populate dropdown for subscriber type "subscriber or contact"
+	When hit  update button then update execute to the expecific contact
+	Same validation should work like adding new contact
+
+
+
+	November 3, 2016
+		create database of lists and contact lists 
+		create ui for list views
+		set dummy data 
+		show lists of the specific user
+		get total contact in specific list
+		create ui for add new list  
+
+	November 4, 2016  
+
+	able to add new list
+
+	when hit save, the fields should be added to lists and the selected contact should be added to the list_contact
+	
+	can add contact during adding new list
+
+	fix the adding contact to a list that when hit next prev the selected checkbox should stay
+
+
+
+	November 7, 2016  
+
+	when a list already added user able to add contact to his existing list, this function is edit list
+
+	when pagination selected contact will disappear and this has to fix, when pagination executed the already selected checkbox shouldn't 
+	disapear
+
+
+
+	filter the array from the variable of the selected contact
+
+	view contact under list 
+
+	add total contact sorting in the list
+
+	November 8
+
+	dont allow to submit if the fields required is not yet filled up, this will prevent use to keep them repeating the adding contact
+
+	Edit list
+
+	Update for November 7, 2016
+	Set default checked box
+	Retrieve default data
+	Set default field values  
+	When update the list contacts delete all the already added contact and just add the updated contact 
+	Load data when document is ready 
+
+
+
+
+
+	Update for November 8, 2016 
+	Delete list specific list 
+	When delete specific list then all the contacts under the list should be deleted 
+	Add import contact in add new list - I need samply import file for this
+		- enable user to upload .csv file 
+		- system will read the new uploaded .csv file by the specific user
+
+		Todo for November 9, 2016
+		- get all the selected field and add to user contact if in the contact upload
+		- get all the selected field and add to user contact and list if in the contact upload 
+		- import csv file in contact field
+	Review all the codes that has been done and doing checking code and fixes
+	Start reviewing form
+
+
+
+Update for November 10, 2016 
+Check coding of the purchased product 
+Familiarize purchased form builder how to integrate to site with laravel
+Start integrating to send right application 
+Fix database migration issue, conflict
+create database migration form and form_list  
+
+Todo for November 11, 2016
+Continue explore and checking codes of software we bought
+integrate form builder to our system
+add migration table columns
+add form home view
+get all form by the specific users
+analyse the automation mvp and started adding to wrike - i will still need to understand the workflow document you just sent.
+
+Find the way that we can add new form when clicked the "save and create source file" button
+   - create new form 
+   - rename file with name-form_id
+   - set edit link and
+   - when hit "save and update" button form should be updated
+   - set delete file link
+ 
+Update for November 15, 2016
+    Find the way that we can add new form when clicked the "save and create source file" button
+    create new form and connect to database
+    set edit link to the form 
+    when hit "save and update" button form should update database 
+    display the added form in form dashboard   
+ 
+Update for Nover 16, 2016
+    get all form by the specific users  - w
+    Set view link  - w
+    Delete form and delete files and data/delete form specific form  - w
+    add form home view - w
+    add sorting and query in home view with pagination - w
+
+Update for Nover 17, 2016
+    remove Email marketing integration - w
+    save and publish -> w
+    Drag and drop editor integration to our database and ui - w
+    drag and drop editor integration   - w
+
+Update for Nover 18, 2016 
+
+	show thank you - w
+ 	add field for Url redirect - w
+ 	Enable embedded codes - w
+ 		- click save and publish content to embeded code should change
+ 		- add the link to the form for embeded code
+ 		- test after if it works 
+ 		- set default simple embedded iframe when form is in editing mode
+
+ 	Save subscriber entry to specific user database.table 
+
+ 	Enable autoresponse when people subscribed the form
+ 	  - the auto response is we will use template?
+
+Update for November 18, 2016 
+ 	Opt-in Confirm 
+    add view entry 
+	Connect contact list
+	save new entry data to our database -> that should be in the contact when customer signs up with the form
+
+Update for November 21, 2016 
+
+
+   
+clear ui
+
+
+
+
+
+
+November 16, 2016 
+delete form specific form
+set link to view form created
+remove Email marketing integration
+Url redirect, 
+show thank you
+save and publish 
+
+ ----------------------------------------------------------
+
+ Update for November 17, 2016
+Connect contact list
+   - create dopdown  ui that user will be able to search and select via dropdown 
+   - retrieve specific list of  user
+   - fix query to display the correct query string in dropdown
+   - change ui to adopt the looks of the entire site
+   - fix specific user retrieve his own list and able to select
+   - add quick design 
+continue Enable embedded codes
+
+Todo for November 17, 2016
+
+Move tasks in wrike to trello
+save lists selected
+set name to the form creation 
+add form home view
+add sorting and query in home view with pagination	
+get all form by the specific users 
+-------------------------------------------------------
+
+
+add name of the form to the creation of form 
+display the selected list
+set email address of user current logged in as receiver of the form entry
+after creation generate/creation of the form change "download source" to "go to home"
+fix issue in header 
+-------------------------------------------
+
+When users subscriber will register the form users info should be saved to database as a backup details and 
+can be used to form entries
+
+When users subscriber will register the form users info should be copied to contact table so that it will be 
+auto saved to their contact
+
+fix the ui and redirects
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

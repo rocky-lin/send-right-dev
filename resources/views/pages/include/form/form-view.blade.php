@@ -25,9 +25,10 @@
                                         <th>
                                         <label>Name</label>
                                           <a href="#" title="First Name" data-toggle="popover" data-trigger="hover" data-content="First name of your form.">(?)</a>  
-                                        </th> 
+                                        </th>  
+
                                         <th> 
-                                            <label>Delete </label>
+                                            <label>View </label>
                                             <a href="#" title="Delete" data-toggle="popover" data-trigger="hover" data-content="Delete your form forever.">(?)</a> 
                                         </th>
                                         <th>
@@ -38,7 +39,10 @@
                                 </thead>
                                 <tbody>
                                     <tr data-ng-hide="deleteForm[form.id]"  ng-repeat="form in data | filter:q | startFrom:currentPage*pageSize | limitTo:pageSize | orderBy : email" >
-                                        <td>@{{form.name}} </td> 
+                                        <td>@{{form.name}} </td>  
+                                        <td>    
+                                            <span class="glyphicon glyphicon-eye-open" aria-hidden="true" data-ng-click="viewNowForm(form)"></span>     
+                                        </td> 
                                         <td>   
                                             <span class="glyphicon glyphicon-trash" aria-hidden="true" data-ng-click="deleteForm(form)"></span>   
                                         </td>
@@ -57,10 +61,10 @@
                             </button>
                         </div>
                     </div>
-                </div>    
-
+                </div>     
 				<hr>     
-                <a href="{{ url('extension/form/create') }}" title="">
+                {{-- <a href="{{ url('extension/form/create/editor/index.php') }}" title=""> --}}
+                <a href="{{ route('user.form.list.connect.view') }}" title=""> 
                     <button type="button" class="btn btn-primary"> Add New Forms</button>
                 </a> 
          

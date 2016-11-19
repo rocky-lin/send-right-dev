@@ -226,4 +226,16 @@ span.cfgenwp-button-small{
 	border:1px solid #6dcaec;
 
 }
+ 
+/**
+ * Custom css that hide elements
+ */ 
+.un-used-elements, #footer p {
+	display:none;
+} 
 
+.cfg-simple-embeded-code { 
+    border: 1px solid #eaeaea;
+    background-color: gainsboro;
+    padding: 37px; 
+}

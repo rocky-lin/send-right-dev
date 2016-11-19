@@ -102,11 +102,27 @@
         <script src="<?php print url('/'); ?>/public/js/src/3.3.7-bootstrap.min.js"></script> 
         <script src="<?php print url('/'); ?>/public/js/src/1.4.8-angular-route.js"></script>
         <script src="<?php print url('/'); ?>/public/js/src/jquery-ui.min.js"></script>
+
+
+
+ 
+
+
+    {{-- Individual Auto suggest needs--}} 
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/fontawesome/4.5.0/css/font-awesome.css">
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/bootstrap/3.3.6/css/bootstrap.min.css">
+    <link rel="stylesheet" href="//mgcrea.github.io/angular-strap/styles/libs.min.css">  
+    <script src="//cdn.jsdelivr.net/angularjs/1.5.5/angular.min.js" data-semver="1.5.5"></script>
+    <script src="//cdn.jsdelivr.net/angularjs/1.5.5/angular-animate.min.js" data-semver="1.5.5"></script>
+    <script src="//cdn.jsdelivr.net/angularjs/1.5.5/angular-sanitize.min.js" data-semver="1.5.5"></script>
+    <script src="//mgcrea.github.io/angular-strap/dist/angular-strap.js" data-semver="v2.3.8"></script>
+    <script src="//mgcrea.github.io/angular-strap/dist/angular-strap.tpl.js" data-semver="v2.3.8"></script>
+    <script src="//mgcrea.github.io/angular-strap/docs/angular-strap.docs.tpl.js" data-semver="v2.3.8"></script> 
+ 
      <!-- Scripts custom --> 
         <script src="<?php print url('/'); ?>/public/js/custom_jquery.js"></script>
         <script src="<?php print url('/'); ?>/public/js/custom_angular_js.js"></script>
         <script src="<?php print url('/'); ?>/public/js/custom_js.js"></script> 
-
 
 </body>
 </html>

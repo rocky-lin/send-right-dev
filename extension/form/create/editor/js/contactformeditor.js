@@ -16,8 +16,8 @@ jQuery(function(){
 	var aweber_authorizationcode_cache = {};
 	var span_required = '<span class="cfgen-required">*</span>';
 	var saveform_btn = jQuery('#cfgenwp-saveform');
-	var saveform_btn_add = 'Save and create source files 3';
-	var saveform_btn_update = 'Save and update 4';
+	var saveform_btn_add = 'Save and Publish';
+	var saveform_btn_update = 'Save and update';
 	var form_editor = jQuery('#cfgenwp-fb-form');
 	var form_settings = jQuery('#cfgenwp-formsettings');
 	var form_id = jQuery('#cfgenwp-form-id');
@@ -1179,10 +1179,8 @@ jQuery(function(){
 			jQuery.post('inc/setupcontactform.php',
 					{element:element_properties},
 					function(data){
-
-						console.log( " post to 'inc/setupcontactform.php ");
 					
-						console.log(data);
+						//console.log(data);
 						
 						form_editor.find('div.cfgenwp-editor-loading').remove();
 						
@@ -1638,8 +1636,6 @@ jQuery(function(){
 				jQuery.post('inc/editimage-delete.php', 
 						{filename:Array(filename)},
 						function(data){
-
-							cosole.log( " post path to inc/editimage-delete.php");
 							delimgbutton.cfgen_closestElementEditorPanel().find('.uploadsuccess-container').hide();
 						}
 				);
@@ -1673,7 +1669,6 @@ jQuery(function(){
 		jQuery.post('inc/editimage-delete.php', 
 			 	{filename:Array(filename)},
 				function(data){
-					console.log( " post to inc/editimage-delete.php");
 					uploadimagesuccesscontainer.find('.uploadimageloading').hide();
 					uploadimagesuccesscontainer.hide();
 					uploadimagesuccesscontainer.find('.uploadimagehtmlfilename').empty(); // shows file name
@@ -2310,10 +2305,7 @@ jQuery(function(){
 	
 	// NEXT STEP - CONFIGURATION
 	jQuery('#cfgenwp-gotoformconfiguration').click(function(){
-
-
-		console.log("go to form settings clicked..");
-
+		
 		var cfgenwp_gotoconfig_error_message = '';
 		
 		var fb_e_c_collection = form_editor.cfgen_findFbElementConts();
@@ -2367,7 +2359,7 @@ jQuery(function(){
 			return false;
 		}
 		
-		if(!cfgenwp_gotoconfig_error_message) {
+		if(!cfgenwp_gotoconfig_error_message){
 		
 			var insertfieldvalue_collection = form_settings.find('select.cfgenwp-insertfieldvalue');
 			
@@ -2692,9 +2684,7 @@ jQuery(function(){
 	
 	// SAVE FORM
 	saveform_btn.click(function(){
-		console.log("---------------------------------------")
- 		console.log("button save or update clicked....");
-
+		
 		var cfgenwp_saveform_error_message = '';
 		var cfgenwp_saveform_error_buttons = '';
 		
@@ -4155,57 +4145,51 @@ jQuery(function(){
 		
 		// console.log(post_json_export);
 
-
-
-
-		console.log(" json_export : " + post_json_export);
-		console.log(" cf_f : " + jQuery('#copyright-header:visible').html());
-
 		var jqxhr_saveform = jQuery.post('inc/saveform.php',
 			   	{
-
-
 					'json_export':post_json_export,
-					'cf_f':jQuery('#copyright-header:visible').html()
+					'cf_f':"Top Studio", //jQuery('#copyright-header:visible').html()
 				},
 				function(data)
 				{	
 
-					console.log("saving form via ajax post to inc/saveform.php");
+					console.log(" Generating new form processed ");
 
 			   		// console.log(data);
 					
 					var json_response = jQuery.parseJSON(data);
 					
 					if(!jQuery.isEmptyObject(json_response['error'])){
-						console.log("form saving got an issue");
 
+						console.log(" Generating form encounter an error");
 						var response_error = json_response['error'];
 						cfgenwp_dialog_box.html('<p>'+response_error['error_message']+'</p>').dialog(cfgenwp_dialog_error);
 					}
 					else{
-						console.log(" saving for now...");
+
+						console.log(" Generating form successful" );
 						
 						// no form id in demo mode, the button value must remain "save and create"
 						json_response['form_id'] ? saveform_btn.html(saveform_btn_update) : saveform_btn.html(saveform_btn_add);
-
-						console.log("form id" + json_response['form_id']);
-                        aftersave_cs.show();
-
+						
+					    aftersave_cs.show();
+						
 						jQuery('#downloadsources').append(json_response['response']).slideDown('fast');
-
-						console.log("form name " + json_export['form_name']);
 
 						loadformdata_c.html(json_export['form_name']);
 
 						form_id.val(json_response['form_id']);
 
+						// Generate form embedded  
+					 
+
+
+
+						jQuery('#cfg-simple-embeded-code').text('<iframe width=\"560\" height=\"560\" src=\"http://localhost/rocky/send-right-dev/extension/form/create/editor/forms/' + json_response['form_id'] + '/index.php\" frameborder=\"0\" ></iframe>')
+						// console.log(" form id generated "  +  );
+						// alert("loaded");
 
 					}
-
-					console.log(json_response);
-
-					console.log("processing form done..");
 					
 					saveform_btn.show();
 					
@@ -4214,8 +4198,10 @@ jQuery(function(){
 					notice_savingform.hide();
 				
 				}).fail(function(){
-					
-					console.log(jqxhr_saveform);
+
+					console.log(" Generating form fail.");
+
+					//console.log(jqxhr_saveform);
 					
 					if(jqxhr_saveform.status && jqxhr_saveform.status == 500){
 						
@@ -5597,10 +5583,7 @@ jQuery(function(){
 					'inc/form-api-getlists.php',
 					post_api,
 					function(data){
-
-
-									console.log("post to inc/form-api-getlists.php");
-									console.log(data);
+									//console.log(data);
 									
 									service_menu_ico.removeClass('cfgenwp-service-menu-ico-deactivated');
 									remove_service_ico.show();

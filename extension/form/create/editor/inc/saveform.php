@@ -7,8 +7,6 @@
  * making the copy and not intended for a collective use.
  *********************************************************************************/
 
-require 'my_custom/functions.php';
-
 require 'sessionpath.php';
 
 require '../class/class.formbuilder.message.php';
@@ -30,10 +28,10 @@ $cfgenwpapi_editor_obj = new cfgenwpApiEditor();
 
 
 // ERROR: WRITABLE FORM INDEX FILE
-if($contactform_obj->demo != 1) {
+if($contactform_obj->demo != 1){
 	
 	// Write the form index file if it's missing
-	if(!is_file($editor_obj->formsindex_filename_path)) {
+	if(!is_file($editor_obj->formsindex_filename_path)){
 		$editor_obj->resetFormsIndex();
 	}
 	
@@ -62,16 +60,6 @@ $json_export_decode['date'] = time();
 
 $json_export_decode = array_merge($json_export_decode, json_decode($editor_obj->quote_smart($_POST['json_export']), true));
 
-
-$json_export_decode['form_id'] = str_replace('17', '1233321', $json_export_decode['form_id']);
-
-//print "<pre>";
-//
-//	print_R($json_export_decode );
-//
-//print "</pre>";
-//print "forms - " . $json_export_decode['form_id'];
-
 $post_form_id = $json_export_decode['form_id'];
 
 
@@ -92,7 +80,7 @@ if($contactform_obj->demo != 1){
 				$formbuilder_message_factory->getAndPrintErrorMessage();
 			}
 		}
-
+		
 	} else{
 		$editor_obj->authentication(true);
 	}
@@ -1872,7 +1860,8 @@ if($contactform_obj->demo != 1){
 		
 		cfgenwp_Zip($dir_form_copy_dest, $dir_form_copy_dest.'/'.$zip_file_name);
 		
-		$zip_button = '<a class="cfgenwp-button cfgenwp-button-yellow cfgenwp-button-position" href="'.$editor_obj->forms_dir.'/'.$dir_form_name.'/'.$zip_file_name.'">Download sources</a>';
+		// $zip_button = '<a class="cfgenwp-button cfgenwp-button-yellow cfgenwp-button-position" href="'.$editor_obj->forms_dir.'/'.$dir_form_name.'/'.$zip_file_name.'">Download sources 1</a>';
+		$zip_button = '<a class="cfgenwp-button cfgenwp-button-yellow cfgenwp-button-position" href="http://localhost/rocky/send-right-dev/user/form">Return to home</a>';
 		
 	} else{
 		// zip extension not loaded
@@ -1881,7 +1870,7 @@ if($contactform_obj->demo != 1){
 
 	if($flag_error_zip_extension){
 
-		$zip_button = '<span class="cfgenwp-button cfgenwp-button-position cfgenwp-button-grey cfgenwp-button-grey-inactive">Download sources</span>'
+		$zip_button = '<span class="cfgenwp-button cfgenwp-button-position cfgenwp-button-grey cfgenwp-button-grey-inactive">Download sources 2</span>'
 					 .'<div class="warning" style="width:460px; margin-top:6px; margin-left:246px; padding:3px 4px; ">'
 					 .'<strong>The download link is unavailable</strong>.'
 					 .'<br><strong>There is a misconfiguration on your server: the Zip extension is missing</strong> and Contact Form Generator was unable to create the zip archive of your contact form.'
@@ -1894,7 +1883,7 @@ if($contactform_obj->demo != 1){
 
 
 if($contactform_obj->demo == 1){
-	$zip_button = '<span class="cfgenwp-button cfgenwp-button-yellow cfgenwp-button-position demodownload">Download sources</span>';
+	$zip_button = '<span class="cfgenwp-button cfgenwp-button-yellow cfgenwp-button-position demodownload">Download sources 3</span>';
 }
 
 
@@ -1914,4 +1903,18 @@ $json_message['form_id'] = $form_id;
 
 echo json_encode($json_message);
 
+ 
+require ('../../../../autoload.php');    
+$jsonDecoded = json_decode($_POST['json_export'], true); 
+$account_id = $_SESSION['account_id']; 
+$formController = new FormController(new Model);
+$formController->insertNewFormNow(
+  	[
+  		'account_id'=>$account_id, 
+	  	'folder_name'=>$form_id, 
+	  	'name'=>$jsonDecoded['form_name'], 
+	  	'config_email'=>$jsonDecoded['config_email_address'],
+	  	'simple_embedded'=>mysql_real_escape_string('<iframe width="560" height="560" src="http://localhost/rocky/send-right-dev/extension/form/create/editor/forms/' . $form_id . '/index.php" frameborder="0" ></iframe>'),
+  	] 
+);   
 ?>

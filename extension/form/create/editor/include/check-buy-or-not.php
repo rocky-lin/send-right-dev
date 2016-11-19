@@ -3,10 +3,10 @@
 	
 		<div id="cfgenwp-header-l" >
 			<a href="index.php"><img src="img/logo.png" alt=""></a>
-			<p id="baseline">Create forms without writing a single line of code. 1</p>
+			<p id="baseline">Create your form by drag and drop features.</p>
 		</div>
 	
-		<div id="cfgenwp-header-r-r">
+		<div id="cfgenwp-header-r-r" style="display:none">
 		<?php
 			if($contactform_obj->demo == 1){?>
 				<div style="float:right; width:210px; ">
@@ -26,7 +26,7 @@
 				<?php
 				if($contactform_obj->demo != 1){?>
 				
-					<div>
+					<div >
 					Version <?php echo $cfgenwp_editor_obj->version;?> © <a href="http://www.topstudiodev.com" target="_blank" class="cfgenwp-a-text"><span id="copyright-header">Top Studio</span></a>
 					</div>
 					

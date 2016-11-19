@@ -79,10 +79,13 @@ $factory->define(App\Form::class, function (Faker\Generator $faker) {
     return [
            'account_id' => 1, 
             'name' => $faker->firstName,
+            'config_email'=> $faker->email,
             'folder_name' => $faker->name,
             'content' => $faker->paragraph,
             'redirect_url' =>  'http://www.google.com',
             'response' => $faker->sentence,
+            'simple_embedded' => $faker->paragraph,
+            'full_embedded' => $faker->paragraph,
             'opt_in_message' => $faker->paragraph  
     ];
 });
@@ -92,6 +95,14 @@ $factory->define(App\FormList::class, function (Faker\Generator $faker) {
     return [ 
             'form_id' => rand(1,App\Form::count()),
             'list_id' => rand(1,App\List1::count())
+    ];
+});
+
+$factory->define(App\FormEntry::class, function (Faker\Generator $faker) { 
+    static $password; 
+    return [ 
+            'form_id' => rand(1,App\Form::count()),
+            'content' => json_encode(['about me'=>$faker->paragraph,'name'=>$faker->name, 'age'=>rand(1,100)])
     ];
 });
 

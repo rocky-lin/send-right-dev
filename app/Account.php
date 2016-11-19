@@ -8,6 +8,10 @@ class Account extends Model
 { 
 	protected $table = 'accounts';
  	
+	public function formLists() 
+    {
+        return $this->hasManyThrough('App\FormList', 'App\Form', 'account_id', 'form_id', 'id');
+    }     
 
  	public function user_acounts(){
 		return $this->hasMany('App\UserAccount');

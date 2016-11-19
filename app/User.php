@@ -31,28 +31,56 @@ class User extends Authenticatable
     // {
     //     return $this->email_address;
     // }
- 
-    public function user_account() { 
+    
+
+    // function __construct() {
+    //     print "test";
+    // }
+
+
+
+
+    public function user_account() 
+    { 
         return $this->hasOne('App\UserAccount');
     } 
-    public static function getUserAccount() {
+
+    public static function getUserAccount() 
+    {
         return self::find(Auth::user()->id)->user_account->account->id; 
     } 
 
-    public static function getUserAccountForms() {
+    public static function getUserAccountForms() 
+    {
         return self::find(Auth::user()->id)->user_account->account->forms;
     }
 
-    public static function getUserAccountContacts() {
+    public static function getUserAccountContacts() 
+    {
         return self::find(Auth::user()->id)->user_account->account->contacts;
     }
 
-    public function routeNotificationForSlack() {
+    public function routeNotificationForSlack() 
+    {
         // https://hooks.slack.com/services/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 - #payments
         // https://hooks.slack.com/services/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 - #jesus143
-        return 'https://hooks.slack.com/services/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'; 
+        return 'https://hooks.slack.com/services/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';  
+    } 
 
-
- 
+    public static function lists() 
+    {
+  
+        return 'users lists';
     }
+
+    public static function formLists() 
+    {
+         return self::find(Auth::user()->id)->user_account->account->formLists;
+    } 
+
+    public static function forms()
+    {
+        //
+    }
+
 }

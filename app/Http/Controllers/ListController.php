@@ -165,4 +165,17 @@ class ListController extends Controller
         $contact_ids  = explode(',', $contact_ids);   
         return $contact_ids;
     }
+
+    public function searchLists($query='') 
+    {  
+
+        $lists = List1::where('name', 'LIKE', '%'. $query . '%')
+            ->where('account_id', Auth::user()->id)
+            ->get()
+            ->toArray();  
+        return $lists;  
+
+    }
+
+    
 }

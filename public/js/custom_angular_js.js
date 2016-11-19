@@ -2,8 +2,13 @@ obj = new Object();
 obj.siteUrl = 'http://localhost/rocky/send-right-dev'; 
 // obj.siteUrl = 'http://sendright.net'; 
 
-var app = angular.module('myApp', ['ui.bootstrap']); 
+var app = angular.module('myApp', ['ngAnimate', 'ngSanitize', 'mgcrea.ngStrap']); 
+ 
+app.controller('MainCtrl', function($scope) {
+});  
 
+'use strict'; 
+ 
 //add contact
 app.controller('myAddContactCtrl', ['$scope', function($scope) { 
 
@@ -242,8 +247,7 @@ app.controller('myListCreateViewCtr', ['$scope', '$filter', '$http', '$window', 
             for (var i = 0; i <  $scope.selectedContactArray.length; i++) {
                 $scope.isContactSelected[$scope.selectedContactArray[i]] = false;  
             }    
-        }
-
+        } 
         // when edit page loaded get all default contact list set
         $scope.$watch('listId', function () { 
             $http({
@@ -257,9 +261,7 @@ app.controller('myListCreateViewCtr', ['$scope', '$filter', '$http', '$window', 
             }, function errorCallback(response) {  
                 alert("something wrong! please contact send right support. Thank you!"); 
             });    
-        });
-
-
+        }); 
         // When the home page contact loaded
         $http({
           method: 'GET',
@@ -277,7 +279,9 @@ app.controller('myListCreateViewCtr', ['$scope', '$filter', '$http', '$window', 
 }]);      
 
 
-//form view
+/**
+ *  This is the one controlling the form view page
+ */
 app.controller('myFormViewCtr', ['$scope', '$filter', '$http', '$window', function ($scope, $filter, $http, $window) { 
     console.log("Form views loaded angulajs!..");
     $scope.currentPage = 0; 
@@ -286,11 +290,18 @@ app.controller('myFormViewCtr', ['$scope', '$filter', '$http', '$window', functi
     $scope.q = ''; 
     $scope.deleteForm = []; 
      $scope.totalForm = 0;
-    $scope.editForm = function(form) {  
-        $window.location.href = obj.siteUrl + '/user/form/'+form.id+'/edit'; 
+
+     
+    $scope.viewNowForm = function(form) {    
+        $window.location.href = obj.siteUrl + '/extension/form/create/editor/forms/'+form.folder_name+'/index.php';  
     } 
+ 
+    $scope.editForm = function(form) {   
+        $window.location.href = obj.siteUrl + '/extension/form/create/editor/?id='+form.folder_name; 
+    } 
+
     $scope.deleteForm = function(form) { 
-        if(confirm('are you sure you want to delete this form?' + form.id)){ 
+        if(confirm('are you sure you want to delete this form?')){ 
             $http({
                 method: 'DELETE',
                 url: obj.siteUrl + '/user/form/' + form.id,
@@ -333,14 +344,32 @@ app.controller('myFormViewCtr', ['$scope', '$filter', '$http', '$window', functi
         alert("something wrong! please form send right support. Thank you!"); 
     });    
 }]);  
-
-
-
-
-// general
+ 
+/**
+ *  General use of code for sorting
+ */
 app.filter('startFrom', function() {
     return function(input, start) {
         start = +start;
         return input.slice(start);
     } 
 }); 
+ 
+/**
+ * Drop Down in create form
+ *  connecting to a lists and should show auto suggest drop down
+ */ 
+angular.module('myApp') 
+.controller('TypeaheadDemoCtrl', function($scope, $templateCache, $http) {  
+    $scope.icons = [];
+    $scope.selectedAddress = ''; 
+    $scope.getLists = function(viewValue) { 
+
+         
+        var str = (viewValue  == '' )? "" : "/" + viewValue;
+      return $http.get( obj.siteUrl + '/user/list/search' + str)
+      .then(function(res) { 
+          return res.data; 
+      });
+    };  
+});  

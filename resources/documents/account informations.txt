@@ -1,0 +1,57 @@
+https://mail.worksmobile.com
+mail: jesus@supershortcut.com
+user: jesus
+pasS: wklk157#1
+------------------------------------------------------------------------------------------
+https://lastpass.com
+user  jesus@supershortcut.com
+pasS: wklk157#1
+------------------------------------------------------------------------------------------
+https://app.getresponse.com
+user  jesus@supershortcut.com
+pasS: wklk157#1
+------------------------------------------------------------------------------------------
+General Folder FTP:
+site: http://sendright.net/
+user: developer@rocky642.com
+pass: wklk157#1
+------------------------------------------------------------------------------------------
+SendRight Folder FTP:
+user: sendright_dev@rocky642.com
+pass: wklk157#1
+------------------------------------------------------------------------------------------
+SSH Key:
+Key name: id_rsa
+Key password: wklk157#1
+
+https://secure1.inmotionhosting.com/index/login
+user: rocky642@gmail.com
+pass: Im@77063
+Putty Configuration: 
+youtube tut: https://www.youtube.com/watch?v=1LwNQ35w2MA
+host: sendright.net
+port: 2222 
+------------------------------------------------------------------------------------------
+Online Server:
+Development Invironment 
+dbname: iamroc5_sendright_dev
+Database: iamroc5_sendright_dev
+user: iamroc5_rocky642
+User: iamroc5_rocky642
+pass: ?~&TyzWX{=!Z 
+
+Live Invironment
+dbname: iamroc5_sendright
+Database: iamroc5_sendright
+user: iamroc5_rocky123
+User: iamroc5_rocky123
+pass: SehmVz_~RNIO 
+------------------------------------------------------------------------
+Phpmyadmin Link
+https://secure153.inmotionhosting.com:2083/cpsess8779872867/3rdparty/phpMyAdmin/index.php#PMAURL-0:index.php?db=&table=&server=1&target=&token=65f747215375a537aaeb40f61b3c2b6d
+cpanel link: https://secure153.inmotionhosting.com:2083/cpsess8779872867/frontend/x3/index.html
+ 
+codecanyon
+
+user: rockylin
+pass: wklk157#1
