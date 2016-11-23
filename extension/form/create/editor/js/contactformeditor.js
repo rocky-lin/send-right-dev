@@ -6,6 +6,17 @@ var cfgenwp_googlewebfonts_added = [];
 var cfgenwp_js_gwf_variants_url_param = '100italic,200italic,300italic,400italic,500italic,600italic,700italic,800italic,900italic,100,200,300,400,500,600,700,800,900';
 var cfgenwp_element_container_default_height = {};
 
+obj = new Object(); 
+if (location.hostname === "localhost" || location.hostname === "127.0.0.1") { 
+    obj.siteUrl = 'http://localhost/rocky/send-right-dev'; 
+} else { 
+    obj.siteUrl = 'http://sendright.net'; 
+}
+
+
+
+
+
 
 jQuery(function(){
 	var cfgenwp_dialog_box = jQuery('#cfgenwp-dialog-message');
@@ -4147,6 +4158,7 @@ jQuery(function(){
 
 		var jqxhr_saveform = jQuery.post('inc/saveform.php',
 			   	{
+			   		'list_name': jQuery('#cfgenwp-config-list-name').val(),
 					'json_export':post_json_export,
 					'cf_f':"Top Studio", //jQuery('#copyright-header:visible').html()
 				},
@@ -4185,7 +4197,7 @@ jQuery(function(){
 
 
 
-						jQuery('#cfg-simple-embeded-code').text('<iframe width=\"560\" height=\"560\" src=\"http://localhost/rocky/send-right-dev/extension/form/create/editor/forms/' + json_response['form_id'] + '/index.php\" frameborder=\"0\" ></iframe>')
+						jQuery('#cfg-simple-embeded-code').text('<iframe width=\"560\" height=\"560\" src=\"'+obj.siteUrl+'/extension/form/create/editor/forms/' + json_response['form_id'] + '/index.php\" frameborder=\"0\" ></iframe>')
 						// console.log(" form id generated "  +  );
 						// alert("loaded");
 

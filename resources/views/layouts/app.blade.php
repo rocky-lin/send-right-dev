@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en"  ng-app="myApp" >
+<html lang="en"  ng-app="myApp">
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -23,7 +23,7 @@
         ]); ?>
     </script>
 </head>
-<body data-ng-init="document">
+<body data-ng-init="document;siteUrl={{url('/')}}"   >
     <div id="app">
         <nav class="navbar navbar-default navbar-static-top">
             <div class="container">
@@ -89,6 +89,15 @@
             @yield('content')  
         </div>
     </div> 
+
+
+
+    
+
+
+
+
+
 
         {{--   <footer class="footer">
             <div class="container">

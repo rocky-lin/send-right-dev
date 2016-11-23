@@ -13,7 +13,7 @@ $cfgenwp_form_css['default']['body'] = array('background-color'=>'#f7f7f7');
 
 $cfgenwp_form_css['default']['.cfgen-clear'] = array('clear'=>'both');
 
-$cfgenwp_form_css['default']['.cfgen-form-container'] = array('padding'=>'30px', 'border'=>'1px solid #EEE', 'background-color'=>'#FFF', 'border-radius'=>'4px', 
+$cfgenwp_form_css['default']['.cfgen-form-container'] = array('padding'=>'30px', 'border-radius'=>'4px', 
 															/* box sizing property is not merged with other elements because cfgen-form-container is not inside id="cfg-form-XXX", it is id="cfg-form-XXX" */
 															'-webkit-box-sizing'=>'border-box', '-moz-box-sizing'=>'border-box', '-ms-box-sizing'=>'border-box', 'box-sizing'=>'border-box', 'max-width'=>'100%');
 

@@ -220,6 +220,25 @@
 					post,
 					function(data){
 
+
+
+
+
+						console.log("post--------------------");
+						console.log(form_values); 
+ 						console.log(form_values[0].elementlabel_value + " " + form_values[0].element_value); 
+						console.log("post--------------------");
+						console.log(post); 
+						console.log("data --------------------");
+
+						console.log(data);
+						console.log("response ---------------------------"); 
+						var response = jQuery.parseJSON(data);  
+						console.log(response); 
+
+
+
+
 						// console.log(data);
 
 						var response = jQuery.parseJSON(data);

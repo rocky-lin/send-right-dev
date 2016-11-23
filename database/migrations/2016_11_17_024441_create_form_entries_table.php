@@ -15,7 +15,7 @@ class CreateFormEntriesTable extends Migration
     {
         Schema::create('form_entries', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('form_id');
+            $table->string('folder_name');
             $table->text('content');  
             $table->timestamps();
         });

@@ -26,6 +26,10 @@ class Form {
  
 	public function insertOrUpdateByFormName($formData = array()) 
 	{  
+		
+		$formData['updated_at'] = getCurrentDateTime(); 
+
+
 		// print "<pre>";
 		// 	print_r($formData); 
 		// print "</pre>"; 
@@ -33,13 +37,18 @@ class Form {
 			// print "<br>insert data";
 			// 
 			// 
+			$formData['created_at'] = getCurrentDateTime(); 
 			$this->model->insert(
 				$this->table_name, 
 				$formData
 			);	
+
+			return $this->model->getResult()[0];
 		} else {
 			// print "<br> update data";
 			$this->model->update($this->table_name,$formData, ' folder_name = ' . $formData['folder_name']);
+
+			return $this->model->getResult()[0];
 		}
 	}  
 

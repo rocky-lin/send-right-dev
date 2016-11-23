@@ -94,7 +94,9 @@ $factory->define(App\FormList::class, function (Faker\Generator $faker) {
     static $password; 
     return [ 
             'form_id' => rand(1,App\Form::count()),
+            'folder_name' => rand(1,100),
             'list_id' => rand(1,App\List1::count())
+
     ];
 });
 

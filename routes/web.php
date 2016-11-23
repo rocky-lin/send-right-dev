@@ -21,14 +21,14 @@ Route::group(['prefix' => 'user' ], function() {
 	Route::get('contact/{contact}/get', 'ContactController@getById')->name('user.contact.get.by.id');
   	Route::get('contact/get/all', 'ContactController@getUserAccountContacts')->name('user.contact.get.all'); 
   	Route::get('contact/import', 'ContactController@import')->name('user.contact.import');
-  	Route::post('contact/import/store', 'ContactController@importStore')->name('user.contact.import.store'); 
+  	Route::post('contact/import/store', 'ContactController@importStore')->name('user.contact.import.store');  
   	Route::resource('contact', 'ContactController');  
 
 	// list   
 	Route::get('list/get/all', 'ListController@getListsAndDetails');  
 	Route::get('list/get/{id}', 'ListController@getLists');  
 	Route::get('list/get/{id}/contacts', 'ListController@getListContacts'); 
-	Route::get('list/search/{name?}', 'ListController@searchLists'); 
+	Route::get('list/search/{name?}', 'ListController@searchLists');  
   	Route::resource('list', 'ListController');   
 
 	//  form  
@@ -36,9 +36,10 @@ Route::group(['prefix' => 'user' ], function() {
 	Route::get('form/list/connect/view', 'FormController@viewConnectList')->name('user.form.list.connect.view'); 
 	Route::post('form/register/step1', 'FormController@registerNewFormStep1')->name('user.form.register.step1'); 
 	// Route::get('form/list/connect/get', 'FormController@getUserAccountForms')->name('user.form.list.connect.get'); 
+	Route::get( 'form/{id}/contacts/view', 'FormController@viewContacts' )->name('form.contacts.view');
+	Route::get( 'form/{id}/contacts/get', 'FormController@getContacts' )->name('form.contacts.get');
 	Route::post('form/list/connect/post', 'FormController@postConnectList')->name('user.form.list.connect.post');  
-	Route::resource('form', 'FormController');
-
+	Route::resource('form', 'FormController');  
 });   
  
 Route::get('send-slack-notification', function(){
@@ -63,3 +64,5 @@ Route::get('csv', function(){
 	});
 }); 
  
+
+

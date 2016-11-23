@@ -7,6 +7,11 @@ use App\User;
 use App\Form;
 use File; 
 use Auth;
+use App\List1;
+use App\Contact;
+
+ 
+
 class FormController extends Controller
 {
     /**
@@ -129,8 +134,14 @@ class FormController extends Controller
     } 
 
     public function getUserAccountForms() { 
-        $contacts = User::getUserAccountForms(); 
-        $collection = collect( $contacts ); 
+        $forms = User::getUserAccountForms(); 
+        $counter = 0; 
+        foreach ($forms as $form) { 
+            $forms[$counter]['total_entry'] = Form::getFormTotalContact($form['id']);
+            $counter++; 
+        } 
+        // dd($forms);
+        $collection = collect( $forms ); 
         $sorted = $collection->sortBy('id', SORT_REGULAR, true); 
         return $sorted->values()->all();
     } 
@@ -144,7 +155,7 @@ class FormController extends Controller
     public function postConnectList(Request $request)
     {
         dd($request);
-    } 
+    }  
 
     public function registerNewFormStep1(Request $request)
     {    
@@ -153,5 +164,20 @@ class FormController extends Controller
         $_SESSION['formEntryStep1']['email'] = Auth::user()->email; 
         // dd($_SESSION['formEntryStep1']);  
         return redirect(url('extension/form/create/editor/index.php')); 
-    } 
+    }  
+
+    public function viewContacts($id) 
+    {   
+        $listId = Form::getListIdFirst($id); 
+        // return "test". $listId;
+        return view('pages.form.form-contact-detail', compact('listId'));  
+    }   
+    public function getContacts($listId) 
+    { 
+        // return Contact::find(50);
+        // return App\List1::getListContacts(8);
+        // print "list id " .$list_id;
+        // return  List1::amazingTest();
+        return List1::getListContactsWithDetails($listId);
+    }  
 }

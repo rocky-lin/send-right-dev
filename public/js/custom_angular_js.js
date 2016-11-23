@@ -1,10 +1,18 @@
-obj = new Object();
-obj.siteUrl = 'http://localhost/rocky/send-right-dev'; 
-// obj.siteUrl = 'http://sendright.net'; 
+obj = new Object(); 
+
+if (location.hostname === "localhost" || location.hostname === "127.0.0.1") { 
+    obj.siteUrl = 'http://localhost/rocky/send-right-dev'; 
+} else { 
+    obj.siteUrl = 'http://sendright.net'; 
+}
 
 var app = angular.module('myApp', ['ngAnimate', 'ngSanitize', 'mgcrea.ngStrap']); 
  
 app.controller('MainCtrl', function($scope) {
+
+     $scope.init = function(value) {
+        $scope.testInput= value;    
+    }
 });  
 
 'use strict'; 
@@ -52,6 +60,7 @@ app.controller('myContactsViewCtr', ['$scope', '$filter', '$http', '$window', fu
     $scope.deleteContact = []; 
      $scope.totalContact = 0;
     $scope.editContact = function(contact) {  
+
         $window.location.href = obj.siteUrl + '/user/contact/'+contact.id+'/edit'; 
     } 
   	$scope.deleteContact = function(contact) { 
@@ -279,6 +288,86 @@ app.controller('myListCreateViewCtr', ['$scope', '$filter', '$http', '$window', 
 }]);      
 
 
+
+/**
+ *  This is the controller for general in lists
+ */
+//contact view
+app.controller('myListCtr', ['$scope', '$filter', '$http', '$window', function ($scope, $filter, $http, $window) { 
+    console.log("Contact views loaded angulajs!..");
+    $scope.currentPage = 0; 
+    $scope.pageSize = '5'; 
+    $scope.data = [];
+    $scope.q = ''; 
+    $scope.deleteContact = []; 
+    $scope.totalContact = 0;
+  
+
+   $scope.editContact = function(contact) {  
+        
+        $window.location.href = obj.siteUrl + '/user/contact/'+contact.id+'/edit'; 
+    } 
+    $scope.deleteContact = function(contact) { 
+        if(confirm('are you sure you want to delete this contact?' + contact.id)){ 
+            $http({
+                method: 'DELETE',
+                url: obj.siteUrl + '/user/contact/' + contact.id,
+                data: {
+                    id: contact.id
+                },
+                headers: {
+                    'Content-type': 'application/json;charset=utf-8'
+                }
+            })
+            .then(function(response) {
+                $scope.deleteContact[contact.id] = true; 
+            }, function(rejection) {
+                alert("Ohps! something wrong, please contact send right support. Thank you!");
+            }); 
+            
+        } else {
+            console.log("cancel delete " + contact.id);
+        } 
+    }   
+
+
+    $scope.getData = function () {  
+      return $filter('filter')($scope.data, $scope.q) 
+    } 
+
+    $scope.numberOfPages=function() { 
+        return Math.ceil($scope.getData().length/$scope.pageSize);                
+    }   
+    // alert("load content");
+    // When the home page contact loaded  
+    $scope.$watch('listId', function () {  
+        // alert("test");
+        // alert($scope.listId);
+        // alert($scope.listId)
+        $http({
+
+          method: 'GET',
+          url:  obj.siteUrl + '/user/form/'+$scope.listId+'/contacts/get'
+
+        }).then(function successCallback(response) {   
+
+            // console.log(response);
+            // alert('test');
+             
+            for (var i = 0; i<response.data.length; i++) {
+
+                $scope.data.push(response.data[i]);
+                $scope.totalContact++; 
+
+            } 
+
+        }, function errorCallback(response) { 
+            alert("something wrong! please contact send right support. Thank you!"); 
+        });     
+    }); 
+}]);  
+
+
 /**
  *  This is the one controlling the form view page
  */
@@ -291,9 +380,13 @@ app.controller('myFormViewCtr', ['$scope', '$filter', '$http', '$window', functi
     $scope.deleteForm = []; 
      $scope.totalForm = 0;
 
-     
+    $scope.viewFormContacts = function(form) {    
+        // alert("redirect to contact views");
+        $window.location.href = obj.siteUrl + '/user/form/' + form.id + '/contacts/view';   
+    }  
+
     $scope.viewNowForm = function(form) {    
-        $window.location.href = obj.siteUrl + '/extension/form/create/editor/forms/'+form.folder_name+'/index.php';  
+        $window.location.href = obj.siteUrl + '/extension/form/create/editor/forms/'+form.folder_name+'/index.php';   
     } 
  
     $scope.editForm = function(form) {   
@@ -355,21 +448,28 @@ app.filter('startFrom', function() {
     } 
 }); 
  
+
+
+
 /**
  * Drop Down in create form
  *  connecting to a lists and should show auto suggest drop down
  */ 
 angular.module('myApp') 
 .controller('TypeaheadDemoCtrl', function($scope, $templateCache, $http) {  
+
+    console.log("type head started "); 
+
+    console.log("siteUrl" + $scope.siteUrl);
     $scope.icons = [];
     $scope.selectedAddress = ''; 
     $scope.getLists = function(viewValue) { 
-
-         
-        var str = (viewValue  == '' )? "" : "/" + viewValue;
+ 
+      var str = (viewValue  == '' )? "" : "/" + viewValue;
       return $http.get( obj.siteUrl + '/user/list/search' + str)
       .then(function(res) { 
           return res.data; 
       });
     };  
 });  
+

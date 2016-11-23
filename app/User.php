@@ -39,27 +39,41 @@ class User extends Authenticatable
 
 
 
-
+    /**
+     *  user has one user account
+     */
     public function user_account() 
     { 
         return $this->hasOne('App\UserAccount');
     } 
 
+    /** 
+     * this will return the users account id
+     */
     public static function getUserAccount() 
     {
         return self::find(Auth::user()->id)->user_account->account->id; 
     } 
 
+    /** 
+     * This will get the users account forms
+     */
     public static function getUserAccountForms() 
     {
-        return self::find(Auth::user()->id)->user_account->account->forms;
+        return self::find(Auth::user()->id)->user_account->account->forms->toArray();
     }
 
+    /** 
+     * This will get the users account contacts
+     */
     public static function getUserAccountContacts() 
     {
         return self::find(Auth::user()->id)->user_account->account->contacts;
     }
 
+    /** 
+     * This will send a notification to slack
+     */
     public function routeNotificationForSlack() 
     {
         // https://hooks.slack.com/services/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 - #payments
@@ -67,20 +81,19 @@ class User extends Authenticatable
         return 'https://hooks.slack.com/services/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';  
     } 
 
+    /** 
+     * This will return users lists
+     */
     public static function lists() 
-    {
-  
+    { 
         return 'users lists';
     }
 
+    /** 
+     * This will return the form lists
+     */
     public static function formLists() 
     {
          return self::find(Auth::user()->id)->user_account->account->formLists;
-    } 
-
-    public static function forms()
-    {
-        //
-    }
-
+    }  
 }

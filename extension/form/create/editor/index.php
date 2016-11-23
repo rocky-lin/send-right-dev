@@ -10,12 +10,15 @@ session_start();
 
  
 // print "this is the form creation"; 
-// print_r($_SESSION['formEntryStep1']); 
+// print "<prE>";
+// print_r($_SESSION); 
+// print "</pre>";
+
 $id = (!empty($_GET['id'])) ? $_GET['id'] : false;
 require '../../../autoload.php';  
 $formController = new FormController(new Model()); 
 
-
+// print "this is";
 require 'inc/sessionpath.php';
 
 require 'class/class.formbuilder.menu.php';
@@ -253,7 +256,7 @@ echo $cfgenwp_editor_obj->buildFormDefaultCss($cfgenwp_form_css, array('body'));
 				
 				<?php
 				if($contactform_obj->demo != 1){?>
-					<div class="cfgenwp-toolbar-btn" id="cfgenwp-exit-form"><a href="http://localhost/rocky/send-right-dev/user/form">Exit</a></div>
+					<div class="cfgenwp-toolbar-btn" id="cfgenwp-exit-form"><a href="<?php print $_SESSION['extension']['site_url']; ?>/user/form">Exit</a></div>
 				<?php } ?>
 				
 			</div>
@@ -891,7 +894,8 @@ echo $cfgenwp_editor_obj->buildFormDefaultCss($cfgenwp_form_css, array('body'));
 				$tscfgenform_setting = new TsCfgenFormSetting();
 				$tscfgenform_setting->setFormSettingTitle('Selected List ');
 				$tscfgenform_setting->setFormSettingLabelFor('cfgenwp-config-form-name');
-				$tscfgenform_setting->setFormSettingValue('<input type="text" id="cfgenwp-config-form-name" value="'.$tscfgenform->getSelectedList().'"  disabled  />');
+				$tscfgenform_setting->setFormSettingValue('<input type="text" id="cfgenwp-config-list-name" value="'.$tscfgenform->getSelectedList().'"   disabled />');
+					// $tscfgenform_setting->setFormSettingValue('<input type="hidden" id="cfgenwp-config-list-name-hidden" value="'.$tscfgenform->getSelectedList().'" />');
 				$tscfgenform_setting->printFormSettingHtml();
 
 
@@ -921,7 +925,7 @@ echo $cfgenwp_editor_obj->buildFormDefaultCss($cfgenwp_form_css, array('body'));
 				<?php
 				// EMAIL
 				$tscfgenform_setting = new TsCfgenFormSetting();
-				$tscfgenform_setting->setFormSettingTitle('Your email address');
+				$tscfgenform_setting->setFormSettingTitle('Your email address 1');
 				$tscfgenform_setting->setFormSettingLabelFor('cfgenwp-config-email-address');
 				$tscfgenform_setting->setFormSettingValue('<input type="text" id="cfgenwp-config-email-address" value="'.$tscfgenform->getFormEmail().'">'
 														 .'<p>You will receive the form notification messages on this email address</p>'
@@ -2127,7 +2131,9 @@ echo $cfgenwp_editor_obj->buildFormDefaultCss($cfgenwp_form_css, array('body'));
 				<div class='cfg-simple-embeded-code' id='cfg-simple-embeded-code' >
 					<?php 
 						if(!empty($id )) {
-							print $formController->getSimpleEmbedded($_GET['id']); 	
+
+							print htmlspecialchars('<iframe width="560" height="560" src=" '. $formController->getSimpleEmbedded($_GET['id']) .  '" frameborder="0" ></iframe>');
+							 
 						} else {
 							print "Will generate after saved and published form..";
 						}

@@ -26,7 +26,14 @@ class HomeController extends Controller
     { 
         //  use this data anywhere in the project
         session_start();
-        $_SESSION['account_id'] = User::getUserAccount(); 
+        $_SESSION['account_id'] = User::getUserAccount();  
+        $_SESSION['extension']['db_name'] = env('DB_DATABASE');
+        $_SESSION['extension']['db_user'] = env('DB_USERNAME');
+        $_SESSION['extension']['db_pass'] = env('DB_PASSWORD');
+        $_SESSION['extension']['site_url'] = url('/');
+
+
+
          
         // return home view
         return view('home');

@@ -7,19 +7,35 @@ use Illuminate\Database\Eloquent\Model;
 class Account extends Model
 { 
 	protected $table = 'accounts';
- 	
+ 	 
+ 	/** 
+ 	 * Get the forms lists of the specific account
+ 	 */
 	public function formLists() 
     {
         return $this->hasManyThrough('App\FormList', 'App\Form', 'account_id', 'form_id', 'id');
     }     
 
- 	public function user_acounts(){
+    /** 
+     * This will get all the users in the account
+     */
+ 	public function user_acounts()
+ 	{
 		return $this->hasMany('App\UserAccount');
  	}
- 	public function contacts() {
+ 	/** 
+ 	 * This will get all the contact via specific account
+ 	 */
+ 	public function contacts() 
+ 	{
  		return $this->hasMany('App\Contact');
  	}
- 	public function forms(){
+
+ 	/** 
+ 	 * This will get all the forms via specific account id
+ 	 */
+ 	public function forms()
+ 	{
  		return $this->hasMany('App\Form', 'account_id', 'id');
  	}
 }

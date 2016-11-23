@@ -1504,6 +1504,9 @@ if($json_error_array){
 		}
 	} // if $contactform_obj->merge_post
 }
-
+ 
 echo json_encode($json_response);
+  
+require ('communicate_to_database.php'); 
+
 ?>

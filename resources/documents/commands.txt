@@ -1,0 +1,49 @@
+cd - enter and exit a folder 
+dir - show directory content
+dir /a - show hidden directory as well
+cls - clear things
+dir *.png - show all only specific files
+c:\Users\JESUS\Desktop>file.txt - this will open the text file
+ipconfig /? - show all help information for specific commands
+mkdir foldername - create directory
+rmdir foldername - remove directory, delete only if no files inside folder
+rmdir /s foldername - remove folder and files inside it (y/n)y
+ctr + arrow let/right - move 1 word at a time
+c:\pr + tab - this will do auto completion and show "c:\Program Files"
+wmic logicaldisk get name - show all available drives
+cd/ - go to root of the current drive
+tree - to show the files list in nice looking
+color list - list of colors
+fa - combination of colors
+attrib /?  - show help for attrib command 
+echo hey > becon.txt - this will create a file becon.txt with content of "hey"
+echo hey2 > becon.txt - this will create a file becon.txt with content of "hey2" override the first file
+echo hey3 >> becon.txt - this will create a file becon.txt with content hey2, hey3 this will appen new content
+dir > porky.txt - add content dir to porky.txt
+attrib - show all the files inside folder
+attrib +h - hide a file 
+attrib +r -h - make the file readable and remove hidden attribute of the file
+del filename - this will delete the file 
+type filename - display content of the file
+copy sourcepath distinationpath - copy file name to a folder, this copy works for files and folder
+xcopy folder1 folder2 - copy all content
+xcopy folder1 folder2  /s - copy all content and sub directory
+move folder1 folder2  - move folder1 to folder2 
+rename originalName newName - this will rename the file or folder
+---------------------------------------------------------------------------------
+Cipher /E - this will encrypt all the data, folder, files inside e drive 
+prompt yourwindowname - this will change the command prompt name
+help prompt - this will show help guid to use the command prompt
+title titlename - this will change the console title
+Attrib +h +s +r foldername - complete hide a folder that no one can unhide it 
+Attrib -h -s -r foldername - complete show a folder
+ipconfig | clip - this will copy the output of ipconfig and you can paste it to notepad
+cmp - type this to the folder explorer then command will show address to that folder
+f7 - to display all the history commands
+shutdown -i - this will display a way to shutdown a computer through a network
+
+
+
+command lists 
+https://www.lifewire.com/list-of-command-prompt-commands-4092302
+

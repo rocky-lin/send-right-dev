@@ -167,15 +167,11 @@ class ListController extends Controller
     }
 
     public function searchLists($query='') 
-    {  
-
+    {   
         $lists = List1::where('name', 'LIKE', '%'. $query . '%')
             ->where('account_id', Auth::user()->id)
             ->get()
             ->toArray();  
-        return $lists;  
-
-    }
-
-    
+        return $lists;   
+    }  
 }

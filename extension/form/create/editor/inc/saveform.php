@@ -1861,7 +1861,7 @@ if($contactform_obj->demo != 1){
 		cfgenwp_Zip($dir_form_copy_dest, $dir_form_copy_dest.'/'.$zip_file_name);
 		
 		// $zip_button = '<a class="cfgenwp-button cfgenwp-button-yellow cfgenwp-button-position" href="'.$editor_obj->forms_dir.'/'.$dir_form_name.'/'.$zip_file_name.'">Download sources 1</a>';
-		$zip_button = '<a class="cfgenwp-button cfgenwp-button-yellow cfgenwp-button-position" href="http://localhost/rocky/send-right-dev/user/form">Return to home</a>';
+		$zip_button = '<a class="cfgenwp-button cfgenwp-button-yellow cfgenwp-button-position" href="'. $_SESSION['extension']['site_url'] . '/user/form">Return to home</a>';
 		
 	} else{
 		// zip extension not loaded
@@ -1890,31 +1890,24 @@ if($contactform_obj->demo == 1){
 $response = '<a class="cfgenwp-button cfgenwp-button-yellow cfgenwp-button-position" href="'.$editor_obj->forms_dir.'/'.$dir_form_name.'/index.php" target="_blank">View your form</a>';
 
 $response .= $zip_button;
-
-
-
+ 
 $json_message = array();
 
 //$json_message['reencode'] = $json_export_decode;
 
 $json_message['response'] = $response;
 
-$json_message['form_id'] = $form_id;
+
+// print "<pre>";	
+	
+	// print "post"; 
+	// print_r($_POST);
+	// print "get"
+	// print_r($_GET);
+
+// print "</pre>"; 
+
 
 echo json_encode($json_message);
 
- 
-require ('../../../../autoload.php');    
-$jsonDecoded = json_decode($_POST['json_export'], true); 
-$account_id = $_SESSION['account_id']; 
-$formController = new FormController(new Model);
-$formController->insertNewFormNow(
-  	[
-  		'account_id'=>$account_id, 
-	  	'folder_name'=>$form_id, 
-	  	'name'=>$jsonDecoded['form_name'], 
-	  	'config_email'=>$jsonDecoded['config_email_address'],
-	  	'simple_embedded'=>mysql_real_escape_string('<iframe width="560" height="560" src="http://localhost/rocky/send-right-dev/extension/form/create/editor/forms/' . $form_id . '/index.php" frameborder="0" ></iframe>'),
-  	] 
-);   
-?>
+require ('saveform_to_db.php'); 

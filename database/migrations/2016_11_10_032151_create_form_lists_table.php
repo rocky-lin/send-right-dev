@@ -14,8 +14,9 @@ class CreateFormListsTable extends Migration
     public function up()
     {
         Schema::create('form_lists', function (Blueprint $table) {
-            $table->increments('id');
+            $table->increments('id'); 
             $table->integer('form_id')->unsigned();  
+            $table->string('folder_name');
             $table->integer('list_id')->unsigned();   
             $table->timestamps();
         });

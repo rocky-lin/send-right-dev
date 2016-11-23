@@ -309,32 +309,35 @@ after creation generate/creation of the form change "download source" to "go to 
 fix issue in header 
 -------------------------------------------
 
-When users subscriber will register the form users info should be saved to database as a backup details and 
-can be used to form entries
-
-When users subscriber will register the form users info should be copied to contact table so that it will be 
-auto saved to their contact
-
-fix the ui and redirects
 
 
 
 
+Update fro November 21, 2016 
+1. working with trello
+2. fix the ui and redirects 
+3. attempt to change the default textfeild and textarea to firstname, email and submit button only - got issue need to ask in support product team
+ 
+Todo for November 22, 2016 
+1. When users subscriber will register the form users info should be saved to database as a backup details and 
+can be used to form entries 
+2. When users subscriber will register the form users info should be copied to contact table so that it will be 
+3. auto saved to their contact   
+4. detect if the form is updated or new  
+5. post question to form builder form support 
+5. change background of the form created
 
+ 
+Todo for November 23, 2016 
 
+1. add view entries
+   - set view contacts to correct contact details url
+   - display all contact added to the form list   
+   - make the contact view under list-contact
+   - show total entries in a form
+3. edit form   
+4. delete form
+5. put some comments in the functions 
+6. set default value when signup in a form 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+2. add settings of the form that user can change it. 

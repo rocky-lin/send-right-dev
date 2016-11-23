@@ -21,9 +21,9 @@ class Model {
 
     // local development
     	private $db_host = "localhost"; 
-    	private $db_user = "root";   
-    	private $db_pass = "1234567890";  
-    	private $db_name = "rocky_sendright";	 
+    	private $db_user = '';
+    	private $db_pass = '';
+    	private $db_name = '';
 
 
 	/*
@@ -36,7 +36,11 @@ class Model {
     private $numResults = "";// used for returning the number of rows
 	
 
-    function __construct() {
+    function __construct() { 
+        $this->db_user = $_SESSION['extension']['db_user']; //"root";   
+        $this->db_pass = $_SESSION['extension']['db_pass']; //"1234567890";  
+        $this->db_name = $_SESSION['extension']['db_name']; //"rocky_sendright";   
+ 
         if($this->connect()) {
             // print "<br>successfully connected";
         } else {
