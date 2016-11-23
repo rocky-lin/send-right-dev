@@ -884,7 +884,7 @@ echo $cfgenwp_editor_obj->buildFormDefaultCss($cfgenwp_form_css, array('body'));
 				
 				// FORM NAME
 				$tscfgenform_setting = new TsCfgenFormSetting();
-				$tscfgenform_setting->setFormSettingTitle('Form name 2');
+				$tscfgenform_setting->setFormSettingTitle('Form name');
 				$tscfgenform_setting->setFormSettingLabelFor('cfgenwp-config-form-name');
 				$tscfgenform_setting->setFormSettingValue('<input type="text" id="cfgenwp-config-form-name" value="'.$cfgenwp_editor_obj->htmlEntities($tscfgenform->getFormName()).'">'
 															.'<input type="hidden" id="cfgenwp-form-id" value="'.$tscfgenform->getFormId().'">');
@@ -925,7 +925,7 @@ echo $cfgenwp_editor_obj->buildFormDefaultCss($cfgenwp_form_css, array('body'));
 				<?php
 				// EMAIL
 				$tscfgenform_setting = new TsCfgenFormSetting();
-				$tscfgenform_setting->setFormSettingTitle('Your email address 1');
+				$tscfgenform_setting->setFormSettingTitle('Your email address');
 				$tscfgenform_setting->setFormSettingLabelFor('cfgenwp-config-email-address');
 				$tscfgenform_setting->setFormSettingValue('<input type="text" id="cfgenwp-config-email-address" value="'.$tscfgenform->getFormEmail().'">'
 														 .'<p>You will receive the form notification messages on this email address</p>'
@@ -2140,15 +2140,12 @@ echo $cfgenwp_editor_obj->buildFormDefaultCss($cfgenwp_form_css, array('body'));
 					 ?>
 				</div>
 				
-				<h2>Ready? Create your form! 1</h2>
+				<h2>Ready? Create your form!</h2>
 
 				<div id="cfgenwp-notice-savevalidation" class="cfgenwp-aftersave">
 					Your form is ready!
-				</div>
-				
-				<div id="downloadsources"></div>
-
-
+				</div> 
+				<div id="downloadsources"></div> 
 				<div>
 				
 					<span id="cfgenwp-notice-loadinglists" class="cfgenwp-savenotice cfgenwp-button-position">Your lists are loading. The save button will reappear as soon as everything is loaded.</span>

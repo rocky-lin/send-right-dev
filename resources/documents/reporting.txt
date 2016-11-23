@@ -340,4 +340,4 @@ Todo for November 23, 2016
 5. put some comments in the functions 
 6. set default value when signup in a form 
 
-2. add settings of the form that user can change it. 
+2. add settings of the form that user can change it.

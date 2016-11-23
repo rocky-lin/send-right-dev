@@ -44,7 +44,8 @@ class Form extends Model
     * If form assign to many list then this query should be
     * changed to many result and return an array 
     */
-   public static function getListIdFirst($formId) {
+   public static function getListIdFirst($formId) 
+   {
        return FormList::where('form_id', $formId)->first()->list_id; 
    }
 

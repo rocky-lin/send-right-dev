@@ -33,16 +33,17 @@ class MenuItem{
 		return $this->stands_on_two_lines;
 	}
 	
-	function getHtmlMenuItem(){
-		
-		$cfgenwp_2lines_class = $this->getStandsOnTwoLines() ? 'cfgenwp-2lines' : '';	
-		
-		$html = '<div class="cfgenwp-addelement '.$cfgenwp_2lines_class.' add-'.$this->getMenuItemType().'" data-cfgenwp_type="'.$this->getMenuItemType().'">'
-				.$this->getMenuItemName()
-				.'</div>';
+	function getHtmlMenuItem(){  
+		$excludedFields  = ['textarea', 'checkbox', 'radio', 'select','selectmultiple','upload','date','rating','time','hidden','image','terms'];  
+	 	if(!in_array($this->getMenuItemType(), $excludedFields)) { 
+			$cfgenwp_2lines_class = $this->getStandsOnTwoLines() ? 'cfgenwp-2lines' : '';	
+			
+			$html = '<div class="cfgenwp-addelement test '.$cfgenwp_2lines_class.' add-'.$this->getMenuItemType().'" data-cfgenwp_type="'.$this->getMenuItemType().'">'
+					.$this->getMenuItemName()
+					.'</div>';
 
-		return $html;
-		
+			return $html;
+		}
 	}
 }
 

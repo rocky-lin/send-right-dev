@@ -7,6 +7,8 @@
  * making the copy and not intended for a collective use.
  *********************************************************************************/
 
+
+// print "<h1>tst </h1>";
 include('sessionpath.php');
 
 
@@ -65,131 +67,157 @@ $element_type_with_label = array('captcha', 'checkbox', 'date', 'email', 'radio'
 $element_type_with_icon = array('captcha', 'date', 'email', 'text', 'url');
 $element_type_with_paragraph = array('captcha', 'checkbox', 'date', 'email', 'paragraph', 'radio', 'rating', 'select', 'selectmultiple', 'text', 'textarea', 'time', 'upload', 'url');
 ?>
-<div class="cfgenwp-fb-e-move-c">
-	<?php
-	// echo $container_id.' | '.$_SESSION['cfgenwp_form_element_id'];
-	// print_r($_SESSION['cfgenwp_used_element_ids']);
-	?>
+
+<?php 
 	
-	<div id="cfgenwp-elementbuilder-<?php echo $container_id;?>" class="cfgenwp-fb-element-c" data-cfgenwp_element_type="<?php echo $json_decode_element['type'];?>" data-cfgenwp_element_id="<?php echo $container_id;?>">
+$formLoadedExlodedFields = ['textarea', 'radio'];
 
-		<?php echo $contactformeditor_obj->addFormField($json_decode_element, true);?>
-		
-		<div class="cfgenwp-e-editor-c">
-		
-			<?php if($contactform_obj->demo != 1){if(!isset($_SESSION['user']) || !$_SESSION['user']){exit;}}?>
-		
-			<div class="cfgenwp-e-editor-btns-c">
 
-				<?php
-				$editor_btns = array(
-									array(	
-											'title' => 'Edit element', 
-											'img' => 'element-editor-menu-edit.png', 
-											'var_type_name' => 'element_type_with_properties', 
-											'panel'=>'cfgenwp-e-editsettings-c',
-											),
-									array(	
-											'title' => 'Edit icon', 
-											'img' => 'element-editor-menu-icon.png', 
-											'var_type_name' => 'element_type_with_icon', 
-											'panel'=>'cfgenwp-e-editicon-c',
-											),
-									array(	
-											'title' => 'Edit alignment', 
-											'img' => 'element-editor-menu-alignment.png', 
-											'var_type_name' => 'element_type_with_label', 
-											'panel'=>'cfgenwp-e-editalignment-c',
-											),
-									array(
-											'title' => 'Edit paragraph', 
-											'class' => 'cfgenwp-e-editor-btn-paragraph', 
-											'img' => 'element-editor-menu-paragraph.png', 
-											'var_type_name' => 'element_type_with_paragraph',
-											'panel'=>'cfgenwp-e-editparagraph-c',
-											),
-									);			
 
-				foreach($editor_btns as $btn_v){
-					
-					if(in_array($json_decode_element['type'], ${$btn_v['var_type_name']})){?>
-					
-						<div class="cfgenwp-e-editor-btn" title="<?php echo $btn_v['title'];?>" data-cfgenwp_editor_panel="<?php echo $btn_v['panel'];?>">
-							<img src="img/<?php echo $btn_v['img'];?>">
-						</div>
+// if($json_decode_element['type'] == 'email') {
+// 	$json_decode_element['type'] = 'input';
+// }
+
+
+// print "<pre>";
+	
+	// print($json_decode_element['type']);
+	// exit;
+	// print "<hr>";
+// print "</pre>";
+?>
+
+
+
+
+<?php if(!in_array($json_decode_element['type'], $formLoadedExlodedFields)): ?>
+	<div class="cfgenwp-fb-e-move-c">
+		<?php
+		// echo $container_id.' | '.$_SESSION['cfgenwp_form_element_id'];
+		// print_r($_SESSION['cfgenwp_used_element_ids']);
+		?>
+		
+		<div id="cfgenwp-elementbuilder-<?php echo $container_id;?>" class="cfgenwp-fb-element-c" data-cfgenwp_element_type="<?php echo $json_decode_element['type'];?>" data-cfgenwp_element_id="<?php echo $container_id;?>">
+
+			<?php echo $contactformeditor_obj->addFormField($json_decode_element, true);?>
+			
+			<div class="cfgenwp-e-editor-c">
+			
+				<?php if($contactform_obj->demo != 1){if(!isset($_SESSION['user']) || !$_SESSION['user']){exit;}}?>
+			
+				<div class="cfgenwp-e-editor-btns-c">
 
 					<?php
+					$editor_btns = array(
+										array(	
+												'title' => 'Edit element', 
+												'img' => 'element-editor-menu-edit.png', 
+												'var_type_name' => 'element_type_with_properties', 
+												'panel'=>'cfgenwp-e-editsettings-c',
+												),
+										array(	
+												'title' => 'Edit icon', 
+												'img' => 'element-editor-menu-icon.png', 
+												'var_type_name' => 'element_type_with_icon', 
+												'panel'=>'cfgenwp-e-editicon-c',
+												),
+										array(	
+												'title' => 'Edit alignment', 
+												'img' => 'element-editor-menu-alignment.png', 
+												'var_type_name' => 'element_type_with_label', 
+												'panel'=>'cfgenwp-e-editalignment-c',
+												),
+										array(
+												'title' => 'Edit paragraph', 
+												'class' => 'cfgenwp-e-editor-btn-paragraph', 
+												'img' => 'element-editor-menu-paragraph.png', 
+												'var_type_name' => 'element_type_with_paragraph',
+												'panel'=>'cfgenwp-e-editparagraph-c',
+												),
+										);			
+
+					foreach($editor_btns as $btn_v){
+						
+						if(in_array($json_decode_element['type'], ${$btn_v['var_type_name']})){?>
+						
+							<div class="cfgenwp-e-editor-btn" title="<?php echo $btn_v['title'];?>" data-cfgenwp_editor_panel="<?php echo $btn_v['panel'];?>">
+								<img src="img/<?php echo $btn_v['img'];?>">
+							</div>
+
+						<?php
+						}
 					}
+					?>
+					
+					<div class="cfgenwp-e-editor-btn cfgenwp-e-editor-btn-delete" title="Delete this element" >
+						<img src="img/cross.png">
+					</div>
+				
+				</div>
+
+				<div class="cfgenwp-clear"></div>
+				
+				<?php
+				if(in_array($json_decode_element['type'], $element_type_with_label)){?>
+					<div class="cfgenwp-e-editor-panel cfgenwp-e-editalignment-c">
+						<?php
+						echo $contactformeditor_obj->addEditAlignment($json_decode_element);
+						echo $contactformeditor_obj->closeEditContainer();
+						?>
+					</div>
+				<?php
 				}
 				?>
 				
-				<div class="cfgenwp-e-editor-btn cfgenwp-e-editor-btn-delete" title="Delete this element" >
-					<img src="img/cross.png">
-				</div>
-			
-			</div>
-
-			<div class="cfgenwp-clear"></div>
-			
-			<?php
-			if(in_array($json_decode_element['type'], $element_type_with_label)){?>
-				<div class="cfgenwp-e-editor-panel cfgenwp-e-editalignment-c">
-					<?php
-					echo $contactformeditor_obj->addEditAlignment($json_decode_element);
-					echo $contactformeditor_obj->closeEditContainer();
-					?>
-				</div>
-			<?php
-			}
-			?>
-			
-			<?php
-			if(in_array($json_decode_element['type'], $element_type_with_paragraph)){?>
-				<div class="cfgenwp-e-editor-panel cfgenwp-e-editparagraph-c">
-					<?php
-					echo $contactformeditor_obj->addEditParagraph($json_decode_element);
-					echo $contactformeditor_obj->closeEditContainer();
-					?>
-				</div>
-			<?php
-			}
-			?>
-			
-			<?php
-			if(in_array($json_decode_element['type'], $element_type_with_properties)){?>
-				<div class="cfgenwp-e-editor-panel cfgenwp-e-editsettings-c">
-					<?php
-					echo $contactformeditor_obj->addEditFormField($json_decode_element);
-					echo $contactformeditor_obj->closeEditContainer();
-					?>
-				</div>
-			<?php
-			}
-			?>
-			
-			<?php
-			if(in_array($json_decode_element['type'], $element_type_with_icon)){?>
-				<div class="cfgenwp-e-editor-panel cfgenwp-e-editicon-c">
 				<?php
-				echo $contactformeditor_obj->addEditIcon($json_decode_element);
-				echo $contactformeditor_obj->closeEditContainer();
+				if(in_array($json_decode_element['type'], $element_type_with_paragraph)){?>
+					<div class="cfgenwp-e-editor-panel cfgenwp-e-editparagraph-c">
+						<?php
+						echo $contactformeditor_obj->addEditParagraph($json_decode_element);
+						echo $contactformeditor_obj->closeEditContainer();
+						?>
+					</div>
+				<?php
+				}
 				?>
-				</div>
-			<?php
-			}
-			?>
+				
+				<?php
+				if(in_array($json_decode_element['type'], $element_type_with_properties)){?>
+					<div class="cfgenwp-e-editor-panel cfgenwp-e-editsettings-c">
+						<?php
+						echo $contactformeditor_obj->addEditFormField($json_decode_element);
+						echo $contactformeditor_obj->closeEditContainer();
+						?>
+					</div>
+				<?php
+				}
+				?>
+				
+				<?php
+				if(in_array($json_decode_element['type'], $element_type_with_icon)){?>
+					<div class="cfgenwp-e-editor-panel cfgenwp-e-editicon-c">
+					<?php
+					echo $contactformeditor_obj->addEditIcon($json_decode_element);
+					echo $contactformeditor_obj->closeEditContainer();
+					?>
+					</div>
+				<?php
+				}
+				?>
+				
+			</div>
+			
+			<div class="cfgenwp-clear"></div>
 			
 		</div>
 		
-		<div class="cfgenwp-clear"></div>
 		
+		<div class="cfgenwp-e-editor-btn cfgenwp-e-editor-btn-move" title="Move this element">
+			<img src="img/arrow-move.png">
+		</div>
+		
+		<div class="cfgenwp-clear"></div>
+
+		<!-- <div> test </div>  -->
 	</div>
-	
-	
-	<div class="cfgenwp-e-editor-btn cfgenwp-e-editor-btn-move" title="Move this element">
-		<img src="img/arrow-move.png">
-	</div>
-	
-	<div class="cfgenwp-clear"></div>
-	
-</div>
+<?php endif; ?>

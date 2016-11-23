@@ -1271,9 +1271,19 @@ class contactFormEditor{
 			} else{
 				$edit_label_value = $this->labels[$type];
 			}
-			
+			 
+
 			$html_label_value = '<input type="text" class="cfgenwp-input-100 cfgenwp-edit-label-value" value="'.$this->htmlentities($edit_label_value).'" >';
+			// $html_label_value .= '<select class="cfgenwp-input-100 cfgenwp-edit-label-value">  
+			// 		<option>First Name</option>
+			// 		<option>Last Name</option>
+			// 		<option>Email</option>
+			// 		<option>Mobile Number</option>
+			// </select>';
 			
+
+
+
 			$label_property_name = in_array($type, array('captcha', 'date', 'email', 'text', 'textarea', 'url')) ? 'Label outside input' : '';
 			
 			$this->editorpanel->addProperty( array(  array('name'=>$label_property_name, 'values'=>array($html_label_value)),  ) );

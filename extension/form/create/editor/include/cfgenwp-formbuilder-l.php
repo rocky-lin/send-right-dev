@@ -7,6 +7,7 @@
 			$menu_container->createMenuItem()->setMenuItemType('title')->setMenuItemName('Title');
 			$menu_container->createMenuItem()->setMenuItemType('paragraph')->setMenuItemName('Paragraph');
 			$menu_container->createMenuItem()->setMenuItemType('email')->setMenuItemName('Email');
+			$menu_container->createMenuItem()->setMenuItemType('email')->setMenuItemName('Test');
 			$menu_container->createMenuItem()->setMenuItemType('text')->setMenuItemName('Single line text');
 			$menu_container->createMenuItem()->setMenuItemType('textarea')->setMenuItemName('Multi-line text');
 			$menu_container->createMenuItem()->setMenuItemType('checkbox')->setMenuItemName('Checkbox');
@@ -28,6 +29,6 @@
 			echo $menu_container->getHtmlMenuItems();
 			
 			?>
-		</div> 
+		</div>  
 	</div><!-- cfgenwp-formbuilder-l -->
 	
