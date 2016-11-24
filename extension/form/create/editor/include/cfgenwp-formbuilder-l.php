@@ -4,11 +4,19 @@
 			
 			<?php
 			$menu_container = new MenuContainer();
+
+			$menu_container->createMenuItem()->setMenuItemType('text')->setMenuItemName('First Name');
+			$menu_container->createMenuItem()->setMenuItemType('text')->setMenuItemName('Last Name');
+			$menu_container->createMenuItem()->setMenuItemType('email')->setMenuItemName('Email Address');
+			$menu_container->createMenuItem()->setMenuItemType('text')->setMenuItemName('Location'); 
+			$menu_container->createMenuItem()->setMenuItemType('text')->setMenuItemName('Phone Number');
+			$menu_container->createMenuItem()->setMenuItemType('text')->setMenuItemName('Telephone Number');
+			// $menu_container->createMenuItem()->setMenuItemType('text')->setMenuItemName('Contact Type');  
+
 			$menu_container->createMenuItem()->setMenuItemType('title')->setMenuItemName('Title');
 			$menu_container->createMenuItem()->setMenuItemType('paragraph')->setMenuItemName('Paragraph');
-			$menu_container->createMenuItem()->setMenuItemType('email')->setMenuItemName('Email');
-			$menu_container->createMenuItem()->setMenuItemType('email')->setMenuItemName('Test');
-			$menu_container->createMenuItem()->setMenuItemType('text')->setMenuItemName('Single line text');
+			// $menu_container->createMenuItem()->setMenuItemType('email')->setMenuItemName('Email'); 
+			// $menu_container->createMenuItem()->setMenuItemType('text')->setMenuItemName('Single line text');
 			$menu_container->createMenuItem()->setMenuItemType('textarea')->setMenuItemName('Multi-line text');
 			$menu_container->createMenuItem()->setMenuItemType('checkbox')->setMenuItemName('Checkbox');
 			$menu_container->createMenuItem()->setMenuItemType('radio')->setMenuItemName('Radio button');

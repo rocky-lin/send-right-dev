@@ -328,16 +328,27 @@ can be used to form entries
 5. change background of the form created
 
  
-Todo for November 23, 2016 
+Update for November 23, 2016 
 
 1. add view entries
    - set view contacts to correct contact details url
    - display all contact added to the form list   
    - make the contact view under list-contact
    - show total entries in a form
-3. edit form   
+3. edit form   - we may have to update this in the future,
 4. delete form
 5. put some comments in the functions 
 6. set default value when signup in a form 
+7. customize the form and hide the fields that we don't need
+
+Todo for November 24, 2016  
+Change links, redirects  
+fix when first load form need to show the form builder directly 
+add default fields
+Check and test forms
+Finalize our form for mvp
+Start checking the campaign, and looking for a campaign builder or email bulder. 
+Upload codes to server 
+make a video  
 
 2. add settings of the form that user can change it.

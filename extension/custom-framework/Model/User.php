@@ -8,8 +8,12 @@ class User  {
 	function __construct($model) 
 	{ 
 		$this->model = $model; 
-	}  
+	}
 
+	/**
+	 * get all users
+	 * @return mixed
+	 */
 	public function getAllUser() 
 	{  
 		$this->model->select($this->table_name,'*',NULL);  
@@ -17,6 +21,11 @@ class User  {
 		return $res; 
 	}
 
+	/**
+	 * get specific user by user id
+	 * @param $user_id
+	 * @return mixed
+	 */
 	public function getSpecificUserById($user_id) 
 	{
 		$this->model->select($this->table_name,'*',NULL, " id=" . $user_id);  

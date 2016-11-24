@@ -11,8 +11,9 @@
 // print "<h1>tst </h1>";
 include('sessionpath.php');
 
-
+// this will manage the settings
 include('../class/class.contactformeditor.php');
+
 $contactformeditor_obj = new contactFormEditor();
 
 $cfgenwp_config = $contactformeditor_obj->includeConfig();
@@ -92,11 +93,31 @@ $formLoadedExlodedFields = ['textarea', 'radio'];
 
 <?php if(!in_array($json_decode_element['type'], $formLoadedExlodedFields)): ?>
 	<div class="cfgenwp-fb-e-move-c">
+
+
 		<?php
+
+
+  // print "<pre>";
+		// if($json_decode_element['type'] == 'email') {
+		// 	$json_decode_element['type'] = 'text';
+		// } 
+		// else if($json_decode_element['type'] == 'text') {
+			// $json_decode_element['type'] = 'email';
+		// }
+	  // print_r($json_decode_element);
+	  // exit;
+	  // print "<hr>";
+  // print "</pre>"; 
 		// echo $container_id.' | '.$_SESSION['cfgenwp_form_element_id'];
 		// print_r($_SESSION['cfgenwp_used_element_ids']);
-		?>
-		
+		// $json_decode_element['custom_label']	 = $_POST['custom_label'];
+
+		// print_r($_POST);
+		?> 
+
+
+
 		<div id="cfgenwp-elementbuilder-<?php echo $container_id;?>" class="cfgenwp-fb-element-c" data-cfgenwp_element_type="<?php echo $json_decode_element['type'];?>" data-cfgenwp_element_id="<?php echo $container_id;?>">
 
 			<?php echo $contactformeditor_obj->addFormField($json_decode_element, true);?>
@@ -140,8 +161,8 @@ $formLoadedExlodedFields = ['textarea', 'radio'];
 						
 						if(in_array($json_decode_element['type'], ${$btn_v['var_type_name']})){?>
 						
-							<div class="cfgenwp-e-editor-btn" title="<?php echo $btn_v['title'];?>" data-cfgenwp_editor_panel="<?php echo $btn_v['panel'];?>">
-								<img src="img/<?php echo $btn_v['img'];?>">
+							<div class="cfgenwp-e-editor-btn" title="<?php echo $btn_v['title'];?>" data-cfgenwp_editor_panel="<?php echo $btn_v['panel'];?> ">
+								<img src="img/<?php echo $btn_v['img'];?>">  
 							</div>
 
 						<?php
@@ -173,8 +194,8 @@ $formLoadedExlodedFields = ['textarea', 'radio'];
 				if(in_array($json_decode_element['type'], $element_type_with_paragraph)){?>
 					<div class="cfgenwp-e-editor-panel cfgenwp-e-editparagraph-c">
 						<?php
-						echo $contactformeditor_obj->addEditParagraph($json_decode_element);
-						echo $contactformeditor_obj->closeEditContainer();
+						// echo $contactformeditor_obj->addEditParagraph($json_decode_element);
+						// echo $contactformeditor_obj->closeEditContainer();
 						?>
 					</div>
 				<?php

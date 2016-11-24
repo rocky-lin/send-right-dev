@@ -7,28 +7,44 @@ class Contact {
 	function __construct($model) 
 	{ 
 		$this->model = $model; 
-	}   
- 
+	}
+
+	/**
+	 * set valid key entry for contact
+	 * @param $formEntries
+	 * @return array
+	 */
 	public function setFormVluesFromSubscriberEntry($formEntries) {
-		$valueArray = array(); 
+		$valueArray = array();
 		foreach ($formEntries as $formEntry) {
-			$field = str_replace(' ', '_',  strtolower($formEntry['elementlabel_value'])); 
-			$value  = $formEntry['element_value']; 
+			$field = str_replace(' ', '_',  strtolower($formEntry['elementlabel_value']));
+			$value  = $formEntry['element_value'];
 			if($this->setFormCorrectKey($field) != false) {
 			 	$valueArray[$this->setFormCorrectKey($field)] = $value;
 			} 
-		}  
+		}
 		return $valueArray;
-	} 
+	}
+
+	/**
+	 * set valid key entry for contact
+	 * @param $formEntriesField
+	 * @return mixed
+	 */
 	public function setFormCorrectKey($formEntriesField) {
-		$formFields = ['first_name', 'last_name', 'email', 'location', 'phone_number', 'telephone_number'];  
+		$formFields = ['first_name', 'last_name', 'email', 'location', 'telephone_number', 'phone_number'];
 		foreach ($formFields as $formField) { 
 			if(strrpos($formEntriesField, $formField) > -1){ 
 				return $formField;
 			}
 		} 
-	}  
-	
+	}
+
+	/**
+	 * add new contact
+	 * @param $contactEntry
+	 * @return mixed
+	 */
 	public function addNewContact($contactEntry)
 	{  
 		$contactEntry['created_at'] = getCurrentDateTime(); 

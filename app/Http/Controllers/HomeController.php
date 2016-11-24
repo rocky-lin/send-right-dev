@@ -30,7 +30,9 @@ class HomeController extends Controller
         $_SESSION['extension']['db_name'] = env('DB_DATABASE');
         $_SESSION['extension']['db_user'] = env('DB_USERNAME');
         $_SESSION['extension']['db_pass'] = env('DB_PASSWORD');
-        $_SESSION['extension']['site_url'] = url('/');
+        $_SESSION['extension']['site_url'] = url('/'); 
+        $_SESSION['form_builder']['menu']['excludedFields'] = ['url', 'textarea', 'checkbox', 'radio', 'select','selectmultiple','upload','date','rating','time','hidden','image','terms'];
+       $_SESSION['form_builder']['db_contact']['entry_fields_filters'] = ['first_name', 'last_name', 'email', 'location', 'phone', 'telephone'];  
 
 
 

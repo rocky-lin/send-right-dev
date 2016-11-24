@@ -7,7 +7,13 @@ class FormEntry {
 	function __construct($model) 
 	{ 
 		$this->model = $model; 
-	}   
+	}
+
+	/**
+	 * Add new form entry
+	 * @param array $formData
+	 * @return mixed
+	 */
 	public function addNewFormEntry($formData = array()) 
 	{    
 		$formData['created_at'] = getCurrentDateTime(); 

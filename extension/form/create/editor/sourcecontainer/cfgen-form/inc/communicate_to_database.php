@@ -12,6 +12,7 @@
 	$formEntries['account_id'] = $_SESSION['account_id'];  
 	$formEntries['type'] = 'contact';
 
+
 	// insert new contact to contact table
 	$contactId = $contact->addNewContact($formEntries); 
  	

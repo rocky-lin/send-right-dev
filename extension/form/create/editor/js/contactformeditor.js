@@ -1073,9 +1073,14 @@ jQuery(function(){
 			container.cfgen_closestElementEditorCont().css({'z-index':'1'});
 		}
 	});
-	
+	console.log("element loaded 1");
 	addFormElement(elements);
 	
+
+
+	/**
+	 * when left side menu is dragged and clicked
+	 */
 	// SORTABLE ELEMENTS
 	form_editor.sortable({
 		handle: '.cfgenwp-e-editor-btn-move',
@@ -1091,7 +1096,7 @@ jQuery(function(){
 		stop: function(event, ui){
 			
 			if(ui.item.hasClass('cfgenwp-addelement')){
-
+				console.log("element loaded 2");
 				addFormElement([{'type':ui.item.data('cfgenwp_type')}], ui.item.index());
 
 				ui.item.remove();
@@ -1137,6 +1142,8 @@ jQuery(function(){
 
 	// ADD ELEMENTS IN THE EDITOR
 	function addFormElement(elements, element_position){
+		console.log("element source function 1");
+		console.log(elements);
 
 		element_position = typeof element_position !== 'undefined' ? element_position : false;
 		
@@ -1160,9 +1167,13 @@ jQuery(function(){
 			}
 			
 			element_properties['unique_hash_form_editor'] = cfgenwp_unique_hash_form_editor;
-			element_properties['css'] = cfgenwp_css_properties;
+			element_properties['css'] = cfgenwp_css_properties; 
+
 			//console.log(element_properties);
 			element_properties = JSON.stringify(element_properties);
+
+
+			console.log(element_properties);
 			var cfgenw_addelement_loading_html = '<div class="cfgenwp-editor-loading"><img src="img/loading.gif"></div>';
 			
 			var submit_element = form_editor.find('input[type="submit"].cfgen-submit');
@@ -1188,7 +1199,9 @@ jQuery(function(){
 			}
 			
 			jQuery.post('inc/setupcontactform.php',
-					{element:element_properties},
+					{
+						element:element_properties, 
+					},
 					function(data){
 					
 						//console.log(data);
@@ -1201,7 +1214,7 @@ jQuery(function(){
 						
 						// 2 elements can't have the same id
 						if(jQuery('#'+cfgenwp_new_element_id).length){
-							
+							console.log("element loaded 3");
 							addFormElement(elements, element_position);
 						}
 						
@@ -1228,7 +1241,7 @@ jQuery(function(){
 								}
 
 							}
-							
+							console.log("element loaded 4");
 							addFormElement(elements, element_position);
 						}
 					});
@@ -1302,12 +1315,16 @@ jQuery(function(){
 		}
 		
 	}
-	
+	 
+	// when fields menus in the left side is selected and clicked
 	jQuery('#cfgenwp-formbuilder-menu-elements').find('div.cfgenwp-addelement').click(function(){
-		addFormElement([{'type':jQuery(this).data('cfgenwp_type')}]);
+		console.log("element loaded 6");
+		// alert(jQuery(this).text()); 
+		console.log(jQuery(this).text());
+
+		addFormElement([{'type':jQuery(this).data('cfgenwp_type'), 'custom_label':jQuery(this).text()}]);
 	});
-	
-	
+	 
 	jQuery('#cfgenwp-genericstyle-close').click(function(){
 		jQuery('#cfgenwp-genericstyle-container').css({'display':'none'});
 	});

@@ -12,6 +12,13 @@
 
 
 
+?> 
+	<script type="text/javascript">
+		document.location = 'editor/index.php'; 
+	</script>  
+<?php
+
+
 // print
 include('editor/inc/sessionpath.php');
 
@@ -386,3 +393,6 @@ $html_section = (isset($html_section) && $html_section) ? $html_section : 'forms
 </body>
 
 </html>
+
+
+

@@ -1272,8 +1272,14 @@ class contactFormEditor{
 				$edit_label_value = $this->labels[$type];
 			}
 			 
+				$label = (!empty($element['custom_label'])) ? $element['custom_label'] : $this->htmlentities($edit_label_value);    
 
-			$html_label_value = '<input type="text" class="cfgenwp-input-100 cfgenwp-edit-label-value" value="'.$this->htmlentities($edit_label_value).'" >';
+
+			// This is the new 
+
+
+
+			$html_label_value = '<input type="text" class="cfgenwp-input-100 cfgenwp-edit-label-value" value="' . $label . '" >';
 			// $html_label_value .= '<select class="cfgenwp-input-100 cfgenwp-edit-label-value">  
 			// 		<option>First Name</option>
 			// 		<option>Last Name</option>
@@ -2421,8 +2427,16 @@ class contactFormEditor{
 		return $this;
 	}
 
-
+	/**
+	 *  This will create the field when select a menu the left side 
+	 */
 	function addFormField($element, $editor, $contactform_obj = false){
+
+		// print "<pre>"; 
+		// print_r($element); 
+		// print "</pre>";
+		// exit;
+		// print " $element, $editor, $contactform_obj ";
 		
 		// to prevent style properties such as "font-family:undefined;"
 		foreach($element as $key=>$value){
@@ -2499,8 +2513,18 @@ class contactFormEditor{
 		if(!in_array($type, array('image', 'paragraph', 'terms', 'title', 'separator', 'submit'))){
 			
 			$label_config['element_id'] = $element_name;
-			
-			$label_config['value'] = !empty($element['id']) ? $this->getLabelValueFromJson($element) : $this->labels[$type];
+			 
+			// print "<pre>"; 
+			// 	print_r($this->labels); 
+			// print "</pre>";
+   			 
+   			/**
+   			 * Set field label 
+   			 */
+			$label = (!empty($element['custom_label'])) ? $element['custom_label'] : $this->labels[$type];    
+
+			// set label if the field here
+			$label_config['value'] = !empty($element['id']) ? $this->getLabelValueFromJson($element) : $label;
 
 			// Default required value for specific fields
 			if(in_array($type, array('email', 'url'))){

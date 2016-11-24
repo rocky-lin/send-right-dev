@@ -7,13 +7,24 @@ class List1 {
 	function __construct($model) 
 	{ 
 		$this->model = $model; 
-	}  
- 
-	public function getListByName($name) { 
+	}
+
+	/**
+	 * Get list by name
+	 * @param $name
+	 * @return mixed
+	 */
+	public function getListByName($name)
+	{
 		$this->model->select($this->table_name, '*', null , "  name = '$name'");  
 		return $this->model->getResult();
-	}  
+	}
 
+
+	/**
+	 * get total contact by list id
+	 * @param $listId
+	 */
 	public static function getTotalContact($listId)    
 	{ 
 

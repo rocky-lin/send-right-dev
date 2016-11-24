@@ -33,12 +33,13 @@ class MenuItem{
 		return $this->stands_on_two_lines;
 	}
 	
-	function getHtmlMenuItem(){  
-		$excludedFields  = ['textarea', 'checkbox', 'radio', 'select','selectmultiple','upload','date','rating','time','hidden','image','terms'];  
+	function getHtmlMenuItem(){   
+		$excludedFields =   $_SESSION['form_builder']['menu']['excludedFields'];  
+		
 	 	if(!in_array($this->getMenuItemType(), $excludedFields)) { 
 			$cfgenwp_2lines_class = $this->getStandsOnTwoLines() ? 'cfgenwp-2lines' : '';	
 			
-			$html = '<div class="cfgenwp-addelement test '.$cfgenwp_2lines_class.' add-'.$this->getMenuItemType().'" data-cfgenwp_type="'.$this->getMenuItemType().'">'
+			$html = '<div class="cfgenwp-addelement '.$cfgenwp_2lines_class.' add-'.$this->getMenuItemType().'" data-cfgenwp_type="'.$this->getMenuItemType().'">'
 					.$this->getMenuItemName()
 					.'</div>';
 

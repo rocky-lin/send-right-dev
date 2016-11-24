@@ -7,9 +7,15 @@ class ListContact {
 	function __construct($model) 
 	{ 
 		$this->model = $model; 
-	}   
-  	
-  	public function addNewFromList($formListEntry) {
+	}
+
+	/**
+	 * add new form list
+	 * @param $formListEntry
+	 * @return mixed
+	 */
+  	public function addNewFromList($formListEntry)
+	{
   		
   		$formListEntry['created_at'] = getCurrentDateTime(); 
 		$formListEntry['updated_at'] = getCurrentDateTime(); 
