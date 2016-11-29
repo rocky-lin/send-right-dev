@@ -340,15 +340,90 @@ Update for November 23, 2016
 5. put some comments in the functions 
 6. set default value when signup in a form 
 7. customize the form and hide the fields that we don't need
+ 
 
-Todo for November 24, 2016  
+Update for November 24, 2016  
 Change links, redirects  
 fix when first load form need to show the form builder directly 
-add default fields
+Add menu as default values in database form builder
 Check and test forms
-Finalize our form for mvp
-Start checking the campaign, and looking for a campaign builder or email bulder. 
-Upload codes to server 
-make a video  
+Finalize our form for mvp, clean codes   
 
-2. add settings of the form that user can change it.
+campaign
+Create campaign migration and database
+Create data faker entries 
+
+Todo for November 25, 2016
+discuss to buy product for email/campaign bulder
+create campaign home page 
+setup view for campaign name 
+setup view for select campaign list
+setup view for select template   
+
+Todo for November 28, 2016
+setup view to select type of view
+integrate purchased product, email/campaign builder
+setup summary view for the campaign
+delete campaign
+ 
+check email builder, new purchased product.
+setup email builder files and database
+fix upload image
+set only get media that is uploaded by the specific user 
+add save and replace existing
+set application logged in based on the authenticated user
+remove demo users in the top header
+fix preview
+fix export 
+fix send to dynamic email 
+add send to list together with dynamic email send
+save and next
+after save and next view setttings
+ 
+
+
+
+  
+2. add settings of the form that user can change it. 
+
+November 25, 2016 
+search and get email builder product 
+test product
+check email builder, new purchased product.
+setup email builder files and database
+fix upload image 
+view campaign home page
+integrate laravel functions to product
+
+November 28, 2016 
+integrate purchased product, email/campaign builder 
+ 
+Will make a video in the weekends
+
+
+Update for November 28, 2016
+- add campaign home view
+- add create new campaign redirect
+- set campaign purchased to login  
+- set disable index with csrf validation, this will be used in the extensions codes/plugins  
+- save campaign to send right database, when new campaign created
+- put validation in connect list and create campaign name 
+ 
+Todo for November 29, 2016
+- put validation in create sender
+- put next button at top menu in compose campaign and set ajax send composed content to save in session and redirect to new page settings
+- create ui in settings
+- dispaly sender email, subject, name
+- allow preview  campaign title and campaign content
+- choose type schedule or direct send
+- send test email  
+
+
+
+ 
+
+
+
+
+
+

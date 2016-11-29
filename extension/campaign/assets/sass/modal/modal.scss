@@ -1,0 +1,58 @@
+.modal-lg {
+  max-width: 90%;
+  width:  90%;
+}
+#editorHtml{
+  height: 400px;
+}
+
+.upload-images {
+    height: 300px;
+    overflow-y: auto;
+    & > div {
+        min-height: 95px;
+    }
+
+    .upload-image-item {
+        width: 100%;
+        padding: 5px;
+        cursor: pointer;
+
+        &:hover {
+            opacity: 0.75;
+        }
+
+        &.active {
+            background-color: #c0c0c0;
+        }
+    }
+}
+.btn-load-template{
+  display: none;
+}
+.template-list {
+    .template-item {
+        text-align: center;
+        display: inline-block;
+        padding: 10px;
+        cursor: pointer;
+        @include roundedCornersPx(5);
+
+        &.active{
+          background-color: lighten( #c0c0c0,15%);
+        }
+        &:hover {
+            background-color: lighten( #c0c0c0,20%);
+        }
+
+        .template-item-icon {
+            .fa {
+                font-size: 80px;
+            }
+        }
+
+        .template-item-name {
+            margin: 5px 0 0;
+        }
+    }
+}

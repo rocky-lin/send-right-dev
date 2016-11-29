@@ -1,0 +1,382 @@
+﻿
+.bal-left-menu-container {
+
+    .bal-elements {
+        background-color: $elementsBgColor;
+        width: 310px;
+        float: left;
+        color: $elementsColor;
+        position: absolute;
+        height: 100%;
+        left: 70px;
+
+
+        .bal-elements-container {
+            margin-left: 17px;
+            /*overflow-y: auto ;*/
+            height: 94%;
+            position: absolute;
+            width: 89%;
+            margin-right: 17px;
+
+            .bal-element-tab {
+                display: none;
+
+                &.active {
+                    display: block;
+                }
+            }
+
+            .bal-element-boxs {
+                text-align: center;
+                height: 114px;
+
+
+                .form-control {
+                    box-shadow: unset;
+                    height: 100%;
+                    width: 100%;
+                    background-color: $elementsInputBgColor;
+                    border: 1px solid $elementsInputBorderColor;
+                    color: $elementsInputTextColor;
+                    padding: 4px;
+                    text-align: center;
+                    font-size: 13px;
+                }
+
+                .big-box, .small-boxs {
+                    padding: 0 3px;
+                }
+
+
+                .big-box {
+                    height: 100%;
+                    /*padding: 0 0 0 15px;*/
+                }
+
+                .small-boxs {
+                    .row {
+                        height: 35px;
+                        margin: 0;
+                        padding: 0 0 0 3px;
+
+                        & > div {
+                            padding: 0;
+                            height: 100%;
+                            margin: 5px 0px;
+
+                            &:first-child {
+                                padding-right: 2px;
+                            }
+
+                            &:last-child {
+                                padding-left: 2px;
+                            }
+                        }
+                    }
+                }
+            }
+
+            .bal-border-radius-box {
+                height: 94px;
+
+
+
+                .big-box {
+                    margin: 2px 0;
+                }
+
+                .small-boxs {
+                    .row {
+                        height: 45px;
+
+                        & > div {
+                            margin: 2px 0;
+                        }
+                    }
+                }
+            }
+
+            .bal-social-content-box {
+
+                input[type="text"] {
+                    display: block;
+                    width: 100%;
+                    height: 34px;
+                    padding: 6px 12px;
+                    font-size: 14px;
+                    line-height: 1.42857143;
+                    border-radius: 4px;
+                    box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+                    background-image: none;
+                    background-color: $elementsInputBgColor;
+                    color: $elementsInputTextColor;
+                    border: 1px solid $elementsInputBorderColor;
+                }
+
+                .small-title {
+                    font-size: 16px;
+                }
+
+                .checkbox-title {
+                    font-size: 14px;
+                    font-weight: normal;
+                }
+            }
+
+            .bal-elements-accordion {
+
+
+                .bal-elements-accordion-item {
+                    position: relative;
+                    margin: 5px 0;
+
+                    .bal-elements-accordion-item-title {
+                        padding: 13px 10px;
+                        @include roundedCornersPx(5);
+                        background-color: $accordionBgColor;
+                        color: $accordionColor;
+                        text-decoration: none;
+                        display: block;
+                        cursor: pointer;
+                        text-indent: 0;
+                        -moz-user-select: none;
+                        -ms-user-select: none;
+                        -webkit-user-select: none;
+                        user-select: none;
+
+                        &:hover {
+                            background-color: $accordionActiveBgColor;
+                        }
+
+                        &.active {
+                            background-color: $accordionActiveBgColor;
+
+                            &:after {
+                                -moz-transform: rotate(45deg);
+                                -ms-transform: rotate(45deg);
+                                -o-transform: rotate(45deg);
+                                -webkit-transform: rotate(45deg);
+                                transform: rotate(45deg);
+
+
+                                @include single-transition(all, 1s, ease-in-out, 0);
+                            }
+                        }
+
+
+                        &:after {
+                            width: 8px;
+                            height: 8px;
+                            border-right: 1px solid $accordionArrowColor;
+                            border-bottom: 1px solid $accordionArrowColor;
+                            position: absolute;
+                            right: 15px;
+                            content: " ";
+                            top: 19px;
+                            -moz-transform: rotate(-45deg);
+                            -ms-transform: rotate(-45deg);
+                            -o-transform: rotate(-45deg);
+                            -webkit-transform: rotate(-45deg);
+                            transform: rotate(-45deg);
+
+
+                            @include single-transition(all, 1s, ease-in-out, 0);
+                        }
+                    }
+
+                    .bal-elements-accordion-item-content {
+                        padding: 3px 0;
+                        display: none;
+                    }
+                }
+            }
+
+            .bal-elements-list {
+                li {
+                    display: inline-block;
+                    margin: 5px 0px 3px 1px;
+                }
+
+                .bal-elements-list-item {
+                    z-index: 111;
+                    @include roundedCornersPx(3);
+                    width: 90px;
+                    height: 80px;
+                    padding-top: 15px;
+                    background-color: $accordionElementsListItemBgColor;
+                    cursor: pointer;
+                    color: $accordionElementsListItemColor;
+
+                    .bal-preview {
+                        text-align: center;
+
+                        .bal-elements-item-icon {
+                            font-size: 26px;
+                        }
+
+
+                        .bal-elements-item-name {
+                            margin-top: 5px;
+                            font-size: 9px;
+                            text-transform: uppercase;
+                        }
+                    }
+
+                    .bal-view {
+                        display: none;
+                    }
+                }
+            }
+
+            .bal-text-style-box {
+                .form-control{
+                      height: unset !important;
+                }
+                .bal-icon-boxs {
+                    margin-top: 5px;
+
+                    .bal-icon-box-item {
+                        width: 30px;
+                        height: 28px;
+                        text-align: center;
+                        font-weight: 700;
+                        padding: 5px;
+                        font-size: 14px;
+                        margin-right: 3px;
+                        background: $elementsIconBoxBgColor;
+                        float: left;
+                        border-radius: 2px;
+                        cursor: pointer;
+
+                        &.active {
+                            background: $elementsIconBoxActiveBgColor;
+                        }
+                    }
+                }
+
+                .bal-align-icons {
+                    float: right;
+                }
+
+                .bal-text-icons {
+                    float: left;
+                }
+
+                .bal-font-icons {
+                    float: right;
+                }
+
+                .bal-element-font-family {
+                    margin: 0;
+                    padding: 0;
+                }
+
+                .bal-element-font-size {
+                    margin: 0;
+                    padding: 0 0 0 5px;
+                }
+            }
+
+            .bg-color {
+                background-color: #fff;
+            }
+            .change-image{
+              background-color: #2F4555;
+              padding: 5px;
+              margin: 5px 0;
+              @include roundedCornersPx(3);
+              cursor: pointer;
+            }
+            .bg-item {
+                @include roundedCornersPx(3);
+                border: 1px solid #000;
+                height: 30px;
+                width: 48%;
+                margin: 0 2px;
+                background-color: $elementsIconBoxBgColor;
+                text-align: center;
+                float: left;
+                font-size: 20px;
+                cursor: pointer;
+            }
+
+            .text-color {
+                background: #000;
+            }
+        }
+
+        .bal-settings {
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            height: 40px;
+            background-color: $settingBgColor;
+            color: $settingColor;
+
+            ul {
+                border-top: 1px solid $settingItemBorderColor;
+            }
+
+            .bal-setting-item {
+                border-right: 1px solid $settingItemBorderColor;
+                padding: 5px 10px;
+                display: inline-block;
+                cursor: pointer;
+                width: 18.5%;
+                font-size: 20px;
+                outline: 0 !important;
+                text-align: center;
+
+                &.active {
+                    background-color: darken($settingBgColor,3%);
+                }
+
+                &:last-child,
+                &:last-child:hover {
+                    border-right: none !important;
+                }
+            }
+
+            .bal-setting-content {
+                position: absolute;
+                background-color: darken( $accordionElementsListItemBgColor,5%);
+                color: $elementsColor;
+                bottom: 40px;
+                width: 100%;
+                box-shadow: 0 -10px 25px -15px rgba(0,0,0,.275);
+
+                ul {
+                    li {
+                        font-size: 20px;
+                        display: inline-block;
+                        width: 48%;
+                        text-align: center;
+                        padding: 5px 0;
+                        cursor: pointer;
+
+                        &.active {
+                            background-color: $accordionElementsListItemBgColor;
+                        }
+                    }
+                }
+
+                .bal-setting-device-content {
+                    background-color: $accordionElementsListItemBgColor;
+                    text-align: center;
+                    display: none;
+                    padding: 20px;
+
+                    &.active {
+                        display: block;
+                    }
+                }
+
+                .bal-setting-content-item {
+                    display: none;
+                    @include single-transition(all, 1s, ease-in-out, 0);
+                }
+            }
+        }
+    }
+}

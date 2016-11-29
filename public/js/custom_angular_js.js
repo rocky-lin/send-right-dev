@@ -48,7 +48,68 @@ app.controller('myEditContactCtrl',['$scope', '$http', function($scope, $http) {
         });  
 
     });
-}]);  
+}]);
+
+
+//campaign view
+app.controller( 'myCampaignViewCtr', ['$scope', '$filter', '$http', '$window', function ($scope, $filter, $http, $window) {
+    console.log("Campaign views loaded angulajs!..");
+    $scope.currentPage = 0;
+    $scope.pageSize = '5';
+    $scope.data = [];
+    $scope.q = '';
+    $scope.deleteCampaign = [];
+    $scope.totalCampaign = 0;
+    $scope.editCampaign = function(campaign) {
+
+        $window.location.href = obj.siteUrl + '/user/campaign/'+campaign.id+'/edit';
+    };
+    $scope.deleteCampaign = function(campaign) {
+        if(confirm('are you sure you want to delete this campaign?' + campaign.id)){
+            $http({
+                method: 'DELETE',
+                url: obj.siteUrl + '/user/campaign/' + campaign.id,
+                data: {
+                    id: campaign.id
+                },
+                headers: {
+                    'Content-type': 'application/json;charset=utf-8'
+                }
+            })
+                .then(function(response) {
+                    $scope.deleteCampaign[campaign.id] = true;
+                }, function(rejection) {
+                    alert("Ohps! something wrong, please campaign send right support. Thank you!");
+                });
+
+        } else {
+            console.log("cancel delete " + campaign.id);
+        }
+    };
+    $scope.getData = function () {
+
+        return $filter('filter')($scope.data, $scope.q)
+    };
+    $scope.numberOfPages=function() {
+
+        return Math.ceil($scope.getData().length/$scope.pageSize);
+    };
+
+    // When the home page campaign loaded
+    $http({
+        method: 'GET',
+        url:  obj.siteUrl + '/user/campaign/get/all'
+    }).then(function successCallback(response) {
+        for (var i = 0; i<response.data.length; i++) {
+            $scope.data.push(response.data[i]);
+            $scope.totalCampaign++;
+        }
+    }, function errorCallback(response) {
+        alert("something wrong! please campaign send right support. Thank you!");
+    });
+}]);
+
+
 
 //contact view
 app.controller('myContactsViewCtr', ['$scope', '$filter', '$http', '$window', function ($scope, $filter, $http, $window) { 
@@ -456,7 +517,7 @@ app.filter('startFrom', function() {
  *  connecting to a lists and should show auto suggest drop down
  */ 
 angular.module('myApp') 
-.controller('TypeaheadDemoCtrl', function($scope, $templateCache, $http) {  
+.controller('myListConnectCtrl', function($scope, $templateCache, $http) {  
 
     console.log("type head started "); 
 

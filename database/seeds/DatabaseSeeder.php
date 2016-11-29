@@ -9,7 +9,7 @@ use App\List1;
 use App\ListContact;
 use App\Form;
 use App\FormList;
- 
+use App\Campaign;
 class DatabaseSeeder extends Seeder
 {
     /**
@@ -29,6 +29,7 @@ class DatabaseSeeder extends Seeder
         ListContact::truncate(); 
         Form::truncate(); 
         FormList::truncate(); 
+        Campaign::truncate();
         // DB::table('users')->truncate();
         // DB::table('users')->truncate();
         // DB::table('users')->truncate(); 
@@ -38,6 +39,7 @@ class DatabaseSeeder extends Seeder
         factory(ListContact::class, 20)->create();  
         factory(Form::class, 20)->create();
         factory(FormList::class, 40)->create();
+        factory(Campaign::class, 40)->create();
         // Model::reguarded();  
     }
 }  

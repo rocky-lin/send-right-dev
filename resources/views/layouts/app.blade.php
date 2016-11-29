@@ -23,7 +23,7 @@
         ]); ?>
     </script>
 </head>
-<body data-ng-init="document;siteUrl={{url('/')}}"   >
+<body data-ng-init="document"   >
     <div id="app">
         <nav class="navbar navbar-default navbar-static-top">
             <div class="container">
@@ -44,6 +44,7 @@
                         <a class="navbar-brand dropdown navbar-menu" href="{{ url('/user/contact') }}">Contacts</a>    
                         <a class="navbar-brand dropdown navbar-menu" href="{{ url('/user/list') }}">List</a>      
                         <a class="navbar-brand dropdown navbar-menu" href="{{ url('/user/form') }}">Form</a>      
+                        <a class="navbar-brand dropdown navbar-menu" href="{{ route('campaign.index') }}">Campaign</a>      
                     @endif 
 
                 </div>

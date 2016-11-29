@@ -4,7 +4,7 @@
 <div class="container"  > 
     <div class="row">
         <div class="col-sm-12">     
-        <div class="bs-docs-section" ng-controller="TypeaheadDemoCtrl">  
+        <div class="bs-docs-section" ng-controller="myListConnectCtrl">  
           <div class="bs-example" style="padding-bottom: 24px;" append-source>
 
 
@@ -34,12 +34,7 @@
         </div>  
         </div>
     </div>
-</div>
-
-
-    
-
-
+</div> 
 @endsection
 
 

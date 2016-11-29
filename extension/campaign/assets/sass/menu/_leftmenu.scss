@@ -1,0 +1,66 @@
+﻿
+.bal-left-menu-container {
+    width: 380px;
+    float: left;
+    position: fixed;
+    height: 100%;
+        z-index: 50;
+}
+.colorpicker{
+  z-index: 60;
+}
+/*Left menu*/
+.bal-left-menu-container {
+    .bal-nav {
+        background-color: $navmenuBgColor;
+        color: $navmenuColor;
+        width: 70px;
+        float: left;
+        height: 100%;
+
+        .bal-left-menu {
+            li.bal-menu-item {
+                background-color: transparent;
+                border: none;
+                font-size: 25px;
+                text-align: center;
+                margin-bottom: 10px;
+                padding: 15px 0;
+                cursor: pointer;
+                position: relative;
+                /*z-index: 1;*/
+                line-height: 1.4;
+              //  @include single-transition(all, 1s, ease-in, 0);
+
+
+                &:hover {
+                    color: lighten( $navmenuColor,20%);
+                }
+
+                &.active {
+                    background-color: $navmenuActiveBgColor;
+                    color: $navmenuActiveColor;
+                }
+
+                &.bal-collapse {
+                    width: 70px;
+
+                    &.btn-collapse-bottom {
+                        position: absolute;
+                        bottom: 0;
+                    }
+                }
+
+                .fa {
+                }
+
+                .bal-menu-name {
+                    font-size: 11px;
+                    display: block;
+                    font-weight: 700;
+                    letter-spacing: .5px;
+                }
+            }
+        }
+    }
+}

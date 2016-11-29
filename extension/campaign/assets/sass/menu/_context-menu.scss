@@ -1,0 +1,56 @@
+﻿.bal-context-menu {
+    visibility: hidden;
+    position: absolute;
+    background-color: #313A41;
+    border: 1px solid #000;
+    color: #fff;
+    padding: 0 5px;
+
+    @include roundedCornersPx(50);
+    /*border-radius: 50px;*/
+    ul.context-menu-items {
+
+        li {
+            display: inline-block;
+            padding: 8px 10px;
+
+            &.font-style{
+              color: #3B7694;
+              padding: 3px 6px;
+              .font-size{
+                  padding: 8px 10px;
+              }
+            }
+            &.active{
+              background-color: lighten(#313A41,9%);
+              cursor: pointer;
+              margin: 1px;
+            }
+            &:hover {
+                background-color: lighten(#313A41,10%);
+                cursor: pointer;
+            }
+
+            &:first-child {
+                margin-left: 9px;
+            }
+
+            &:last-child {
+                margin-right: 9px;
+            }
+        }
+    }
+
+    .context-menu-hyperlink{
+         display: none;
+         padding: 8px 10px;
+
+          a{
+              text-decoration: none;
+                display: inline-block;
+                font-size: 22px;
+          }
+
+    }
+
+}

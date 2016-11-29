@@ -71,13 +71,7 @@
                     <a href="{{ url('/login') }}">Login</a>
                     <a href="{{ url('/register') }}">Register</a>
                 </div>
-            @endif  
-
-
-
-
-            
-
+            @endif   
             <div class="content">
                 <div class="title m-b-md">
                    Welcome to Send Right! <p>fast and easy email management</p>

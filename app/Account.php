@@ -38,4 +38,9 @@ class Account extends Model
  	{
  		return $this->hasMany('App\Form', 'account_id', 'id');
  	}
+
+	public function campaigns()
+	{
+		return $this->hasMany('App\Campaign', 'account_id', 'id');
+	}
 }

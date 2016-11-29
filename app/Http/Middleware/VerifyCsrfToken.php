@@ -11,7 +11,8 @@ class VerifyCsrfToken extends BaseVerifier
      *
      * @var array
      */
+     
     protected $except = [
-        //
+        '/' // set disable index with csrf validation, this will be used in the extensions codes/plugins
     ];
 }

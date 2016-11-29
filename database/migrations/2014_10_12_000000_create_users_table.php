@@ -19,7 +19,7 @@ class CreateUsersTable extends Migration
             $table->string('email', 50)->unique();
             $table->string('password');
             $table->string('registration_token');
-            $table->string('status1', 25)->default('inactive'); 
+            $table->string('status', 25)->default('inactive'); 
             $table->rememberToken(); 
             $table->timestamps();
             $table->softDeletes();

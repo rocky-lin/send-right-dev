@@ -1,9 +1,18 @@
 <?php   
-Auth::loginUsingId(1);  
+// Auth::loginUsingId(1);  
 // welcome page for loggedout
-Route::get('/', function () { 
-    return view('welcome');
-})->middleware('guest'); 
+Route::get('/', function () {
+	// put condition here to validate if you are visiting extensions or not
+	// visiting extension page - no need to redirect because we need to use the functions of laravel
+	// if visited the main pages then we need to redirect to home because it must be logged in
+	// return view('welcome');
+});
+Route::post('/', function () {
+	// put condition here to validate if you are visiting extensions or not
+	// visiting extension page - no need to redirect because we need to use the functions of laravel
+	// if visited the main pages then we need to redirect to home because it must be logged in
+	// return view('welcome');
+});
 // Authentication
 Auth::routes();  
 // home page dispaly
@@ -39,7 +48,34 @@ Route::group(['prefix' => 'user' ], function() {
 	Route::get( 'form/{id}/contacts/view', 'FormController@viewContacts' )->name('form.contacts.view');
 	Route::get( 'form/{id}/contacts/get', 'FormController@getContacts' )->name('form.contacts.get');
 	Route::post('form/list/connect/post', 'FormController@postConnectList')->name('user.form.list.connect.post');  
-	Route::resource('form', 'FormController');  
+	Route::resource('form', 'FormController');   
+
+	// campaign 
+	// 
+	// create step 1
+		Route::get('campaign/get/all', 'CampaignController@getAllCampaign')->name('user.campaign.get.all');   
+		Route::post('campaign/create/validate', 'CampaignController@createValidate')->name('user.campaign.create.validate');
+		// create step 2
+		Route::get('campaign/create/sender', 'CampaignController@createSender')->name('user.campaign.create.sender.view');
+		Route::post('campaign/create/sender', 'CampaignController@createSenderValidate')->name('user.campaign.create.sender.validate');
+
+		// step 3
+			Route::post('campaign/create/compose', 'CampaignController@composeValidate')->name('user.campaign.create.settings.validate'); 
+		// creation of campaign
+		
+		// step 4
+		Route::get('campaign/create/settings', 'CampaignController@createSettings')->name('user.campaign.create.settings');
+		Route::post('campaign/create/settings', 'CampaignController@createSettingsValidate')->name('user.campaign.create.settings.validate'); 
+
+
+		// preview 
+		 	Route::get('campaign/create/settings/preview/mobile', 'CampaignController@getPreviewMobile')->name('user.campaign.create.settings.preview.mobile');
+		 	Route::get('campaign/create/settings/preview/desktop', 'CampaignController@getPreviewDesktop')->name('user.campaign.create.settings.preview.desktop');
+		 	Route::get('campaign/create/settings/preview/tablet', 'CampaignController@getPreviewTablet')->name('user.campaign.create.settings.preview.tablet');
+
+ 	// create step 1
+	Route::resource('campaign', 'CampaignController');  	  
+
 });   
  
 Route::get('send-slack-notification', function(){
@@ -52,10 +88,6 @@ Route::get('send-slack-notification', function(){
  * 
  */
 Route::get('csv', function(){
-
-
-	print "<h4>This is the csv file</h4>"; 
-
 	Excel::load('E:\xampp\htdocs\rocky\send-right-dev\public\files\import\contacts\export.csv', function($reader) { 
 	    // reader methods 
 		print "excel file loaded";

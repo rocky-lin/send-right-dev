@@ -107,8 +107,36 @@ $factory->define(App\FormEntry::class, function (Faker\Generator $faker) {
             'content' => json_encode(['about me'=>$faker->paragraph,'name'=>$faker->name, 'age'=>rand(1,100)])
     ];
 });
-
  
+
+   //  $table->increments('id');    
+   //  $table->string('sender_name', 50);
+   //  $table->string('sender_email', 75);
+   //  $table->string('sender_subject'); 
+   //  $table->string('title'); 
+   //  $table->text('content');
+   //  $table->string('type', 50);
+   //  $table->string('status', 50); 
+ // 
+$factory->define(App\Campaign::class, function (Faker\Generator $faker) { 
+    static $password; 
+
+    $typeA = ['direct send', 'schedule']; 
+    $statusA = ['active', 'inactive'];
+
+    return [
+        'account_id' =>  1,
+        'sender_name'=> $faker->firstName,
+        'sender_email'=> $faker->email,
+        'sender_subject'=> $faker->firstName . ' ' . $faker->lastName,
+        'title'=> $faker->lastName,
+        'content'=> $faker->paragraph,
+        'type'=> $typeA[rand(0,1)],
+        'status'=> $statusA[rand(0,1)]
+    ];
+});
+
+
 
 
 

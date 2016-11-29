@@ -45,7 +45,9 @@ class Form extends Model
     * changed to many result and return an array 
     */
    public static function getListIdFirst($formId) 
-   {
+   { 
+      // print "form list id " . FormList::where('form_id', $formId)->first()->list_id;
+      // exit; 
        return FormList::where('form_id', $formId)->first()->list_id; 
    }
 

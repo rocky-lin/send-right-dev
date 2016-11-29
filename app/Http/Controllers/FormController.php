@@ -133,13 +133,14 @@ class FormController extends Controller
         // }
     } 
 
-    public function getUserAccountForms() { 
+    public function getUserAccountForms() 
+    {   
         $forms = User::getUserAccountForms(); 
         $counter = 0; 
         foreach ($forms as $form) { 
             $forms[$counter]['total_entry'] = Form::getFormTotalContact($form['id']);
             $counter++; 
-        } 
+        }  
         // dd($forms);
         $collection = collect( $forms ); 
         $sorted = $collection->sortBy('id', SORT_REGULAR, true); 

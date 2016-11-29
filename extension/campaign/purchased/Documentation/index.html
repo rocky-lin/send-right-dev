@@ -1,0 +1,155 @@
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head lang="en">
+    <meta http-equiv="content-type" content="text/html;charset=utf-8">
+    <title>Bal - Email Builder Documentation</title>
+    <!-- Framework CSS -->
+    <link rel="stylesheet" href="assets/blueprint-css/screen.css" type="text/css" media="screen, projection">
+    <link rel="stylesheet" href="assets/blueprint-css/print.css" type="text/css" media="print">
+    <!--[if lt IE 8]><link rel="stylesheet" href="assets/blueprint-css/ie.css" type="text/css" media="screen, projection"><![endif]-->
+    <link rel="stylesheet" href="assets/blueprint-css/plugins/fancy-type/screen.css" type="text/css" media="screen, projection">
+    <style type="text/css" media="screen">
+        p, table, hr, .box { margin-bottom: 25px; }
+            .box p { margin-bottom: 10px; }
+        .table-bordered { border: 1px solid #ddd; }
+            .table-bordered > thead > tr > th,
+            .table-bordered > tbody > tr > th,
+            .table-bordered > tfoot > tr > th,
+            .table-bordered > thead > tr > td,
+            .table-bordered > tbody > tr > td,
+            .table-bordered > tfoot > tr > td { border: 1px solid #ddd; }
+            .table-bordered > thead > tr > th,
+            .table-bordered > thead > tr > td { border-bottom-width: 2px; }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+
+        <h3 class="center alt">&ldquo;Bal - Email Builder&rdquo; Documentation by &ldquo;askerov&rdquo; v1.2</h3>
+
+        <hr>
+
+        <h1 class="center">&ldquo;Bal - Email Builder&rdquo;</h1>
+
+        <div class="borderTop">
+            <div class="span-6 colborder info prepend-1">
+                <p class="prepend-top">
+                    <strong>
+                        Created: 17/02/2016<br>
+                        By: Rufat Askerov<br>
+                        Email: <a href="mailto:rufet.esgerov@gmail.com">rufet.esgerov@gmail.com</a>
+                    </strong>
+                </p>
+            </div><!-- end div .span-6 -->
+
+            <div class="span-12 last">
+                <p class="prepend-top append-0">Thank you for purchasing my plugin. If you have any questions that are beyond the scope of this help file, please feel free to email via my user page contact form <a href="http://codecanyon.net/user/askerov?ref=askerov">here</a>. Thanks so much!</p>
+            </div>
+        </div><!-- end div .borderTop -->
+
+        <hr>
+        <div class="center">
+          <a class="" href="https://www.youtube.com/watch?v=rAeqXn8k5HE" title="" style="display:inline-block">
+             <img src="http://cidcode.net/uploads/install-use.png" alt="install">
+            </a>
+        </div>
+
+          <hr>
+        <h2 id="toc" class="alt">Table of Contents</h2>
+        <ol class="alpha">
+            <li><a href="#htmlStructure">HTML Structure</a></li>
+            <li><a href="#cssFiles">CSS Files and Structure</a></li>
+            <li><a href="#javascript">JavaScript</a></li>
+            <li><a href="#php">Php</a></li>
+            <li><a href="#mysql">Sql(mysql)</a></li>
+        </ol>
+        <hr>
+        <h3 id="htmlStructure"><strong>A) HTML Structure</strong> - <a href="#toc">top</a></h3>
+        <p>
+          This is very simple for editing,Firstly you should add index.php your server .After this step if you want to change any elements in this plugin you should edit <b>elements.json</b> file.
+          This file inludes all elements settings such as name,icon(font-awesome icons) and content url.
+          You can see  <b>elements.json</b> structure below
+         </p>
+
+        <pre><code>{
+  "elements": [{
+      "name": "Media",
+      "items": [{
+          "name": "Image",
+          "icon": "fa fa-picture-o",
+          "content": "elements/Image-full.html"
+      }
+    ]
+  }, {
+      "name": "Footer",
+      "items": [{
+          "name": "Adress",
+          "icon": "fa fa-minus",
+          "content": "elements/address.html"
+      }]
+  }]
+}</code></pre>
+
+
+
+
+        <hr>
+        <h3 id="cssFiles"><strong>B) CSS Files and Structure</strong> - <a href="#toc">top</a></h3>
+        <p>
+            I'm using 2 CSS files in this template.
+        </p>
+        <p>The first one is a main css of plugin</p>
+        <p>The second file is a style  for colorpicker </p>
+        <p>The third file contains all of the main css files for the plugin </p>
+
+        <hr>
+
+        <h3 id="javascript"><strong>C) JavaScript</strong> - <a href="#toc">top</a></h3>
+
+        <p>This theme imports four Javascript files.</p>
+
+        <ol>
+            <li>bal-email-editor</li>
+            <li>colorpicker</li>
+            <li>demo</li>
+            <li>email-editor.bundle</li>
+        </ol>
+
+        <ol>
+            <li>bal-email-editor is a main plugin for this file  </li>
+            <li>colorpicker is a colorpicker css for the main page</li>
+            <li>demo for the load example template for editing</li>
+            <li>email-editor.bundle contains all files need for the plugin</li>
+        </ol>
+
+        <hr>
+        <h3 id="php"><strong>D) Php files</strong> - <a href="#toc">top</a></h3>
+        <p>This plugin includes 8 php files.</p>
+        <ol>
+            <li><b>config</b> is a settings for this plugin such as site directory,site url and etc.  </li>
+            <li><b>export</b> for the save email builder result as zip(or html)  </li>
+            <li><b>get-files</b> get all uploading files from uploads folder  </li>
+            <li><b>index</b> main file this plugin, creating email builder page  </li>
+            <li><b>load_templates</b> select all templates from database  </li>
+            <li><b>save_template</b> for the save email builder result  </li>
+            <li><b>upload</b> for the upload any image to uploads folder </li>
+            <li><b>includes/db.class.php</b> includes database connection and  select ,insert queries  </li>
+        </ol>
+        <hr>
+        <h3 id="mysql"><strong>E) Sql files</strong> - <a href="#toc">top</a></h3>
+        <p>
+          <b>dump.sql</b> - all sql codes in here. Mainly you need table for email editor ,
+           second table - <b>bal_email_limiter</b> for set limit demo users .
+          </p>
+
+        <hr>
+        <p>Once again, thank you so much for purchasing this theme. As I said at the beginning, I'd be glad to help you if you have any questions relating to this theme. No guarantees, but I'll do my best to assist. If you have a more general question relating to the themes on CodeCanyon, you might consider visiting the forums and asking your question in the "Item Discussion" section.</p>
+
+        <p class="append-bottom alt large"><strong>Rufat Askerov</strong></p>
+        <p><a href="#toc">Go To Table of Contents</a></p>
+
+        <hr class="space">
+    </div><!-- end div .container -->
+</body>
+</html>
