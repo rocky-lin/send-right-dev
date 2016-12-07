@@ -33,5 +33,15 @@ body {
   */
  
  .un-used-elements {
-  display:none;
+    display:none;
+ }
+ 
+ .campaign-inactive {  
+    color:red;
+    font-weight: bold; 
+ } 
+
+ .campaign-active { 
+    color:green;
+    font-weight: bold; 
  }

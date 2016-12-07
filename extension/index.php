@@ -6,9 +6,7 @@ $frm = new Form(new Model());
 // $formController = new FormController(new Model());
  
 // print_r($formController->getFormByFolderName(24));
-
-
-
+ 
 print htmlspecialchars('<iframe width="560" height="560" src="http://localhost/rocky/send-right-dev/extension/form/create/editor/forms/24/index.php" frameborder="0" ></iframe>');
 // print "<pre>";   
 	// $frm->insertNewForm(); 

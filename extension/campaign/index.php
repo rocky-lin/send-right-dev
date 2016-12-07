@@ -40,13 +40,15 @@ $userName=$db->getUserName($_SESSION["UserId"]);
     <script type="text/javascript">   
   
      $(document).ready(function(){ 
-            $('#campaignComposeNext').click(function(){  
-                $.post( "compose-finished.php", { content: $('.bal-content-wrapper').html() })
+            $('#campaignComposeNext').click(function() {
+                var id = $('#campaignId').val();
+                console.log(id);
+                $.post( "compose-finished.php", { content: $('.bal-content-wrapper').html(), id:id})
                     .done(function( data ) { 
                         if(data == 'Ok') {
-                            document.location = 'http://localhost/rocky/send-right-dev/user/campaign/create/settings';  
+                            document.location = 'http://localhost/rocky/send-right-dev/user/campaign/create/settings';
                         } else {
-                            alert("Something wrong!");
+                            console.log("Something wrong!");
                         } 
                         // alert( "Data Loaded: " + data );
                     })  
@@ -64,10 +66,35 @@ $userName=$db->getUserName($_SESSION["UserId"]);
             </div> 
 		</div>
 	</div>
+<?php 
+    $stepLists = ['Campaigns'=>route('campaign.index'), 'Campaign Details'=>route('campaign.create'), 'Sender Details'=>route('user.campaign.create.sender.view'), 'Compose Campaign'=>url('extension/campaign/index.php'), 'Campaign Settings'=>route('user.campaign.create.settings')]; 
+    $currentStep = 'Compose Campaign'; 
+?>
+<ol class="breadcrumb"> 
 
-    <div class="bal-editor-demo">
-    </div>
+<?php if(false){  ?>
+    <br><br><br><br>
+        <?php $disableNext = false; ?>
+        <?php foreach($stepLists as $step => $url) {    ?>  
+            <?php if($step == $currentStep) {   ?>
+                <?php $disableNext = true; ?>
+                <li  class="active" ><?php print $step; ?></li>
+            <?php } else {  ?>
+                <?php if($disableNext == true) { ?>
 
+                    <li><a href="#"><?php print $step; ?></a></li>
+                 
+                <?php  } else {   ?>
+                    <li><a href="<?php print $url; ?>"><?php print $step; ?></a></li>
+                <?php }  ?>
+            <?php } ?>
+        <?php } ?>
+    </ol>  
+<?php }  ?> 
+
+    <div class="bal-editor-demo" position: relative;margin-top: -73px;>
+    </div> 
+    <input type="hidden" value="<?php print (!empty($_GET['id']))? $_GET['id'] : ""; ?>" id="campaignId" />
     <!-- for demo version -->
     <script src="assets/vendor/jquery/dist/jquery.min.js"></script>
     <script src="assets/vendor/jquery-ui/jquery-ui.min.js"></script>
@@ -351,13 +378,30 @@ $userName=$db->getUserName($_SESSION["UserId"]);
                         if (data.code == 0) {
                             _templateItems = '';
 
+                            // console.log(data.files[0]['name']);
+                            // console.log(data.files[1]['name']);
+                            // console.log(data.files[2]['name']);
+                            // console.log(data.files[3]['name']);
                             _templateListItems = data.files;
 
-                            _dataId = 4;
+                            // set template that to be loaded, this is for edit
+
+                            if($('#campaignId').val() > 0){
+                                _dataId = $('#campaignId').val();
+                            } else {
+                                _dataId = 66;
+                            }
+
+
+
+                            // alert(_dataId);
                             //search template in array
                             var result = $.grep(_templateListItems, function(e) {
                                 return e.id == _dataId;
                             });
+
+
+                            // alert(result[1].content);
 
                             _contentText = $('<div/>').html(result[0].content).text();
                             $('.bal-content-wrapper').html(_contentText);

@@ -10,7 +10,7 @@
                 	<div data-ng-controller="myListCreateViewCtr">       
 					    {!! Form::open(['route' => 'list.store', 'method'=>'post', 'name'=>'addListFrm', 'autocomplete'=>'off']) !!} 
 							@include('pages.include.list.list-form')  
-				 			   @include('pages.include.contact.contact-select')   
+                            @include('pages.include.contact.contact-select')
 		            	{!!Form::close()!!}     
                 	</div>     
                 </div>       

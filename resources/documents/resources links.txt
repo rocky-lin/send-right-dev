@@ -1,0 +1,11 @@
+
+1. Angular Bootstrap 
+https://angular-ui.github.io/bootstrap/
+
+2. Angular bootstrap ui - modal 
+https://stackoverflow.com/questions/26525670/how-to-use-modal-bootstrap-in-angular-ng-repeat
+fiddle: http://jsfiddle.net/8s9ss/4/
+
+
+3. Running cronjobs in laravel
+https://www.sitepoint.com/managing-cronjobs-with-laravel/

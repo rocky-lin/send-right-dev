@@ -42,7 +42,7 @@ class HomeController extends Controller
 
 
 
-    public function test(){
-        return view('plugin.test');
-    }
+    // public function test(){
+    //     return view('plugin.test');
+    // }
 }

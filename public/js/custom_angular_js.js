@@ -62,7 +62,7 @@ app.controller( 'myCampaignViewCtr', ['$scope', '$filter', '$http', '$window', f
     $scope.totalCampaign = 0;
     $scope.editCampaign = function(campaign) {
 
-        $window.location.href = obj.siteUrl + '/user/campaign/'+campaign.id+'/edit';
+        $window.location.href = obj.siteUrl + '/extension/campaign/index.php?id='+campaign.id;
     };
     $scope.deleteCampaign = function(campaign) {
         if(confirm('are you sure you want to delete this campaign?' + campaign.id)){
@@ -99,8 +99,9 @@ app.controller( 'myCampaignViewCtr', ['$scope', '$filter', '$http', '$window', f
     $http({
         method: 'GET',
         url:  obj.siteUrl + '/user/campaign/get/all'
-    }).then(function successCallback(response) {
-        for (var i = 0; i<response.data.length; i++) {
+    }).then(function successCallback(response) { 
+        // console.log(response); 
+        for (var i = 0; i<response.data.length; i++) { 
             $scope.data.push(response.data[i]);
             $scope.totalCampaign++;
         }
@@ -316,7 +317,7 @@ app.controller('myListCreateViewCtr', ['$scope', '$filter', '$http', '$window', 
             // console.log($scope.selectedContactArray);  
             for (var i = 0; i <  $scope.selectedContactArray.length; i++) {
                 $scope.isContactSelected[$scope.selectedContactArray[i]] = false;  
-            }    
+            }
         } 
         // when edit page loaded get all default contact list set
         $scope.$watch('listId', function () { 
@@ -515,22 +516,164 @@ app.filter('startFrom', function() {
 /**
  * Drop Down in create form
  *  connecting to a lists and should show auto suggest drop down
- */ 
-angular.module('myApp') 
-.controller('myListConnectCtrl', function($scope, $templateCache, $http) {  
+ */
+angular.module('myApp')
+.controller('myListConnectCtrl', function($scope, $templateCache, $http) {
 
-    console.log("type head started "); 
 
+    console.log("type head started ");
     console.log("siteUrl" + $scope.siteUrl);
     $scope.icons = [];
-    $scope.selectedAddress = ''; 
-    $scope.getLists = function(viewValue) { 
- 
+    //$scope.selectedAddress = '';
+
+    $scope.getLists = function(viewValue) {
       var str = (viewValue  == '' )? "" : "/" + viewValue;
       return $http.get( obj.siteUrl + '/user/list/search' + str)
-      .then(function(res) { 
-          return res.data; 
+      .then(function(res) {
+          return res.data;
       });
-    };  
-});  
+    };
+});
+
+
+
+
+
+// list create, edit and suggested contacts
+app.controller('myListSelectCtr', ['$scope', '$filter', '$http', '$window', function ($scope, $filter, $http, $window) {
+    // $scope.document = function() {
+    console.log("List create views loaded angulajs!..");
+    $scope.isContactSelected = [];
+    $scope.currentPage = 0;
+    $scope.pageSize = '5';
+    $scope.data = [];
+    $scope.q = '';
+    $scope.deleteContact = [];
+    $scope.totalContact = 0;
+    $scope.selectedContactArray = [];
+
+    $scope.editContact = function(contact) {
+
+        $window.location.href = obj.siteUrl + '/user/contact/'+contact.id+'/edit';
+    }
+
+    $scope.deleteContact = function(contact) {
+
+        if(confirm('are you sure you want to delete this contact?' + contact.id)){
+            $http({
+                method: 'DELETE',
+                url: obj.siteUrl + '/user/contact/' + contact.id,
+                data: {
+                    id: contact.id
+                },
+                headers: {
+                    'Content-type': 'application/json;charset=utf-8'
+                }
+            })
+                .then(function(response) {
+                    $scope.deleteContact[contact.id] = true;
+                }, function(rejection) {
+                    alert("Ohps! something wrong, please contact send right support. Thank you!");
+                });
+
+        } else {
+            console.log("cancel delete " + contact.id);
+        }
+    }
+
+    $scope.getData = function () {
+
+        return $filter('filter')($scope.data, $scope.q)
+    }
+
+    $scope.numberOfPages = function() {
+
+        return Math.ceil($scope.getData().length/$scope.pageSize);
+    }
+
+    /**
+     * [selectContact when user select a contact then it should be stored to an array, this is usfull when hitting next and prev]
+     * @param  {[type]} contact [description]
+     * @return {[type]}         [description]
+     */
+    $scope.selectContact = function(contact) {
+        $scope.setCheckBoxUnSelectedContact();
+        var array = $scope.selectedContactArray;
+        if (array.indexOf(contact.id) === -1) {
+            $scope.selectedContactArray.push(contact.id);
+        } else {
+            var index = array.indexOf(contact.id);
+            if (index > -1) {
+                $scope.selectedContactArray.splice(index, 1);
+            }
+        }
+        $scope.setCheckBoxSelectedContact();
+    };
+
+    // set check box as selected and based on the input selected list id or default list id
+    $scope.setCheckBoxSelectedContact = function() {
+        // console.log($scope.selectedContactArray);
+        for (var i = 0; i <  $scope.selectedContactArray.length; i++) {
+            $scope.isContactSelected[$scope.selectedContactArray[i]] = true;
+        }
+    };
+
+    // set check box as un selected and based on the input selected list id or default list id
+    $scope.setCheckBoxUnSelectedContact = function() {
+        // console.log($scope.selectedContactArray);
+        for (var i = 0; i <  $scope.selectedContactArray.length; i++) {
+            $scope.isContactSelected[$scope.selectedContactArray[i]] = false;
+        }
+    };
+
+
+    // load the default list data selecte before
+    // usually this is from the database and when hit edit to to the list or any other that connected to this list
+    // then it should show the default selected list and selected checkboxes
+    $scope.loadDefaultLists = function(list_id) {
+        
+       console.log("doc loaded" + list_id);
+        var listIdArr = list_id.split(',');
+
+        for (var i = 0; i<listIdArr.length; i++) {
+            console.log(" default list id "  +   listIdArr[i]);
+            $scope.selectedContactArray.push(parseInt(listIdArr[i]));
+        }
+        $scope.setCheckBoxSelectedContact();
+    };
+
+    // when edit page loaded get all default contact list set
+    //$scope.$watch('default_list_ids', function () {
+        //$http({
+        //    method: 'GET',
+        //    url:  obj.siteUrl + '/user/list/get/'+$scope.listId+'/contacts'
+        //}).then(function successCallback(response) {
+        //for (var i = 0; i<$scope.default_list_ids.length; i++) {
+        //
+        //    alert($scope.default_list_ids[0]);
+            //$scope.selectedContactArray.push($scope.data[i].contact_id);
+        //}
+        //    $scope.setCheckBoxSelectedContact();
+        //}, function errorCallback(response) {
+        //    alert("something wrong! please contact send right support. Thank you!");
+        //});
+    //});
+    //
+    // When the home page contact loaded
+    $http({
+        method: 'GET',
+        url:  obj.siteUrl + '/user/list/get/all'
+    }).then(function successCallback(response) {
+        for (var i = 0; i<response.data.length; i++) {
+            $scope.data.push(response.data[i]);
+            $scope.totalContact++;
+        }
+    }, function errorCallback(response) {
+
+        alert("something wrong! please contact send right support. Thank you!");
+    });
+    // }
+}]);
+
+
 

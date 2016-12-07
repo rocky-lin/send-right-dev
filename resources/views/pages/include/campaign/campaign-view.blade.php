@@ -10,62 +10,75 @@
                                 <select ng-model="pageSize" id="pageSize" class="form-control"  > 
                                     <option value="5">5</option>
                                     <option value="10">10</option>  
-                                    @for($i=2; $i<10; $i++)  
+                                    @for($i=2; $i<10; $i++)
                                         <option value="{{$i*10}}">{{$i*10}}</option>    
                                     @endfor
                                  </select>  
                             <div/> 
                         </div>
                     </div>
+
                     <div class="row" style="margin-left:0px; margin-right:0px"> 
                         <div  class="col-sm-12">
+                         <br> <hr>
                             <table class="table table-hover">
                                 <thead>
                                     <tr>
+                                        <td>  
+                                            <label>Picture </label>  
+                                        </td>
                                         <th>
-                                            <label>Sender Email </label>
-                                            <a href="#" title="Email" data-toggle="popover" data-trigger="hover" data-content="Email of your campaign.">(?)</a>
+                                            <label>Sender Email </label> 
                                         </th>
                                         <th>
-                                            <label>Sender Subject </label>
-                                            <a href="#" title="First Name" data-toggle="popover" data-trigger="hover" data-content="First name of your campaign.">(?)</a>
-                                        </th>
-
-                                        <th>
-                                        <label>Campaign Title</label>
-                                          <a href="#" title="First Name" data-toggle="popover" data-trigger="hover" data-content="First name of your campaign.">(?)</a>
+                                            <label>Sender Subject </label> 
                                         </th>
                                         <th>
-                                            <label>Campaign Type </label>
-                                            <a href="#" title="Email" data-toggle="popover" data-trigger="hover" data-content="Type of your campaign, subscriber or contact">(?)</a>
+                                            <label>Campaign Title</label> 
+                                        </th>
+                                        <th>
+                                            <label>Campaign Type </label> 
                                         </th>
                                         <th>
                                             <label>Next Send</label>
                                         </th>
                                         <th>
-                                            <label>Delete </label>
-                                            <a href="#" title="Delete" data-toggle="popover" data-trigger="hover" data-content="Delete your campaign forever.">(?)</a>
+                                            <label>Status</label>
                                         </th>
                                         <th>
-                                            <label>Edit </label>
-                                            <a href="#" title="Edit" data-toggle="popover" data-trigger="hover" data-content="Update your campaign.">(?)</a>
+                                            <label>Type</label>
                                         </th>
+                                        <th>
+                                            <labe> Created at </labe>
+                                        </th>   
+                                        <th>
+                                            <label>Delete </label> 
+                                        </th>
+                                        <th>
+                                            <label>Edit </label> 
+                                        </th> 
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr data-ng-hide="deleteCampaign[campaign.id]"  ng-repeat="campaign in data | filter:q | startFrom:currentPage*pageSize | limitTo:pageSize | orderBy : email" >
-                                        <td>@{{  campaign.sender_email }} </td>
-                                        <td>@{{  campaign.sender_subject }} </td>
-                                        <td>@{{ campaign.title }}</td>
-                                        <td>@{{  campaign.type }} </td>
-                                        <td>Later..</td>
-
+                                    <tr data-ng-hide="deleteCampaign[campaign.id]"  ng-repeat="campaign in data | filter:q | startFrom:currentPage*pageSize | limitTo:pageSize | orderBy : email" > 
+                                        <td>  
+                                            <img  style="width:75px;" class="media-object"  src="http://localhost/rocky/send-right-dev/public/img/campaign/pretty-girl.jpg" /> 
+                                        </td> 
+                                        <td>@{{campaign.sender_email }}</td>
+                                        <td>@{{campaign.sender_subject}}</td>
+                                        <td>@{{campaign.title }}</td>
+                                        <td>@{{campaign.type }}</td> 
+                                        <td> later... </td>
+                                        <td ng-class="{'campaign-inactive': campaign.status === 'inactive', 
+                                        'campaign-active' : campaign.status === 'active'}" >@{{campaign.status}}</td>
+                                        <td>@{{campaign.type}}</td> 
+                                        <td>@{{campaign.created_ago}}</td>
                                         <td>   
                                             <span class="glyphicon glyphicon-trash" aria-hidden="true" data-ng-click="deleteCampaign(campaign)"></span>
                                         </td>
                                         <td>
                                              <span class="glyphicon glyphicon-pencil" aria-hidden="true" data-ng-click="editCampaign(campaign)"></span>
-                                        </td>
+                                        </td> 
                                     </tr> 
                                 </tbody>
                             </table>  

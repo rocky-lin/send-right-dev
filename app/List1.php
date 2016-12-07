@@ -48,6 +48,9 @@ class  List1 extends Model
         return 'test';
     }
 
+    public function campaignList(){
+        return $this->hasMany('App\CampaignList', 'list_id', 'id');
+    }
     /** 
      * This will get the list contacts with details, ex: contact details
      */
@@ -79,4 +82,54 @@ class  List1 extends Model
         return  ListContact::where('list_id', $listId)->count();
     }
 
+
+    public static function getListIdByListName($listName) 
+    { 
+        // print_r($listName);
+        
+        $list = self::where('name', $listName)->first();
+
+        return $list->id;
+    }
+
+
+    public static function getListIdsToArray($listIds) 
+    {
+
+        // print "list id " . $listId; 
+        // exit; 
+        $listIds      = str_replace('[', '', $listIds);
+        $listIds      = str_replace(']', '', $listIds);
+        $listIdsArray = explode(',', $listIds); 
+        // print_r($listIdsArray); 
+        // exit;  
+        return $listIdsArray;
+    }
+    public static function getListNamesByListIds($listIds)
+    { 
+        $listIds      = str_replace('[', '', $listIds);
+        $listIds      = str_replace(']', '', $listIds);
+        $listIdsArray = explode(',', $listIds);
+        $listNameStr  = '';
+        $i=0;
+ 
+
+        foreach($listIdsArray as $id) {
+            if($id > 0) {
+                $listNameStr .= self::find($id)->name; 
+                if($i < count($listIdsArray)-1) {
+                    $listNameStr .= ',';
+
+                }
+            }
+            $i++;
+        }
+        // self::find()
+        // rint $listIds;
+        return $listNameStr;
+    }
+    public static function getCurrentCampaignListNames()
+    {  
+        return self::getListNamesByListIds($_SESSION['campaign']['listIds']);
+    }
 }

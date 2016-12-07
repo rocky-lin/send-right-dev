@@ -416,7 +416,70 @@ Todo for November 29, 2016
 - dispaly sender email, subject, name
 - allow preview  campaign title and campaign content
 - choose type schedule or direct send
-- send test email  
+- send test email
+
+
+
+
+Update for December 1, 2016
+set edit link and redirect when hit edit icon in campaign
+make edit save works
+delete campaign together withe other related tables
+delete campaign
+edit campaign
+add save and replace existing
+when upload new media needs to save to a specific user in the database
+set only get media that is uploaded by the specific user
+when browse media need to validate and retrieve all the media details in database and show in ui
+
+
+Todo for December 2, 2016
+set list search can select multiple
+when edit and click edit icon for campaign panel this should redirect to adding campaign name,list and template area
+when edit and hit icon edit in sender panel then it should redirect to sender area and allow to change it.ut
+hit save edit campaign and sender needs to redirect back to campaign settings with sessions content
+when edit campaign need to retrieve data from database to display in settings
+
+
+Update for December 5, 2016
+fix edit lists check only 2 instead 3
+Check functions from creation, update and delete. 
+Check proper save data to database
+Check proper flow of campaign
+Set default value when campaign is loaded in the settings
+Fix compose campaign edit 
+Fix compose campaign create
+
+Report videos
+http://screencast.com/t/yJx91xNc
+I have short second video but i am having issue in uploading will send it to you when its 
+successfully uploaded
+
+
+Todo December 6, 2016
+Check overall functions and see if found any issue and fix it
+Start working on preview campaign
+remove demo users in the top header
+set only validation for campaign name with specific user
+In the top header of the campaign should show the steps, so that when the user create a campaign then they will know what step they are currently in.
+
+
+ 
+
+
+Update for Dec 5, 2016
+1. allow preview tablet
+2. add more email analytic
+3. In the top header of the campaign should show the steps, so that when the user create a campaign then they will know what step they are currently in.
+4. when edit it should prevent the validation title is exist already
+5. set only validation for campaign name with specific user
+6. set select date time schedule current date default
+
+Todo for Dec 6, 2016
+
+Test send
+Schedule send
+schedule repeat send
 
 
 

@@ -1,7 +1,15 @@
 <?php   
+
 // Auth::loginUsingId(1);  
 // welcome page for loggedout
 Route::get('/', function () {
+
+	// PRINT "TEST"; 
+	// $current = Carbon::now();
+	// $current = new Carbon(); 
+	// // get today - 2015-12-19 00:00:00
+	// $today = Carbon::today();
+	// PRINT "TODAY" . $today; 
 	// put condition here to validate if you are visiting extensions or not
 	// visiting extension page - no need to redirect because we need to use the functions of laravel
 	// if visited the main pages then we need to redirect to home because it must be logged in
@@ -53,11 +61,15 @@ Route::group(['prefix' => 'user' ], function() {
 	// campaign 
 	// 
 	// create step 1
-		Route::get('campaign/get/all', 'CampaignController@getAllCampaign')->name('user.campaign.get.all');   
-		Route::post('campaign/create/validate', 'CampaignController@createValidate')->name('user.campaign.create.validate');
+		Route::get('campaign/get/all', 'CampaignController@getAllCampaign')->name('user.campaign.get.all');
+	    Route::post('campaign/create/validate', 'CampaignController@createValidate')->name('user.campaign.create.validate');
+    	Route::post('campaign/create/update/{id?}', 'CampaignController@createUpdate')->name('user.campaign.create.update');
+
+
 		// create step 2
 		Route::get('campaign/create/sender', 'CampaignController@createSender')->name('user.campaign.create.sender.view');
 		Route::post('campaign/create/sender', 'CampaignController@createSenderValidate')->name('user.campaign.create.sender.validate');
+		Route::post('campaign/create/sender/update/{id?}', 'CampaignController@createSenderUpdate')->name('user.campaign.sender.update');
 
 		// step 3
 			Route::post('campaign/create/compose', 'CampaignController@composeValidate')->name('user.campaign.create.settings.validate'); 
@@ -94,6 +106,13 @@ Route::get('csv', function(){
 		 $results = $reader->skip(false)->take(10)->get();
 		 dd($results);
 	});
+}); 
+
+
+
+// Testing development 
+Route::get('ng-bootstrap-ui', function(){
+	return view('test.ng-strap');
 }); 
  
 
