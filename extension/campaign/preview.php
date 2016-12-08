@@ -22,8 +22,10 @@
 			
 		<?php
 			use App\Campaign;  
-			$campaign = Campaign::find($_GET['campaignId']);  
-			echo htmlspecialchars_decode(stripslashes($campaign->content)); 
+			$campaign = Campaign::find($_GET['campaignId']);   
+			$content = htmlspecialchars_decode(stripslashes($campaign->content));
+			$content = str_replace('contenteditable="true"', '', $content);
+			echo $content; 
 		?>
  
 	</div>

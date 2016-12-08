@@ -121,7 +121,7 @@ $factory->define(App\FormEntry::class, function (Faker\Generator $faker) {
 $factory->define(App\Campaign::class, function (Faker\Generator $faker) { 
     static $password; 
 
-    $typeA = ['direct send', 'schedule']; 
+    $typeA = ['direct send', 'schedule send']; 
     $statusA = ['active', 'inactive'];
 
     return [
@@ -133,6 +133,16 @@ $factory->define(App\Campaign::class, function (Faker\Generator $faker) {
         'content'=> $faker->paragraph,
         'type'=> $typeA[rand(0,1)],
         'status'=> $statusA[rand(0,1)]
+    ];
+});
+
+$factory->define(App\CampaignSchedule::class, function (Faker\Generator $faker) {   
+    return [ 
+        'campaign_id' =>1,
+        'repeat' =>'One Time',
+        'schedule_send' =>Carbon\Carbon::now(),
+        'type_send' => 'email',
+        'batch_send' =>rand(0,10)
     ];
 });
 

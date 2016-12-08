@@ -29,6 +29,10 @@ class  List1 extends Model
         return $this->hasMany('App\FormList'); 
     }
 
+    public function campaignList(){
+        return $this->hasMany('App\CampaignList', 'list_id', 'id');
+    }
+
     /** 
      *  This will get the total list coontacts
      */
@@ -48,9 +52,7 @@ class  List1 extends Model
         return 'test';
     }
 
-    public function campaignList(){
-        return $this->hasMany('App\CampaignList', 'list_id', 'id');
-    }
+   
     /** 
      * This will get the list contacts with details, ex: contact details
      */

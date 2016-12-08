@@ -475,18 +475,34 @@ Update for Dec 5, 2016
 5. set only validation for campaign name with specific user
 6. set select date time schedule current date default
 
-Todo for Dec 6, 2016
+Todo for December 7, 2016 
+1. Setup scheduler in my local for testing
+2. Setup cronjobs in online server and tested if it works, so that will be ready when schedule campaign functions works. 
+3. Setup send email for mailtrap and this is for testing while developing the campaign functions
+4. Code the functions of the campaign to get the reach deadline schedule and setup arrays and contacts with email address 
 
-Test send
+Todo for December 8, 2016 
+5. Setup and test mailable traits this is to be ready when campaign schedule works. 
+6. Continue coding campaign schedule to get all address and prepare for send an email 
+7. Sending email set to mailtrap for now but when we are live maybe we can use mailgun
+8. Test campaign online with cronjobs functionality
+ 
+ 
+ 
+Update December 8, 2016 
+Setup and test mailable traits this is to be ready when campaign schedule works. 
+Continue coding campaign schedule to get all address and prepare for send an email 
+Sending email set to mailtrap for now but when we are live maybe we can use mailgun
 Schedule send
 schedule repeat send
+When display in campaign home view it should show the next send of campaign and must be human readable date and time
 
-
-
- 
-
-
-
-
-
-
+Todo December 9, 2016
+Direct send after finished
+Test send
+In adding campaign list only allow to proceed to next step if select a campaign 
+In adding list only allow to proceed next if select a contact
+Test campaign online with cronjobs functionality
+Upload code to server
+Update path for serever compatibility
+Test email campaign in server 

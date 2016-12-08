@@ -1,5 +1,4 @@
 <?php   
-
 // Auth::loginUsingId(1);  
 // welcome page for loggedout
 Route::get('/', function () {
@@ -111,9 +110,31 @@ Route::get('csv', function(){
 
 
 // Testing development 
+use Carbon\Carbon;
+use App\Helper; 
+
 Route::get('ng-bootstrap-ui', function(){
 	return view('test.ng-strap');
 }); 
- 
+   
+Route::get('/campaign-send', 'CampaignScheduleController@send'); 
 
+Route::get('/carbon-test', function(){
 
+	// create($year = null, $month = null, $day = null, $hour = null, $minute = null, $second = null, $tz = null); 
+	 
+
+	$dateTime = Helper::dateTimeExplode('2016-12-09 06:45:40'); 
+	print "<pre>"; 
+	print_r($dateTime); 
+	print "</pre>";
+
+	$date =  Carbon::create($dateTime['year'], $dateTime['month'], $dateTime['day'],  $dateTime['hour'], $dateTime['min'], $dateTime['sec']); 
+	print "<br> now " . $date->now();
+	print "<br> tomorrow " . $date->now()->addDays(1);
+	print "<br> next week " .  $date->now()->addDays(7);  
+	print "<br> next month " .  $date->now()->addMonth(1);;
+}); 
+	
+	
+	

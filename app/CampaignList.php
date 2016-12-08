@@ -13,7 +13,6 @@ class CampaignList extends Model
  	protected $fillable = ['campaign_id', 'list_id']; 
  	protected $hidden = [];
 
-
 	public function list1() {
 		return $this->belongsTo('App\List1', 'list_id', 'id');
 	}
@@ -30,15 +29,8 @@ class CampaignList extends Model
 
  		foreach ($listIdArry as $key => $list_id) 
  		{  
-
-
- 			
  			if(!empty($list_id) and $list_id != null and  $list_id > 0 ) {  
-
- 				// print " list id $list_id <br>";
-
-
- 		     
+ 				// print " list id $list_id <br>"; 		     
 				// note: This needs to be an array 
 		 	    // get specific list id by list name
 		     	// $list_id = List1::getListIdByListName($list_id);  
@@ -48,15 +40,18 @@ class CampaignList extends Model
 		        self::create(['list_id'=>$list_id,  'campaign_id'=>$campaignList['campaign_id']]); 	 
 	     	}
  		}  
-
  
  		return true; 
  		// exit;  
  	}
 
- 	 
+ 	public static function getTotalCampaignList($campaign_id)
+ 	{
+ 		return CampaignList::where('campaign_id', $campaign_id)->count(); 
+ 	}
+ 
+ 
 
 
-
-
+	
 }

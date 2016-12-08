@@ -15,6 +15,7 @@ use DB;
 use Illuminate\Support\Facades\Input;
 use App\User;
 use Carbon\Carbon; 
+use App\Helper; 
 
 class CampaignController extends Controller
 {
@@ -247,19 +248,20 @@ class CampaignController extends Controller
     // other
     public function getAllCampaign()
     {
-
-
+ 
         $campaigns = Campaign::getCampaignsByAccount()->toArray(); 
 
+     
         $collection = collect( $campaigns ); 
         $sorted = $collection->sortBy('id', SORT_REGULAR, true);  
         $campaigns = $sorted->values()->all();
-
-        // dd($campaigns); 
+ 
         foreach($campaigns as $index => $campaign)  { 
             $created_ago = Carbon::createFromTimeStamp(strtotime($campaign['created_at']))->diffForHumans(); 
             // print "ago " .   $ago;
             $campaigns[$index]['created_ago'] = $created_ago;
+             $campaigns[$index]['next_send'] = Helper::createDateTime(CampaignSchedule::where('campaign_id', $campaigns[$index]['id'])->first()->schedule_send)->format('l jS \\of F Y h:i:s A');
+             $campaigns[$index]['total_contacts'] =  count(Campaign::getAllEmailWillRecieveTheCampaign($campaigns[$index]['id'])['contacts']); 
         } 
         //dd($campaigns);  
         return $campaigns; 

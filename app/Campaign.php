@@ -201,5 +201,24 @@ class Campaign   extends Model
         return  $strListIds;
     }
 
+    public static function getAllEmailWillRecieveTheCampaign($campaignId)
+    {   
+        $contacts = []; 
+        // get lists contact of the specific campaign 
+        $campaignLists = Campaign::find($campaignId)->campaignList;   
+        $counter=0; 
+        // dd($campaignLists );
+        // exit;
+        foreach ($campaignLists as  $campaignList) {
+             // print " <br> &nbsp;&nbsp; list id " . $campaignList->list_id;  
+             foreach ($campaignList->list1->list_contact as $listContact) {
+                 // print " <br>  &nbsp;&nbsp; &nbsp; email " . $listContact->contact->email;   
+                $contacts['contacts'][$listContact->contact->id]['email'] = $listContact->contact->email; 
 
+                $contacts['contacts'][$listContact->contact->id]['full_name'] = $listContact->contact->first_name . ' ' . $listContact->contact->last_name; 
+                $counter++; 
+            }
+        } 
+        return $contacts;  
+    }
 }

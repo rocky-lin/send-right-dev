@@ -17,7 +17,7 @@ class CreateCampaignSchedulesTable extends Migration
             $table->increments('id');  
              $table->integer('campaign_id'); 
              $table->string('repeat', 100)->default('one time');
-             $table->dateTime('schedule_send'); 
+             $table->dateTime('schedule_send');  
             $table->timestamps();
         });
     }

@@ -20,9 +20,11 @@ class CreateCampaignsTable extends Migration
             $table->string('sender_email', 75)->nullable();
             $table->string('sender_subject')->nullable();
             $table->string('title')->nullable();
-            $table->text('content')->nullable();
+            $table->text('content')->nullable(); 
+            $table->smallInteger('batch_send')->default(0); 
+            $table->string('type_send', 50)->default('email'); 
             $table->string('type', 50)->default('direct send');
-            $table->string('status', 50)->default('inactive');
+            $table->string('status', 50)->default('inactive'); 
             $table->timestamps(); 
         });
     }

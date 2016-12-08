@@ -43,6 +43,9 @@
                                             <label>Next Send</label>
                                         </th>
                                         <th>
+                                            <label> Total Contacts </label>
+                                        </th>
+                                        <th>
                                             <label>Status</label>
                                         </th>
                                         <th>
@@ -68,7 +71,8 @@
                                         <td>@{{campaign.sender_subject}}</td>
                                         <td>@{{campaign.title }}</td>
                                         <td>@{{campaign.type }}</td> 
-                                        <td> later... </td>
+                                        <td> @{{campaign.next_send}} </td> 
+                                        <td> @{{campaign.total_contacts}} </td>
                                         <td ng-class="{'campaign-inactive': campaign.status === 'inactive', 
                                         'campaign-active' : campaign.status === 'active'}" >@{{campaign.status}}</td>
                                         <td>@{{campaign.type}}</td> 
