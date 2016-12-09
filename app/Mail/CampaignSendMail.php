@@ -35,6 +35,6 @@ class CampaignSendMail extends Mailable
      */
     public function build()
     {
-        return $this->view('mail.campaign-send-mail', ['contact'=>$this->contact, 'campaign'=>$this->campaign]);
+        return $this->from($this->campaign['sender_email'], $this->campaign['sender_name'])->subject($this->campaign['sender_subject'])->view('mail.campaign-send-mail', ['content'=>$this->campaign['content']]);
     }
 }

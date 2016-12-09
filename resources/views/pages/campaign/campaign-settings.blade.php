@@ -49,7 +49,7 @@ th {
 <input id="" type='hidden'  name='sender_subject' value="{{$_SESSION['campaign']['sender']['subject']}}" />
 <input id="" type='hidden'  name='title' value="{{$_SESSION['campaign']['name']}}" /> 
 <input id="" type='hidden'  name='template' value="{{$_SESSION['campaign']['template']}}" />
-<input id="" type='hidden'  name='campaign_id' value="{{$_SESSION['campaign']['id']}}" />
+<input  type='hidden'  name='campaign_id' value="{{$_SESSION['campaign']['id']}}" id="campaign_id" />
 <input id="" type='hidden'  name='list_ids' value="{{$_SESSION['campaign']['listIds']}}" />
 
   
@@ -165,6 +165,18 @@ th {
 </div>   
 
 
+<div class="panel panel-default">
+    <div class="panel-heading">
+      <h3 class="panel-title">Send Test Email</h3>
+    </div>
+    <div class="panel-body">   
+      <div class="form-group" >
+        <input type="email" name="test_email" value="" id="test_email" class="form-control" placeholder="Place email address that will receive the test email campaign." />
+      </div>
+      <input class="btn btn-info" type="button" name="submit" value="Send Test" id="campaign-send-test" /> <span id="campaign-send-test-status"> </span>
+
+    </div>  
+</div>   
 
 {{-- Start preview campaign  --}}
   <div class="panel panel-default">
@@ -215,14 +227,14 @@ th {
     <a href = "" data-toggle="modal" data-target="#myModal1" id="previewDesktop" campaign-id="{{$_SESSION['campaign']['id']}}"> Large view </a><br> 
         <a href = "" data-toggle="modal" data-target="#myModal2" id="previewMobile" campaign-id="{{$_SESSION['campaign']['id']}}">Normal View </a><br> 
     </div>  
-  </div>  
- 
+  </div> 
   <div class="panel panel-default">
     <div class="panel-heading">
       <h3 class="panel-title">Finished</h3>
     </div>
     <div class="panel-body">
-      <input class="btn btn-info" type="submit" name="submit" value="Finish" />
+      <input class="btn btn-info" type="submit" name="submit" value="Save" />  
+</button>
     </div>  
   </div>  
  

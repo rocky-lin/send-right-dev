@@ -16,37 +16,19 @@ use App\User;
 use App\CampaignList;
 
 class CampaignScheduleController extends Controller
-{
- 
+{ 
+    
     public function send()
     {    
-        // print '<h1> fix campaign query contact/list even without contact</h1>'; 
-        // Mail::to('mrjesuserwinsuarez@gmail.com')->send(new OrderShipped(['id'=>1, 'title'=>'campaign title']));  
-        // print "send an email now ";  
-        // exit; 
-        // print "controller works";
+         
     	//  get all campaign that on time and also exceeding the time already
         $campaignScheduleReachDeadline = CampaignSchedule::getReachDeadline(); 
-
-        // dd($campaignScheduleReachDeadline);
-
-        // print "test";
-        // exit; 
-            // print "<br> date time now " . Carbon::now(); 
-            // dd( $campaignScheduleReachDeadline ); 
+ 
             // get campaign template
             foreach ($campaignScheduleReachDeadline as $campaign) {     
-
-                print "\n " . $campaign->id . " campaign title " . $campaign->schedule_send . ' campaign id ' . $campaign->campaign_id;        
-                
+     
                 if(CampaignList::getTotalCampaignList($campaign->campaign_id) > 0) {
-
-                    // exit;  
-                    // print "<pre>";
-                    // print_r($contacts); 
-                    // print_r($campaign);
-                    // print "</pre>";    
-                     
+  
                     // send email now to the contacts the belong to the lists of the campaign
                     $this->sendEmailToContacts($campaign);   
 
@@ -56,42 +38,88 @@ class CampaignScheduleController extends Controller
                     // break; 
                 } else {
                     print "<br>\n No list found in the campaign";
-                }
+                } 
 
             }
     }  
-     
-    public function sendEmailToContacts($campaign)
+
+    public function directSend($campaign_id) 
     {
+        // get campaign content
+        $campaignScheduleReachDeadline = CampaignSchedule::getScpecificCampaignByCampaignId($campaign_id); 
+      
+        // get contact of the specific campaign
+           foreach ($campaignScheduleReachDeadline as $campaign) {     
 
-        $contacts = Campaign::getAllEmailWillRecieveTheCampaign($campaign->campaign_id);
+                // print "\n direct send " . $campaign->id . " campaign title " . $campaign->schedule_send . ' campaign id ' . $campaign->campaign_id;        
+                
+                if(CampaignList::getTotalCampaignList($campaign->campaign_id) > 0) {
+  
+                    // send email now to the contacts the belong to the lists of the campaign
+                    $this->sendEmailToContacts($campaign);   
+
+                    // update campaign now with next schedule if repeat and batch send, so that we will know how many times it sent
+                    $this->supdateNextScheduleAndUpdateBatch($campaign); 
+     
+                    // break; 
+                } else {
+                    print "<br>\n No list found in the campaign";
+                } 
+            } 
+        // update 
+    }
+      
+    public function testSend($campaign_id, $email) 
+    { 
+        $toMail = '';
+        $contact = ['contact'=>[]]; 
+        // get campaign content
+        $campaignScheduleReachDeadline = CampaignSchedule::getScpecificCampaignByCampaignIdForTest($campaign_id); 
          
-        // print "<pre>";
-        //     print_r($contacts );
-        // print "</pre>"; 
-        // exit; 
-        $campaign = (array) $campaign;  
+        // $campaign = (array) $campaign; 
 
-        // dd($campaign); 
-        // exit; 
+        
 
-        // send to contact now
+              // dd($campaignScheduleReachDeadline); 
+        // get contact of the specific campaign
+           foreach ($campaignScheduleReachDeadline as $campaign) {      
+               $campaign = (array) $campaign;   
+
+
+                if(!empty($email)) {
+                    $toMail = $email;
+                } else {
+                    $toMail = $campaign['sender_email'];
+                }
+
+                 if(Mail::to($toMail)->send(new CampaignSendMail($contact, $campaign))) { 
+
+                    Activity::create(['account_id'=>$campaign['account_id'], 'table_name'=>'campaigns','table_id'=>$campaign['campaign_id'], 'action'=>'Email test successfully sent to ' . $campaign['sender_email'] . ' campaign status is ' . $campaign['repeat'] ]);  
+                    return true; 
+                } else {
+                    Activity::create(['account_id'=>$campaign['account_id'], 'table_name'=>'campaigns','table_id'=>$campaign['campaign_id'], 'action'=>'Email test failed sending to ' . $campaign['sender_email'] . ' campaign status is ' . $campaign['repeat'] ]);   
+                    return false; 
+                }  
+                break;
+            } 
+        // update 
+     }
+    public function sendEmailToContacts($campaign)
+    { 
+        $contacts = Campaign::getAllEmailWillRecieveTheCampaign($campaign->campaign_id);  
+
+        $campaign = (array) $campaign;    
+
         foreach ($contacts['contacts'] as $id => $contact) { 
-            
-            // print "current user account " . User::getUserAccount(); 
-            // exit; 
-             // print " contact email  email = " . $contact['email'] ;
+         
             if(Mail::to($contact['email'])->send(new CampaignSendMail($contact, $campaign))) {
             
                 Activity::create(['account_id'=>$campaign['account_id'], 'table_name'=>'campaigns','table_id'=>$campaign['campaign_id'], 'action'=>'Email successfully sent to ' . $contact['email'] . ' campaign status is ' . $campaign['repeat'] ]); 
 
-                // print "sent an email success";
-                // Log::info('successfully sent and email to his contact'); 
+          
             } else {
-                 Activity::create(['account_id'=>$campaign['account_id'], 'table_name'=>'campaigns','table_id'=>$campaign['campaign_id'], 'action'=>'Email failed sending to ' . $contact['email'] . ' campaign status is ' . $campaign['repeat'] ]); 
-                // print "failed send and email";
-                 // Log::info('failed sent and email to his contact'); 
-                 // Log::emergency("emergency text");
+                 Activity::create(['account_id'=>$campaign['account_id'], 'table_name'=>'campaigns','table_id'=>$campaign['campaign_id'], 'action'=>'Email failed sending to ' . $contact['email'] . ' campaign status is ' . $campaign['repeat'] ]);  
+
             } 
         }  
     }

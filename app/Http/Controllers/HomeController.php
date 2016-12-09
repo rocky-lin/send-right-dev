@@ -36,6 +36,9 @@ class HomeController extends Controller
         $_SESSION['form_builder']['menu']['excludedFields'] = ['url', 'textarea', 'checkbox', 'radio', 'select','selectmultiple','upload','date','rating','time','hidden','image','terms'];
         $_SESSION['form_builder']['db_contact']['entry_fields_filters'] = ['first_name', 'last_name', 'email', 'location', 'phone', 'telephone'];
 
+        $_SESSION['url']['hoem'] =  url('/'); 
+
+
         // return home view
          return view('home');
     }

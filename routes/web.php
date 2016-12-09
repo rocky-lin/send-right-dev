@@ -77,12 +77,14 @@ Route::group(['prefix' => 'user' ], function() {
 		// step 4
 		Route::get('campaign/create/settings', 'CampaignController@createSettings')->name('user.campaign.create.settings');
 		Route::post('campaign/create/settings', 'CampaignController@createSettingsValidate')->name('user.campaign.create.settings.validate'); 
-
-
+ 
 		// preview 
 		 	Route::get('campaign/create/settings/preview/mobile', 'CampaignController@getPreviewMobile')->name('user.campaign.create.settings.preview.mobile');
 		 	Route::get('campaign/create/settings/preview/desktop', 'CampaignController@getPreviewDesktop')->name('user.campaign.create.settings.preview.desktop');
 		 	Route::get('campaign/create/settings/preview/tablet', 'CampaignController@getPreviewTablet')->name('user.campaign.create.settings.preview.tablet');
+
+		// send test email 
+			Route::get('campaign/create/settings/email/send/test/{id?}/{email?}', 'CampaignController@sendTestCampaignEmail')->name('user.campaign.create.settings.email.send.test');
 
  	// create step 1
 	Route::resource('campaign', 'CampaignController');  	  
@@ -112,6 +114,11 @@ Route::get('csv', function(){
 // Testing development 
 use Carbon\Carbon;
 use App\Helper; 
+use App\Mail\OrderShipped;  
+Route::get('/send-email-test', function(){
+	Mail::to('mrjesuserwinsuarez@gmail.com')->send(new OrderShipped()) ; 
+}); 
+
 
 Route::get('ng-bootstrap-ui', function(){
 	return view('test.ng-strap');
@@ -122,8 +129,7 @@ Route::get('/campaign-send', 'CampaignScheduleController@send');
 Route::get('/carbon-test', function(){
 
 	// create($year = null, $month = null, $day = null, $hour = null, $minute = null, $second = null, $tz = null); 
-	 
-
+	  
 	$dateTime = Helper::dateTimeExplode('2016-12-09 06:45:40'); 
 	print "<pre>"; 
 	print_r($dateTime); 

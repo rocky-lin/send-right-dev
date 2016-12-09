@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html> 
 <head>
 	<title> Preview </title>
 	<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
@@ -14,13 +14,11 @@
 		} 
 	</style>
 </head>
-<body>
-	Hi {{$contact['full_name']}},   
+<body> 
 	 <?php  
-		$content = htmlspecialchars_decode(stripslashes($campaign['content']));
+		$content = htmlspecialchars_decode(stripslashes($content));
 		$content = str_replace('contenteditable="true"', '', $content);
 		print $content; 
-	 ?>
- 	 {{-- {!!htmlspecialchars_decode(stripslashes($campaign['content']))!!} --}}
+	 ?> 
 </body>
 </html>

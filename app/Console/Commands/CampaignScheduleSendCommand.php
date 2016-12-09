@@ -43,18 +43,16 @@ class CampaignScheduleSendCommand extends Command
     public function __construct()
     {
         parent::__construct();
-    }
-
+    } 
+    
     /**
      * Execute the console command.
      *
      * @return mixed
      */
     public function handle()
-    {
- 
-        $this->info("Sending email to contacts now.."); 
- 
+    { 
+        $this->info("Sending email to contacts now..");  
         $campaignScheduleCtr = new CampaignScheduleController();
         $campaignScheduleCtr->send(); 
     }

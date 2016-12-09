@@ -16,7 +16,7 @@ class OrderShipped extends Mailable
      *
      * @return void
      */
-    public function __construct($campaign)
+    public function __construct()
     {
         // dd($campaign); 
     }
@@ -28,6 +28,6 @@ class OrderShipped extends Mailable
      */
     public function build()
     {
-        return $this->view('mail.order-shipped');
+        return $this->from('noresponse@sendirght.net', 'Send Right')->subject('This is the subject, diba alright kaau ni?')->view('mail.order-shipped');
     }
 }

@@ -20,6 +20,11 @@ $userName=$db->getUserName($_SESSION["UserId"]);
 // print_r($user); 
 // print "test = " . Auth::user()->name; 
 
+
+// print "url " . $_SESSION['url']['hoem'];
+$home_url =  $_SESSION['url']['hoem'];
+
+// print "path " . route('user.campaign.create.settings');
 ?>
 <html xmlns="http://www.w3.org/1999/xhtml">
 
@@ -35,7 +40,7 @@ $userName=$db->getUserName($_SESSION["UserId"]);
     <link href="assets/css/colorpicker.css" rel="stylesheet" />
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <script  src="http://localhost/rocky/send-right-dev/extension/campaign/assets/js/3.1.1-jquery.min.js"></script>
+    <script  src="http://localhost/rocky/send-right-dev//extension/campaign/assets/js/3.1.1-jquery.min.js"></script>
 
     <script type="text/javascript">   
   
@@ -45,8 +50,12 @@ $userName=$db->getUserName($_SESSION["UserId"]);
                 console.log(id);
                 $.post( "compose-finished.php", { content: $('.bal-content-wrapper').html(), id:id})
                     .done(function( data ) { 
-                        if(data == 'Ok') {
-                            document.location = 'http://localhost/rocky/send-right-dev/user/campaign/create/settings';
+                        if(data == 'Ok') { 
+                            
+                            var redirectTo = '<?php print $home_url . "/user/campaign/create/settings"; ?>';  
+                            alert(redirectTo);
+                            document.location =  redirectTo;
+ 
                         } else {
                             console.log("Something wrong!");
                         } 

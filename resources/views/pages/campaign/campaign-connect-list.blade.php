@@ -12,6 +12,18 @@
             </ul>
         </div>
     @endif
+        
+     @if (session('status'))
+        <div class="alert alert-danger">
+            <ul>
+                <li>
+                    {{ session('status') }}
+                </li>
+            </ul>
+        </div>
+    @endif
+
+
     <div class="row">
         <div class="col-sm-12">     
             

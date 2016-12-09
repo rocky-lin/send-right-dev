@@ -22,36 +22,46 @@ class CampaignSchedule extends Model
    				self::create($campaignSchedule);  
        		} 
        } 
- 
+  
+       // get all the campaign details
        public static function getReachDeadline() 
-       { 
-       	 	 
-          // $scheduledCampaign  = DB::table('campaigns')
-          //   ->join('campaign_schedules', 'campaign_schedules.campaign_id', '=', 'campaigns.id')
-          //   ->join('campaign_lists', 'campaign_lists.campaign_id', '=', 'campaigns.id') 
-          //   ->where('campaign_schedules.schedule_send', '<=', Carbon::now()) 
-          //   ->get();
-
-      print "<br> date time now  " .  Carbon::now(); 
-  	$scheduledCampaign = DB::table('campaigns')
-        ->join('campaign_schedules', function ($join) {
-            $join->on('campaigns.id', '=', 'campaign_schedules.campaign_id')
-               ->where('campaign_schedules.schedule_send', '<=', Carbon::now())
-               ->where('campaigns.status', '=', 'active')
-               ->where('campaigns.type', '=', 'schedule send');
-        })
-        ->get();
- 
-       		// print "current date time  " . Carbon::now(); 
-       		// $scheduledCampaign = self::where('schedule_send', '<=', Carbon::now())->get(); 
-       		 
-       		// dd($scheduledCampaign); 
-       		// foreach ($scheduledCampaign as $sc) {
-       		// 	print "<br> id " . $sc->id . " date " . $sc->schedule_send; 
-       		// }
+       {  
+         // print "<br> date time now  " .  Carbon::now(); 
+    	   $scheduledCampaign = DB::table('campaigns')
+          ->join('campaign_schedules', function ($join) {
+              $join->on('campaigns.id', '=', 'campaign_schedules.campaign_id')
+                 ->where('campaign_schedules.schedule_send', '<=', Carbon::now())
+                 ->where('campaigns.status', '=', 'active')
+                 ->where('campaigns.type', '=', 'schedule send');
+          })
+        ->get(); 
        		return $scheduledCampaign; 
-       }
+       } 
 
-
-
-} 
+       // get specific campaign info
+       public static function getScpecificCampaignByCampaignId($campaign_id)
+       {   
+         $scheduledCampaign = DB::table('campaigns')
+          ->join('campaign_schedules', function ($join) use ($campaign_id)  {
+              $join->on('campaigns.id', '=', 'campaign_schedules.campaign_id')
+                 ->where('campaigns.status', '=', 'active')
+                 ->where('campaigns.type', '=', 'direct send')
+                 ->where('campaigns.id', '=', $campaign_id);
+          } )
+        ->get(); 
+          return $scheduledCampaign; 
+       } 
+        // get specific campaign info
+       public static function getScpecificCampaignByCampaignIdForTest($campaign_id)
+       {   
+         $scheduledCampaign = DB::table('campaigns')
+          ->join('campaign_schedules', function ($join) use ($campaign_id)  {
+              $join->on('campaigns.id', '=', 'campaign_schedules.campaign_id')
+                 // ->where('campaigns.status', '=', 'active')
+                 // ->where('campaigns.type', '=', 'direct send')
+                 ->where('campaigns.id', '=', $campaign_id);
+          } )
+        ->get(); 
+          return $scheduledCampaign; 
+       } 
+      } 

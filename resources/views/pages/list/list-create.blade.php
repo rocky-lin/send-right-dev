@@ -5,7 +5,14 @@
         <div class="col-sm-12"> 
             <div class="panel panel-default">  
                 <div class="panel-heading">Dashboard</div>    
-                <div class="panel-body">   
+                <div class="panel-body">    
+
+                    @if (session('status_contact'))
+                        <div class="alert alert-danger">
+                            {{ session('status_contact') }}
+                        </div>
+                    @endif 
+
                     @include('pages/include/other/submitted-form-response-one', ['messangeName'=>'status'])  
                 	<div data-ng-controller="myListCreateViewCtr">       
 					    {!! Form::open(['route' => 'list.store', 'method'=>'post', 'name'=>'addListFrm', 'autocomplete'=>'off']) !!} 

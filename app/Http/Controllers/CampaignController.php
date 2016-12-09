@@ -16,6 +16,8 @@ use Illuminate\Support\Facades\Input;
 use App\User;
 use Carbon\Carbon; 
 use App\Helper; 
+use Redirect;
+use App\Http\Controllers\CampaignScheduleController; 
 
 class CampaignController extends Controller
 {
@@ -71,7 +73,13 @@ class CampaignController extends Controller
         // 
         // print " list ids ".  $_SESSION['campaign']['listIds'];
         // exit; 
-        return redirect(route('user.campaign.create.sender.view'));
+        $listIdsTotal = count(explode(',', $request->get('list_ids'))); 
+        // dd($listIdsTotal); 
+        if( $listIdsTotal < 2 ) {
+            return Redirect::back()->withInput(Input::all())->with('status', 'Please select at least 1 list.');
+        } else { 
+            return redirect(route('user.campaign.create.sender.view'));
+        }
     }
 
     public function createUpdate(Request $request, $id)
@@ -210,13 +218,28 @@ class CampaignController extends Controller
                 'campaign_lists' => $request->get('list_ids'),
             ]);
  
-        $status = '<div class="alert alert-success"> Campaign settings successfully updated and  ' . $request->get('campaign_send_as') . '!</div>';
+        // $status = '<div class="alert alert-success"> Campaign settings successfully updated and  ' . $request->get('campaign_send_as') . '!</div>';
 
         $listNames = List1::getCurrentCampaignListNames();
 
         // save new and set new settings into session 
         // this will be used in populating in correct values in the settings after the new settings is submitted.
         Campaign::setDefaultValueToSession($request->get('campaign_id'));  
+
+        // message status 
+        if($request->get(   'campaign_type') == 'direct send') {
+            if($request->get('campaign_status') == 'active') {
+ 
+                    $campaignSchedule = new CampaignScheduleController();  
+                    $campaignSchedule->directSend($request->get('campaign_id')); 
+
+                $status = "<div class='alert alert-success'> Campaign email sent to contacts...</div>";     
+            } else {
+                $status = "<div class='alert alert-danger'> Sending now failed and must be in active status..</div>"; 
+            } 
+        } else {
+            $status = "<div class='alert alert-success'> Campaign email schedule saved..</div>";
+        }
 
         return view('pages.campaign.campaign-settings', compact('status', 'listNames')); 
     } 
@@ -283,5 +306,27 @@ class CampaignController extends Controller
         EmailAnalytic::where('table_name', 'campaigns')->where('table_id', $id)->delete();
         Campaign::find($id)->campaignList()->delete();
         Campaign::find($id)->delete();
+    } 
+    public function sendTestCampaignEmail($id, $email)
+    {  
+        // print "$id, $email";
+        // $campaignSendTest = CampaignSchedule::getScpecificCampaignByCampaignId($id); 
+
+            // print "<pre>";
+            //     print_r($campaignSendTest); 
+            // print "</pre>";  
+          $campaignSchedule = new CampaignScheduleController();
+          $boolean = $campaignSchedule->testSend($id, $email); 
+
+          if($boolean) {
+            print "<span style='color:green' > successfully sent test email</span>"; 
+          } else {
+            print "<span style='color:red'>failed send test email</span>";
+          }
+ 
+        // print "new email test sent!";
+        // campaign id
+        // send to sender
+        // return successfully sent
     }
 }

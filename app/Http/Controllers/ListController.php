@@ -10,6 +10,8 @@ use App\User;
 use Auth; 
 use App\ListContact;
 use DB;
+use Redirect;
+use Input; 
 class ListController extends Controller
 {
     private $id;
@@ -62,15 +64,35 @@ class ListController extends Controller
     public function store(Requests\StoreListReuquest $request)
     {   
 
+        print "list " . $request->get('contact_ids');
+
+        // $totalContact = explode(',', $request->get('contact_ids')); 
+        $totalContactLen = strlen($request->get('contact_ids')); 
+
+        // dd($totalContact); 
+
+        // if less than 3 meaning user didn't select a contact that belongs to the list 
+        if($totalContactLen < 3) {
+            return Redirect::back()->withInput(Input::all())->with('status_contact', 'Please select at least 1 contact.');
+        }
+
+
+
         // insert new list
         $listData = $request->except('_token', 'contact_ids'); 
         $listData['account_id'] = User::getUserAccount();    
         $list1 = List1::create($listData);   
  
+
+
+
         // insert to list contacts 
         foreach ($this->toArrayContactIds($request->get('contact_ids')) as $contact_id) { 
             ListContact::firstOrCreate(['list_id'=>$list1->id, 'contact_id'=>$contact_id]); 
         }  
+
+
+
 
         // return response
         return redirect()
