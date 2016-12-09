@@ -24,6 +24,11 @@
     </script>
 </head>
 <body data-ng-init="document"   >
+
+     <input type="hidden" value="{{url('/')}}" id="url_home" />  
+ 
+ 
+
     <div id="app">
         <nav class="navbar navbar-default navbar-static-top">
             <div class="container">
