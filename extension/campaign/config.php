@@ -1,8 +1,13 @@
-
 <?php
+function is_localhost() {
+    $whitelist = array( '127.0.0.1', '::1' );
+    if( in_array( $_SERVER['REMOTE_ADDR'], $whitelist) )
+        return true;
+}
+// $isLocal = true;
 
-$isLocal = true;
-if($isLocal === true) {
+
+if(is_localhost() === true) {
 
  //main variables
 //print " host " . $_SERVER[HTTP_HOST];
@@ -45,11 +50,11 @@ if($isLocal === true) {
 } else {
  //main variables
 //print " host " . $_SERVER[HTTP_HOST];
- define("SITE_URL", 'http://'.$_SERVER['HTTP_HOST']. '/email-builder/app/Bal - Email Editor/');
+ define("SITE_URL", 'http://'.$_SERVER['HTTP_HOST']. '/extension/campaign/');
 
 
 
- define("SITE_DIRECTORY",$_SERVER['DOCUMENT_ROOT'] .'/email-builder/app/Bal - Email Editor/');
+ define("SITE_DIRECTORY",$_SERVER['DOCUMENT_ROOT'] . '/extension/campaign/');
 
  //elements.json file directory
  define("ELEMENTS_DIRECTORY",SITE_DIRECTORY.'elements.json');

@@ -12,7 +12,7 @@
 		.sortable-row-actions { 
 			display:none;
 		} 
-	</style>
+	</style> 
 </head>
 <body> 
 	 <?php  

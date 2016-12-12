@@ -36,11 +36,16 @@ class ListController extends Controller
    
 
 
+        // print "test";
+
         $counter=0;
         foreach($lists as $list) {   
             $lists[$counter]['contact_total'] = List1::getListContactsTotal($list['id']);
             $counter++; 
         } 
+        // print"<pre>"; 
+        // print_r($lists); 
+        // print "</pre>";
         // dd($lists);
         return $lists;
     } 

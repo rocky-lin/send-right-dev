@@ -24,7 +24,7 @@ class ValidateCampaignList extends FormRequest
     public function rules()
     {
         return [
-            'campaignName' => 'required|unique:campaigns,title'
+            'campaignName' => 'required'
         ];
     }
 }

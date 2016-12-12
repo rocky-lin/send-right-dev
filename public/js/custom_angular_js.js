@@ -525,6 +525,11 @@ angular.module('myApp')
     console.log("siteUrl" + $scope.siteUrl);
     $scope.icons = [];
     //$scope.selectedAddress = '';
+    // $scope.editList = function(list) {  
+
+    //     $window.location.href = obj.siteUrl + '/user/list/'+list.id+'/edit'; 
+    // } 
+
 
     $scope.getLists = function(viewValue) {
       var str = (viewValue  == '' )? "" : "/" + viewValue;

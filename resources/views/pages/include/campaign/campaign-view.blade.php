@@ -23,10 +23,7 @@
                          <br> <hr>
                             <table class="table table-hover">
                                 <thead>
-                                    <tr>
-                                        <td>  
-                                            <label>Picture </label>  
-                                        </td>
+                                    <tr> 
                                         <th>
                                             <label>Sender Email </label> 
                                         </th>
@@ -63,10 +60,7 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr data-ng-hide="deleteCampaign[campaign.id]"  ng-repeat="campaign in data | filter:q | startFrom:currentPage*pageSize | limitTo:pageSize | orderBy : email" > 
-                                        <td>  
-                                            <img  style="width:75px;" class="media-object"  src="http://localhost/rocky/send-right-dev/public/img/campaign/pretty-girl.jpg" /> 
-                                        </td> 
+                                    <tr data-ng-hide="deleteCampaign[campaign.id]"  ng-repeat="campaign in data | filter:q | startFrom:currentPage*pageSize | limitTo:pageSize | orderBy : email" >  
                                         <td>@{{campaign.sender_email }}</td>
                                         <td>@{{campaign.sender_subject}}</td>
                                         <td>@{{campaign.title }}</td>

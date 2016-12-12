@@ -213,12 +213,27 @@ class Campaign   extends Model
              // print " <br> &nbsp;&nbsp; list id " . $campaignList->list_id;  
              foreach ($campaignList->list1->list_contact as $listContact) {
                  // print " <br>  &nbsp;&nbsp; &nbsp; email " . $listContact->contact->email;   
-                $contacts['contacts'][$listContact->contact->id]['email'] = $listContact->contact->email; 
-
+                 
+                $contacts['contacts'][$listContact->contact->id]['email'] = $listContact->contact->email;  
                 $contacts['contacts'][$listContact->contact->id]['full_name'] = $listContact->contact->first_name . ' ' . $listContact->contact->last_name; 
+                $contacts['contacts'][$listContact->contact->id]['first_name'] =  $listContact->contact->first_name;
+                $contacts['contacts'][$listContact->contact->id]['last_name'] =  $listContact->contact->last_name;
+                $contacts['contacts'][$listContact->contact->id]['email'] =  $listContact->contact->email;
+                $contacts['contacts'][$listContact->contact->id]['location'] =  $listContact->contact->location;  
+                $contacts['contacts'][$listContact->contact->id]['phone_number'] =  $listContact->contact->phone_number;
+                $contacts['contacts'][$listContact->contact->id]['telephone_number'] =  $listContact->contact->telephone_number; 
+                $contacts['contacts'][$listContact->contact->id]['contact_id'] =  $listContact->contact->telephone_number; 
                 $counter++; 
             }
         } 
         return $contacts;  
     }
+
+    public static function supplyContactFilteres($contactFilters, $campaign)
+    {
+         foreach ($contactFilters as $contactFilter => $contactValue) { 
+            $campaign = str_replace($contactFilter, $contactValue, $campaign); 
+        }
+        return $campaign; 
+    } 
 }

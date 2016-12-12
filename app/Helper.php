@@ -35,6 +35,9 @@ class Helper extends Model
     	 $dateTimeExploded = Helper::dateTimeExplode($dateTime); 
     	return Carbon::create($dateTimeExploded['year'], $dateTimeExploded['month'], $dateTimeExploded['day'],  $dateTimeExploded['hour'], $dateTimeExploded['min'], $dateTimeExploded['sec']); 
     }
-
-
+    public static function toAgo($dateTime)
+    {
+    	return Carbon::createFromTimeStamp(strtotime($dateTime))->diffForHumans(); 
+    }
+ 
 }

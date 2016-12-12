@@ -506,3 +506,63 @@ Test campaign online with cronjobs functionality
 Upload code to server
 Update path for serever compatibility
 Test email campaign in server 
+
+
+
+
+
+
+
+
+Hi Rocky,  
+
+Codes uploaded to the server now, we are able to send email, also schedule send works and direct send.  Below are the updates and todo by monday. 
+Campaign has a lot of work than we expected as you can see the lists below and in trello.
+
+Todo December 9, 2016 
+ 
+Set sender, subject, sender name of the campaign
+Direct send after finished
+Test send
+In adding campaign list only allow to proceed to next step if select a campaign 
+In adding list only allow to proceed next if select a contact
+Test campaign online with cronjobs functionality
+Upload code to server
+Update path for serever compatibility
+Test email campaign in server 
+change the hardcoded url in the pages
+sending email issue with "Expected response code 354 but got code "550", with message "550 5.7.0 Requested action not taken: too many emails per second"
+
+	December 12, 2016  
+	if select send now change button "save" to send. in campaign settings - 20m - d 
+	when upload to server not able to upload image campaign in online - 10m - d
+	remove validation of exist in all the campaign name - 5m - d
+	put total contact in lists during select list for campaign - 30m - d
+	put view contact of the specific lists - change to edit list, redirect to list edit - 10m - d  
+	add this function {{full_name}} in campaign creation in order to let the users select a contact info and when campaign sends then it should automatically populate the contact info - 1h 30m - d
+	remove icons in the campaign footer - 10m - d
+	display boxes draggable in home dashboard  - d 
+	display activity, campaign, list, contact, forms boxes in the home
+
+hit "send button" settings and after page loaded first save data to database and then start sending emails via ajax and show status. - onhold
+maybe fix the campaign design, something there is need of change but this has to be checked first to confirm - onhold
+connect to mailgun or aws but i think i prefer for now mailgun as laravel frameworks suggested - onhold
+upload image in campaign need to add loading icon so that, uploading will be user friendly - onhold
+  
+ 
+December 13, 2016
+Continue display basic preview in home for activity, campaign, list, contact, forms
+add activity for contact, list, campaign, forms
+start auto response coding
+
+
+
+
+
+---------------------------------------------------------------------------------------------
+sortable resources docs 
+src: https://getuikit.com/docs/sortable.html
+
+
+
+

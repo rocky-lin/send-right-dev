@@ -1,9 +1,9 @@
  
 .glyphicon {
-	cursor:pointer;
+  cursor:pointer;
 }
 .navbar-menu {
-	font-size: 15px;
+  font-size: 15px;
 }
 
 
@@ -45,3 +45,54 @@ body {
     color:green;
     font-weight: bold; 
  }
+
+
+ /*campaign */
+
+ .bal-settings {
+  display:none;
+ }
+
+ /* jquery ui, sortable*/ 
+
+
+/* Home sortable divs   */
+.home-sortable-div .column {
+  width:100%;
+}
+.home-sortable-div .column .portlet {
+  border:1px solid red;
+  background-color:#fafafa;   
+  height:200px;
+/*  width:250px;*/
+  border-radius:5px;
+}
+
+.portlet-content {
+  border:1px solid grey;
+  min-height:150px;
+  overflow-y:scroll;
+  border-radius:5px;
+  /* padding:20px; */
+  height: 300px;
+  font-size:11px; 
+}
+.portlet-placeholder {
+  border: 1px dotted #e71212;
+  margin: 0 1em 1em 0;
+  height: 50px; 
+} 
+
+
+.portlet  {
+  border:1px solid #dedede; 
+  padding:5px;
+  margin-bottom: 20px;
+}
+
+.portlet-header {
+/*   border:1px solid red; */
+  padding-bottom:5px;
+  cursor:move; 
+
+}

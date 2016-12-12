@@ -38,12 +38,15 @@ $home_url =  $_SESSION['url']['hoem'];
     <link href="assets/css/demo.css" rel="stylesheet" />
     <link href="assets/css/email-editor.bundle.min.css" rel="stylesheet" />
     <link href="assets/css/colorpicker.css" rel="stylesheet" />
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1"> 
+    <script  src="<?php print $home_url; ?>/extension/campaign/assets/js/3.1.1-jquery.min.js"></script> 
+    <script src="<?php print $_SESSION['url']['hoem']; ?>/public/js/custom_jquery.js" type="text/javascript"  ></script> 
+    <script src="<?php print $_SESSION['url']['hoem']; ?>/public/js/custom_js.js" type="text/javascript"  ></script> 
+     
+    <link rel="stylesheet" type="text/css" href="<?php print $_SESSION['url']['hoem']; ?>/public/css/custom_style.css"> 
+ 
 
-    <script  src="http://localhost/rocky/send-right-dev//extension/campaign/assets/js/3.1.1-jquery.min.js"></script>
-
-    <script type="text/javascript">   
-  
+    <script type="text/javascript">    
      $(document).ready(function(){ 
             $('#campaignComposeNext').click(function() {
                 var id = $('#campaignId').val();
@@ -53,7 +56,7 @@ $home_url =  $_SESSION['url']['hoem'];
                         if(data == 'Ok') { 
                             
                             var redirectTo = '<?php print $home_url . "/user/campaign/create/settings"; ?>';  
-                            alert(redirectTo);
+                            // alert(redirectTo);
                             document.location =  redirectTo;
  
                         } else {
@@ -68,13 +71,41 @@ $home_url =  $_SESSION['url']['hoem'];
 </head> 
 
 <body>
-	<div class="bal-header"> 
-		<div class="bal-user-info">
-            <div class="bal-user-name">
-                <button class="btn btn-info" id="campaignComposeNext" >Save and Next</button> 
-            </div> 
-		</div>
-	</div>
+	<div class="bal-header" style="padding:13px;">      
+
+                    <div class="pull-right"> 
+                        &nbsp; &nbsp; 
+                        <button class="btn btn-info" id="campaignComposeNext" >Save and Next</button>    
+                    </div>
+                <div class="pull-right">
+                    <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#campaign-compose-select-contact-collapse" aria-expanded="false" aria-controls="campaign-compose-select-contact-collapse"> 
+                        Select Contact Column
+                    </button>
+                    <div class="collapse" id="campaign-compose-select-contact-collapse">
+                          <div class="well" id="campaign-compose-select-contact-row-name" style="text-align: left;" >
+                                <ul> 
+                                    <li> <input type="button" value="First Name" table-row-name-id="contact-row-name-first-name" /> </li>
+                                    <li>  <input type="button" value="Last Name" table-row-name-id="contact-row-name-last-name" />  </li>
+                                    <li>  <input type="button" value="Email" table-row-name-id="contact-row-name-email" />  </li> 
+                                    <li>  <input type="button" value="Location" table-row-name-id="contact-row-name-location" />  </li>
+                                    <li>  <input type="button" value="Phone Number" table-row-name-id="contact-row-name-phone-number" />  </li>
+                                    <li>  <input type="button" value="Telphone Number" table-row-name-id="contact-row-name-telephone-number" />  
+        </li>
+                                   
+                                </ul> 
+                                <div style="position:absolute; margin-top:-2000000000px">  
+                                    <input type="text" id="contact-row-name-first-name" value="{{first_name}}" />
+                                    <input type="text" id="contact-row-name-last-name" value="{{last_name}}" />
+                                    <input type="text" id="contact-row-name-email" value="{{email}}" />
+                                    <input type="text" id="contact-row-name-location" value="{{location}}" />
+                                    <input type="text" id="contact-row-name-phone-number" value="{{phone_number}}" />
+                                    <input type="text" id="contact-row-name-telephone-number" value="{{telephone_number}}" />   
+                                </div>
+                          </div>
+                    </div>
+                </div> 
+
+	   </div>
 <?php 
     $stepLists = ['Campaigns'=>route('campaign.index'), 'Campaign Details'=>route('campaign.create'), 'Sender Details'=>route('user.campaign.create.sender.view'), 'Compose Campaign'=>url('extension/campaign/index.php'), 'Campaign Settings'=>route('user.campaign.create.settings')]; 
     $currentStep = 'Compose Campaign'; 

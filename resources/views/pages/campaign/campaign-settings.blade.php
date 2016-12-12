@@ -130,11 +130,11 @@ th {
     <div class="panel-body"> 
   		<ul class="list-group">
   		    <li class="list-group-item">   
-            <input type="radio" class="pull-right pull-right1" rel = "pullRight1" name="campaign_type" value="direct send" <?php print ($_SESSION['campaign']['delivery']['directSend']['input'] == true) ? 'checked' : null ?> />
+            <input type="radio" class="pull-right pull-right1" rel = "pullRight1" name="campaign_type" value="direct send" id="campaign_type_direct_send"  <?php print ($_SESSION['campaign']['delivery']['directSend']['input'] == true) ? 'checked' : null ?> />
             <b>Direct Send:</b> 
           </li>
           <li class="list-group-item">   
-            <input type="radio" class="pull-right pull-right2" rel = "pullRight2" name="campaign_type" value="schedule send"  <?php print ($_SESSION['campaign']['delivery']['scheduleSend']['input'] == true) ? 'checked' : null ?> />
+            <input type="radio" class="pull-right pull-right2" rel = "pullRight2" name="campaign_type" value="schedule send" id="campaign_type_schedule_send" <?php print ($_SESSION['campaign']['delivery']['scheduleSend']['input'] == true) ? 'checked' : null ?> />
             <br>
             <b>Schedule:</b> <br>   <br>  
           <div> 
@@ -166,14 +166,14 @@ th {
 
 
 <div class="panel panel-default">
-    <div class="panel-heading">
+    <div class="panel-heading"> 
       <h3 class="panel-title">Send Test Email</h3>
     </div>
     <div class="panel-body">   
       <div class="form-group" >
         <input type="email" name="test_email" value="" id="test_email" class="form-control" placeholder="Place email address that will receive the test email campaign." />
       </div>
-      <input class="btn btn-info" type="button" name="submit" value="Send Test" id="campaign-send-test" /> <span id="campaign-send-test-status"> </span>
+      <input class="btn btn-default" type="button" name="submit" value="Send Test" id="campaign-send-test" /> <span id="campaign-send-test-status"> </span>
 
     </div>  
 </div>   
@@ -233,7 +233,7 @@ th {
       <h3 class="panel-title">Finished</h3>
     </div>
     <div class="panel-body">
-      <input class="btn btn-info" type="submit" name="submit" value="Save" />  
+      <input class="btn btn-info" type="submit" name="submit" value="Save now" id="campaign-finish" />  
 </button>
     </div>  
   </div>  

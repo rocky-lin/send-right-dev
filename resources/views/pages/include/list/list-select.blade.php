@@ -1,6 +1,6 @@
 <div data-ng-controller="myListSelectCtr"   ng-init="loadDefaultLists('{{$defaultListIds}}')">
     <input type="hidden" name="list_ids" value="@{{selectedContactArray}}"   />
-
+asdas
     <hr>
     <div class="row">
         <div class="col-sm-6">
@@ -25,14 +25,16 @@
                 <thead>
                 <tr>
                     <th>
-                        <label>
-                            Select Contact
-                        </label>
+                        <label>Select Contact</label>
                     </th>
                     <th>
-                        <label> List Name </label>
+                        <label>List Name</label>
                         <a href="#" title="First Name" data-toggle="popover" data-trigger="hover" data-content="First name of your contact.">(?)</a>
                     </th>
+                    <th> 
+                        <label>Total Contacts</label>
+                    </th>
+                    <th> Edit </th>
                 </tr>
                 </thead>
                 <tbody>
@@ -41,6 +43,10 @@
                         <input type="checkbox" data-ng-value="@{{contact.id}}"   data-ng-click="selectContact(contact)" data-ng-checked="isContactSelected[@{{contact.id}}]" />
                     </td>
                     <td>@{{contact.name}} </td>
+                    <td>@{{contact.contact_total}} </td>
+                    <th> 
+                        <a href="{{$_SESSION['url']['hoem']}}/user/list/@{{contact.id}}/edit">edit</a> 
+                    </th>
                 </tr>
                 </tbody>
             </table>

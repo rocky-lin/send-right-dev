@@ -17,4 +17,16 @@ class Contact extends Model
     	return $this->belongsTo('App\Account'); 
     }
 
+    public static function setgetFilterValues($contact)
+    {  
+            $contactFilterValues = [ 
+                '{{first_name}}'=>$contact['first_name'], 
+                '{{last_name}}'=>$contact['last_name'], 
+                '{{email}}'=>$contact['email'], 
+                '{{location}}'=>$contact['location'], 
+                '{{phone_number}}'=>$contact['phone_number'], 
+                '{{telephone_number}}'=>$contact['telephone_number'] 
+            ];   
+            return $contactFilterValues;
+    }
 }

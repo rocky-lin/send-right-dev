@@ -15,6 +15,7 @@
     <link href="<?php print url('/'); ?>/public/css/custom_style.css" rel="stylesheet"> 
     <script src="<?php print url('/'); ?>/public/js/src/1.5.8-angular.min.js"></script>   
     <script src="<?php print url('/'); ?>/public/js/src/ui-bootstrap-tpls-2.2.0.min.js"></script> 
+
  
     <!-- Scripts -->
     <script>
@@ -117,6 +118,8 @@
         <script src="<?php print url('/'); ?>/public/js/src/3.3.7-bootstrap.min.js"></script> 
         <script src="<?php print url('/'); ?>/public/js/src/1.4.8-angular-route.js"></script>
         <script src="<?php print url('/'); ?>/public/js/src/jquery-ui.min.js"></script>
+
+
  
     {{-- Individual Auto suggest needs--}} 
     <link rel="stylesheet" href="//cdn.jsdelivr.net/fontawesome/4.5.0/css/font-awesome.css">
@@ -143,9 +146,9 @@
      <!-- Scripts custom --> 
         <script src="<?php print url('/'); ?>/public/js/custom_jquery.js"></script>
         <script src="<?php print url('/'); ?>/public/js/custom_angular_js.js"></script>
-        <script src="<?php print url('/'); ?>/public/js/custom_js.js"></script> 
-
-
+        <script src="<?php print url('/'); ?>/public/js/custom_js.js"></script>  
+        <script src="<?php print url('/'); ?>/public/js/custom_jquery_ui.js"></script> 
+ 
 
 </body>
 </html>

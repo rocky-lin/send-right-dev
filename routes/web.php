@@ -34,62 +34,73 @@ Route::group(['prefix' => 'user' ], function() {
   	});    
 
 	// contact 
-	Route::get('contact/{contact}/get', 'ContactController@getById')->name('user.contact.get.by.id');
-  	Route::get('contact/get/all', 'ContactController@getUserAccountContacts')->name('user.contact.get.all'); 
-  	Route::get('contact/import', 'ContactController@import')->name('user.contact.import');
-  	Route::post('contact/import/store', 'ContactController@importStore')->name('user.contact.import.store');  
-  	Route::resource('contact', 'ContactController');  
+		Route::get('contact/{contact}/get', 'ContactController@getById')->name('user.contact.get.by.id');
+	  	Route::get('contact/get/all', 'ContactController@getUserAccountContacts')->name('user.contact.get.all'); 
+	  	Route::get('contact/import', 'ContactController@import')->name('user.contact.import');
+	  	Route::post('contact/import/store', 'ContactController@importStore')->name('user.contact.import.store');  
+	  	Route::resource('contact', 'ContactController');  
 
 	// list   
-	Route::get('list/get/all', 'ListController@getListsAndDetails');  
-	Route::get('list/get/{id}', 'ListController@getLists');  
-	Route::get('list/get/{id}/contacts', 'ListController@getListContacts'); 
-	Route::get('list/search/{name?}', 'ListController@searchLists');  
-  	Route::resource('list', 'ListController');   
+		Route::get('list/get/all', 'ListController@getListsAndDetails');  
+		Route::get('list/get/{id}', 'ListController@getLists');  
+		Route::get('list/get/{id}/contacts', 'ListController@getListContacts'); 
+		Route::get('list/search/{name?}', 'ListController@searchLists');  
+	  	Route::resource('list', 'ListController');   
 
 	//  form  
-	Route::get('form/get/all', 'FormController@getUserAccountForms')->name('user.form.get.all');   
-	Route::get('form/list/connect/view', 'FormController@viewConnectList')->name('user.form.list.connect.view'); 
-	Route::post('form/register/step1', 'FormController@registerNewFormStep1')->name('user.form.register.step1'); 
-	// Route::get('form/list/connect/get', 'FormController@getUserAccountForms')->name('user.form.list.connect.get'); 
-	Route::get( 'form/{id}/contacts/view', 'FormController@viewContacts' )->name('form.contacts.view');
-	Route::get( 'form/{id}/contacts/get', 'FormController@getContacts' )->name('form.contacts.get');
-	Route::post('form/list/connect/post', 'FormController@postConnectList')->name('user.form.list.connect.post');  
-	Route::resource('form', 'FormController');   
+		Route::get('form/get/all', 'FormController@getUserAccountForms')->name('user.form.get.all');   
+		Route::get('form/list/connect/view', 'FormController@viewConnectList')->name('user.form.list.connect.view'); 
+		Route::post('form/register/step1', 'FormController@registerNewFormStep1')->name('user.form.register.step1'); 
+		// Route::get('form/list/connect/get', 'FormController@getUserAccountForms')->name('user.form.list.connect.get'); 
+		Route::get( 'form/{id}/contacts/view', 'FormController@viewContacts' )->name('form.contacts.view');
+		Route::get( 'form/{id}/contacts/get', 'FormController@getContacts' )->name('form.contacts.get');
+		Route::post('form/list/connect/post', 'FormController@postConnectList')->name('user.form.list.connect.post');  
+		Route::resource('form', 'FormController');   
 
-	// campaign 
-	// 
-	// create step 1
-		Route::get('campaign/get/all', 'CampaignController@getAllCampaign')->name('user.campaign.get.all');
-	    Route::post('campaign/create/validate', 'CampaignController@createValidate')->name('user.campaign.create.validate');
-    	Route::post('campaign/create/update/{id?}', 'CampaignController@createUpdate')->name('user.campaign.create.update');
+	// campaign  
+		// create step 1
+			Route::get('campaign/get/all', 'CampaignController@getAllCampaign')->name('user.campaign.get.all');
+		    Route::post('campaign/create/validate', 'CampaignController@createValidate')->name('user.campaign.create.validate');
+	    	Route::post('campaign/create/update/{id?}', 'CampaignController@createUpdate')->name('user.campaign.create.update');
 
 
-		// create step 2
-		Route::get('campaign/create/sender', 'CampaignController@createSender')->name('user.campaign.create.sender.view');
-		Route::post('campaign/create/sender', 'CampaignController@createSenderValidate')->name('user.campaign.create.sender.validate');
-		Route::post('campaign/create/sender/update/{id?}', 'CampaignController@createSenderUpdate')->name('user.campaign.sender.update');
+			// create step 2
+			Route::get('campaign/create/sender', 'CampaignController@createSender')->name('user.campaign.create.sender.view');
+			Route::post('campaign/create/sender', 'CampaignController@createSenderValidate')->name('user.campaign.create.sender.validate');
+			Route::post('campaign/create/sender/update/{id?}', 'CampaignController@createSenderUpdate')->name('user.campaign.sender.update');
 
-		// step 3
-			Route::post('campaign/create/compose', 'CampaignController@composeValidate')->name('user.campaign.create.settings.validate'); 
-		// creation of campaign
-		
-		// step 4
-		Route::get('campaign/create/settings', 'CampaignController@createSettings')->name('user.campaign.create.settings');
-		Route::post('campaign/create/settings', 'CampaignController@createSettingsValidate')->name('user.campaign.create.settings.validate'); 
- 
-		// preview 
-		 	Route::get('campaign/create/settings/preview/mobile', 'CampaignController@getPreviewMobile')->name('user.campaign.create.settings.preview.mobile');
-		 	Route::get('campaign/create/settings/preview/desktop', 'CampaignController@getPreviewDesktop')->name('user.campaign.create.settings.preview.desktop');
-		 	Route::get('campaign/create/settings/preview/tablet', 'CampaignController@getPreviewTablet')->name('user.campaign.create.settings.preview.tablet');
+			// step 3
+				Route::post('campaign/create/compose', 'CampaignController@composeValidate')->name('user.campaign.create.settings.validate'); 
+			// creation of campaign
+			
+			// step 4
+			Route::get('campaign/create/settings', 'CampaignController@createSettings')->name('user.campaign.create.settings');
+			Route::post('campaign/create/settings', 'CampaignController@createSettingsValidate')->name('user.campaign.create.settings.validate'); 
+	 
+			// preview 
+			 	Route::get('campaign/create/settings/preview/mobile', 'CampaignController@getPreviewMobile')->name('user.campaign.create.settings.preview.mobile');
+			 	Route::get('campaign/create/settings/preview/desktop', 'CampaignController@getPreviewDesktop')->name('user.campaign.create.settings.preview.desktop');
+			 	Route::get('campaign/create/settings/preview/tablet', 'CampaignController@getPreviewTablet')->name('user.campaign.create.settings.preview.tablet');
 
-		// send test email 
-			Route::get('campaign/create/settings/email/send/test/{id?}/{email?}', 'CampaignController@sendTestCampaignEmail')->name('user.campaign.create.settings.email.send.test');
+			// send test email 
+				Route::get('campaign/create/settings/email/send/test/{id?}/{email?}', 'CampaignController@sendTestCampaignEmail')->name('user.campaign.create.settings.email.send.test');
 
- 	// create step 1
-	Route::resource('campaign', 'CampaignController');  	  
-
+ 		// create step 1
+		Route::resource('campaign', 'CampaignController');  	  
+  
+	// Home
+		Route::get('home/preview/activities', 'HomeController@previewActivities')->name('home.preview.activities');  
+		Route::get('home/preview/contacts', 'HomeController@previewContacts')->name('home.preview.contacts');  
+		Route::get('home/preview/lists', 'HomeController@previewLists')->name('home.preview.lists');  
+		Route::get('home/preview/forms', 'HomeController@previewForms')->name('home.preview.forms');  
+		Route::get('home/preview/campaigns', 'HomeController@previewCampaigns')->name('home.preview.campaigns');  
+		Route::get('home/preview/statics', 'HomeController@previewStatistics')->name('home.preview.statistics');   
 });   
+
+
+
+
+
  
 Route::get('send-slack-notification', function(){
 	$user = App\User::find(1); 
@@ -115,11 +126,13 @@ Route::get('csv', function(){
 use Carbon\Carbon;
 use App\Helper; 
 use App\Mail\OrderShipped;  
+
+
+
 Route::get('/send-email-test', function(){
 	Mail::to('mrjesuserwinsuarez@gmail.com')->send(new OrderShipped()) ; 
 }); 
-
-
+ 
 Route::get('ng-bootstrap-ui', function(){
 	return view('test.ng-strap');
 }); 
@@ -139,8 +152,107 @@ Route::get('/carbon-test', function(){
 	print "<br> now " . $date->now();
 	print "<br> tomorrow " . $date->now()->addDays(1);
 	print "<br> next week " .  $date->now()->addDays(7);  
-	print "<br> next month " .  $date->now()->addMonth(1);;
+	print "<br> next month " .  $date->now()->addMonth(1);
+}); 
+
+
+Route::get('/sortable-div', function(){
+	?>
+
+ <!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>jQuery UI Sortable - Portlets</title>
+  <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+  <link rel="stylesheet" href="/resources/demos/style.css">
+  <style>
+  body {
+    min-width: 520px;
+  }
+  .column {
+    width: 170px;
+    float: left;
+    padding-bottom: 100px;
+  }
+  .portlet {
+    margin: 0 1em 1em 0;
+    padding: 0.3em;
+  }
+  .portlet-header {
+    padding: 0.2em 0.3em;
+    margin-bottom: 0.5em;
+    position: relative;
+  }
+  .portlet-toggle {
+    position: absolute;
+    top: 50%;
+    right: 0;
+    margin-top: -8px;
+  }
+  .portlet-content {
+    padding: 0.4em;
+  }
+  .portlet-placeholder {
+    border: 1px dotted black;
+    margin: 0 1em 1em 0;
+    height: 50px;
+  }
+  </style>
+ <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+	  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+  <script>
+
+
+  $( function() {
+
+  	// sorting and draggining 
+    $( ".column" ).sortable({
+      connectWith: ".column",
+      handle: ".portlet-header",
+      cancel: ".portlet-toggle",
+      placeholder: "portlet-placeholder ui-corner-all"
+    }); 
+ 
+    // add css or style in the header and append classes
+    $( ".portlet" )
+      .addClass( "ui-widget ui-widget-content ui-helper-clearfix ui-corner-all" )
+      .find( ".portlet-header" )
+        .addClass( "ui-widget-header ui-corner-all" )
+        .prepend( "<span class='ui-icon ui-icon-minusthick portlet-toggle'></span>");
+ 
+ 	// show hide toggle
+    $( ".portlet-toggle" ).on( "click", function() {
+      var icon = $( this );
+      icon.toggleClass( "ui-icon-minusthick ui-icon-plusthick" );
+      icon.closest( ".portlet" ).find( ".portlet-content" ).toggle();
+    });
+ 
+  } );
+  </script>
+</head>
+<body>
+   
+<div class="column"> 
+  <div class="portlet">
+    <div class="portlet-header">Testing 1 </div>
+    <div class="portlet-content">Lorem ipsum dolor sit amet, consectetuer adipiscing elit</div>
+  </div>
+  <div class="portlet">
+    <div class="portlet-header">Test2</div>
+    <div class="portlet-content">Lorem ipsum dolor sit amet, consectetuer adipiscing elit</div>
+  </div> 
+</div>
+  	 
+</body>
+</html>
+	<?php 
 }); 
 	
 	
+
+Route::group(['prefix' => 'debugging' ], function() {     
+	Route::get('/data-tables', 'TestPagesController@dataTable'); 
+});
 	

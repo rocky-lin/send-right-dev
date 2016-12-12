@@ -20,8 +20,7 @@ $(function(){
 	    altFormat: "F j, Y h:i K"
 	}); 
 });
-
-
+ 
 $(document).ready(function(){  
 	console.log("document is ready from custom_jquery.js");   
 	// preview desktop campaign
@@ -68,11 +67,116 @@ $(document).ready(function(){
 		    return re.test(email);
 		}
 	}); 
-})
-//
-//$(document).ready(function(){
-//
-//	$("#list-search").change(function(){
-//		alert("change");
-//	});
-//});
+
+	// campaign settings
+	 $('#campaign_type_schedule_send, #campaign_type_direct_send').click(function() { 
+	 		var value = $("input[name='campaign_type']:checked").val();  
+	 		if(value == 'direct send') {
+	 			$('#campaign-finish').val('Send now');
+	 		} else {
+	 			$('#campaign-finish').val('Save now');
+	 		}	 
+	  });  
+
+	// campaign compose 
+	$('#campaign-select-contact-table-row').change(function(e){
+		console.log(" selected contact row name");
+		console.log( "selected value " + $(this).val() );  
+	})
+
+
+
+
+// Compose campaign copy clipboard when clicked contact
+$('#campaign-compose-select-contact-row-name input ').click(function(){ 
+	 var copyRowNameId = $(this).attr('table-row-name-id'); 
+	 var copyRowValue = $('#'+copyRowNameId).val(); 
+	 var copyRowName =  $(this).val();
+	 console.log("table row name id " + copyRowNameId); 
+	   copyToClipboard(document.getElementById(copyRowNameId));  
+	  $('#campaign-compose-select-contact-collapse').attr('class', 'collapse'); 
+	  $('#campaign-compose-select-contact-collapse').attr('aria-expanded', 'false');   
+	  alert("Contact row name "  + copyRowName + " as "  + copyRowValue  + " successfully copied to your clipboard");
+}) 
+ 	
+// clipboard copy when click   
+function copyToClipboard(elem) {
+	  // create hidden text element, if it doesn't already exist
+    var targetId = "_hiddenCopyText_";
+    var isInput = elem.tagName === "INPUT" || elem.tagName === "TEXTAREA";
+    var origSelectionStart, origSelectionEnd;
+    if (isInput) {
+        // can just use the original source element for the selection and copy
+        target = elem;
+        origSelectionStart = elem.selectionStart;
+        origSelectionEnd = elem.selectionEnd;
+    } else {
+        // must use a temporary form element for the selection and copy
+        target = document.getElementById(targetId);
+        if (!target) {
+            var target = document.createElement("textarea");
+            target.style.position = "absolute";
+            target.style.left = "-9999px";
+            target.style.top = "0";
+            target.id = targetId;
+            document.body.appendChild(target);
+        }
+        target.textContent = elem.textContent;
+    }
+    // select the content
+    var currentFocus = document.activeElement;
+    target.focus();
+    target.setSelectionRange(0, target.value.length);
+    
+    // copy the selection
+    var succeed;
+    try {
+    	  succeed = document.execCommand("copy");
+    } catch(e) {
+        succeed = false;
+    }
+    // restore original focus
+    if (currentFocus && typeof currentFocus.focus === "function") {
+        currentFocus.focus();
+    }
+    
+    if (isInput) {
+        // restore prior selection
+        elem.setSelectionRange(origSelectionStart, origSelectionEnd);
+    } else {
+        // clear temporary content
+        target.textContent = "";
+    }
+    return succeed;
+} 
+
+
+
+
+// Home loaded
+// Change code to only load home page view 
+
+	$("#home-activity-preview").load( "http://localhost/rocky/send-right-dev/user/home/preview/activities", function() {
+  		console.log( "home activities preview loaded, this should only loaded in home page" );
+	});   
+	$("#home-contact-preview").load('http://localhost/rocky/send-right-dev/user/home/preview/contacts', function(){
+		console.log( "home contacts preview loaded, this should only loaded in home page" );
+	})
+	$("#home-list-preview").load('http://localhost/rocky/send-right-dev/user/home/preview/lists', function(){
+		console.log( "home lists preview loaded, this should only loaded in home page" );
+	})
+	$("#home-form-preview").load('http://localhost/rocky/send-right-dev/user/home/preview/forms', function(){
+		console.log( "home forms preview loaded, this should only loaded in home page" );
+	})
+	$("#home-campaign-preview").load('http://localhost/rocky/send-right-dev/user/home/preview/campaigns', function(){
+		console.log( "home campaigns preview loaded, this should only loaded in home page" );
+	})
+	$("#home-statistic-preview").load('http://localhost/rocky/send-right-dev/user/home/preview/statics', function(){
+		//
+	})
+
+  // alert( "Load was performed." ); 
+
+
+}); 
+
