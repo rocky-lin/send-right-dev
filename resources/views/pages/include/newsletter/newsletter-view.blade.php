@@ -1,8 +1,8 @@
        <div ng-controller="myCampaignViewCtr">
-
+                    <h3>Your total contact  @{{ totalContact }} </h3>
                         <div class="row">   
                             <div class="col-sm-6">
-                                <label for="seach" > Search Campaigns </label> 
+                                <label for="seach" > Search Contacts </label> 
                                 <input ng-model="q" id="search" class="form-control" >
                             </div>
                             <div class="col-sm-6">
@@ -92,6 +92,6 @@
                 </div>    
 
 				<hr>     
-                <a href="{{ route('user.campaign.create.start')}}" title="">
+                <a href="{{ route('campaign.create')}}" title="">
                     <button type="button" class="btn btn-primary"> Add New Campaign</button>
          

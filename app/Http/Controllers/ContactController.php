@@ -9,6 +9,8 @@ use App\User;
 use App\ListContact;
 use Storage; 
 use Excel;
+use App\Activity;
+
 class ContactController extends Controller
 {
 
@@ -91,10 +93,8 @@ class ContactController extends Controller
     {   
         $data = [];  
         $data = $request->except('_token'); 
-        $data['account_id'] = User::getUserAccount();  
-        // dd($data);
-        Contact::create($data);  
-
+        $data['account_id'] = User::getUserAccount();   
+        Contact::create($data);   
         return redirect()->back()->with('status', 'New Contact Created!');
           // return redirect('dashboard')->with('status', 'Profile updated!');
     } 

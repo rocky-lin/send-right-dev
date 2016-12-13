@@ -64,6 +64,10 @@ class Campaign   extends Model
               return $campaign['id'];
         }
     }
+    public static function getAllCampaigns($limit=100) 
+    {
+        return self::where('account_id', User::getUserAccount())->limit($limit)->orderBy('id', 'desc')->get();
+    }
     public static function getListIdsAsString($id) 
     {  
         

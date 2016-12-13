@@ -3,12 +3,10 @@
 @section('content')
     <div class="container"> 
         <div class="row"> 
-
             {{-- status display --}}
             @if(Auth::user()->status == 'inactive') 
                 <div class="alert alert-danger"  > {{  "your account is currently in active, please visit your email and hit comfirm, thank you!" }} </div>
             @endif  
- 
             {{-- Start panel --}}
             <div class="panel panel-default"> 
                 <div class="panel-heading">Dashboard</div>   
@@ -19,16 +17,29 @@
                                 <div class="portlet">
                                     <div class="portlet-header">Activity</div>
                                     <div class="portlet-content" id="home-activity-preview">
-                                     
+                                        <br><br><br><br>
+                                        <center>
+                                            Loading activities...
+                                        </center>
                                     </div>
                                 </div> 
                                 <div class="portlet">
                                     <div class="portlet-header">Lists</div>
-                                    <div class="portlet-content" id="home-list-preview" >Lorem ipsum dolor sit amet, consectetuer adipiscing elit</div>
+                                    <div class="portlet-content" id="home-list-preview" >
+                                        <br><br><br><br>
+                                        <center>
+                                        Loading lists...
+                                        </center>
+                                    </div>
                                 </div> 
                                 <div class="portlet">
                                     <div class="portlet-header"  >Campaign</div>
-                                    <div class="portlet-content" id="home-campaign-preview" >Lorem ipsum dolor sit amet, consectetuer adipiscing elit</div>
+                                    <div class="portlet-content" id="home-campaign-preview" >
+                                        <br><br><br><br>
+                                        <center>
+                                        Loading campaigns...
+                                        </center>
+                                    </div>
                                 </div> 
                             </div>
                         </div>  
@@ -36,22 +47,36 @@
                             <div class="column" > 
                                 <div class="portlet">
                                     <div class="portlet-header">Contacts</div>
-                                    <div class="portlet-content" id="home-contact-preview" >Lorem ipsum dolor sit amet, consectetuer adipiscing elit</div>
+                                    <div class="portlet-content" id="home-contact-preview" >
+                                        <br><br><br><br>
+                                        <center>
+                                            Loading contacts...
+                                        </center>
+                                    </div>
                                 </div> 
                                 <div class="portlet">
                                     <div class="portlet-header">Forms</div>
-                                    <div class="portlet-content" id="home-form-preview" >Lorem ipsum dolor sit amet, consectetuer adipiscing elit</div>
+                                    <div class="portlet-content" id="home-form-preview" >
+                                        <br><br><br><br>
+                                        <center>
+                                            Loading forms...
+                                        </center>
+                                    </div>
                                 </div> 
                                 <div class="portlet">
                                     <div class="portlet-header">Statistics</div>
-                                    <div class="portlet-content" id="home-statistic-preview">Lorem ipsum dolor sit ameasdasd asd asd asd asda sas dast, consectetuerit olor sit ameasdasd asd asd asd asda sas dast, consectetuerit olor sit ameasdasd asd asd asd asda sas dast, consectetuerit olor sit ameasdasd asd asd asd asda sas dast, consectetuerit olor sit ameasdasd asd asd asd asda sas dast, consectetuerit olor sit ameasdasd asd asd asd asda sas dast, consectetuerit olor sit ameasdasd asd asd asd asda sas dast, consectetuerit olor sit ameasdasd asd asd asd asda sas dast, consectetuerit olor sit ameasdasd asd asd asd asda sas dast, consectetuerit olor sit ameasdasd asd asd asd asda sas dast, consectetuerit olor sit ameasdasd asd asd asd asda sas dast, consectetuerit olor sit ameasdasd asd asd asd asda sas dast, consectetuerit olor sit ameasdasd asd asd asd asda sas dast, consectetuerit olor sit ameasdasd asd asd asd asda sas dast, consectetuerit olor sit ameasdasd asd asd asd asda sas dast, consectetuerit olor sit ameasdasd asd asd asd asda sas dast, consectetuerit olor sit ameasdasd asd asd asd asda sas dast, consectetuerit olor sit ameasdasd asd asd asd asda sas dast, consectetuerit olor sit ameasdasd asd asd asd asda sas dast, consectetuerit olor sit ameasdasd asd asd asd asda sas dast, consectetuerit olor sit ameasdasd asd asd asd asda sas dast, consectetuerit olor sit ameasdasd asd asd asd asda sas dast, consectetuerit olor sit ameasdasd asd asd asd asda sas dast, consectetuerit ameasdasd asd asd asd asda sas dast, consectetuerit ameasdasd asd asd asd asda sas dast, consectetuer adipiscing elit</div>
+                                    <div class="portlet-content" id="home-statistic-preview">
+                                        <br><br><br><br>
+                                        <center>
+                                            Loading statistics...
+                                        </center>
+                                    </div>
                                 </div> 
                             </div>
                         </div>  
                     </div>  
                 </div>
             </div>  
-
         </div>
     </div> 
 @endsection

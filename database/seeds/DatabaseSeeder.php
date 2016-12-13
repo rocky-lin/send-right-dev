@@ -11,6 +11,8 @@ use App\Form;
 use App\FormList;
 use App\Campaign;
 use App\CampaignSchedule;
+use App\Newsletter;
+
 class DatabaseSeeder extends Seeder
 {
     /**
@@ -32,6 +34,7 @@ class DatabaseSeeder extends Seeder
         FormList::truncate(); 
         Campaign::truncate();
         CampaignSchedule::truncate(); 
+        Newsletter::truncate(); 
         // DB::table('users')->truncate();
         // DB::table('users')->truncate();
         // DB::table('users')->truncate(); 
@@ -43,6 +46,8 @@ class DatabaseSeeder extends Seeder
         factory(FormList::class, 40)->create();
         factory(Campaign::class, 40)->create();
         factory(CampaignSchedule::class, 40)->create();
+        factory(Newsletter::class, 40)->create();
+        
         // Model::reguarded();  
     }
 }  

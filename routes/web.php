@@ -1,8 +1,25 @@
 <?php   
 // Auth::loginUsingId(1);  
 // welcome page for loggedout
-Route::get('/', function () {
+// use Auth;
 
+Route::get('/', function () { 
+	// print " url = " . url('/');  
+	$url = url('/');  
+	$urlArray = explode("/", $url); 
+	if(in_array('extension', $urlArray)) { 
+		// print "in extension"; 
+	} else {   
+		if(Auth::guest()) {
+			// print "gues";
+			return view('welcome'); 
+		} else {
+			print "home";
+			return redirect(url('/home'));
+		} 
+		// return redirect('login');
+		// print "not in extension";
+	} 
 	// PRINT "TEST"; 
 	// $current = Carbon::now();
 	// $current = new Carbon(); 
@@ -58,6 +75,10 @@ Route::group(['prefix' => 'user' ], function() {
 		Route::resource('form', 'FormController');   
 
 	// campaign  
+	 
+		// create start gate 
+			Route::get('campaign/create/start','CampaignController@createStart')->name('user.campaign.create.start');
+			
 		// create step 1
 			Route::get('campaign/get/all', 'CampaignController@getAllCampaign')->name('user.campaign.get.all');
 		    Route::post('campaign/create/validate', 'CampaignController@createValidate')->name('user.campaign.create.validate');
@@ -88,16 +109,68 @@ Route::group(['prefix' => 'user' ], function() {
  		// create step 1
 		Route::resource('campaign', 'CampaignController');  	  
   
-	// Home
+	// Home 
 		Route::get('home/preview/activities', 'HomeController@previewActivities')->name('home.preview.activities');  
 		Route::get('home/preview/contacts', 'HomeController@previewContacts')->name('home.preview.contacts');  
 		Route::get('home/preview/lists', 'HomeController@previewLists')->name('home.preview.lists');  
 		Route::get('home/preview/forms', 'HomeController@previewForms')->name('home.preview.forms');  
 		Route::get('home/preview/campaigns', 'HomeController@previewCampaigns')->name('home.preview.campaigns');  
 		Route::get('home/preview/statics', 'HomeController@previewStatistics')->name('home.preview.statistics');   
+
+	//newsletter 
+		Route::resource('newsletter', 'NewsLetterController', ['only' => [
+		    'index', 'destroy'
+		]]); 
+
+		// set subject sender
+		Route::get('newsletter/sender', 'NewsLetterController@getSender')->name('user.newsletter.get.sender'); 
+		Route::post('newsletter/sender', 'NewsLetterController@postSender')->name('user.newsletter.post.sender'); 
+
+		// compose newsletter
+		Route::get('newsletter/compose', 'NewsLetterController@getCompose')->name('user.newsletter.get.compose'); 
+		Route::post('newsletter/compose', 'NewsLetterController@postCompose')->name('user.newsletter.post.compose'); 
+
+		// set sender
+		Route::get('newsletter/send', 'NewsLetterController@getSend')->name('user.newsletter.get.send'); 
+		Route::post('newsletter/send', 'NewsLetterController@postSend')->name('user.newsletter.post.send'); 
+  
 });   
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+// TESTING CODES AND ROUTES
 
 
 
@@ -119,9 +192,7 @@ Route::get('csv', function(){
 		 dd($results);
 	});
 }); 
-
-
-
+ 
 // Testing development 
 use Carbon\Carbon;
 use App\Helper; 

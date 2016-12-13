@@ -27,6 +27,13 @@ class CampaignController extends Controller
     	return view('pages.campaign.campaign');
     } 
 
+    public function createStart()
+    {
+        // print "test";
+        // exit;
+        return view('pages.campaign.campaign-create-start'); 
+    }
+
     // STEP 1
     public function create()
     {
@@ -329,4 +336,8 @@ class CampaignController extends Controller
         // send to sender
         // return successfully sent
     }
+
+
+
+
 }

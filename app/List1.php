@@ -68,6 +68,11 @@ class  List1 extends Model
     }
 
 
+    public static function getAllLists($limit=100) 
+    {
+        return self::where('account_id', User::getUserAccount())->limit($limit)->orderBy('id', 'desc')->get();
+    }
+
     /**
      * This will get the lists  of the specific user
      */

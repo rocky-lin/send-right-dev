@@ -21,4 +21,14 @@ class Activity extends Model
     {
     	//
     }
+
+    public static function createActivity($activity)
+    {
+          Activity::create([ 
+            'account_id'=>User::getUserAccount(), 
+            'table_name'=>$activity['table_name'],
+            'table_id'=>$activity['table_id'], 
+            'action'=>$activity['action']]      
+        ); 
+    } 
 }

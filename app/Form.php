@@ -58,6 +58,10 @@ class Form extends Model
       return 20;
    }
 
+   public static function getAllForms($limit=100) 
+    {
+        return self::where('account_id', User::getUserAccount())->limit($limit)->orderBy('id', 'desc')->get();
+    }
    /**
     * if the contact can add many list then this should be looping to 
     * get the total contact of each list 

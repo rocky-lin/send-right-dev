@@ -549,15 +549,34 @@ maybe fix the campaign design, something there is need of change but this has to
 connect to mailgun or aws but i think i prefer for now mailgun as laravel frameworks suggested - onhold
 upload image in campaign need to add loading icon so that, uploading will be user friendly - onhold
   
+Hi Rocky,
+
+I moved some cards, in trello and here is the updates for today.
+
+Update for December 13, 2016
+set redirect url to sendiright.net/home
+add view return for sendiright.net/home
+Continue display basic preview in home for campaign,list,contact,forms
+Add activity for contact, list, campaign, forms
+If no content yet, display
+Put activity for adding contact
+Put activity for adding lists
+put adding campaign
+put adding form
+add newsletter - removed
+
+Todo for December 14, 2016
+Add selection of the campaign create campaign and
+Continue coding campaign auto response
+
+
+Thanks,
+
+Best regards,
+Jesus Erwin Suarez
  
-December 13, 2016
-Continue display basic preview in home for activity, campaign, list, contact, forms
-add activity for contact, list, campaign, forms
-start auto response coding
-
-
-
-
+    
+ 
 
 ---------------------------------------------------------------------------------------------
 sortable resources docs 

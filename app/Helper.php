@@ -39,5 +39,13 @@ class Helper extends Model
     {
     	return Carbon::createFromTimeStamp(strtotime($dateTime))->diffForHumans(); 
     }
+    public static function responseAddCreatedAtAgo($response) 
+    {
+        foreach($response as $index => $respond) {
+            $response[$index]['create_at_ago'] = Helper::toAgo($respond['created_at']); 
+        } 
+
+        return $response;
+    }
  
 }

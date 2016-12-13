@@ -7,6 +7,10 @@ use App\User;
 use Auth;
 use App\Activity; 
 use App\Helper; 
+use App\Contact; 
+use App\Campaign; 
+use App\List1; 
+use App\Form;
 
 class HomeController extends Controller
 {
@@ -41,12 +45,13 @@ class HomeController extends Controller
         $_SESSION['url']['hoem'] =  url('/'); 
 
         // return home view
-         return view('home');
+        
+        return view('home');
     }
 
     public function previewActivities() 
     { 
-        $activities = Activity::getAllAcitivities()->toArray(); 
+        $activities = Activity::getAllAcitivities(10)->toArray(); 
         foreach($activities as $index => $activity) {
             $activities[$index]['create_at_ago'] = Helper::toAgo($activity['created_at']); 
         } 
@@ -54,28 +59,31 @@ class HomeController extends Controller
     }  
     public function previewContacts()
     {
-        // 
-        $activities = '';
-        return view('pages.home.home-contact-view', compact('activities'));
+        $contacts = Contact::getAllContacts(10)->toArray();   
+        $contacts = Helper::responseAddCreatedAtAgo($contacts); 
+        return view('pages.home.home-contact-view', compact('contacts'));
     }
     public function previewLists()
     { 
-        $activities = '';
-        return view('pages.home.home-list-view', compact('activities'));
+        $lists = List1::getAllLists(10)->toArray();   
+        $lists = Helper::responseAddCreatedAtAgo($lists);    
+        return view('pages.home.home-list-view', compact('lists'));
     }
     public function previewForms()
-    {
-        $activities = '';
-        return view('pages.home.home-form-view', compact('activities'));
+    {   
+        $forms = Form::getAllForms(10)->toArray();
+        $forms = Helper::responseAddCreatedAtAgo($forms);
+        return view('pages.home.home-form-view', compact('forms')); 
     }
     public function previewCampaigns()
     {
-        $activities = '';
-        return view('pages.home.home-campaign-view', compact('activities'));
+        $campaigns = Campaign::getAllCampaigns(10)->toArray();   
+        $campaigns = Helper::responseAddCreatedAtAgo($campaigns);     
+        return view('pages.home.home-campaign-view', compact('campaigns'));
     }
     public function previewStatistics()
     {
-        $activities = '';
-        return view('pages.home.home-statistic-view', compact('activities'));
+        $statistics = '';
+        return view('pages.home.home-statistic-view', compact('statistics'));
     }
 }     

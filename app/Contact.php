@@ -29,4 +29,10 @@ class Contact extends Model
             ];   
             return $contactFilterValues;
     }
+
+
+    public static function getAllContacts($limit=100) 
+    {
+        return self::where('account_id', User::getUserAccount())->limit($limit)->orderBy('id', 'desc')->get();
+    }
 }

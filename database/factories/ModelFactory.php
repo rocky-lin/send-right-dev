@@ -144,7 +144,17 @@ $factory->define(App\CampaignSchedule::class, function (Faker\Generator $faker) 
         'type_send' => 'email',
         'batch_send' =>rand(0,10)
     ];
+}); 
+
+//
+$factory->define(App\Newsletter::class, function (Faker\Generator $faker) {   
+    return [ 
+        'account_id' =>1,
+        'content'=>$faker->paragraph,
+        'status'=>'active' 
+    ];
 });
+
 
 
 
