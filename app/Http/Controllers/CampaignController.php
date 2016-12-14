@@ -17,7 +17,8 @@ use App\User;
 use Carbon\Carbon; 
 use App\Helper; 
 use Redirect;
-use App\Http\Controllers\CampaignScheduleController; 
+use App\Http\Controllers\CampaignScheduleController;  
+use Session;
 
 class CampaignController extends Controller
 {
@@ -36,8 +37,20 @@ class CampaignController extends Controller
 
     // STEP 1
     public function create()
-    {
+    { 
         session_start();
+
+        if(Input::get('ck') == 'newsletter') {   
+            $_SESSION['campaign']['kind'] = 'newsletter';
+        } else if(Input::get('ck') == 'auto responder')  {  
+            // session('campaign_kind', '');
+           $_SESSION['campaign']['kind'] = 'auto responder';
+        } else {
+            return redirect()->route('user.campaign.create.start')->with('status', 'please select campaign type'); 
+        }
+
+
+        
 
         $campaign = [];
         $defaultListIds = '0';
@@ -166,30 +179,29 @@ class CampaignController extends Controller
     // STEP 4
     public function createSettings() 
     { 
+
         session_start(); 
         // print_r($_SESSION['campaign']['listIds']); 
         // exit 
-        return view('pages.campaign.campaign-settings', ['status'=>'', 'listNames'=>List1::getCurrentCampaignListNames()]);
+        // 
+        // print "campaign id  " . $_SESSION['campaign']['id'];
+        $campaignSchedule = CampaignSchedule::where('campaign_id', $_SESSION['campaign']['id'])->first();  
+        $campaign = Campaign::find($_SESSION['campaign']['id'])->first();
+        return view('pages.campaign.campaign-settings', ['status'=>'', 'listNames'=>List1::getCurrentCampaignListNames(), 'campaignSchedule'=>$campaignSchedule, 'campaign'=>$campaign]);
     }   
 
     public function createSettingsValidate(Request $request) 
     {   
         session_start();
-
-
         // dd($request->all());
-
-
-        
-
         // print"<pre>";
         // print_r($_SESSION['campaign']);
         // exit;
-        //        if($request->get('campaign_send_as') == 'sendNow') {
-        //            print "send send";
-        //        };
+        // if($request->get('campaign_send_as') == 'sendNow') {
+        //    print "send send";
+        // };
         // UPDATE CAMPAIGN
-
+        
         Campaign::createOrUpdateByCampaignId([
             'account_id'=>User::getUserAccount(),
             'sender_name'=>$request->get('sender_name'),
@@ -198,15 +210,21 @@ class CampaignController extends Controller
             'title'=>$request->get('title'), 
             'id'=>$request->get('campaign_id'), 
             'status'=>$request->get('campaign_status'),
-            'type'=>$request->get('campaign_type')
+            'type'=>$request->get('campaign_type'), 
+            'kind' => $request->get('campaign_kind')  
         ]);
 
         // UPDATE OR CREATE CAMPAIGN SCHEDULE
+              
             CampaignSchedule::createOrUpdateByCampaignId([
                 'campaign_id'=>$request->get('campaign_id'), 
                 'repeat' => $request->get('campaign_schedule_repeat'), 
                 'schedule_send' => $request->get('campaign_schedule_send'), 
+                'days' =>  (!empty($request->get('campaign_schedule_days')))? $request->get('campaign_schedule_days') : 0,
+                'hours' => (!empty($request->get('campaign_schedule_hours')))? $request->get('campaign_schedule_hours') : 0,
+                'mins' =>  (!empty($request->get('campaign_schedule_mins')))? $request->get('campaign_schedule_mins') : 0,
             ]);   
+  
 
         // UPDATE OR CREATE NEW EMAIL ANALYTIC
             EmailAnalytic::createOrUpdateByCampaignId([
@@ -234,6 +252,11 @@ class CampaignController extends Controller
         Campaign::setDefaultValueToSession($request->get('campaign_id'));  
 
         // message status 
+            
+
+
+
+
         if($request->get(   'campaign_type') == 'direct send') {
             if($request->get('campaign_status') == 'active') {
  
@@ -248,7 +271,10 @@ class CampaignController extends Controller
             $status = "<div class='alert alert-success'> Campaign email schedule saved..</div>";
         }
 
-        return view('pages.campaign.campaign-settings', compact('status', 'listNames')); 
+
+        $campaignSchedule = CampaignSchedule::where('campaign_id', $_SESSION['campaign']['id'])->first();   
+        $campaign = Campaign::find($_SESSION['campaign']['id'])->first();
+        return view('pages.campaign.campaign-settings', compact('status', 'listNames', 'campaignSchedule', 'campaign')); 
     } 
 
     // preview  

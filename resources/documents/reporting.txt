@@ -566,8 +566,26 @@ put adding form
 add newsletter - removed
 
 Todo for December 14, 2016
-Add selection of the campaign create campaign and
-Continue coding campaign auto response
+
+Fix ui for campaign and auto response - d
+Redirect to select campaign start if directly visited to connect campaign lists with error that says "need to select campaign type" - d
+create table  table - d
+create migration  - d
+test adding campaing as newsletter - d
+insert new auto responder - d
+fix bug campaign not sending email when dont have a filter in the campaign compose like {{first_name}}
+create new ui settings for auto responder - p 
+send to new contact 
+immediately or schedule same type with newsletter - repeat -> Auto Responder
+  
+Todo for December 15, 2016 
+continue optin
+Edit auto response and newsletter update
+Auto response schedule
+
+
+
+
 
 
 Thanks,

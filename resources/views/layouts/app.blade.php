@@ -47,7 +47,7 @@
                         <a class="navbar-brand dropdown navbar-menu" href="{{ url('/user/list') }}">List</a>      
                         <a class="navbar-brand dropdown navbar-menu" href="{{ url('/user/form') }}">Form</a>      
                         <a class="navbar-brand dropdown navbar-menu" href="{{ route('campaign.index') }}">Campaign</a>  
-                        <a class="navbar-brand dropdown navbar-menu" href="{{ route('newsletter.index') }}">Newsletter</a>      
+                        {{-- <a class="navbar-brand dropdown navbar-menu" href="{{ route('newsletter.index') }}">Newsletter</a>       --}}
                     @endif 
 
                 </div>

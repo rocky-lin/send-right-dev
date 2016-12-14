@@ -25,7 +25,8 @@ class Campaign   extends Model
         'content',
         'type',
         'status',
-        'type'
+        'type',
+        'kind'
     ];
 
     protected $hidden = [];
@@ -110,6 +111,12 @@ class Campaign   extends Model
         $campaignSchedule = self::find($id)->campaignSchedule;
         $emailAnalytic = self::emailAnalytic($id);
  
+
+
+        // start campaign 
+        $_SESSION['campaign']['kind'] = $campaign->kind;
+
+
         // set default campaign status
         $_SESSION['campaign']['status']['active'] = ($campaign->status == 'active') ? true : false; 
         $_SESSION['campaign']['status']['inactive'] = ($campaign->status == 'inactive') ? true : false; 
@@ -234,7 +241,7 @@ class Campaign   extends Model
     }
 
     public static function supplyContactFilteres($contactFilters, $campaign)
-    {
+    {         
          foreach ($contactFilters as $contactFilter => $contactValue) { 
             $campaign = str_replace($contactFilter, $contactValue, $campaign); 
         }

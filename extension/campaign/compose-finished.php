@@ -54,6 +54,17 @@
 
 		// exit; 	
 		// prepare campaign details
+		// 
+		 
+		if($_SESSION['campaign']['kind'] == 'auto responder') {
+			$repeat = 'Response All Time'; 
+		} else {
+			$repeat = 'One Time'; 
+		}
+
+
+
+
 		$campaign = [ 
 			'id'=>$_POST['id'],
 			'title'=>$_SESSION['campaign']['name'],
@@ -62,7 +73,8 @@
 			'sender_email' => $_SESSION['campaign']['sender']['email'],
 			'sender_subject' => $_SESSION['campaign']['sender']['subject'],
 			'content' =>htmlentities($_SESSION['campaign']['content']),
-			'type' => 'schedule send',
+			'type' => ($_SESSION['campaign']['kind'] == 'auto responder') ? 'immediate response' : 'schedule send',   
+			'kind' =>  $_SESSION['campaign']['kind'],
 			'status' => 'inactive'
 		];  
 
@@ -70,7 +82,7 @@
 		$_SESSION['campaign']['id'] = Campaign::createOrUpdateByCampaignId($campaign);
  
 		// insert campaign schedule 
-		CampaignSchedule::create(['campaign_id'=>$_SESSION['campaign']['id'], 'schedule_send'=>Carbon::now(), 'repeat'=>'One Time']);
+		CampaignSchedule::create(['campaign_id'=>$_SESSION['campaign']['id'], 'schedule_send'=>Carbon::now(), 'repeat'=>$repeat]);
  
 		// insert email analytic
 		EmailAnalytic::create(['table_name'=>'campaigns', 'table_id'=>$_SESSION['campaign']['id']]);

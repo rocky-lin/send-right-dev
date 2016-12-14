@@ -24,6 +24,7 @@ class CreateCampaignsTable extends Migration
             $table->smallInteger('batch_send')->default(0); 
             $table->string('type_send', 50)->default('email'); 
             $table->string('type', 50)->default('direct send');
+            $table->string('kind')->default('newsletter');
             $table->string('status', 50)->default('inactive'); 
             $table->timestamps(); 
         });

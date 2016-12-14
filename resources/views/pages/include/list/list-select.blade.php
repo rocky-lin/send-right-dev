@@ -1,6 +1,5 @@
 <div data-ng-controller="myListSelectCtr"   ng-init="loadDefaultLists('{{$defaultListIds}}')">
-    <input type="hidden" name="list_ids" value="@{{selectedContactArray}}"   />
-asdas
+    <input type="hidden" name="list_ids" value="@{{selectedContactArray}}"   /> 
     <hr>
     <div class="row">
         <div class="col-sm-6">

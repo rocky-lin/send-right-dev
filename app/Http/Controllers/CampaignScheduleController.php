@@ -82,20 +82,20 @@ class CampaignScheduleController extends Controller
          
         // $campaign = (array) $campaign; 
 
-        
+            // dd(    $campaignScheduleReachDeadline );
 
             // dd($campaignScheduleReachDeadline); 
             // get contact of the specific campaign
            foreach ($campaignScheduleReachDeadline as $campaign) {      
                $campaign = (array) $campaign;   
-
-
+              
                 if(!empty($email)) {
                     $toMail = $email;
                 } else {
                     $toMail = $campaign['sender_email'];
                 }
-
+ // print "email " .$toMail;
+               // exit;
                  if(Mail::to($toMail)->queue(new CampaignSendMail($contact, $campaign))) { 
 
                     Activity::create(['account_id'=>$campaign['account_id'], 'table_name'=>'campaigns','table_id'=>$campaign['campaign_id'], 'action'=>'Email test successfully sent to ' . $campaign['sender_email'] . ' campaign status is ' . $campaign['repeat'] ]);  

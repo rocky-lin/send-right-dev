@@ -107,7 +107,8 @@ Route::group(['prefix' => 'user' ], function() {
 				Route::get('campaign/create/settings/email/send/test/{id?}/{email?}', 'CampaignController@sendTestCampaignEmail')->name('user.campaign.create.settings.email.send.test');
 
  		// create step 1
-		Route::resource('campaign', 'CampaignController');  	  
+		Route::resource('campaign', 'CampaignController');  	
+		// Route::post('campaign', 'CampaignController@create')->name('user.campaign.create.post');
   
 	// Home 
 		Route::get('home/preview/activities', 'HomeController@previewActivities')->name('home.preview.activities');  

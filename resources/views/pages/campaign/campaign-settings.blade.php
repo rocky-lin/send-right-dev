@@ -51,6 +51,8 @@ th {
 <input id="" type='hidden'  name='template' value="{{$_SESSION['campaign']['template']}}" />
 <input  type='hidden'  name='campaign_id' value="{{$_SESSION['campaign']['id']}}" id="campaign_id" />
 <input id="" type='hidden'  name='list_ids' value="{{$_SESSION['campaign']['listIds']}}" />
+<input id="" type='hidden'  name='campaign_kind' value="{{$_SESSION['campaign']['kind']}}" />
+
 
   
 
@@ -102,10 +104,8 @@ th {
       Sender Details
       <a href="{{route('user.campaign.create.sender.view')}}?action=edit&id={{$_SESSION['campaign']['id']}}">
     <span class="glyphicon glyphicon-pencil" data-toggle="modal" data-target="#editIcon2" style="float: right;position: relative;"></span>
-  </a>
- 
-    </div>
-
+  </a> 
+    </div> 
     <div class="panel-body">  
       <table style="width:50%">
         <tr>
@@ -123,34 +123,85 @@ th {
       </table> 
     </div>
   </div> 
-  <div class="panel panel-default">
-    <div class="panel-heading">
-      <h3 class="panel-title">Delivery Type</h3>
-    </div>
-    <div class="panel-body"> 
-  		<ul class="list-group">
-  		    <li class="list-group-item">   
-            <input type="radio" class="pull-right pull-right1" rel = "pullRight1" name="campaign_type" value="direct send" id="campaign_type_direct_send"  <?php print ($_SESSION['campaign']['delivery']['directSend']['input'] == true) ? 'checked' : null ?> />
-            <b>Direct Send:</b> 
-          </li>
-          <li class="list-group-item">   
-            <input type="radio" class="pull-right pull-right2" rel = "pullRight2" name="campaign_type" value="schedule send" id="campaign_type_schedule_send" <?php print ($_SESSION['campaign']['delivery']['scheduleSend']['input'] == true) ? 'checked' : null ?> />
-            <br>
-            <b>Schedule:</b> <br>   <br>  
-          <div> 
-            <section  id="exampleb-altInput" style = " width: 24%;"  >
-              <input   name="campaign_schedule_send" type="hidden" class="flatpickr flatpickr-input"  placeholder="Select Date.." data-alt-input="true" data-enable-time="true" data-alt-format="F j, Y h:i K" value="<?php print $_SESSION['campaign']['delivery']['scheduleSend']['dateTime']; ?>" >  
-           </section>  
-           <br>
-          <b>Repeat:</b> <br>  <br>  
-            {{Form::select('campaign_schedule_repeat', ['One Time'=>'One Time', 'Daily'=>'Daily', 'Weekly'=>'Weekly', 'Monthly'=>'Monthly'], $_SESSION['campaign']['delivery']['scheduleSend']['repeat'],['class'=>'select-option'] )}}
-          </div>
-  			</li> 
-  		</ul> 		  	 
-    </div>
-  </div>  
-  <!-- Analytic -->
 
+
+
+@if($_SESSION['campaign']['kind'] == 'auto responder') 
+
+  <?php   // dd($campaignSchedule);   ?>
+      <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title">Auto Response Type</h3>
+      </div>
+      <div class="panel-body"> 
+        <ul class="list-group">
+            <li class="list-group-item">   
+              <input type="radio" class="pull-right pull-right1" rel = "pullRight1" name="campaign_type" value="immediate response" id="campaign_type_direct_send"   
+              {{($campaign->type == 'immediate response') ? 'checked' : null }} />
+              <b>Immediate Response:</b> 
+            </li>
+            <li class="list-group-item">   
+              <input type="radio" class="pull-right pull-right2" rel = "pullRight2" name="campaign_type" value="schedule response" id="campaign_type_schedule_send"     
+              {{($campaign->type == 'schedule response') ? 'checked' : null }} /> 
+              <b>Schedule Response:</b> <br>   <br>    
+            <div class='form-group'> 
+              <label class="label label-primary" > Days </label>
+              <input class='form-control' type="number" value="{{isset($campaignSchedule->days) ? $campaignSchedule->days : '0' }}" name="campaign_schedule_days" min="0" />
+            </div>
+             <div class='form-group'> 
+              <label class="label label-primary" > Hours </label>
+              <input class='form-control'  type="number" value="{{isset($campaignSchedule->hours) ? $campaignSchedule->hours : '0' }}" name="campaign_schedule_hours" min="0" />
+            </div>
+             <div class='form-group'> 
+              <label class="label label-primary" > Mins </label>
+              <input class='form-control'  type="number" value="{{isset($campaignSchedule->mins) ? $campaignSchedule->mins : '0' }}" name="campaign_schedule_mins" min="0" /> 
+            </div> 
+            <div style='display:none'>
+              <br>
+              <input  type="hidden" value="Response All Time"  name="campaign_schedule_repeat" /> 
+              <br>
+              <input type="hidden" name="campaign_schedule_send"  class="flatpickr flatpickr-input"  placeholder="Select Date.." data-alt-input="true" data-enable-time="true" data-alt-format="F j, Y h:i K" value="{{Carbon\Carbon::now()}}" />  
+                
+            </div>
+          </li> 
+        </ul>          
+      </div>
+    </div>  
+@else 
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title">Delivery Type</h3>
+      </div>
+      <div class="panel-body"> 
+    		<ul class="list-group">
+    		    <li class="list-group-item">   
+              <input type="radio" class="pull-right pull-right1" rel = "pullRight1" name="campaign_type" value="direct send" id="campaign_type_direct_send"  <?php print ($_SESSION['campaign']['delivery']['directSend']['input'] == true) ? 'checked' : null ?> />
+              <b>Direct Send:</b> 
+            </li>
+            <li class="list-group-item">   
+              <input type="radio" class="pull-right pull-right2" rel = "pullRight2" name="campaign_type" value="schedule send" id="campaign_type_schedule_send" <?php print ($_SESSION['campaign']['delivery']['scheduleSend']['input'] == true) ? 'checked' : null ?> />
+              <br>
+              <b>Schedule:</b> <br>   <br>  
+            <div> 
+              <section  id="exampleb-altInput" style = " width: 24%;"  >
+                <input   name="campaign_schedule_send" type="hidden" class="flatpickr flatpickr-input"  placeholder="Select Date.." data-alt-input="true" data-enable-time="true" data-alt-format="F j, Y h:i K" value="<?php print $_SESSION['campaign']['delivery']['scheduleSend']['dateTime']; ?>" >  
+             </section>  
+             <br>
+            <b>Repeat:</b> <br>  <br>  
+              {{Form::select('campaign_schedule_repeat', ['One Time'=>'One Time', 'Daily'=>'Daily', 'Weekly'=>'Weekly', 'Monthly'=>'Monthly'], $_SESSION['campaign']['delivery']['scheduleSend']['repeat'],['class'=>'select-option'] )}}
+            </div>
+    			</li> 
+    		</ul> 		  	 
+      </div>
+    </div>  
+  @endif
+
+
+
+
+
+
+  <!-- Analytic --> 
 <div class="panel panel-default">
     <div class="panel-heading">
       <h3 class="panel-title">Email Tracking</h3>
@@ -162,9 +213,7 @@ th {
           <li class="list-group-item">Email Click Link<input type="checkbox" name="campaign_email_analytic_click_link" class="pull-right" <?php print ($_SESSION['campaign']['email']['clickLink'] == true) ? 'checked' : null ?> /></li>   
         </ul>
     </div>  
-</div>   
-
-
+</div>    
 <div class="panel panel-default">
     <div class="panel-heading"> 
       <h3 class="panel-title">Send Test Email</h3>
