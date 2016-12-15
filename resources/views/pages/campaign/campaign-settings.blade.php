@@ -126,7 +126,13 @@ th {
 
 
 
-@if($_SESSION['campaign']['kind'] == 'auto responder') 
+
+
+@if($_SESSION['campaign']['kind'] == 'auto responder' || $campaign->kind == 'auto responder')
+
+
+
+
 
   <?php   // dd($campaignSchedule);   ?>
       <div class="panel panel-default">

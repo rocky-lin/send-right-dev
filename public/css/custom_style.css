@@ -1,98 +1,120 @@
- 
+
 .glyphicon {
-  cursor:pointer;
+    cursor:pointer;
 }
 .navbar-menu {
-  font-size: 15px;
+    font-size: 15px;
 }
 
 
 /* Sticky footer styles
 -------------------------------------------------- */
 html {
-  position: relative;
-  min-height: 100%;
+    position: relative;
+    min-height: 100%;
 }
 body {
-  /* Margin bottom by footer height */
-  margin-bottom: 60px;
+    /* Margin bottom by footer height */
+    margin-bottom: 60px;
 }
 .footer {
-  position: absolute;
-  bottom: 0;
-  width: 100%;
-  /* Set the fixed height of the footer here */
-  height: 60px;
-  background-color: #f5f5f5;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    /* Set the fixed height of the footer here */
+    height: 60px;
+    background-color: #f5f5f5;
 }
 
- 
 
- /**
-  * Hide this elements
-  */
- 
- .un-used-elements {
+
+/**
+ * Hide this elements
+ */
+
+.un-used-elements {
     display:none;
- }
- 
- .campaign-inactive {  
+}
+
+.campaign-inactive {
     color:red;
-    font-weight: bold; 
- } 
+    font-weight: bold;
+}
 
- .campaign-active { 
+.campaign-active {
     color:green;
-    font-weight: bold; 
- }
+    font-weight: bold;
+}
 
 
- /*campaign */
+/*campaign */
 
- .bal-settings {
-  display:none;
- }
+.bal-settings {
+    display:none;
+}
 
- /* jquery ui, sortable*/ 
+/* jquery ui, sortable*/
 
 
 /* Home sortable divs   */
 .home-sortable-div .column {
-  width:100%;
+    width:100%;
 }
 .home-sortable-div .column .portlet {
-  border:1px solid red;
-  background-color:#fafafa;   
-  height:200px;
-/*  width:250px;*/
-  border-radius:5px;
+    border:1px solid red;
+    background-color:#fafafa;
+    height:200px;
+    /*  width:250px;*/
+    border-radius:5px;
 }
 
 .portlet-content {
-  border:1px solid grey;
-  min-height:150px;
-  overflow-y:scroll;
-  border-radius:5px;
-  /* padding:20px; */
-  height: 300px;
-  font-size:11px; 
+    border:1px solid grey;
+    min-height:150px;
+    overflow-y:scroll;
+    border-radius:5px;
+    /* padding:20px; */
+    height: 300px;
+    font-size:11px;
 }
 .portlet-placeholder {
-  border: 1px dotted #e71212;
-  margin: 0 1em 1em 0;
-  height: 50px; 
-} 
+    border: 1px dotted #e71212;
+    margin: 0 1em 1em 0;
+    height: 50px;
+}
 
 
 .portlet  {
-  border:1px solid #dedede; 
-  padding:5px;
-  margin-bottom: 20px;
+    border:1px solid #dedede;
+    padding:5px;
+    margin-bottom: 20px;
 }
 
 .portlet-header {
-/*   border:1px solid red; */
-  padding-bottom:5px;
-  cursor:move; 
+    /*   border:1px solid red; */
+    padding-bottom:5px;
+    cursor:move;
 
+}
+
+
+/*Loader*/
+.loader {
+    border: 2px solid #f3f3f3;
+    border-radius: 50%;
+    border-top: 2px solid #000000;
+    width: 20px;
+    height: 20px;
+    -webkit-animation: spin 2s linear infinite;
+    animation: spin 2s linear infinite;
+}
+
+@-webkit-keyframes spin {
+    0% { -webkit-transform: rotate(0deg); }
+    100% { -webkit-transform: rotate(360deg); }
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
 }

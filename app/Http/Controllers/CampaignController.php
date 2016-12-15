@@ -326,6 +326,27 @@ class CampaignController extends Controller
         return $campaigns; 
     }
 
+    public function getAllCampaignSortByKind($kind)
+    {
+
+        $campaigns = Campaign::getCampaignsByAccountSortByKind($kind)->toArray();
+
+
+        $collection = collect( $campaigns );
+        $sorted = $collection->sortBy('id', SORT_REGULAR, true);
+        $campaigns = $sorted->values()->all();
+
+        foreach($campaigns as $index => $campaign)  {
+            $created_ago = Carbon::createFromTimeStamp(strtotime($campaign['created_at']))->diffForHumans();
+            // print "ago " .   $ago;
+            $campaigns[$index]['created_ago'] = $created_ago;
+             $campaigns[$index]['next_send'] = Helper::createDateTime(CampaignSchedule::where('campaign_id', $campaigns[$index]['id'])->first()->schedule_send)->format('l jS \\of F Y h:i:s A');
+             $campaigns[$index]['total_contacts'] =  count(Campaign::getAllEmailWillRecieveTheCampaign($campaigns[$index]['id'])['contacts']);
+        }
+        //dd($campaigns);
+        return $campaigns;
+    }
+
     public function edit($id)
     {
         return "THis is to edit the campaign, redirect url..";

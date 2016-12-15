@@ -84,6 +84,10 @@ Route::group(['prefix' => 'user' ], function() {
 		    Route::post('campaign/create/validate', 'CampaignController@createValidate')->name('user.campaign.create.validate');
 	    	Route::post('campaign/create/update/{id?}', 'CampaignController@createUpdate')->name('user.campaign.create.update');
 
+			Route::get('campaign/get/all/by/kind/{kind?}', 'CampaignController@getAllCampaignSortByKind')->name('user.campaign.get.all.sort.by.kind');
+
+
+
 
 			// create step 2
 			Route::get('campaign/create/sender', 'CampaignController@createSender')->name('user.campaign.create.sender.view');
@@ -133,8 +137,15 @@ Route::group(['prefix' => 'user' ], function() {
 
 		// set sender
 		Route::get('newsletter/send', 'NewsLetterController@getSend')->name('user.newsletter.get.send'); 
-		Route::post('newsletter/send', 'NewsLetterController@postSend')->name('user.newsletter.post.send'); 
-  
+		Route::post('newsletter/send', 'NewsLetterController@postSend')->name('user.newsletter.post.send');
+
+	// responder
+
+		Route::get('auto-response/start/process', 'AutoResponseDetailsController@startResponse');
+
+
+
+
 });   
 
 

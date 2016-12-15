@@ -95,19 +95,60 @@ app.controller( 'myCampaignViewCtr', ['$scope', '$filter', '$http', '$window', f
         return Math.ceil($scope.getData().length/$scope.pageSize);
     };
 
+
+
+
     // When the home page campaign loaded
-    $http({
-        method: 'GET',
-        url:  obj.siteUrl + '/user/campaign/get/all'
-    }).then(function successCallback(response) { 
-        // console.log(response); 
-        for (var i = 0; i<response.data.length; i++) { 
-            $scope.data.push(response.data[i]);
-            $scope.totalCampaign++;
+    // Sort display all the campaings
+
+
+    //$scope.testingFunc = function (data) {
+
+        //alert("test" + data);
+
+    //};
+    $scope.campaignDisplayByKind = function(kind) {
+        $scope.campaignKindLoader = true;
+
+        $scope.myStyle={'display':'block'};
+
+
+        //alert("test");
+        var url = obj.siteUrl;
+
+        if(kind == 'all') {
+            url = url + '/user/campaign/get/all';
+        } else {
+            url = url + '/user/campaign/get/all/by/kind/'+kind;
         }
-    }, function errorCallback(response) {
-        alert("something wrong! please campaign send right support. Thank you!");
-    });
+
+        $http({
+            method: 'GET',
+            url: url,
+        }).then(function successCallback(response) {
+
+            $scope.data = [];
+            $scope.myStyle={'display':'none'};
+            // console.log(response);
+            for (var i = 0; i < response.data.length; i++) {
+                $scope.data.push(response.data[i]);
+                $scope.totalCampaign++;
+            }
+            $scope.campaignKindLoader = false;
+
+
+        }, function errorCallback(response) {
+            $scope.myStyle={'display':'none'};
+            //$scope.campaignKindLoader = false;
+            alert("something wrong! please campaign send right support. Thank you!");
+        });
+    };
+
+
+    // initialized data
+    $scope.campaignDisplayByKind('all');
+
+
 }]);
 
 

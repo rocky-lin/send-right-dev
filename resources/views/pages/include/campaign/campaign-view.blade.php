@@ -1,4 +1,7 @@
-       <div ng-controller="myCampaignViewCtr">
+
+
+
+       <div >
 
                         <div class="row">   
                             <div class="col-sm-6">
@@ -11,25 +14,23 @@
                                     <option value="5">5</option>
                                     <option value="10">10</option>  
                                     @for($i=2; $i<10; $i++)
-                                        <option value="{{$i*10}}">{{$i*10}}</option>    
+                                        <option value="{{$i*10}}">{{$i*10}}</option>
                                     @endfor
                                  </select>  
                             <div/> 
                         </div>
                     </div>
 
-                    <div class="row" style="margin-left:0px; margin-right:0px"> 
+
+
+
+
+                    <div class="row" style="margin-left:0px; margin-right:0px">
                         <div  class="col-sm-12">
                          <br> <hr>
                             <table class="table table-hover">
                                 <thead>
                                     <tr> 
-                                        <th>
-                                            <label>Sender Email </label> 
-                                        </th>
-                                        <th>
-                                            <label>Sender Subject </label> 
-                                        </th>
                                         <th>
                                             <label>Campaign Title</label> 
                                         </th>
@@ -61,10 +62,8 @@
                                 </thead>
                                 <tbody>
                                     <tr data-ng-hide="deleteCampaign[campaign.id]"  ng-repeat="campaign in data | filter:q | startFrom:currentPage*pageSize | limitTo:pageSize | orderBy : email" >  
-                                        <td>@{{campaign.sender_email }}</td>
-                                        <td>@{{campaign.sender_subject}}</td>
                                         <td>@{{campaign.title }}</td>
-                                        <td>@{{campaign.type }}</td> 
+                                        <td>@{{campaign.type }}</td>
                                         <td> @{{campaign.next_send}} </td> 
                                         <td> @{{campaign.total_contacts}} </td>
                                         <td ng-class="{'campaign-inactive': campaign.status === 'inactive', 

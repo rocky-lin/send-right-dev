@@ -567,34 +567,35 @@ add newsletter - removed
 
 Todo for December 14, 2016
 
-Fix ui for campaign and auto response - d
-Redirect to select campaign start if directly visited to connect campaign lists with error that says "need to select campaign type" - d
-create table  table - d
-create migration  - d
-test adding campaing as newsletter - d
-insert new auto responder - d
+Fix ui for campaign and auto response 
+Redirect to select campaign start if directly visited to connect campaign lists with error that says "need to select campaign type"  
+create table  table  
+create migration   
+test adding campaing as newsletter 
+insert new auto responder  
 fix bug campaign not sending email when dont have a filter in the campaign compose like {{first_name}}
-create new ui settings for auto responder - p 
+create new ui settings for auto responder 
 send to new contact 
 immediately or schedule same type with newsletter - repeat -> Auto Responder
   
 Todo for December 15, 2016 
 continue optin
+fix edit campaign newsletter sender lists - d
+fix edit campaign auto responder lists - d
+campaign fix total contact not, counting correctly - p
+edit campaign didn't set default active or not active
 Edit auto response and newsletter update
 Auto response schedule
+create table for auto response
+create relationship between auto response models
+create migration for auto response and migrate
+create sorting for auto response, newsletters campaign and default load is both newsletter and auto responder
 
 
+click sorting radio button should display loading in the bottom area
+radio button should work in retrieving correct campaign when clicked
 
 
-
-
-Thanks,
-
-Best regards,
-Jesus Erwin Suarez
- 
-    
- 
 
 ---------------------------------------------------------------------------------------------
 sortable resources docs 

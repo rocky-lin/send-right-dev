@@ -34,11 +34,31 @@ class Campaign   extends Model
     public function account()
     {
         return $this->belongsTo('App\Account');
-    }  
+    }
+
+    public function autoResponse()
+    {
+        return $this->hasMany('App\AutoResponse');
+    }
+
     public static function getCampaignsByAccount()
     {
         return Account::find(User::getUserAccount())->campaigns;
     }
+    public static function getCampaignsByAccountSortByKind($kind)
+    {
+        return Account::find(User::getUserAccount())
+            ->campaigns()
+            ->where('kind', $kind)
+            ->get();
+    }
+
+
+
+
+
+
+
     // public function emailAnalytic() 
     // { 
     //     return $this->hasOne('App\EmailAnalytic', 'campaign_id', 'id'); 

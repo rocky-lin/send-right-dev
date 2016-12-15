@@ -19,6 +19,7 @@ class CreateAutoResponseDetailsTable extends Migration
             $table->string('table_name');
             $table->integer('table_id');
             $table->string('status')->default('active');
+            $table->string('email');
             $table->timestamps();
         });
     }
