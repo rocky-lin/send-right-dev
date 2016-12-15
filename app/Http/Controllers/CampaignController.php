@@ -46,11 +46,12 @@ class CampaignController extends Controller
             // session('campaign_kind', '');
            $_SESSION['campaign']['kind'] = 'auto responder';
         } else {
-            return redirect()->route('user.campaign.create.start')->with('status', 'please select campaign type'); 
+            if(Input::get('action') != 'edit') {
+                return redirect()->route('user.campaign.create.start')->with('status', 'please select campaign type');
+            }
         }
 
 
-        
 
         $campaign = [];
         $defaultListIds = '0';
@@ -184,9 +185,11 @@ class CampaignController extends Controller
         // print_r($_SESSION['campaign']['listIds']); 
         // exit 
         // 
-        // print "campaign id  " . $_SESSION['campaign']['id'];
-        $campaignSchedule = CampaignSchedule::where('campaign_id', $_SESSION['campaign']['id'])->first();  
-        $campaign = Campaign::find($_SESSION['campaign']['id'])->first();
+//         print "campaign id  " . $_SESSION['campaign']['id'];
+
+        $campaignSchedule = CampaignSchedule::where('campaign_id', $_SESSION['campaign']['id'])->first();
+        $campaign = Campaign::where('id' , $_SESSION['campaign']['id'])->first();
+//        dd($campaign );
         return view('pages.campaign.campaign-settings', ['status'=>'', 'listNames'=>List1::getCurrentCampaignListNames(), 'campaignSchedule'=>$campaignSchedule, 'campaign'=>$campaign]);
     }   
 
@@ -272,8 +275,8 @@ class CampaignController extends Controller
         }
 
 
-        $campaignSchedule = CampaignSchedule::where('campaign_id', $_SESSION['campaign']['id'])->first();   
-        $campaign = Campaign::find($_SESSION['campaign']['id'])->first();
+        $campaignSchedule = CampaignSchedule::where('campaign_id', $_SESSION['campaign']['id'])->first();
+        $campaign = Campaign::where('id' , $_SESSION['campaign']['id'])->first();
         return view('pages.campaign.campaign-settings', compact('status', 'listNames', 'campaignSchedule', 'campaign')); 
     } 
 

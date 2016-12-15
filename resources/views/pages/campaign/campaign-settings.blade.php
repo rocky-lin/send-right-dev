@@ -138,7 +138,7 @@ th {
             <li class="list-group-item">   
               <input type="radio" class="pull-right pull-right1" rel = "pullRight1" name="campaign_type" value="immediate response" id="campaign_type_direct_send"   
               {{($campaign->type == 'immediate response') ? 'checked' : null }} />
-              <b>Immediate Response:</b> 
+              <b>Immediate Response:</b>
             </li>
             <li class="list-group-item">   
               <input type="radio" class="pull-right pull-right2" rel = "pullRight2" name="campaign_type" value="schedule response" id="campaign_type_schedule_send"     

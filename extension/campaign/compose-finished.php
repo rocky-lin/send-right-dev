@@ -19,8 +19,10 @@
 	// check if the post request has campaign id and if exist, 
 	// prepare execute the update campaign and other part campaign related tables
 	if(!empty($_POST['id'])) 
-	{   
-		
+	{
+
+
+
 		$campaign = [
 			'id'=> $_POST['id'], 
 			'account_id'=>$_SESSION['account_id'],  
@@ -28,9 +30,11 @@
 		];  
  
 	    // execute update
-		$_SESSION['campaign']['id'] = Campaign::createOrUpdateByCampaignId($campaign);
- 		
- 		// set edit values to session
+	    Campaign::createOrUpdateByCampaignId($campaign);
+
+		$_SESSION['campaign']['id'] = $_POST['id'];
+
+		// set edit values to session
 		Campaign::setDefaultValueToSession($_POST['id']);  
     } 
 
@@ -96,6 +100,11 @@
 
 	} 
 
+
+	//	print "<pre>";
+	//print_r($_SESSION['campaign']);
+	//print "</pre>";
+	//exit;
 	// the "ok" or "not ok" status will trigger the next page or redirect to settings. 
 	// If success insert or update settings, else do nothing and show error if not success
 	if($_SESSION['campaign']['id']) {
