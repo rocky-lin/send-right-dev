@@ -15,8 +15,7 @@
     <link href="<?php print url('/'); ?>/public/css/custom_style.css" rel="stylesheet"> 
     <script src="<?php print url('/'); ?>/public/js/src/1.5.8-angular.min.js"></script>   
     <script src="<?php print url('/'); ?>/public/js/src/ui-bootstrap-tpls-2.2.0.min.js"></script> 
-
- 
+    
     <!-- Scripts -->
     <script>
         window.Laravel = <?php echo json_encode([

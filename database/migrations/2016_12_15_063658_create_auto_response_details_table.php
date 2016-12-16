@@ -16,8 +16,8 @@ class CreateAutoResponseDetailsTable extends Migration
         Schema::create('auto_response_details', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('auto_response_id')->unsigned();
-            $table->string('table_name');
-            $table->integer('table_id');
+            $table->string('table_name')->default('contacts');
+            $table->integer('table_id')->default(0)->unsigned();
             $table->string('status')->default('active');
             $table->string('email');
             $table->timestamps();

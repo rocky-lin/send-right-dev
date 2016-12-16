@@ -9,3 +9,8 @@ fiddle: http://jsfiddle.net/8s9ss/4/
 
 3. Running cronjobs in laravel
 https://www.sitepoint.com/managing-cronjobs-with-laravel/
+
+4. bootstrap snippets
+     Navigation Menu 
+     	http://bootsnipp.com/snippets/featured/account-in-navbar
+     	http://bootsnipp.com/snippets/featured/nav-account-manager

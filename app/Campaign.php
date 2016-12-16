@@ -262,9 +262,12 @@ class Campaign   extends Model
 
     public static function supplyContactFilteres($contactFilters, $campaign)
     {         
+
          foreach ($contactFilters as $contactFilter => $contactValue) { 
             $campaign = str_replace($contactFilter, $contactValue, $campaign); 
         }
+             // print_r($contactFilters);
+        // print_r($campaign);
         return $campaign; 
     } 
 }

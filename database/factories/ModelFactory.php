@@ -154,10 +154,18 @@ $factory->define(App\Newsletter::class, function (Faker\Generator $faker) {
         'status'=>'active' 
     ];
 });
+ 
+$factory->define(App\AutoResponseDetails::class, function (Faker\Generator $faker) {   
+    return [ 
+        'auto_response_id'=> 1,
+        'table_name'=> 'contacts', 
+        'table_id'=> 0,
+        'status'=> 'active',
+        'email'=> $faker->email
+    ];
+});
 
-
-
-
+ 
 
 
 

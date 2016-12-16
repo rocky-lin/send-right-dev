@@ -592,8 +592,22 @@ create migration for auto response and migrate
 create sorting for auto response, newsletters campaign and default load is both newsletter and auto responder
 
 
+December 19, 2016
+add day or time interval send
+add on day schedule
+use template from campaign
+calculate functionality when to send based on schedules.
+Redirect to select campaign start if directly visited to connect campaign lists with error that says "need to select campaign type"
 click sorting radio button should display loading in the bottom area
 radio button should work in retrieving correct campaign when clicked
+work with auto responder functionality
+
+Todo December 20, 2016  
+Work with  Payment
+
+
+
+
 
 
 

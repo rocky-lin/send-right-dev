@@ -13,7 +13,8 @@ class Kernel extends ConsoleKernel
      * @var array
      */
     protected $commands = [ 
-        Commands\CampaignScheduleSendCommand::class
+        Commands\CampaignScheduleSendCommand::class,
+        Commands\CampaignAutoResponseSendCommand::class
     ];
 
     /**

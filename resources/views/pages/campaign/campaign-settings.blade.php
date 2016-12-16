@@ -158,7 +158,7 @@ th {
               <label class="label label-primary" > Hours </label>
               <input class='form-control'  type="number" value="{{isset($campaignSchedule->hours) ? $campaignSchedule->hours : '0' }}" name="campaign_schedule_hours" min="0" />
             </div>
-             <div class='form-group'> 
+             <div class='form-group' style="display:none"> 
               <label class="label label-primary" > Mins </label>
               <input class='form-control'  type="number" value="{{isset($campaignSchedule->mins) ? $campaignSchedule->mins : '0' }}" name="campaign_schedule_mins" min="0" /> 
             </div> 

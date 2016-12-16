@@ -4,7 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class AutoResponse extends Model
+class autoResponse extends Model
 {
     protected $table = 'auto_responses';
     protected $fillable = ['campaign_id','table_name', 'table_id'];

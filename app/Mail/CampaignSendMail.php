@@ -39,13 +39,22 @@ class CampaignSendMail extends Mailable
     {   
         // only do validation when sending real contacts 
         // then if not and just a test send then we will not do this validation and filters 
+        // 
+        // print "teststst";
+        // print_r($this->contact); 
+        // print 'total contact ' . count($this->contact) ; 
         if(count($this->contact) > 1) {  
             // set values in each filter
             $contactFilterValues = Contact::setgetFilterValues($this->contact);   
             // loop find and replace 
             $this->campaign['content'] =  Campaign::supplyContactFilteres($contactFilterValues, $this->campaign['content']);
         }  
-        
+            // print" <pre> "; 
+            // print_r($this->campaign); 
+
+            // print $this->campaign['sender_email']; 
+            // print"</pre>"; 
+            // exit;
         // set view and other attribute of the email sending
         return $this->from($this->campaign['sender_email'], $this->campaign['sender_name'])->subject($this->campaign['sender_subject'])->view('mail.campaign-send-mail', ['content'=>$this->campaign['content']]);
     }
