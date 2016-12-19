@@ -176,7 +176,5 @@ function copyToClipboard(elem) {
 	})
 
   // alert( "Load was performed." ); 
-
-
-}); 
-
+ 
+});  

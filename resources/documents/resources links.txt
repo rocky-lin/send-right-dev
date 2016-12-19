@@ -10,7 +10,42 @@ fiddle: http://jsfiddle.net/8s9ss/4/
 3. Running cronjobs in laravel
 https://www.sitepoint.com/managing-cronjobs-with-laravel/
 
-4. bootstrap snippets
-     Navigation Menu 
+4. bootstrap snippets  
+          navigation
      	http://bootsnipp.com/snippets/featured/account-in-navbar
      	http://bootsnipp.com/snippets/featured/nav-account-manager
+     	http://bootsnipp.com/snippets/featured/form-wizard-using-tabs
+     	http://bootsnipp.com/snippets/featured/content-in-bootstrap-tabs
+
+          profile 
+     	http://bootsnipp.com/snippets/featured/dynamic-avatar-blur
+     	http://bootsnipp.com/snippets/featured/simple-user-profile
+
+
+          account infor, files, profile
+     	http://bootsnipp.com/snippets/featured/easy-table-filter
+     	http://bootsnipp.com/snippets/featured/material-design-switch
+     	http://bootsnipp.com/snippets/featured/ribbon-buttons
+     	http://bootsnipp.com/snippets/featured/responsive-mail-inbox-and-compose
+
+          billing
+          http://bootsnipp.com/snippets/9yKPD
+          http://bootsnipp.com/snippets/a68Do
+          http://bootsnipp.com/snippets/j0p6a
+          http://bootsnipp.com/snippets/featured/plans-and-pricing
+          http://bootsnipp.com/snippets/3xv0n
+          http://bootsnipp.com/snippets/ypqoW
+          http://bootsnipp.com/snippets/featured/derwiki039s-stripe-payment-form-updated
+
+          template design nav menu in left side 
+          http://bootsnipp.com/snippets/featured/flat-responsive-dashboard-design
+
+          activity design, boxes
+          http://bootsnipp.com/snippets/xzyz
+
+          searching 
+          http://jsfiddle.net/lesson8/u66Qa/show/
+
+
+          slide down
+          http://jsfiddle.net/lesson8/xudtnvcr/

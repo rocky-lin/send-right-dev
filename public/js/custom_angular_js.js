@@ -723,3 +723,93 @@ app.controller('myListSelectCtr', ['$scope', '$filter', '$http', '$window', func
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+// Account Controller 
+
+// list create, edit and suggested contacts
+app.controller('myUserAccountCtrl', ['$scope', '$filter', '$http', '$window', function ($scope, $filter, $http, $window) { 
+        
+
+        //Typing in field current password
+        $scope.$watch('current_password', function(newValue, oldValue) {  
+            $scope.old_password_invalid = false; 
+            if($scope.old_password == newValue) {
+                $scope.old_password_class = "alert alert-success";
+                $scope.old_password_invalid = true; 
+                $scope.old_password_text =  "Password matched to old password"; 
+            }   else {  
+                $scope.old_password_class = "alert alert-danger";
+                $scope.old_password_invalid = true; 
+                $scope.old_password_text = "Didn't matched to old password"; 
+            }   
+        });  
+
+        // Typing in field new password and repeat password
+        $scope.$watchCollection('[new_password, repeat_new_password]', function(newValue, oldValue) {   
+        console.log("typing");
+            $scope.new_password_invalid = false; 
+            console.log(newValue[0]);
+            if(newValue == null) {
+                $scope.new_password_class = "alert alert-danger";
+                $scope.new_password_invalid = true; 
+                $scope.passwordAllowUpdate = false; 
+                $scope.new_password_text = "new password required";  
+            } else if (newValue[0].length  < 5 ) {  
+                $scope.new_password_class = "alert alert-danger";
+                $scope.new_password_invalid = true; 
+                $scope.new_password_text =  "Required min password is 5";
+                $scope.passwordAllowUpdate = false; 
+            } else if(newValue[0] == newValue[1]) {
+                $scope.new_password_class = "alert alert-success";
+                $scope.new_password_invalid = true; 
+                $scope.new_password_text =  "Password matched to old password";
+                $scope.passwordAllowUpdate = true; 
+            }   else if(newValue[0] != newValue[1]) {  
+                $scope.new_password_class = "alert alert-danger";
+                $scope.new_password_invalid = true; 
+                $scope.new_password_text =  "Password didn't matched to repeat password "; 
+                $scope.passwordAllowUpdate = false; 
+            }   else {
+                $scope.passwordAllowUpdate = false; 
+                $scope.new_password_invalid = false;  
+            }
+        }); 
+ 
+        $scope.changePassword = function() { 
+            console.log($scope.current_password + " " + $scope.new_password );  
+            console.log("changing password now!");  
+            // send ajax request via post 
+              
+  
+            $http({
+            method: 'POST',
+            url:  obj.siteUrl + '/user/update-password',
+            data: { password:$scope.new_password },
+            headers : {  'X-XSRF-TOKEN' : '2sltge4Q2lVTdF8dFVTjyABHm1Mdqk2mBA59k4X8' }, 
+            }).then(function successCallback(response) { 
+                $scope.new_password_text = response.data; 
+                console.log(response); 
+            }, function errorCallback(response) { 
+                alert("something wrong! please contact send right support. Thank you!");
+            }); 
+        }
+
+
+     console.log("account controller loaded - angular js"); 
+ 
+}]);
+
+
+
+

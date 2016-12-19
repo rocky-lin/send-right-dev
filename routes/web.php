@@ -43,7 +43,7 @@ Auth::routes();
 Route::get('/home', 'HomeController@index'); 
 Route::get('/home/test', 'HomeController@test'); 
 
-Route::group(['prefix' => 'user' ], function() {    
+Route::group(['prefix' => 'user' , 'middleware' => 'auth' ], function() {    
 
 	// when confirm user registration
 	Route::group(['prefix'=>'registration'], function(){
@@ -142,7 +142,17 @@ Route::group(['prefix' => 'user' ], function() {
 	// responder
 
 		Route::get('auto-response/start/process', 'AutoResponseDetailsController@startResponse');
+ 
+	// member
+		Route::get('profile', 'UserController@profile')->name('user.profile');
+		Route::get('billing', 'UserController@billing')->name('user.billing');
+		Route::get('account', 'UserController@account')->name('user.account');
+		Route::get('change-password', 'UserController@changePassword')->name('user.change-password'); 
 
+
+
+	// user 
+	Route::post('update-password', 'UserController@updatePasswordPost')->name('user.update.password.post'); 
 
 
 

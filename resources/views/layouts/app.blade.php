@@ -15,7 +15,11 @@
     <link href="<?php print url('/'); ?>/public/css/custom_style.css" rel="stylesheet"> 
     <script src="<?php print url('/'); ?>/public/js/src/1.5.8-angular.min.js"></script>   
     <script src="<?php print url('/'); ?>/public/js/src/ui-bootstrap-tpls-2.2.0.min.js"></script> 
-    
+ 
+    <script>
+      angular.module("myApp").constant("CSRF_TOKEN", '{{ csrf_token() }}');
+    </script>
+ 
     <!-- Scripts -->
     <script>
         window.Laravel = <?php echo json_encode([
@@ -71,16 +75,15 @@
 
                                 <ul class="dropdown-menu" role="menu">
                                     <li>
-                                        <a href="#" title="">Profile</a>
+                                        <a href="{{route('user.profile')}}" title="">Profile</a>
                                     </li>
 
                                     <li> 
-                                        <a href="#" title="">Account</a>
+                                        <a href="{{route('user.account')}}" title="">Account</a>
                                     </li> 
                                     <li> 
-                                        <a href="#" title="">Billing</a>
-                                    </li> 
-
+                                        <a href="{{route('user.billing')}}" title="">Billing</a>
+                                    </li>  
                                     <li>
                                         <a href="{{ url('/logout') }}"
                                             onclick="event.preventDefault();

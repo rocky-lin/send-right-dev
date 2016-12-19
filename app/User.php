@@ -96,4 +96,14 @@ class User extends Authenticatable
     {
          return self::find(Auth::user()->id)->user_account->account->formLists;
     }  
+
+    public static function updatePassword($password, $new_password=null, $old_password=null) 
+    { 
+        $status = self::find(Auth::user()->id)->update(['password'=>bcrypt($password)]); 
+        if($status) {
+            return true;
+        } else {
+            return false; 
+        }
+    }
 }

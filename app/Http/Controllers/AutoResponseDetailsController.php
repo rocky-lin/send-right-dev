@@ -15,7 +15,7 @@ class AutoResponseDetailsController extends Controller
      * @return string
      */
     public function startResponse() {  
-            
+         
         // set sending to fals
         $isSendNow = false;
 
