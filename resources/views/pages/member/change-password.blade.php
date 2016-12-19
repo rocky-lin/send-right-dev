@@ -4,6 +4,8 @@
 				<!-- Form Name -->
 				<legend>Change password</legend> 
 				<!-- Password input-->
+				<div class="form-group" style="display:none ">
+				  <label class="col-md-4 control-label" for="piCurrPass">Current Password 1</label>
 				  <div class="col-md-4">
 				    <input id="piCurrPass" name="piCurrPass" type="password" placeholder="" class="form-control input-md" required=""> 
 				  </div>
