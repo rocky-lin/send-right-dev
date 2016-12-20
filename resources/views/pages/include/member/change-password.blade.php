@@ -37,6 +37,8 @@
 				    <button id="bGodkend" name="bGodkend" class="btn btn-success" ng-click="changePassword()" data-ng-disabled="!passwordAllowUpdate" >Update</button>
 				  </div>
 				</div>  
+
+				<div style="display:none">
 				old pass 
  				@{{old_password}}<br>
  				old pass type
@@ -45,6 +47,7 @@
 				@{{new_password}}<br>
 				repeat new pass
 				@{{repeat_new_password}} <br> 
+				</div>
 				</fieldset> 
 				{{-- <label data-ng-model="old_password_invalid"> old password now correct! </label> --}} 
 	</div>

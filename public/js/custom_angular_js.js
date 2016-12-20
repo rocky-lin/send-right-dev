@@ -740,75 +740,121 @@ app.controller('myListSelectCtr', ['$scope', '$filter', '$http', '$window', func
 // list create, edit and suggested contacts
 app.controller('myUserAccountCtrl', ['$scope', '$filter', '$http', '$window', function ($scope, $filter, $http, $window) { 
         
+        $scope.accountInfoInit = [];    
+        
 
-        //Typing in field current password
-        $scope.$watch('current_password', function(newValue, oldValue) {  
-            $scope.old_password_invalid = false; 
-            if($scope.old_password == newValue) {
-                $scope.old_password_class = "alert alert-success";
-                $scope.old_password_invalid = true; 
-                $scope.old_password_text =  "Password matched to old password"; 
-            }   else {  
-                $scope.old_password_class = "alert alert-danger";
-                $scope.old_password_invalid = true; 
-                $scope.old_password_text = "Didn't matched to old password"; 
-            }   
-        });  
+        // Change password
+            //Typing in field current password
+            $scope.$watch('current_password', function(newValue, oldValue) {  
+                $scope.old_password_invalid = false; 
+                if($scope.old_password == newValue) {
+                    $scope.old_password_class = "alert alert-success";
+                    $scope.old_password_invalid = true; 
+                    $scope.old_password_text =  "Password matched to old password"; 
+                }   else {  
+                    $scope.old_password_class = "alert alert-danger";
+                    $scope.old_password_invalid = true; 
+                    $scope.old_password_text = "Didn't matched to old password"; 
+                }   
+            });  
 
-        // Typing in field new password and repeat password
-        $scope.$watchCollection('[new_password, repeat_new_password]', function(newValue, oldValue) {   
-        console.log("typing");
-            $scope.new_password_invalid = false; 
-            console.log(newValue[0]);
-            if(newValue == null) {
-                $scope.new_password_class = "alert alert-danger";
-                $scope.new_password_invalid = true; 
-                $scope.passwordAllowUpdate = false; 
-                $scope.new_password_text = "new password required";  
-            } else if (newValue[0].length  < 5 ) {  
-                $scope.new_password_class = "alert alert-danger";
-                $scope.new_password_invalid = true; 
-                $scope.new_password_text =  "Required min password is 5";
-                $scope.passwordAllowUpdate = false; 
-            } else if(newValue[0] == newValue[1]) {
-                $scope.new_password_class = "alert alert-success";
-                $scope.new_password_invalid = true; 
-                $scope.new_password_text =  "Password matched to old password";
-                $scope.passwordAllowUpdate = true; 
-            }   else if(newValue[0] != newValue[1]) {  
-                $scope.new_password_class = "alert alert-danger";
-                $scope.new_password_invalid = true; 
-                $scope.new_password_text =  "Password didn't matched to repeat password "; 
-                $scope.passwordAllowUpdate = false; 
-            }   else {
-                $scope.passwordAllowUpdate = false; 
-                $scope.new_password_invalid = false;  
-            }
-        }); 
- 
-        $scope.changePassword = function() { 
-            console.log($scope.current_password + " " + $scope.new_password );  
-            console.log("changing password now!");  
-            // send ajax request via post 
-              
-  
-            $http({
-            method: 'POST',
-            url:  obj.siteUrl + '/user/update-password',
-            data: { password:$scope.new_password },
-            headers : {  'X-XSRF-TOKEN' : '2sltge4Q2lVTdF8dFVTjyABHm1Mdqk2mBA59k4X8' }, 
-            }).then(function successCallback(response) { 
-                $scope.new_password_text = response.data; 
-                console.log(response); 
-            }, function errorCallback(response) { 
-                alert("something wrong! please contact send right support. Thank you!");
+            // Typing in field new password and repeat password
+            $scope.$watchCollection('[new_password, repeat_new_password]', function(newValue, oldValue) {   
+            console.log("typing");
+                $scope.new_password_invalid = false; 
+                console.log(newValue[0]);
+                if(newValue == null) {
+                    $scope.new_password_class = "alert alert-danger";
+                    $scope.new_password_invalid = true; 
+                    $scope.passwordAllowUpdate = false; 
+                    $scope.new_password_text = "new password required";  
+                } else if (newValue[0].length  < 5 ) {  
+                    $scope.new_password_class = "alert alert-danger";
+                    $scope.new_password_invalid = true; 
+                    $scope.new_password_text =  "Required min password is 5";
+                    $scope.passwordAllowUpdate = false; 
+                } else if(newValue[0] == newValue[1]) {
+                    $scope.new_password_class = "alert alert-success";
+                    $scope.new_password_invalid = true; 
+                    $scope.new_password_text =  "Password matched to old password";
+                    $scope.passwordAllowUpdate = true; 
+                }   else if(newValue[0] != newValue[1]) {  
+                    $scope.new_password_class = "alert alert-danger";
+                    $scope.new_password_invalid = true; 
+                    $scope.new_password_text =  "Password didn't matched to repeat password "; 
+                    $scope.passwordAllowUpdate = false; 
+                }   else {
+                    $scope.passwordAllowUpdate = false; 
+                    $scope.new_password_invalid = false;  
+                }
             }); 
-        }
+     
+            $scope.changePassword = function() { 
+                console.log($scope.current_password + " " + $scope.new_password );  
+                console.log("changing password now!");  
+                // send ajax request via post  
+                $http({
+                method: 'POST',
+                url:  obj.siteUrl + '/user/update-password',
+                data: { password:$scope.new_password },
+                headers : {  'X-XSRF-TOKEN' : '2sltge4Q2lVTdF8dFVTjyABHm1Mdqk2mBA59k4X8' }, 
+                }).then(function successCallback(response) { 
+                    $scope.new_password_text = response.data; 
+                    console.log(response); 
+                }, function errorCallback(response) { 
+                    alert("something wrong! please contact send right support. Thank you!");
+                }); 
+            } 
+        // Change account information   
+            $scope.updateAccount = function() {  
+                console.log("update account now");  
 
-
-     console.log("account controller loaded - angular js"); 
+               $scope.accountInfoUpdateLoaderStyle = {'display': 'block', 'margin-top': '6px', 'margin-left': '13px'}; 
+            $http({
+                method: 'POST',
+                url:  obj.siteUrl + '/user/update-account',
+                data: { name:$scope.user_full_name,email:$scope.user_email,company:$scope.user_company,time_zome:$scope.user_time_zome,user_name:$scope.user_name },
+                headers : { 'X-XSRF-TOKEN' : '2sltge4Q2lVTdF8dFVTjyABHm1Mdqk2mBA59k4X8' }, 
+                }).then(function successCallback(response) { 
+                    $scope.new_password_text = response.data; 
+                    console.log(response);  
+                    $scope.accountStatus(true, 'info', response);  
+                }, function errorCallback(response) { 
+                    // console.log("something wrong! please contact send right support. Thank you!");
+                     $scope.accountStatus(true, 'danger', 'something wrong'); 
+                }); 
+            }      
+            // add data to fields as initialized
+            $scope.$watch('accountInfoInit', function(newValue, oldValue)   { 
+               $scope.user_full_name =  newValue.name; 
+                $scope.user_email = newValue.email;
+                $scope.user_company = newValue.company;
+                $scope.user_time_zome = newValue.time_zone;
+                $scope.user_name = newValue.user_name;  
+                 // $scope.accountInfoStatusShow  = false;  
+            });
+            console.log("account controller loaded - angular js");  
  
+            $scope.accountStatus = function(show, status, message) { 
+                $scope.accountInfoStatusModel = message.data; 
+                $scope.accountInfoStatusShow  = true; 
+                $scope.accountInfoStatusClass  = 'alert alert-' +status+ ' alert-dismissable';  
+
+               $scope.accountInfoUpdateLoaderStyle = {'display': 'none'}; 
+            }
 }]);
+
+// app.directive('initModel', function($compile) {
+//     return {
+//         restrict: 'A',
+//         link: function(scope, element, attrs) {
+//             scope[attrs.initModel] = element[0].value;
+//             element.attr('ng-model', attrs.initModel);
+//             element.removeAttr('init-model');
+//             $compile(element)(scope);
+//         }
+//     };
+// }
 
 
 

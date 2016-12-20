@@ -12,7 +12,8 @@
         "maatwebsite/excel": "~2.1.0",
         "barryvdh/laravel-ide-helper": "^2.2",
         "doctrine/dbal": "^2.5",
-        "nesbot/carbon": "^1.21" 
+        "nesbot/carbon": "^1.21",
+        "laravel/cashier": "~7.0"
         
     },
     "require-dev": {

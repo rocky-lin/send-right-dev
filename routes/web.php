@@ -148,11 +148,10 @@ Route::group(['prefix' => 'user' , 'middleware' => 'auth' ], function() {
 		Route::get('billing', 'UserController@billing')->name('user.billing');
 		Route::get('account', 'UserController@account')->name('user.account');
 		Route::get('change-password', 'UserController@changePassword')->name('user.change-password'); 
-
-
-
+ 
 	// user 
 	Route::post('update-password', 'UserController@updatePasswordPost')->name('user.update.password.post'); 
+	Route::post('update-account', 'UserController@updateAccountPost')->name('user.update.account.post'); 
 
 
 

@@ -12,7 +12,10 @@ use App\FormList;
 use App\Campaign;
 use App\CampaignSchedule;
 use App\Newsletter;
-
+use App\Subscription; 
+use App\Product; 
+use App\ProductDetail; 
+use App\Invoice; 
 class DatabaseSeeder extends Seeder
 {
     /**
@@ -34,20 +37,30 @@ class DatabaseSeeder extends Seeder
         FormList::truncate(); 
         Campaign::truncate();
         CampaignSchedule::truncate(); 
-        Newsletter::truncate(); 
+        Newsletter::truncate();  
+        Subscription::truncate(); 
+        Product::truncate(); 
+        ProductDetail::truncate(); 
+        Invoice::truncate(); 
+ 
         // DB::table('users')->truncate();
         // DB::table('users')->truncate();
         // DB::table('users')->truncate(); 
-        factory(UserAccount::class, 20)->create();  
-        factory(Contact::class, 20)->create();
-        factory(List1::class, 20)->create();  
-        factory(ListContact::class, 20)->create();  
-        factory(Form::class, 20)->create();
-        factory(FormList::class, 40)->create();
-        factory(Campaign::class, 40)->create();
-        factory(CampaignSchedule::class, 40)->create();
-        factory(Newsletter::class, 40)->create();
-        
+        factory(Account::class, 10)->create();  
+        factory(UserAccount::class, 10)->create();  
+        factory(Contact::class, 10)->create();
+        factory(List1::class, 10)->create();  
+        factory(ListContact::class, 10)->create();  
+        factory(Form::class, 10)->create();
+        factory(FormList::class, 10)->create();
+        factory(Campaign::class, 10)->create();
+        factory(CampaignSchedule::class, 10)->create();
+        factory(Newsletter::class, 10)->create(); 
+        factory(Subscription::class, 10)->create();
+        factory(Product::class, 10)->create();
+        factory(ProductDetail::class, 10)->create();
+        factory(Invoice::class, 10)->create();
+    
         // Model::reguarded();  
     }
 }  

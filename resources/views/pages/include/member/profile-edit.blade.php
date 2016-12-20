@@ -1,4 +1,7 @@
-<div class="container">
+
+ 
+
+<div class="container" data-ng-init="accountInfoInit={{$userAccount}}">
   <h1>Edit Profile</h1>
   <hr style="width:91%">
 
@@ -15,55 +18,46 @@
     </div>
     <!-- edit form column -->
     <div class="col-md-7 col-sm-6 col-xs-12 personal-info">
-      <div class="alert alert-info alert-dismissable" style="width:91%">
-        
-       
-        <a class="panel-close close" data-dismiss="alert">×</a> 
+      <div ng-bind-html="accountInfoStatusModel" ng-class="accountInfoStatusClass" ng-show="accountInfoStatusShow" style="width:91%; "> 
+ 
         <i class="fa fa-coffee"></i>
-        This is an <strong>.alert</strong>. Use this to show important messages to the user.
+        @{{accountInfoStatusModel}}
       </div>
       <h3>Personal info</h3>
       <form class="form-horizontal ng-pristine ng-valid" role="form">
        
         <div class="form-group">
           <label class="col-lg-3 control-label">Full Name:</label>
+          <div class="col-lg-8">  
+            <input ng-model="user_full_name" class="form-control" type="text">  
+          </div>
+
+ 
+        </div>
+           <div class="form-group">
+          <label class="col-lg-3 control-label">Email:</label>
           <div class="col-lg-8">
-            <input class="form-control" value="Bishop" type="text">
+            <input  ng-model="user_email" class="form-control"  type="text">
           </div>
         </div>
         <div class="form-group">
           <label class="col-lg-3 control-label">Company:</label>
           <div class="col-lg-8">
-            <input class="form-control" value="" type="text">
+            <input  ng-model="user_company" class="form-control"   type="text">
           </div>
-        </div>
-        <div class="form-group">
-          <label class="col-lg-3 control-label">Email:</label>
-          <div class="col-lg-8">
-            <input class="form-control" value="janesemail@gmail.com" type="text">
-          </div>
-        </div>
+        </div> 
         <div class="form-group">
           <label class="col-lg-3 control-label">Time Zone:</label>
           <div class="col-lg-8">
             <div class="ui-select">
-              <select id="user_time_zone" class="form-control">
-                <option value="Hawaii">(GMT-10:00) Hawaii</option>
-                <option value="Alaska">(GMT-09:00) Alaska</option>
-                <option value="Pacific Time (US &amp; Canada)">(GMT-08:00) Pacific Time (US &amp; Canada)</option>
-                <option value="Arizona">(GMT-07:00) Arizona</option>
-                <option value="Mountain Time (US &amp; Canada)">(GMT-07:00) Mountain Time (US &amp; Canada)</option>
-                <option value="Central Time (US &amp; Canada)" selected="selected">(GMT-06:00) Central Time (US &amp; Canada)</option>
-                <option value="Eastern Time (US &amp; Canada)">(GMT-05:00) Eastern Time (US &amp; Canada)</option>
-                <option value="Indiana (East)">(GMT-05:00) Indiana (East)</option>
-              </select>
+            <input  ng-model="user_time_zome" class="form-control"   type="text" disabled> 
             </div>
           </div>
         </div>
         <div class="form-group">
           <label class="col-md-3 control-label">Username:</label> <br>
           <div class="col-md-8"> 
-            <input class="form-control" value="janeuser" type="text" disabled="">
+            <input ng-model="user_name"  class="form-control"  type="text" disabled="">
           </div>
         </div>
         
@@ -71,7 +65,8 @@
         <div class="form-group">
           <label class="col-md-3 control-label"></label>
           <div class="col-md-10">
-            <input class="btn btn-primary pull-right" value="Save Changes" type="button">
+             <div class="loader pull-right"  ng-style="accountInfoUpdateLoaderStyle" ng-init="accountInfoUpdateLoaderStyle={'margin-top': '6px', 'display': 'none', 'margin-left': '13px'}" syle="display:none" ></div>
+            <input ng-click="updateAccount()" class="btn btn-primary pull-right" value="Save Changes" type="button">         
             <span></span> 
           </div>
         </div> 

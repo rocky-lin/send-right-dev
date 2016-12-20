@@ -15,7 +15,6 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password', 'registration_token',
     ];
 
     /**
@@ -46,7 +45,7 @@ class User extends Authenticatable
     { 
         return $this->hasOne('App\UserAccount');
     } 
-
+    
     /** 
      * this will return the users account id
      */
@@ -106,4 +105,13 @@ class User extends Authenticatable
             return false; 
         }
     }
+    public static function isUserExist($email) 
+    {
+        $user = User::where('email', '=', $email)->first();
+        if ($user === null) {
+            return false; 
+        } else {
+            return true; 
+        }
+    } 
 }

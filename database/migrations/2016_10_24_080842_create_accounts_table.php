@@ -15,8 +15,13 @@ class CreateAccountsTable extends Migration
     {
         Schema::create('accounts', function (Blueprint $table) {
             $table->increments('id');  
-            $table->string('company'); 
-            $table->string('time_zone');  
+            $table->string('user_name')->nullable(); 
+            $table->string('company')->nullable();  
+            $table->string('time_zone')->nullable();  
+            $table->string('payment_api_id')->nullable();
+            $table->string('card_brand')->nullable();
+            $table->string('card_last_four')->nullable();
+            $table->timestamp('trial_ends_at')->nullable();
             $table->timestamps();
         });
     }
