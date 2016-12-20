@@ -7,6 +7,7 @@ use App\User;
 class Account extends Model
 { 
 	protected $table = 'accounts'; 
+	protected $fillable = ['user_name', 'company', 'time_zone', 'payment_api_id', 'card_brand', 'card_last_four', 	'trial_ends_at']; 
  	/** 
  	 * Get the forms lists of the specific account
  	 */
