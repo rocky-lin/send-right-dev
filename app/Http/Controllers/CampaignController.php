@@ -32,7 +32,7 @@ class CampaignController extends Controller
     {
         // print "test";
         // exit;
-        return view('pages.campaign.campaign-create-start'); 
+        return view('pages.campaign.campaign-create-start');
     }
 
     // STEP 1

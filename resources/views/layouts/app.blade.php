@@ -102,6 +102,7 @@
             </div>
         </nav>  
         <div class='container'>
+            @include('pages/include/subscription/subscription-status-message')
             @yield('content')  
         </div>
     </div> 

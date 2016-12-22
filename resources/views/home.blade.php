@@ -4,9 +4,7 @@
     <div class="container"> 
         <div class="row"> 
             {{-- status display --}}
-            @if(Auth::user()->status == 'inactive') 
-                <div class="alert alert-danger"  > {{  "your account is currently in active, please visit your email and hit comfirm, thank you!" }} </div>
-            @endif  
+
             {{-- Start panel --}}
             <div class="panel panel-default"> 
                 <div class="panel-heading">Dashboard</div>   

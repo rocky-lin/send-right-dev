@@ -59,5 +59,27 @@ class Account extends Model
 	{ 
 		$account = self::find(User::getUserAccount()); 
 		return $account->user_name;   
-	} 
+	}
+
+
+
+	public static function getSubscriptionStatus()
+	{
+		return self::find(User::getUserAccount())->subscription()->first()->status;
+	}
+	public static function getSubscription()
+	{
+		return self::find(User::getUserAccount())->subscription;
+	}
+
+	public static function getSubscriptionProduct()
+	{
+		return self::find(User::getUserAccount())->subscription->product;
+	}
+
+
+
+
+
+
 }

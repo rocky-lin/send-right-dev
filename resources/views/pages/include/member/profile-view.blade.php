@@ -18,38 +18,49 @@
                 <div class=" col-md-9 col-lg-9 "> 
                   <table class="table table-user-information">
                     <tbody>
-                      <tr>
-                        <td>Department:</td>
-                        <td>Programming</td>
-                      </tr>
-                      <tr>
-                        <td>Hire date:</td>
-                        <td>06/23/2013</td>
-                      </tr>
-                      <tr>
-                        <td>Date of Birth</td>
-                        <td>01/24/1988</td>
-                      </tr>
-                   
-                         <tr>
-                             </tr><tr>
-                        <td>Gender</td>
-                        <td>Female</td>
-                      </tr>
-                        <tr>
-                        <td>Home Address</td>
-                        <td>Kathmandu,Nepal</td>
-                      </tr>
-                      <tr>
-                        <td>Email</td>
-                        <td><a href="mailto:info@support.com">info@support.com</a></td>
-                      </tr>
-                        <tr><td>Phone Number</td>
-                        <td>123-4567-890(Landline)<br><br>555-4567-890(Mobile)
-                        </td>
-                           
-                      </tr>
-                     
+                    <tr>
+                      <th style="width:20%">
+                        Full Name:
+                      </th>
+                      <td>  {{ $userInfo['full_name'] or  'Not yet suplied' }} </td>
+                    </tr>
+
+                    <tr>
+                      <th style="width:20%">
+                        Email:
+                      </th>
+                      <td>  {{ $userInfo['email'] or  'Not yet suplied' }} </td>
+                    </tr>
+
+                    <tr>
+                      <th style="width:20%">
+                        Company:
+                      </th>
+                      <td>  {{ $userInfo['company'] or  'Not yet suplied' }} </td>
+                    </tr>
+
+
+                    <tr>
+                      <th style="width:20%">
+                        Time Zone:
+                      </th>
+                      <td>  {{ $userInfo['time_zone'] or  'Not yet suplied' }} </td>
+                    </tr>
+
+                    <tr>
+                      <th style="width:20%">
+                        Username:
+                      </th>
+                      <td>  {{ $userInfo['user_name'] or  'Not yet suplied'   }} </td>
+                    </tr>
+                    <tr>
+                      <th style="width:20%">
+                        Subscription plan:
+                      </th>
+                      <td>  {{ $userInfo['subscription_name'] or  'free'   }} </td>
+                    </tr>
+
+
                     </tbody>
                   </table>
                   

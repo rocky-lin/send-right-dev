@@ -5,6 +5,8 @@ namespace App;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Auth;
+use App\Subscription;
+use App\Account;
 class User extends Authenticatable
 {
     use Notifiable;
@@ -52,7 +54,7 @@ class User extends Authenticatable
      */
     public static function getUserAccount() 
     {
-        return self::find(Auth::user()->id)->user_account->account->id; 
+        return self::find(Auth::user()->id)->user_account->account->id;
     } 
 
     /** 
@@ -114,5 +116,13 @@ class User extends Authenticatable
         } else {
             return true; 
         }
-    } 
+    }
+
+    public static function getSubscriptionName() {
+        $subscription = Account::getSubscriptionProduct();
+        return $subscription->name;
+    }
+    public static function getSubscriptionStatus() {
+        return 3;
+    }
 }

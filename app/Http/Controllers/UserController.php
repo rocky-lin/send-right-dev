@@ -6,13 +6,27 @@ use Illuminate\Http\Request;
 use App\User; 
 use App\Activity;
 use Auth; 
-use App\Account; 
+use App\Account;
+use App\Product;
 
 class UserController extends Controller
 {
     public function profile()
-    { 	 
-    	return view('pages/member/profile'); 
+    {
+
+
+
+
+        $account = Account::find(User::getUserAccount());
+        $userInfo['user_name'] = $account->user_name;
+        $userInfo['company']   = $account->company;
+        $userInfo['time_zone'] = $account->time_zone;
+        $userInfo['full_name'] = Auth::user()->name;
+        $userInfo['email']     = Auth::user()->email;
+        $userInfo['subscription_name'] = User::getSubscriptionName();
+
+
+    	return view('pages/member/profile', compact('userInfo'));
     }
     public function account() 
     {
@@ -28,8 +42,20 @@ class UserController extends Controller
 
     }
     public function billing() 
-    {	
-    	return view('pages/member/billing'); 
+    {
+
+
+
+        $bronze['product'] = Product::first();
+        $bronze['product']['details'] = Product::getProductDetails(Product::first()->id);
+
+
+
+
+    //       Product::find(1)
+
+
+    	return view('pages/member/billing', compact('bronze'));
     } 
     public function changePassword() 
     {

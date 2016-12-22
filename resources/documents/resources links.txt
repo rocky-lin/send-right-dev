@@ -49,3 +49,7 @@ https://www.sitepoint.com/managing-cronjobs-with-laravel/
 
           slide down
           http://jsfiddle.net/lesson8/xudtnvcr/
+
+
+          pay2go documentation
+          https://www.pay2go.com/dw_files/info_api/gateway_creditcard_deauthorize_api_V1_0_1.pdf

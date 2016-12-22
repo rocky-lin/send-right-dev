@@ -13,6 +13,8 @@ use Auth;
 use Illuminate\Support\Facades\Input;
 use App\UserAccount; 
 use App\Account;
+use App\Subscription;
+use App\Activity;
 
 class RegisterController extends Controller
 {
@@ -104,7 +106,22 @@ class RegisterController extends Controller
          * Send registration confirmation to the email  
          */
          $user = User::find($newCreatedUser->id);  
-         $user->notify(new UserRegisteredNotification($user));     
+         $user->notify(new UserRegisteredNotification($user));
+
+
+        /**
+         * Create subscription
+         */
+
+
+        $subscription = Subscription::createNewSubscription($account->id);
+
+
+
+        Activity::createActivity( ['account_id'=> $account->id, 'table_name'=>'users', 'table_id'=> $newCreatedUser->id,  'action'=> 'New user successfully created!']  );
+        Activity::createActivity( ['account_id'=> $account->id, 'table_name'=>'accounts', 'table_id'=>$account->id, 'action'=> 'Your account successfully created!']  );
+        Activity::createActivity( ['account_id'=> $account->id, 'table_name'=>'subscriptions', 'table_id'=> $subscription ->id, 'action'=> 'User account trial subscription successfully created!']  );
+
 
          /*
           * return instance

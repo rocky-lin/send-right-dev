@@ -24,9 +24,15 @@
         ]); ?>
     </script>
 </head>
-<body data-ng-init="document"   > 
+<body data-ng-init="document"   >
+
+
      <input type="hidden" value="{{url('/')}}" id="url_home" />   
     <div id="app">
+
+
+
+
         <nav class="navbar navbar-default navbar-static-top">
             <div class="container">
                 <div class="navbar-header">
@@ -98,27 +104,20 @@
                     </ul>
                 </div>
             </div>
-        </nav>  
-        <div class='container'>
+        </nav>
+
+        dasfasd
+        @include('pages/include/subscription/subscription-status-message')
+        <div class='container test'>
+
+
+
             @yield('content')  
         </div>
     </div> 
 
 
 
-    
-
-
-
-
-
-
-        {{--   <footer class="footer">
-            <div class="container">
-                <br>
-                <p class="text-muted"> Copy right @ Send Right </p>
-            </div>
-        </footer> --}}
 
     <!-- Scripts src -->
         <script src="<?php print url('/'); ?>/public/js/src/jquery-3.1.1.min.js"></script>

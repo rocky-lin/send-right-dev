@@ -142,7 +142,7 @@ Route::group(['prefix' => 'user' , 'middleware' => 'auth' ], function() {
 	// responder
 
 		Route::get('auto-response/start/process', 'AutoResponseDetailsController@startResponse');
- 
+
 	// member
 		Route::get('profile', 'UserController@profile')->name('user.profile');
 		Route::get('billing', 'UserController@billing')->name('user.billing');
@@ -151,8 +151,12 @@ Route::group(['prefix' => 'user' , 'middleware' => 'auth' ], function() {
  
 	// user 
 	Route::post('update-password', 'UserController@updatePasswordPost')->name('user.update.password.post'); 
-	Route::post('update-account', 'UserController@updateAccountPost')->name('user.update.account.post'); 
+	Route::post('update-account', 'UserController@updateAccountPost')->name('user.update.account.post');
 
+
+	// billing
+
+	route::post('product/select/{product?}', 'ProductController@processSelectedProduct')->name('user.product.select');
 
 
 });   

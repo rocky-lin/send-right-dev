@@ -163,6 +163,7 @@ return [
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
 
+
         /*
          * Package Service Providers...
          */
@@ -180,8 +181,8 @@ return [
         App\Providers\RouteServiceProvider::class,
         Collective\Html\HtmlServiceProvider::class,
         Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class,
-        Laravel\Cashier\CashierServiceProvider::class, 
-
+        Laravel\Cashier\CashierServiceProvider::class,
+        App\Http\ViewComposers\ComposerServiceProvider::class,
     ],
 
     /*
