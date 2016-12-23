@@ -624,33 +624,38 @@ After function in sendright we can start connecting to the api
 ============ADD THIS TO TRELLO============
 
 list all the tasks that is need to do in the day
-1. Set default selected plan subscription - 10mins - d
-2. when signup should auto create subscription plan and set as free - 10mins - d
-3. display message that current user is in free trial mode - 10min - d
-4. fix warning if email is not confirmed, need to show globally - 10min - 5min - d
-5. when sign up create activity - 8min - 10min - d
-2. Disable other plans - 5min - d
-2. Change wording to upgrade instead of signup - 2min  - d
-3 .Display the product details under plan cards 5min   - d
-4. Set specific design in every subscription plan card - 5min - d
-5. display information in profile page - 15min - 17min
-6. display subscription plan in profile page    - 5min - 11min
-9. When trial ends and if the user still didn't pay then it should show a message above that says your trial period has expired please sign-up for a plan now. - 15min
+ Set default selected plan subscription
+ when signup should auto create subscription plan and set as free 
+ display message that current user is in free trial mode 
+ fix warning if email is not confirmed, need to show globally 
+  when sign up create activity 
+  Disable other plans 
+  Change wording to upgrade instead of signup
+ Display the product details under plan cards 5min
+ Set specific design in every subscription plan card 
+  display information in profile page 
+ display subscription plan in profile page
+When trial ends and if the user still didn't pay then it should show a message above that says your trial period has expired please sign-up for a plan now. 
 
 
 
-12. update billed at
-11. when signup to a plugin set upgrade button to unclickable - 10min
-10. When they sign up for a plan remove the message display above about telling them for trial - 5min
-11. When they subscribed to a plan then it should display the billing cycle - 30min
-7. In account page, when typing a password for " change password fields " error showing automatically and this is advisable to hide it every 5 seconds/or something redo code in
+ 
+when signup to a plugin set upgrade button to unclickable
+When they sign up for a plan remove the message display above about telling them for trial  
+When they subscribed to a plan then it should display the billing cycle  
+In account page, when typing a password for " change password fields " error showing automatically and this is advisable to hide it every 5 seconds/or something redo code in
 order to avoid display html text showing in " change password fields " even the update was for profile information.
-8. Set start and end time for trials it could be 1 month
-12. Pay2go documentation https://www.pay2go.com/dw_files/info_api/gateway_creditcard_deauthorize_api_V1_0_1.pdf
-13. Pay2go php coding https://github.com/jesus143/pay2go
-14. Start rendering fields html for payment
-15. Receive the response from pay2go after processed
-16. Set plan as subscribed and set cancel button is clickable to cancel subscription
+Set start and end time for trials it could be 1 month
+Pay2go documentation https://www.pay2go.com/dw_files/info_api/gateway_creditcard_deauthorize_api_V1_0_1.pdf
+Pay2go php coding https://github.com/jesus143/pay2go
+Start rendering fields html for payment
+ Receive the response from pay2go after processed
+Set plan as subscribed and set cancel button is clickable to cancel subscription
+
+
+
+work with installing, setup and debugging apis for pay2go and spgateway
+
 
 
 

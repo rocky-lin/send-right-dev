@@ -33,12 +33,10 @@
 
                     </table>
                 </div>
-                <div class="panel-footer">
-
-                    {{Form::open(['url'=>route('user.product.select'), 'method'=>'post'])}}
+                <div class="panel-footer"> 
+                    {{Form::open(['url'=>route('user.billing.confirm'), 'method'=>'post'])}}
                         <input type="hidden" name="name" value="{{$bronze['product']->name}}" />
-                        <button type="submit"  class="btn btn-info" > Upgrade </button>  1 month FREE trial</div>
-
+                        <button type="submit"  class="btn btn-info" > Upgrade </button>  1 month FREE trial</div> 
                     {{Form::close()}}
 
             </div>

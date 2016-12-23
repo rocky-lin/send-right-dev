@@ -18,8 +18,13 @@ class Product extends Model
     	return $this->hasMany('App\ProductDetail');
     }
 
+    public static function getProductByProductName($name) 
+    {
+        return Product::where('name', $name)->get()->first();  
+    }
     public static  function getProductDetails($product_id)
     {
         return self::find(1)->productDetails;
     }
+
 }

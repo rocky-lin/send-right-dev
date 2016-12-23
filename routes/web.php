@@ -43,6 +43,25 @@ Auth::routes();
 Route::get('/home', 'HomeController@index'); 
 Route::get('/home/test', 'HomeController@test'); 
 
+
+
+
+
+
+
+Route::post('cash/create', 'CashController@store');
+
+
+Route::get('admin/order', 'admin\OrderController@index');
+Route::get('admin/order/requestPay/{order_id}', 'admin\OrderController@requestPay');
+
+
+
+
+
+
+
+
 Route::group(['prefix' => 'user' , 'middleware' => 'auth' ], function() {    
 
 	// when confirm user registration
@@ -145,20 +164,33 @@ Route::group(['prefix' => 'user' , 'middleware' => 'auth' ], function() {
 
 	// member
 		Route::get('profile', 'UserController@profile')->name('user.profile');
+
 		Route::get('billing', 'UserController@billing')->name('user.billing');
+
 		Route::get('account', 'UserController@account')->name('user.account');
 		Route::get('change-password', 'UserController@changePassword')->name('user.change-password'); 
- 
+ 	
+	 	// bilig 
+		/* 1、place table
+		 * 2、payment page
+		 * 3、Pay2go page
+		 * 4、thanks you page
+		 */    
+		
+		route::post('billing/confirm', 'SubscriptionController@confirm')->name('user.billing.confirm'); 
+		route::get('billing/success', 'SubscriptionController@thankYou')->name('user.billing.thankYou'); 
+		
+
+		 
+
+
+
 	// user 
 	Route::post('update-password', 'UserController@updatePasswordPost')->name('user.update.password.post'); 
 	Route::post('update-account', 'UserController@updateAccountPost')->name('user.update.account.post');
-
-
-	// billing
-
-	route::post('product/select/{product?}', 'ProductController@processSelectedProduct')->name('user.product.select');
-
-
+ 
+	// billing 
+	route::post('product/select/{product?}', 'ProductController@processSelectedProduct')->name('user.product.select');  
 });   
 
 
@@ -200,6 +232,13 @@ Route::group(['prefix' => 'user' , 'middleware' => 'auth' ], function() {
 
 
  
+// case testing
+Route::get('cash', 'CashController@index');
+Route::get('cash/notify-url', 'CashController@notifyUrl');
+Route::get('cash/return-url', 'CashController@returnUrl');
+
+
+
 Route::get('send-slack-notification', function(){
 	$user = App\User::find(1); 
 	$user->notify(new App\Notifications\PaymentDeadlineNotification());

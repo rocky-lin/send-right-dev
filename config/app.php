@@ -183,6 +183,7 @@ return [
         Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class,
         Laravel\Cashier\CashierServiceProvider::class,
         App\Http\ViewComposers\ComposerServiceProvider::class,
+        Maras0830\Pay2Go\Providers\Pay2GoServiceProvider::class,
     ],
 
     /*
@@ -234,6 +235,7 @@ return [
         'Html' => Collective\Html\HtmlFacade::class, 
         'Excel' => Maatwebsite\Excel\Facades\Excel::class,
         'Input' => Illuminate\Support\Facades\Input::class,
+        'Pay2Go' => Maras0830\Pay2Go\Pay2Go::class,
     ],
 
 ];

@@ -61,3 +61,20 @@ pass: wklk157#1
 Email:
 jesus@sendright.net
 mQ.oe-gJo@FU
+
+
+PAYMENT
+https://www.spgateway.com/main/login_center/single_login   
+https://ccore.spgateway.com/MPG/mpg_gateway 
+53769992 - 企業會員帳號(公司統一編號) - Corporate Account Number (Company Uniform Number) 
+SSC700902 - 管理者帳號 - Administrator account 
+Ssc@70963 - 管理者密碼 - The administrator password
+ 
+
+ 
+
+
+My Website：
+url：http://supershortcut.com/wp-login.php
+account：jesus
+pass: JKKNdkcHEHQ5zHFkuJK*RaBp
