@@ -18,6 +18,7 @@ class CreateInvoicesTable extends Migration
             $table->integer('account_id')->unsigned();
             $table->integer('product_id')->unsigned();
             $table->integer('total_amount')->unsigned();
+            $table->text('response')->nullable();
             $table->timestamps();
         });
     }

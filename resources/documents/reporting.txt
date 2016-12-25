@@ -668,6 +668,21 @@ work with installing, setup and debugging apis for pay2go and spgateway
 
 
 
+update for December 23, 2016
+user able to visit the billing page and see that they can subscribe to a card
+system will validate if subscribed or not
+when user clicked subscribed they will redirect to filling information and confirmation of payment
+user will be redirect to third party tool name "spgateway" and there fill the credit card information and start validating
+after the payment succeeded, we received the response and update our the user subscription and create invoice in our database
+remove the message above the says "you are in trial period please subscribe"
+
+update for December 26, 2016
+Design thank you page
+check the trial period cycle and when this will be expired
+Don't allow user to subscribe again if they are currently in subscribed status
+If they currently subscribed, put something design to a card that's says "Current Plan"
+Display payment cycle
+Create cronjobs command to check subscriptions of the user if they reach the 1 month bill or not
 
 
 

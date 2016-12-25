@@ -1,8 +1,8 @@
   <html>
         <head>
             <title>redirect pay2go ...</title>
-        </head>
-
+        </head> 
+        
         <body>
             {!! $order !!}
         </body>

@@ -13,6 +13,7 @@ class Invoice extends Model
    		'account_id',
 		'product_id',
 		'total_amount',
+		'response'
 	];
  
 	public function account()
@@ -23,4 +24,15 @@ class Invoice extends Model
 	{
 		return $this->belongsTo('App\Product'); 
 	} 
+	public static function getNewOrderId()
+	{
+		$orderId = Self::orderBy('id', 'desc')->first()->id;
+ 		$orderId++;   
+ 		return $orderId; 
+	}
+	public static function createNewInvoice($invoice=[])
+	{
+		// dd($invoice);
+		return self::create($invoice);
+	}
 }

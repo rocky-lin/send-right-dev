@@ -44,7 +44,7 @@ class CashController extends Controller
 		}
  	
 
- 		$post = '{"Status":"SUCCESS","Message":"\u6388\u6b0a\u6210\u529f","Result":"{\"MerchantID\":\"MS3709347\",\"Amt\":1649,\"TradeNo\":\"16122311314251125\",\"MerchantOrderNo\":\"201608256888\",\"RespondType\":\"JSON\",\"CheckCode\":\"3DF69EB65888EA6A8E74FE0A2BE312DAAF02CD20059B629AADEBF8859A801E4A\",\"IP\":\"112.210.113.62\",\"EscrowBank\":\"KGI\",\"ItemDesc\":\"Subscription to send right\",\"IsLogin\":true,\"PaymentType\":\"CREDIT\",\"PayTime\":\"2016-12-23 11:31:42\",\"RespondCode\":\"00\",\"Auth\":\"930637\",\"Card6No\":\"400022\",\"Card4No\":\"1111\",\"Exp\":\"1705\",\"TokenUseStatus\":0,\"InstFirst\":1649,\"InstEach\":0,\"Inst\":0,\"ECI\":\"\"}"}'; 
+ 		$post = '{"Status":"SUCCESS","Message":"\u6388\u6b0a\u6210\u529f","Result":"{\"MerchantID\":\"MS3709347\",\"Amt\":836,\"TradeNo\":\"16122315361971592\",\"MerchantOrderNo\":\"6\",\"RespondType\":\"JSON\",\"CheckCode\":\"866E6361DFB7633B56819F8759F280231FFDE3D4B8367B5071812D8E85C75149\",\"IP\":\"112.210.113.62\",\"EscrowBank\":\"KGI\",\"ItemDesc\":\"Bronze\",\"IsLogin\":true,\"PaymentType\":\"CREDIT\",\"PayTime\":\"2016-12-23 15:36:19\",\"RespondCode\":\"00\",\"Auth\":\"930637\",\"Card6No\":\"400022\",\"Card4No\":\"1111\",\"Exp\":\"1705\",\"TokenUseStatus\":0,\"InstFirst\":836,\"InstEach\":0,\"Inst\":0,\"ECI\":\"\"}"}'; 
 
 
 

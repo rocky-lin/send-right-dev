@@ -22,8 +22,13 @@ class Subscription extends Model
 		'trial_start_at',
 		'trial_end_at',
         'status'
-    ];  
- 
+    ];
+
+
+    protected static $statusBilled = 3;
+    protected static $statusFree = 2;
+    protected static $statusExpired = 1;
+
     public function account() 
     {
     	return $this->belongsTo('App\Account'); 
@@ -46,9 +51,24 @@ class Subscription extends Model
     {
         return self::create(['account_id'=>$account_id, 'product_id'=>Product::first()->id, 'trial_start_at'=>Carbon::now(), 'trial_end_at'=>Carbon::now()->addMonth(1)]);
     }
-    public static function getProductName() {
-
+    public static function createNewSubscriptionCustom($subscription) {
+        self::create($subscription);
     }
+
+
+
+    public static function getStatusFree() {
+        return self::$statusFree;
+    }
+    public static function getStatusBilled() {
+        return self::$statusBilled;
+    }
+    public static function getStatusExpired() {
+        return self::$statusExpired;
+    }
+
+
+
 
 
     public static function setAddOneMonthSubscription() {}

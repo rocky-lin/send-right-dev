@@ -178,9 +178,10 @@ Route::group(['prefix' => 'user' , 'middleware' => 'auth' ], function() {
 		 */    
 		
 		route::post('billing/confirm', 'SubscriptionController@confirm')->name('user.billing.confirm'); 
-		route::get('billing/success', 'SubscriptionController@thankYou')->name('user.billing.thankYou'); 
+		route::post('billing/confirm/proceed', 'SubscriptionController@confirmProceed')->name('user.billing.confirm.proceed'); 
+		route::get('billing/success', 'SubscriptionController@success')->name('user.billing.success'); 
 		
-
+		
 		 
 
 
