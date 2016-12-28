@@ -176,5 +176,17 @@ function copyToClipboard(elem) {
 	})
 
   // alert( "Load was performed." ); 
- 
+ 	 
 });  
+
+
+$(document).ready(function(){
+	 	// Save optin settings in campaign editor
+ 	$('#save_optin_settings').on('click', function() { 
+        var $this = $(this); 
+        $this.button('loading'); 
+        setTimeout(function() {
+           $this.button('reset');
+        }, 8000);
+	});
+})

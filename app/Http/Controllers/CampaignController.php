@@ -45,6 +45,9 @@ class CampaignController extends Controller
         } else if(Input::get('ck') == 'auto responder')  {  
             // session('campaign_kind', '');
            $_SESSION['campaign']['kind'] = 'auto responder';
+        } else if(Input::get('ck') == 'mobile email optin')  {
+            // session('campaign_kind', '');
+           $_SESSION['campaign']['kind'] = 'mobile email optin';
         } else {
             if(Input::get('action') != 'edit') {
                 return redirect()->route('user.campaign.create.start')->with('status', 'please select campaign type');
@@ -81,8 +84,11 @@ class CampaignController extends Controller
             $campaign['title'] = (!empty($_SESSION['campaign']['name'])) ? $_SESSION['campaign']['name'] : $campaign; 
         }
 
-        $defaultListIds = Campaign::stringListIdsremoveBracket($defaultListIds); 
-        return view('pages.campaign.campaign-connect-list', compact('campaign', 'defaultListIds', 'action', 'id'));
+        $defaultListIds = Campaign::stringListIdsremoveBracket($defaultListIds);
+
+        $kind =   (!empty($_SESSION['campaign']['kind'])) ? $_SESSION['campaign']['kind'] : '';
+
+        return view('pages.campaign.campaign-connect-list', compact('campaign', 'defaultListIds', 'action', 'id', 'kind'));
     }
     public function createValidate(ValidateCampaignList $request)
     {   
@@ -90,14 +96,24 @@ class CampaignController extends Controller
         $_SESSION['campaign']['name']     = $request->get('campaignName');
         $_SESSION['campaign']['listIds']  =  $request->get('list_ids');
         $_SESSION['campaign']['template'] =  'Default'; //$request->get('template');
+         $_SESSION['campaign']['kind']  = $request->get('kind'); 
+
+
         // print  $_SESSION['campaign']['listIds'];
         // 
         // print " list ids ".  $_SESSION['campaign']['listIds'];
         // exit; 
         $listIdsTotal = count(explode(',', $request->get('list_ids'))); 
         // dd($listIdsTotal); 
-        if( $listIdsTotal < 2 ) {
+        if( $_SESSION['campaign']['kind']  == 'mobile email optin') {
+
+            // print "successfully added email optin";
+            // return Redirect::to();
+            return redirect('extension/campaign/index.php');
+
+        } elseif( $listIdsTotal < 2 ) {
             return Redirect::back()->withInput(Input::all())->with('status', 'Please select at least 1 list.');
+            
         } else { 
             return redirect(route('user.campaign.create.sender.view'));
         }

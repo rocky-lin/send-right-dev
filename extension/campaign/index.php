@@ -21,9 +21,16 @@ $userName=$db->getUserName($_SESSION["UserId"]);
 // print "test = " . Auth::user()->name; 
 
 
+
+
+ 
+
 // print "url " . $_SESSION['url']['hoem'];
 $home_url =  $_SESSION['url']['hoem'];
+$kind = $_SESSION['campaign']['kind']; 
 
+
+// echo "kind " . $kind; 
 // print "path " . route('user.campaign.create.settings');
 ?>
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -70,40 +77,112 @@ $home_url =  $_SESSION['url']['hoem'];
     </script>
 </head> 
 
-<body>
-	<div class="bal-header" style="padding:13px;">      
 
-                    <div class="pull-right"> 
-                        &nbsp; &nbsp; 
-                        <button class="btn btn-info" id="campaignComposeNext" >Save and Next</button>    
+
+
+
+<body> 
+ 
+    <!-- Email OptIn PopUp Container  -->
+    <div class="container">  
+        <div class="modal fade" id="emailOptIn" role="dialog" style="z-index: 200px">
+            <div class="modal-dialog  ">  
+              <div class="modal-content">
+                <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal">&times;</button>
+                  <h4 class="modal-title">Mobile Optin Settings</h4>
+                </div>
+                <div class="modal-body">  
+
+                    <div class="form-group row">
+                        <label for="example-text-input" class="col-xs-2 col-form-label">OptIn Url</label>
+                        <div class="col-xs-10">
+                            <input class="form-control" type="text" value="" id="" placeholder="example" >
+                            <div style="padding-top:5px;">
+                                <small id="emailHelp" class="form-text text-muted"> <?php print url('optin/example');  ?></small>
+                            </div> 
+                        </div>
                     </div>
-                <div class="pull-right">
-                    <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#campaign-compose-select-contact-collapse" aria-expanded="false" aria-controls="campaign-compose-select-contact-collapse"> 
-                        Select Contact Column
-                    </button>
-                    <div class="collapse" id="campaign-compose-select-contact-collapse">
-                          <div class="well" id="campaign-compose-select-contact-row-name" style="text-align: left;" >
-                                <ul> 
-                                    <li> <input type="button" value="First Name" table-row-name-id="contact-row-name-first-name" /> </li>
-                                    <li>  <input type="button" value="Last Name" table-row-name-id="contact-row-name-last-name" />  </li>
-                                    <li>  <input type="button" value="Email" table-row-name-id="contact-row-name-email" />  </li> 
-                                    <li>  <input type="button" value="Location" table-row-name-id="contact-row-name-location" />  </li>
-                                    <li>  <input type="button" value="Phone Number" table-row-name-id="contact-row-name-phone-number" />  </li>
-                                    <li>  <input type="button" value="Telphone Number" table-row-name-id="contact-row-name-telephone-number" />  
-        </li>
-                                   
-                                </ul> 
-                                <div style="position:absolute; margin-top:-2000000000px">  
-                                    <input type="text" id="contact-row-name-first-name" value="{{first_name}}" />
-                                    <input type="text" id="contact-row-name-last-name" value="{{last_name}}" />
-                                    <input type="text" id="contact-row-name-email" value="{{email}}" />
-                                    <input type="text" id="contact-row-name-location" value="{{location}}" />
-                                    <input type="text" id="contact-row-name-phone-number" value="{{phone_number}}" />
-                                    <input type="text" id="contact-row-name-telephone-number" value="{{telephone_number}}" />   
-                                </div>
-                          </div>
+
+                    <div class="form-group row">
+                        <label for="example-text-input" class="col-xs-2 col-form-label">OptIn Subject</label>
+                        <div class="col-xs-10">
+                            <input class="form-control" type="text" value="" id="" placeholder="OptIn Subject" > 
+                        </div>
                     </div>
-                </div> 
+
+                    <div class="form-group row">
+                        <label for="example-text-input" class="col-xs-2 col-form-label">OptIn Receiver Name</label>
+                        <div class="col-xs-10">
+                            <input class="form-control" type="text" value="" id="" placeholder="OptIn Receiver Name"> 
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label for="example-text-input" class="col-xs-2 col-form-label">OptIn Receiver Email</label>
+                        <div class="col-xs-10">
+                            <input class="form-control" type="text" value="" id="" placeholder="OptIn Receiver Email"> 
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label for="example-text-input" class="col-xs-2 col-form-label">OptIn Response Url</label>
+                        <div class="col-xs-10">
+                            <input class="form-control" type="text" value="" id="" placeholder="OptIn Response Url" > 
+                        </div>
+                    </div>  
+
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-default" data-dismiss="modal">Close</button> 
+                  <button type="button" class="btn btn-primary btn-lg " id="save_optin_settings" data-loading-text="<i class='fa fa-circle-o-notch fa-spin'></i> Processing Order">Submit Order</button>
+                </div>
+              </div> 
+            </div>
+        </div>
+    </div> 
+
+ 
+
+	<div class="bal-header container" style="padding:13px;">      
+
+                <div class="pull-right"> 
+                    &nbsp; &nbsp; 
+                    <button class="btn btn-info" id="campaignComposeNext" >Save and Next</button>    
+                </div>  
+                <?php if($kind == 'mobile email optin'): ?>
+                    <div class="pull-right">  
+                        <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#emailOptIn">Email Optin Settings</button> 
+                    </div>   
+                <?php else: ?>    
+                    <div class="pull-right">
+                        <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#campaign-compose-select-contact-collapse" aria-expanded="false" aria-controls="campaign-compose-select-contact-collapse"> 
+                            Select Contact Column
+                        </button>
+                        <div class="collapse" id="campaign-compose-select-contact-collapse">
+                              <div class="well" id="campaign-compose-select-contact-row-name" style="text-align: left;" >
+                                    <ul> 
+                                        <li> <input type="button" value="First Name" table-row-name-id="contact-row-name-first-name" /> </li>
+                                        <li>  <input type="button" value="Last Name" table-row-name-id="contact-row-name-last-name" />  </li>
+                                        <li>  <input type="button" value="Email" table-row-name-id="contact-row-name-email" />  </li> 
+                                        <li>  <input type="button" value="Location" table-row-name-id="contact-row-name-location" />  </li>
+                                        <li>  <input type="button" value="Phone Number" table-row-name-id="contact-row-name-phone-number" />  </li>
+                                        <li>  <input type="button" value="Telphone Number" table-row-name-id="contact-row-name-telephone-number" />  
+                                    </li> 
+                                    </ul> 
+                                    <div style="position:absolute; margin-top:-2000000000px">  
+                                        <input type="text" id="contact-row-name-first-name" value="{{first_name}}" />
+                                        <input type="text" id="contact-row-name-last-name" value="{{last_name}}" />
+                                        <input type="text" id="contact-row-name-email" value="{{email}}" />
+                                        <input type="text" id="contact-row-name-location" value="{{location}}" />
+                                        <input type="text" id="contact-row-name-phone-number" value="{{phone_number}}" />
+                                        <input type="text" id="contact-row-name-telephone-number" value="{{telephone_number}}" />   
+                                    </div>
+                              </div>
+                        </div>
+                    </div> 
+                <?php endif;  ?>
+
 
 	   </div>
 <?php 
