@@ -73,5 +73,25 @@ class Helper extends Model
 
         return $response;
     }
+
+    public static function getDaysDifferenceBetween2DatTime($aheadDateTime)
+    {
+        $dateTimeEndAt = Helper::createDateTime($aheadDateTime);
+        $now = Carbon::now();
+
+        if($now < $aheadDateTime) {
+            $difference = ($dateTimeEndAt->diff($now)->days < 1) ? 'today' : $dateTimeEndAt->diffInDays($now);
+            if ($difference > 31) {
+                return 0;
+            } else {
+                return $difference;
+            }
+        } else {
+            return 0; 
+        }
+
+    }
+
+
  
 }

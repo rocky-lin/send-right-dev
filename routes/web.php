@@ -168,8 +168,11 @@ Route::group(['prefix' => 'user' , 'middleware' => 'auth' ], function() {
 		Route::get('billing', 'UserController@billing')->name('user.billing');
 
 		Route::get('account', 'UserController@account')->name('user.account');
-		Route::get('change-password', 'UserController@changePassword')->name('user.change-password'); 
- 	
+
+		Route::get('change-password', 'UserController@changePassword')->name('user.change-password');
+		Route::post('update-billing-address', 'UserController@updateBillingAddress')->name('user.update-billing-address');
+		Route::post('update-billing-credit-card', 'UserController@updateBillingCreditCard')->name('user.update-billing-credit-card');
+
 	 	// bilig 
 		/* 1、place table
 		 * 2、payment page

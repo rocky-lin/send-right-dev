@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\View;
 use App\Account;
 use App\User;
 use Auth;
+use App\Subscription;
  
 class AppServiceProvider extends ServiceProvider
 {
@@ -18,7 +19,10 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         view()->composer('*', function ($view) {  
-            if (Auth::user() ) {  
+            if (Auth::user() ) {
+                  Subscription::updateSubscriptionExpired();
+                  //                print"test";
+                  //                print "total days remaining for your billed account " . Subscription::getRemainingDaysFromSubscription();
                 $view->with('subscription_status', Account::getSubscriptionStatus()); 
             }
         });

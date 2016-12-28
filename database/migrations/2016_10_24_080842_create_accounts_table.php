@@ -19,9 +19,22 @@ class CreateAccountsTable extends Migration
             $table->string('company')->nullable();  
             $table->string('time_zone')->nullable();  
             $table->string('payment_api_id')->nullable();
-            $table->string('card_brand')->nullable();
-            $table->string('card_last_four')->nullable();
-            $table->timestamp('trial_ends_at')->nullable();
+
+            // card info
+            $table->string('billing_card_holder_name')->nullable();
+            $table->string('billing_card_number')->nullable();
+            $table->string('billing_card_month_expiry')->nullable();
+            $table->string('billing_card_year_expiry')->nullable();
+            $table->string('billing_card_cvv')->nullable();
+
+            // billing address
+            $table->string('billing_address')->nullable();
+            $table->string('billing_address_street')->nullable();
+            $table->string('billing_address_line_2')->nullable();
+            $table->string('billing_address_city')->nullable();
+            $table->string('billing_address_state')->nullable();
+            $table->string('billing_address_zip_code')->nullable();
+
             $table->timestamps();
         });
     }

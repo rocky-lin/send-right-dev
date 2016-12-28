@@ -804,7 +804,7 @@ app.controller('myUserAccountCtrl', ['$scope', '$filter', '$http', '$window', fu
                 }, function errorCallback(response) { 
                     alert("something wrong! please contact send right support. Thank you!");
                 }); 
-            } 
+            };
         // Change account information   
             $scope.updateAccount = function() {  
                 console.log("update account now");  
@@ -823,15 +823,39 @@ app.controller('myUserAccountCtrl', ['$scope', '$filter', '$http', '$window', fu
                     // console.log("something wrong! please contact send right support. Thank you!");
                      $scope.accountStatus(true, 'danger', 'something wrong'); 
                 }); 
-            }      
+            };
             // add data to fields as initialized
             $scope.$watch('accountInfoInit', function(newValue, oldValue)   { 
                $scope.user_full_name =  newValue.name; 
                 $scope.user_email = newValue.email;
                 $scope.user_company = newValue.company;
                 $scope.user_time_zome = newValue.time_zone;
-                $scope.user_name = newValue.user_name;  
-                 // $scope.accountInfoStatusShow  = false;  
+                $scope.user_name = newValue.user_name;
+                //console.log(" billing address " + newValue.details.billing_address);
+                // $scope.accountInfoStatusShow  = false;
+
+
+                // billing address
+                $scope.address = newValue.details.billing_address;
+                $scope.streetAddress = newValue.details.billing_address_street;
+                $scope.addressLine2 = newValue.details.billing_address_line_2;
+                $scope.city = newValue.details.billing_address_city;
+                $scope.state = newValue.details.billing_address_state;
+                $scope.zipCode = newValue.details.billing_address_zip_code;
+
+
+
+
+                // credit card
+
+                $scope.billing_card_holder_name = newValue.details.billing_card_holder_name;
+                $scope.billing_card_number = newValue.details.billing_card_number;
+                $scope.billing_card_month_expiry = newValue.details.billing_card_month_expiry;
+                $scope.billing_card_year_expiry = newValue.details.billing_card_year_expiry;
+                $scope.billing_card_cvv = newValue.details.billing_card_cvv;
+
+
+
             });
             console.log("account controller loaded - angular js");  
  
@@ -842,6 +866,66 @@ app.controller('myUserAccountCtrl', ['$scope', '$filter', '$http', '$window', fu
 
                $scope.accountInfoUpdateLoaderStyle = {'display': 'none'}; 
             }
+
+        // Update billing address
+
+            $scope.updateBillingAddress = function() {
+
+                console.log(" address " + $scope.address);
+                 console.log($scope.streetAddress +
+                 $scope.addressLine2 +
+                 $scope.city +
+                 $scope.state +
+
+                 $scope.zipCode);
+
+                    $http({
+                        method: 'POST',
+                        url:  obj.siteUrl + '/user/update-billing-address',
+                        data: { billing_address:$scope.address,billing_address_street:$scope.streetAddress,billing_address_line_2:$scope.addressLine2, billing_address_city:$scope.city,
+                        billing_address_state:$scope.state, billing_address_zip_code:$scope.zipCode},
+                        headers : { 'X-XSRF-TOKEN' : '2sltge4Q2lVTdF8dFVTjyABHm1Mdqk2mBA59k4X8' },
+                    }).then(function successCallback(response) {
+
+                        alert('Successfully updated billing address');
+                        $scope.new_password_text = response.data;
+                        console.log(response);
+                        //$scope.accountStatus(true, 'info', response);
+                    }, function errorCallback(response) {
+                        // console.log("something wron! please contact send right support. Thank you!");
+                        $scope.accountStatus(true, 'danger', 'something wrong');
+                    });
+            };
+
+            // Update credit card info
+            $scope.updateCreditCardDetails  = function() {
+                $http({
+                    method: 'POST',
+                    url:  obj.siteUrl + '/user/update-billing-credit-card',
+                    data: {
+                        billing_card_holder_name:$scope.billing_card_holder_name,
+                        billing_card_number:$scope.billing_card_number,
+                        billing_card_month_expiry:$scope.billing_card_month_expiry,
+                        billing_card_year_expiry:$scope.billing_card_year_expiry,
+                        billing_card_cvv:$scope.billing_card_cvv
+                    },
+                    headers : { 'X-XSRF-TOKEN' : '2sltge4Q2lVTdF8dFVTjyABHm1Mdqk2mBA59k4X8' },
+                }).then(function successCallback(response) {
+
+                    alert('Successfully updated credit card info');
+                    $scope.new_password_text = response.data;
+                    console.log(response);
+                    //$scope.accountStatus(true, 'info', response);
+                }, function errorCallback(response) {
+                    // console.log("something wrong! please contact send right support. Thank you!");
+                    $scope.accountStatus(true, 'danger', 'something wrong');
+                });
+            };
+
+
+
+
+
 }]);
 
 // app.directive('initModel', function($compile) {

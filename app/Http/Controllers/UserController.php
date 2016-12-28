@@ -8,15 +8,17 @@ use App\Activity;
 use Auth; 
 use App\Account;
 use App\Product;
+use App\Subscription;
 
 class UserController extends Controller
 {
     public function profile()
     {
+        $subscriptionRemainingDaysBilled = Subscription::getRemainingDaysFromSubscription();
+        $subscriptionRemainingDaysTrial = Subscription::getRemainingDaysFromTrial();
 
-
-
-
+        //        print "<pre>";
+        //        print_r($subscription);
         $account = Account::find(User::getUserAccount());
         $userInfo['user_name'] = $account->user_name;
         $userInfo['company']   = $account->company;
@@ -26,7 +28,7 @@ class UserController extends Controller
         $userInfo['subscription_name'] = User::getSubscriptionName();
 
 
-    	return view('pages/member/profile', compact('userInfo'));
+    	return view('pages/member/profile', compact('userInfo', 'subscriptionRemainingDaysBilled', 'subscriptionRemainingDaysTrial'));
     }
     public function account() 
     {
@@ -35,8 +37,8 @@ class UserController extends Controller
         $userAccount['email']     = Auth::user()->email; 
         $userAccount['user_name'] = Account::getUserName(); 
         $userAccount['company']   = Account::getCompanyName(); 
-        $userAccount['time_zone'] = Account::getTimeZone();   
-
+        $userAccount['time_zone'] = Account::getTimeZone();
+        $userAccount['details'] = Account::find(User::getUserAccount());
         $userAccount = json_encode($userAccount);
         return view('pages/member/account', compact('userAccount'));   
 
@@ -47,15 +49,14 @@ class UserController extends Controller
 
 
         $bronze['product'] = Product::first();
+        // dd(  $bronze['product'] );
         $bronze['product']['details'] = Product::getProductDetails(Product::first()->id);
 
-
-
-
+ 
     //       Product::find(1)
 
-
-    	return view('pages/member/billing', compact('bronze'));
+        $subscriptionStatus =  Account::getSubscriptionStatus(); 
+    	return view('pages/member/billing', compact('bronze', 'subscriptionStatus'));
     } 
     public function changePassword() 
     {
@@ -113,4 +114,31 @@ class UserController extends Controller
         Activity::createActivity(['table_name'=>'accounts', 'table_id'=>User::getUserAccount(), 'action'=>$accountAction]); 
         // print "Your account password successfully updated, try logout and log in now!";  
     }
+
+    public function updateBillingAddress(Request $request)
+    {
+        print "updated account id" . User::getUserAccount();
+        //        dd($request->all());
+        Account::where('id',User::getUserAccount())->update([
+            'billing_address'=>$request->get('billing_address'),
+            'billing_address_street'=>$request->get('billing_address_street'),
+            'billing_address_line_2'=>$request->get('billing_address_line_2'),
+            'billing_address_city'=>$request->get('billing_address_city'),
+            'billing_address_state'=>$request->get('billing_address_state'),
+            'billing_address_zip_code'=>$request->get('billing_address_zip_code'),
+        ]);
+    }
+     public function updateBillingCreditCard(Request $request)
+    {
+//        dd($request->all());
+        Account::where('id',User::getUserAccount())->update([
+            'billing_card_holder_name'=>$request->get('billing_card_holder_name'),
+            'billing_card_number'=>$request->get('billing_card_number'),
+            'billing_card_month_expiry'=>$request->get('billing_card_month_expiry'),
+            'billing_card_year_expiry'=>$request->get('billing_card_year_expiry'),
+            'billing_card_cvv'=>$request->get('billing_card_cvv')
+        ]);
+
+    }
+
 }

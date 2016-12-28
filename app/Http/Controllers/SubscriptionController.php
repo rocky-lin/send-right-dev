@@ -78,7 +78,7 @@ class SubscriptionController extends Controller
 							 'table_id' =>   $invoiceCreateStatus->id,
 							 'action' => 'New invoice created',
 					 ]);
-					 print "successfully created invoice";
+//					 print "successfully created invoice";
 				 }
 
 				 // create or update subscription
@@ -90,7 +90,7 @@ class SubscriptionController extends Controller
 				 ]);
 
 				 if($subscriptionUpdate) {
-					 print "Subscription successfully updated";
+//					 print "Subscription successfully updated";
 					 Activity::createActivity([
 							 'table_name' => 'subscriptions',
 							 'table_id' =>   Account::getSubscriptionId(),
@@ -102,9 +102,9 @@ class SubscriptionController extends Controller
 				// $user->foo = Input::get('foo');
 				// $user->save();
 
-    	 		 print "success now";
+//    	 		 print "success now";
 			 } else {
-		 		 print "failed now";
+//		 		 print "failed now";
 		 	}
     	 return view('pages/subscription/thank-you');
     }

@@ -13,26 +13,28 @@ class Pay2GoModel extends Model
 	protected $response = [];
 	protected $productName = '';
 	protected $productAmount = '';
+	protected $amount = 0;
 
 
 	public function loadPaymentResponse($response) 
 	{ 
-		print "<h2>Thank you page!</h2>"; 
-		print "<pre> post";  
+		//		print "<h2>Thank you page!</h2>";
+//				print "<pre> post";
  		$response = json_decode($response, true); 
  		$response['Result'] = json_decode($response['Result'], true); 
- 		print "<pre>"; 
-
+//		 		print "</pre>";
  		$this->response = $response;
 
-		print_r($this->response);
+//				print_r($this->response);
 
-		print_r(serialize($this->response));
+//				print_r(serialize($this->response));
+//		print "</pre>";
 
  		$this->status = strtolower($response['Status']);  
  		$this->productName = strtolower($response['Result']['ItemDesc']);
  		$this->productAmount = strtolower($response['Result']['Amt']);
 	}
+
 
 	public function getStatus() { return $this->status; }
 	public function getProductName() { return $this->productName; }

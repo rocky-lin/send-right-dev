@@ -24,7 +24,7 @@ class CreateSubscriptionsTable extends Migration
             $table->integer('quantity')->default(0);
             $table->timestamp('trial_start_at')->nullable();
             $table->timestamp('trial_end_at')->nullable();
-            $table->integer('status')->default(2); // 1 - expired,  2 - free, 3 - billed
+            $table->integer('status')->default(2); // 1 - expired,  2 - free, 3 - billed, 4 trial expired
             $table->timestamps();
         });
     }

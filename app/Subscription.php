@@ -6,6 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 use App\Product;
 use Carbon\Carbon;
+use App\Account;
+use App\Helper;
 
 class Subscription extends Model
 {
@@ -54,27 +56,66 @@ class Subscription extends Model
     public static function createNewSubscriptionCustom($subscription) {
         self::create($subscription);
     }
-
-
-
-    public static function getStatusFree() {
+    public static function getRemainingDaysFromSubscription()
+    {
+        $subscription = Account::getSubscription();
+        $totalDays =  Helper::getDaysDifferenceBetween2DatTime($subscription->bill_end_at);
+        return $totalDays;
+    }
+    public static function getRemainingDaysFromTrial()
+    {
+        $subscription = Account::getSubscription();
+        $totalDays =  Helper::getDaysDifferenceBetween2DatTime($subscription->trial_end_at);
+        return $totalDays;
+    }
+    public static function getStatusFree()
+    {
         return self::$statusFree;
     }
-    public static function getStatusBilled() {
+    public static function getStatusBilled()
+    {
         return self::$statusBilled;
     }
-    public static function getStatusExpired() {
+    public static function getStatusExpired()
+    {
         return self::$statusExpired;
     }
 
+    public static function updateSubscriptionExpired()
+    {
 
+//        print "<br> remaining subscription " . self::getRemainingDaysFromSubscription();
+//        print "<br> remaining trial subscription " . self::getRemainingDaysFromTrial();
 
+        $subscriptionId = Account::getSubscriptionId();
+        if(!empty(Account::getSubscription()->trial_end_at)) {
 
+            if (self::getRemainingDaysFromSubscription() == 0){
+//                print "<br>status = 1 successfully  updated";
+                return Subscription::find($subscriptionId)->update(['status' => 1]);
+            } else if (self::getRemainingDaysFromSubscription() > 0){
+//                print "<br>status = 3 successfully  updated";
+                return Subscription::find($subscriptionId)->update(['status'=>3]);
+                //update  status 3
+            }
+            // update status 1
+        } else {
+
+            if (self::getRemainingDaysFromTrial() == 0) {
+//                print "<br>status = 1 successfully  updated";
+                return Subscription::find($subscriptionId)->update(['status'=>4]);
+            }
+        }
+            // update status 1
+
+    }
 
     public static function setAddOneMonthSubscription() {}
     public static function setAddOneMonthSubscriptionAlreadySubscribed() {}
     public static function setCancelSubscription() {}
     public static function setStatusSubscription() {}
+
+
 
 
 
