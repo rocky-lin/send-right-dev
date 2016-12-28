@@ -5,7 +5,9 @@
 /.
 /.zip
 .zip
-.env  
+.env
+/resources/documents/reporting.txt
+/resources/documents/account informations.txt
 extension/form/create/editor/forms  
  
  # Windows image file caches
