@@ -55,17 +55,21 @@
                     </tr>
                     <tr>
                       <th style="width:20%">
-                        Subscription plan:
+                        Subscription plan billed:
                       </th>
-                      <td>  {{ $userInfo['subscription_name'] or  'free'   }} </td>
+                      <td>  {{ $userInfo['subscription_name'] . ' remaining days till next bill cycle ' . $subscriptionRemainingDaysBilled . ' days'  }}  </td>
                     </tr>
-
+                 <tr>
+                      <th style="width:20%">
+                        Subscription plan free:
+                      </th>
+                      <td>  {{ $userInfo['subscription_name'] . ' your free subscription will expire in ' . $subscriptionRemainingDaysTrial . ' days'  }}  </td>
+                    </tr>
 
                     </tbody>
                   </table>
-                  
-                  <a href="#" class="btn btn-primary">My Sales Performance</a>
-                  <a href="#" class="btn btn-primary">Team Sales Performance</a>
+
+                  <a href="{{url('user/account')}}" class="btn btn-primary">Edit Account</a>
                 </div>
               </div>
             </div>

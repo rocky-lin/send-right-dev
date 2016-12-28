@@ -2,7 +2,7 @@
 			<div class="form-horizontal">
 				<fieldset>  
 				<!-- Form Name -->
-				<legend>Change password</legend>  
+				<h1>Change password</h1>
 					<div  class="col-md-6" ng-class="new_password_class"  ng-show="new_password_invalid"   ng-hide="!new_password ||  !repeat_new_password"   >@{{new_password_text}}</div>
 					 <div ng-class="old_password_class"  ng-show="old_password_invalid"  ng-hide="!current_password"  >@{{old_password_text}}
 					 </div> 

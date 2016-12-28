@@ -78,3 +78,9 @@ My Website：
 url：http://supershortcut.com/wp-login.php
 account：jesus
 pass: JKKNdkcHEHQ5zHFkuJK*RaBp
+
+here is demo website info
+test website：
+url：http://demo4.iamrockylin.com/wp-admin/
+account:jesus
+password:$%1ig)WaFFQ9gh*XfZWql0PO

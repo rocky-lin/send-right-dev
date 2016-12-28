@@ -1,4 +1,4 @@
-<div class="container" xmlns="http://www.w3.org/1999/html">
+<div class="container">
     <div class="row">
         <div class="col-xs-12 col-md-3">
             <div class="panel panel-primary">
@@ -32,13 +32,17 @@
                         @endforeach
 
                     </table>
-                </div>
+                </div> 
                 <div class="panel-footer"> 
+               {{-- {{ " staus " . $subscriptionStatus  }} --}}
+                @if($subscriptionStatus <  3)
                     {{Form::open(['url'=>route('user.billing.confirm'), 'method'=>'post'])}}
-                        <input type="hidden" name="name" value="{{$bronze['product']->name}}" />
-                        <button type="submit"  class="btn btn-info" > Upgrade </button>  1 month FREE trial</div> 
+                        <input type="hidden" name="name" value="{{$bronze['product']->name}}" /> 
+                        <button type="submit"  class="btn btn-info" > Upgrade </button>  1 month FREE trial</div>  
                     {{Form::close()}}
-
+                @else
+                    <button type="submit"  class="btn btn-info"  disabled> Selected </button>  1 month FREE trial </div> 
+                @endif
             </div>
         </div>
         <div class="col-xs-12 col-md-3">

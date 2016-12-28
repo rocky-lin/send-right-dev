@@ -13,7 +13,12 @@
                     <div class="alert alert-info alert-dismissible subscription-status" style="width:103%">
                         <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
                          <b> You are currently in trial status, please upgrade now!</b>
-                    </div> 
+                    </div>
+                @elseif($subscription_status == 4)
+                    <div class="alert alert-info alert-dismissible subscription-status" style="width:103%">
+                        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                         <b>Your trial subscription is expired </b>
+                    </div>
                 @elseif($subscription_status == 3)
                     {{--subscription billed--}}
                 @else
