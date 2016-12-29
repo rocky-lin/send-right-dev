@@ -35,11 +35,18 @@
  
         </div>
            <div class="form-group">
-          <label class="col-lg-3 control-label">Email:</label>
-          <div class="col-lg-8">
-            <input  ng-model="user_email" class="form-control"  type="text">
+            <label class="col-lg-3 control-label">Email:</label>
+            <div class="col-lg-8">
+                <input  ng-model="user_email" class="form-control"  type="text">
+            </div>
           </div>
-        </div>
+          <div class="form-group">
+            <label class="col-lg-3 control-label">Send Right Email:</label>
+            <div class="col-lg-8">
+                <input  ng-model="sendright_email" class="form-control"  type="text">
+            </div>
+          </div> 
+
         <div class="form-group">
           <label class="col-lg-3 control-label">Company:</label>
           <div class="col-lg-8">

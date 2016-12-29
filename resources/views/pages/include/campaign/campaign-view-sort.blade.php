@@ -14,8 +14,9 @@
     <label class="radio-inline">
         <input type="radio" name="optradio" ng-click="campaignDisplayByKind('auto responder')"  >Auto Responders
     </label>
-</form>
-
-<br>
-
+    <label class="radio-inline">
+        <input type="radio" name="optradio" ng-click="campaignDisplayByKind('mobile email optin')"  >Mobile Email Optin
+    </label> 
+</form> 
+<br> 
 <div class="loader" ng-style="myStyle" ></div>

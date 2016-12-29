@@ -34,6 +34,9 @@ class CreateAccountsTable extends Migration
             $table->string('billing_address_city')->nullable();
             $table->string('billing_address_state')->nullable();
             $table->string('billing_address_zip_code')->nullable();
+ 
+            // sendright email for each user 
+            $table->string('sendright_email')->nullable();
 
             $table->timestamps();
         });

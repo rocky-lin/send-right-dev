@@ -813,7 +813,7 @@ app.controller('myUserAccountCtrl', ['$scope', '$filter', '$http', '$window', fu
             $http({
                 method: 'POST',
                 url:  obj.siteUrl + '/user/update-account',
-                data: { name:$scope.user_full_name,email:$scope.user_email,company:$scope.user_company,time_zome:$scope.user_time_zome,user_name:$scope.user_name },
+                data: { name:$scope.user_full_name,email:$scope.user_email, sendright_email:$scope.sendright_email,company:$scope.user_company,time_zome:$scope.user_time_zome,user_name:$scope.user_name },
                 headers : { 'X-XSRF-TOKEN' : '2sltge4Q2lVTdF8dFVTjyABHm1Mdqk2mBA59k4X8' }, 
                 }).then(function successCallback(response) { 
                     $scope.new_password_text = response.data; 
@@ -831,6 +831,8 @@ app.controller('myUserAccountCtrl', ['$scope', '$filter', '$http', '$window', fu
                 $scope.user_company = newValue.company;
                 $scope.user_time_zome = newValue.time_zone;
                 $scope.user_name = newValue.user_name;
+                $scope.sendright_email = newValue.sendright_email; 
+ 
                 //console.log(" billing address " + newValue.details.billing_address);
                 // $scope.accountInfoStatusShow  = false;
 
@@ -923,10 +925,22 @@ app.controller('myUserAccountCtrl', ['$scope', '$filter', '$http', '$window', fu
             };
 
 
-
-
+        
 
 }]);
+
+
+
+// app.controller('optinSettingsPopup', ['$scope', '$filter', '$http', '$window', function ($scope, $filter, $http, $window) { 
+
+//     console.log("loaded optin popup") 
+
+// }]);
+
+// app.controller('optinSettingsPopup', function($scope) {
+
+//          console.log("loaded optin popup") 
+// });  
 
 // app.directive('initModel', function($compile) {
 //     return {

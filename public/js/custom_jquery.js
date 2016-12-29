@@ -181,12 +181,43 @@ function copyToClipboard(elem) {
 
 
 $(document).ready(function(){
-	 	// Save optin settings in campaign editor
+ 
+	// Save optin settings in campaign editor
  	$('#save_optin_settings').on('click', function() { 
+
+
+ 		var optInUrlInput 	 = $("#optInUrlInput").val(); 
+ 		var optInEmailSubject = $("#optInEmailSubject").val(); 
+ 		var optInEmailContent = $("#optInEmailContent").val(); 
+ 		var optInRecieverName = $("#optInRecieverName").val(); 
+ 		var optInRecieverEmail = $("#optInRecieverEmail").val(); 
+ 		var optInResponseUrl   = $("#optInResponseUrl").val(); 
+  
         var $this = $(this); 
-        $this.button('loading'); 
-        setTimeout(function() {
-           $this.button('reset');
-        }, 8000);
-	});
+        $this.button('loading');  
+ 		$.post( "includes/optin-settings-popup-savetosession.php", {
+ 			optin_url:optInUrlInput, optin_email_subject:optInEmailSubject,optin_email_content:optInEmailContent,optin_email_to_name:optInRecieverName,optin_email_to_mail:optInRecieverEmail,optin_popup_link:optInResponseUrl
+ 		 })
+		  .done(function( data ) {
+		  	  $this.button('reset');
+		    console.log( "Data Loaded: " + data );
+
+		    	if(data == 'Optin Settings saved successfully') {
+		    		console.log("display success box");
+		    		$('#optin-status').attr('class', 'alert alert-success');  
+		    	} else {
+		    		$('#optin-status').attr('class', 'alert alert-danger'); 
+		    		console.log("display error box");  
+		    	}
+		    	$('#optin-status').html(data);
+		  });
+
+ 
+	});  
+ 	$( "#optInUrlInput" ).keyup(function() {
+  		console.log("typing1");
+		var optInUrlTyped = $(this).val(); 
+		console.log(optInUrlTyped);    
+		$("#optInUrlTyped").text(optInUrlTyped); 
+	}); 
 })

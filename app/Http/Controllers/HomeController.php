@@ -45,7 +45,9 @@ class HomeController extends Controller
         $_SESSION['url']['hoem'] =  url('/'); 
 
         // return home view
-        
+        // distroy mobile optin after insert or update     
+        unset($_SESSION['campaign']['optin']);
+
         return view('home');
     }
 

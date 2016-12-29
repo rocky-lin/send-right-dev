@@ -676,13 +676,59 @@ user will be redirect to third party tool name "spgateway" and there fill the cr
 after the payment succeeded, we received the response and update our the user subscription and create invoice in our database
 remove the message above the says "you are in trial period please subscribe"
 
-update for December 26, 2016
-Design thank you page
-check the trial period cycle and when this will be expired
-Don't allow user to subscribe again if they are currently in subscribed status
-If they currently subscribed, put something design to a card that's says "Current Plan"
-Display payment cycle
-Create cronjobs command to check subscriptions of the user if they reach the 1 month bill or not
+
+update for December 27, 2016
+Design thank you page -30min
+Check the trial period cycle and when this will be expired - 30min - d - 30min
+Don't allow user to subscribe again if they are currently in subscribed status -10min - d - 5min
+Display payment cycle - 15min - d - 45min
+If they currently subscribed, put something design to a card that's says "Current Plan" - 15min - 0min
+
+Create cronjobs command to check subscriptions of the user if they reach the 1 month bill or not, if reach update subscription to payable again - 20min
+
+fix display of error message in change password display status - 30min
+if subscription status is 2 then show bronze free for 10 more days - 10min
+make 1 button in profile as editable and redirect to account page - 5min
+
+12:45pm
+
+Update for December 28, 2016
+review the view for mobile optin
+create planning for mobile optin 
+create database relationship 
+create migration for campaign template and update tables for campaign to match the mobile optin function
+add icon and clickable as option in create a campaign and when clicked mobile optin allow to add name and list and after hit next then will redirect to create campaign 
+add popup settings for mobile optin in campaign creation
+when hit save add loading in the button, that load only inside the button
+
+Todo December 29, 2016
+Continue with mobile optin
+
+
+Update for December 29, 2016
+1. create the mobile optin button settings as popup 
+2. set the sendright email as default email of the user, in this way when subscriber send an email then sendright system can detect it and save it to sepcific lists that is assign list to the mobile optin 
+3. add migration database table for campaign mobile optin
+4. set to model as fillable fields and table column
+5. separate mobile optin settings from autoresponse and newsletter's settings 
+6. in campaign homepage added the sorting for mobile optin
+7. in campaign homepage added the allow sort all including mobile optin with autoresponse and newsletter
+8. add account settings field for sendright email and that is beeing used for mobile optin 
+
+Todo December 30, 2016
+9. allow update different path with optin and newsletter, autoresponse
+10. allow edit mobile optin
+11. when edit auto fill mobile optin settings in popup
+12. add validation for mobile optin auto popup and if found an error disable from procceding to settings area
+13. if camapign is mobile optin hide field dropdown and show a popup and if autoresponse or newsletter show dropdown for field but hide popup
+14. allow update popup in ajax
+15. Fix save or update in settings, current issue is no default values for mobile optin 
+16. Fix display correct information in campaign homepage for mobile optin
+
+
+
+
+
 
 
 

@@ -42,11 +42,8 @@
                     {{ Form::open(['url'=>route('user.campaign.create.validate'), 'method'=>'post'], ['class'=>'form-control']) }}
                 @endif 
 
-                <form class="form-inline" role="form">
-                
-                    {{ Form::text('kind', $kind) }} 
-
-
+                <form class="form-inline" role="form"> 
+                    {{ Form::hidden('kind', $kind) }}  
                     <div class="form-group"> 
                         {{ Form::label('Campaign Name', 'Campaign Name', ['class'=>'label label-primary'])}}
                         {{ Form::text('campaignName', (!empty($campaign['title'])) ? $campaign['title'] : '' , ['class'=>'form-control', 'placeholder'=>'Campaign Name']) }}

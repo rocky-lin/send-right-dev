@@ -7,34 +7,30 @@ if (!isset($_SESSION["UserId"]) || is_null($_SESSION["UserId"])) {
 	die();
 } 
 $db = new Db();
-$userName=$db->getUserName($_SESSION["UserId"]); 
+$userName=$db->getUserName($_SESSION["UserId"]);  
+use App\Account;   
+use App\Campaign;
+$sendRightEmail  = Account::getSendRightEmail(); 
+$recieverName = Auth::user()->name;   
+$home_url =  $_SESSION['url']['hoem']; 
+$campaign_id = (!empty($_GET['id']))? $_GET['id'] : null;
 
-
-
-// print "<pre>";
-//     print_r($_SESSION); 
-// print "</pre>";
-  
-// print "test"; 
-// $user = App\User::find(1);
-// print_r($user); 
-// print "test = " . Auth::user()->name; 
-
-
-
-
+$kind = ''; 
+// print " id " . $campaign_id;
+if($campaign_id) { 
+    $campaign = Campaign::find($campaign_id);  
+    // print "kind = " . $campaign->kind; 
+    $kind = $campaign->kind; 
+} else {
+    $kind = $_SESSION['campaign']['kind']; 
+}
  
-
-// print "url " . $_SESSION['url']['hoem'];
-$home_url =  $_SESSION['url']['hoem'];
-$kind = $_SESSION['campaign']['kind']; 
-
+// print " kind " . $kind;
 
 // echo "kind " . $kind; 
 // print "path " . route('user.campaign.create.settings');
 ?>
-<html xmlns="http://www.w3.org/1999/xhtml">
-
+<html xmlns="http://www.w3.org/1999/xhtml" > 
 <head>
     <meta name="csrf-token" content="<?php print csrf_token(); ?>">
     <title>Bal - Email Editor</title>
@@ -46,8 +42,10 @@ $kind = $_SESSION['campaign']['kind'];
     <link href="assets/css/email-editor.bundle.min.css" rel="stylesheet" />
     <link href="assets/css/colorpicker.css" rel="stylesheet" />
     <meta name="viewport" content="width=device-width, initial-scale=1"> 
-    <script  src="<?php print $home_url; ?>/extension/campaign/assets/js/3.1.1-jquery.min.js"></script> 
-    <script src="<?php print $_SESSION['url']['hoem']; ?>/public/js/custom_jquery.js" type="text/javascript"  ></script> 
+
+    <script  src="<?php print $home_url; ?>/extension/campaign/assets/js/3.1.1-jquery.min.js"></script>  
+
+    <script src="<?php print $_SESSION['url']['hoem']; ?>/public/js/custom_jquery.js" type="text/javascript"  ></script>  
     <script src="<?php print $_SESSION['url']['hoem']; ?>/public/js/custom_js.js" type="text/javascript"  ></script> 
      
     <link rel="stylesheet" type="text/css" href="<?php print $_SESSION['url']['hoem']; ?>/public/css/custom_style.css"> 
@@ -67,84 +65,22 @@ $kind = $_SESSION['campaign']['kind'];
                             document.location =  redirectTo;
  
                         } else {
-                            console.log("Something wrong!");
-                        } 
+                            alert(data)
+                        }
                         // alert( "Data Loaded: " + data );
                     })  
             })
         });
         
     </script>
-</head> 
+</head>  
+<body>    
 
-
-
-
-
-<body> 
- 
-    <!-- Email OptIn PopUp Container  -->
-    <div class="container">  
-        <div class="modal fade" id="emailOptIn" role="dialog" style="z-index: 200px">
-            <div class="modal-dialog  ">  
-              <div class="modal-content">
-                <div class="modal-header">
-                  <button type="button" class="close" data-dismiss="modal">&times;</button>
-                  <h4 class="modal-title">Mobile Optin Settings</h4>
-                </div>
-                <div class="modal-body">  
-
-                    <div class="form-group row">
-                        <label for="example-text-input" class="col-xs-2 col-form-label">OptIn Url</label>
-                        <div class="col-xs-10">
-                            <input class="form-control" type="text" value="" id="" placeholder="example" >
-                            <div style="padding-top:5px;">
-                                <small id="emailHelp" class="form-text text-muted"> <?php print url('optin/example');  ?></small>
-                            </div> 
-                        </div>
-                    </div>
-
-                    <div class="form-group row">
-                        <label for="example-text-input" class="col-xs-2 col-form-label">OptIn Subject</label>
-                        <div class="col-xs-10">
-                            <input class="form-control" type="text" value="" id="" placeholder="OptIn Subject" > 
-                        </div>
-                    </div>
-
-                    <div class="form-group row">
-                        <label for="example-text-input" class="col-xs-2 col-form-label">OptIn Receiver Name</label>
-                        <div class="col-xs-10">
-                            <input class="form-control" type="text" value="" id="" placeholder="OptIn Receiver Name"> 
-                        </div>
-                    </div>
-
-                    <div class="form-group row">
-                        <label for="example-text-input" class="col-xs-2 col-form-label">OptIn Receiver Email</label>
-                        <div class="col-xs-10">
-                            <input class="form-control" type="text" value="" id="" placeholder="OptIn Receiver Email"> 
-                        </div>
-                    </div>
-
-                    <div class="form-group row">
-                        <label for="example-text-input" class="col-xs-2 col-form-label">OptIn Response Url</label>
-                        <div class="col-xs-10">
-                            <input class="form-control" type="text" value="" id="" placeholder="OptIn Response Url" > 
-                        </div>
-                    </div>  
-
-                </div>
-                <div class="modal-footer">
-                  <button type="button" class="btn btn-default" data-dismiss="modal">Close</button> 
-                  <button type="button" class="btn btn-primary btn-lg " id="save_optin_settings" data-loading-text="<i class='fa fa-circle-o-notch fa-spin'></i> Processing Order">Submit Order</button>
-                </div>
-              </div> 
-            </div>
-        </div>
-    </div> 
-
- 
-
-	<div class="bal-header container" style="padding:13px;">      
+    <!-- popup -->
+    <?php require_once('includes/optin-settings-popup.php'); ?>
+  
+    <!--  -->
+	<div class="bal-header container" style="padding:13px;">  
 
                 <div class="pull-right"> 
                     &nbsp; &nbsp; 
@@ -181,10 +117,12 @@ $kind = $_SESSION['campaign']['kind'];
                               </div>
                         </div>
                     </div> 
-                <?php endif;  ?>
+                <?php endif;  ?> 
+	</div> 
 
-
-	   </div>
+    <!-- Hidden values -->
+    <input type="hidden" value="<?php print $campaign_id; ?>" id="campaignId" />
+   
 <?php 
     $stepLists = ['Campaigns'=>route('campaign.index'), 'Campaign Details'=>route('campaign.create'), 'Sender Details'=>route('user.campaign.create.sender.view'), 'Compose Campaign'=>url('extension/campaign/index.php'), 'Campaign Settings'=>route('user.campaign.create.settings')]; 
     $currentStep = 'Compose Campaign'; 
@@ -213,7 +151,6 @@ $kind = $_SESSION['campaign']['kind'];
 
     <div class="bal-editor-demo" position: relative;margin-top: -73px;>
     </div> 
-    <input type="hidden" value="<?php print (!empty($_GET['id']))? $_GET['id'] : ""; ?>" id="campaignId" />
     <!-- for demo version -->
     <script src="assets/vendor/jquery/dist/jquery.min.js"></script>
     <script src="assets/vendor/jquery-ui/jquery-ui.min.js"></script>

@@ -38,7 +38,9 @@ class UserController extends Controller
         $userAccount['user_name'] = Account::getUserName(); 
         $userAccount['company']   = Account::getCompanyName(); 
         $userAccount['time_zone'] = Account::getTimeZone();
+        $userAccount['sendright_email'] = Account::getSendRightEmail();
         $userAccount['details'] = Account::find(User::getUserAccount());
+
         $userAccount = json_encode($userAccount);
         return view('pages/member/account', compact('userAccount'));   
 
@@ -75,9 +77,14 @@ class UserController extends Controller
     } 
     public function updateAccountPost(Request $request)  
     {   
+
+
+        // print "user account " . User::getUserAccount();
+        // dd($request->all());
         $accountAction = ''; 
         $userAction = '';
         $isEamil = false;
+        $sendRightEmail = false;
         $isEamil = User::isUserExist($request->get('email')); 
          if(!$isEamil)   {
             // print "email not exist"; 
@@ -86,14 +93,32 @@ class UserController extends Controller
             print "Email exist, failed to update  <b>x</b><br>";
             $userAction .= "Email exist, failed to update. ";  
          }
+
+        $sendRightEmail = Account::isSendRightEmailExist($request->get('sendright_email'));
+         if(!$sendRightEmail)   { 
+            Account::find(User::getUserAccount())->update(['sendright_email'=>$request->get('sendright_email')]); 
+         }  else {
+            print "Sendright Email exist, failed to update  <b>x</b><br>";
+            $userAction .= "Sendright Email exist, failed to update. ";  
+         }
  
+
         $user = User::find(Auth::user()->id)->update(['name'=>$request->get('name')]);   
+
         $account = Account::find(User::getUserAccount())->update(['company'=>$request->get('company')]);  
+
+
 
         if(!$isEamil) { 
             print "Email successfully update  <i class='fa fa-check' aria-hidden='true'></i><br>";  
              $userAction .= "Email successfully update"; 
         } 
+        if(!$sendRightEmail) { 
+            print "Sendright Email successfully update  <i class='fa fa-check' aria-hidden='true'></i><br>";  
+             $userAction .= "Sendright Email successfully update"; 
+        } 
+
+
         if($user  === true)  {
             print "Full name successfully updated <i class='fa fa-check' aria-hidden='true'></i>  <br>";
             $userAction .= "Full name successfully updated";
@@ -101,13 +126,18 @@ class UserController extends Controller
             print "Something wrong full name failed updated<span class='glyphicon-class'></span><br>";
             $userAction .=  "Something wrong full name failed updated";
         }
+        
         if($account  === true) {
-            print "Company successfully updated <i class='fa fa-check' aria-hidden='true'></i><br>";
-            $accountAction .=  "Company successfully updated"; 
+            print "Company successfully updated <i class='fa fa-check' aria-hidden='true'></i><br>"; 
+            $accountAction .=  "Company successfully updated";  
         } else {
             print "Something wrong company failed updated  <b>x</b><br>";
             $accountAction .= "Something wrong company failed updated"; 
         } 
+
+
+
+
         // print "user action  " . $userAction; 
         // print "user action  " . $accountAction;  
         Activity::createActivity(['table_name'=>'users', 'table_id'=>Auth::user()->id, 'action'=>$userAction]);

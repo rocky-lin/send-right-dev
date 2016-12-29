@@ -7,7 +7,26 @@ use App\User;
 class Account extends Model
 { 
 	protected $table = 'accounts'; 
-	protected $fillable = ['user_name', 'company', 'time_zone', 'payment_api_id', 'card_brand', 'card_last_four', 	'trial_ends_at']; 
+	 
+	protected $fillable = [ 
+		'user_name',
+		'company',
+		'time_zone',
+		'payment_api_id',
+		'billing_card_holder_name',
+		'billing_card_number',
+		'billing_card_month_expiry',
+		'billing_card_year_expiry',
+		'billing_card_cvv',
+		'billing_address',
+		'billing_address_street',
+		'billing_address_line_2',
+		'billing_address_city',
+		'billing_address_state',
+		'billing_address_zip_code',
+		'sendright_email'
+	];
+
  	/** 
  	 * Get the forms lists of the specific account
  	 */
@@ -55,6 +74,11 @@ class Account extends Model
 		$account = self::find(User::getUserAccount()); 
 		return $account->time_zone;  
 	}  
+	public static function getSendRightEmail() 
+	{ 
+		$account = self::find(User::getUserAccount()); 
+		return $account->sendright_email;  
+	}  
 	public static function getUserName() 
 	{ 
 		$account = self::find(User::getUserAccount()); 
@@ -79,6 +103,10 @@ class Account extends Model
 	public static function getSubscriptionProduct()
 	{
 		return self::find(User::getUserAccount())->subscription->product;
+	}
+	public static function isSendRightEmailExist($sendRightEmail)
+	{
+		return self::where('sendright_email', $sendRightEmail)->count(); 
 	}
 
 

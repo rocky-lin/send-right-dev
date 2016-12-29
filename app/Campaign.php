@@ -26,7 +26,13 @@ class Campaign   extends Model
         'type',
         'status',
         'type',
-        'kind'
+        'kind',
+        'optin_url',
+        'optin_email_content',
+        'optin_email_subject',
+        'optin_popup_link',
+        'optin_email_to_name',
+        'optin_email_to_mail'  
     ];
 
     protected $hidden = [];
@@ -46,11 +52,13 @@ class Campaign   extends Model
         return Account::find(User::getUserAccount())->campaigns;
     }
     public static function getCampaignsByAccountSortByKind($kind)
-    {
-        return Account::find(User::getUserAccount())
+    { 
+        $campaigns = Account::find(User::getUserAccount())
             ->campaigns()
             ->where('kind', $kind)
             ->get();
+
+        return $campaigns; 
     }
 
 

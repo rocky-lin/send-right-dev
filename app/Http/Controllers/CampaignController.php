@@ -199,14 +199,33 @@ class CampaignController extends Controller
 
         session_start(); 
         // print_r($_SESSION['campaign']['listIds']); 
-        // exit 
-        // 
-//         print "campaign id  " . $_SESSION['campaign']['id'];
+        // exit  
+        // print "campaign id  " . $_SESSION['campaign']['id'];
 
         $campaignSchedule = CampaignSchedule::where('campaign_id', $_SESSION['campaign']['id'])->first();
+        
         $campaign = Campaign::where('id' , $_SESSION['campaign']['id'])->first();
-//        dd($campaign );
-        return view('pages.campaign.campaign-settings', ['status'=>'', 'listNames'=>List1::getCurrentCampaignListNames(), 'campaignSchedule'=>$campaignSchedule, 'campaign'=>$campaign]);
+ 
+            if($campaign->kind == 'mobile email optin') {
+ 
+                $optinDetails = [
+                    'Optin Url'=>$campaign->optin_url,
+                    'Optin Email Subject'=>$campaign->optin_email_subject, 
+                    'Optin Email Content'=>$campaign->optin_email_content, 
+                    'Optin Popup Link'=>$campaign->optin_popup_link, 
+                    'Optin Receiver Name'=>$campaign->optin_email_to_name, 
+                    'Optin Receiver Email'=>$campaign->optin_email_to_mail, 
+                ];      
+
+                print "mobile optin";
+
+                return view('pages.campaign.campaign-settings-optin', ['optinDetails'=>$optinDetails, 'status'=>'', 'listNames'=>List1::getCurrentCampaignListNames(), 'campaignSchedule'=>$campaignSchedule, 'campaign'=>$campaign]); 
+            } else {
+
+                print "not mobile optin "; 
+                return view('pages.campaign.campaign-settings', ['status'=>'', 'listNames'=>List1::getCurrentCampaignListNames(), 'campaignSchedule'=>$campaignSchedule, 'campaign'=>$campaign]);
+            }
+
     }   
 
     public function createSettingsValidate(Request $request) 
@@ -293,7 +312,13 @@ class CampaignController extends Controller
 
         $campaignSchedule = CampaignSchedule::where('campaign_id', $_SESSION['campaign']['id'])->first();
         $campaign = Campaign::where('id' , $_SESSION['campaign']['id'])->first();
-        return view('pages.campaign.campaign-settings', compact('status', 'listNames', 'campaignSchedule', 'campaign')); 
+    
+        // print "campaign kind " . $_SESSION['campaign']['kind'];
+        if($campaign->kind == 'mobile email optin') {
+            return view('pages/campaign/campaign-settings-optin', compact('status', 'listNames', 'campaignSchedule', 'campaign')); 
+        } else {  
+            return view('pages/campaign/campaign-settings', compact('status', 'listNames', 'campaignSchedule', 'campaign'));  
+        }
     } 
 
     // preview  
@@ -330,14 +355,24 @@ class CampaignController extends Controller
         $collection = collect( $campaigns ); 
         $sorted = $collection->sortBy('id', SORT_REGULAR, true);  
         $campaigns = $sorted->values()->all();
+  
+                    
+                    foreach($campaigns as $index => $campaign)  { 
+                        switch ($campaigns[$index]['kind']) {
+                            case 'mobile email optin': 
+                                //
+                            break; 
+                            default: 
+                                $created_ago = Carbon::createFromTimeStamp(strtotime($campaign['created_at']))->diffForHumans(); 
+                                    // print "ago " .   $ago;
+                                    $campaigns[$index]['created_ago'] = $created_ago;
+                                    $campaigns[$index]['next_send'] = Helper::createDateTime(CampaignSchedule::where('campaign_id', $campaigns[$index]['id'])->first()->schedule_send)->format('l jS \\of F Y h:i:s A');
+                                $campaigns[$index]['total_contacts'] =  count(Campaign::getAllEmailWillRecieveTheCampaign($campaigns[$index]['id'])['contacts']); 
+                            break; 
+                        } 
+                     
+                    } 
  
-        foreach($campaigns as $index => $campaign)  { 
-            $created_ago = Carbon::createFromTimeStamp(strtotime($campaign['created_at']))->diffForHumans(); 
-            // print "ago " .   $ago;
-            $campaigns[$index]['created_ago'] = $created_ago;
-             $campaigns[$index]['next_send'] = Helper::createDateTime(CampaignSchedule::where('campaign_id', $campaigns[$index]['id'])->first()->schedule_send)->format('l jS \\of F Y h:i:s A');
-             $campaigns[$index]['total_contacts'] =  count(Campaign::getAllEmailWillRecieveTheCampaign($campaigns[$index]['id'])['contacts']); 
-        } 
         //dd($campaigns);  
         return $campaigns; 
     }
@@ -345,21 +380,29 @@ class CampaignController extends Controller
     public function getAllCampaignSortByKind($kind)
     {
 
-        $campaigns = Campaign::getCampaignsByAccountSortByKind($kind)->toArray();
+        // get campaign based on sorting
+        $campaigns = Campaign::getCampaignsByAccountSortByKind($kind)->toArray(); 
 
-
-        $collection = collect( $campaigns );
+        // sort campaign result by id in descending order
+        $collection = collect( $campaigns ); 
         $sorted = $collection->sortBy('id', SORT_REGULAR, true);
         $campaigns = $sorted->values()->all();
-
-        foreach($campaigns as $index => $campaign)  {
-            $created_ago = Carbon::createFromTimeStamp(strtotime($campaign['created_at']))->diffForHumans();
-            // print "ago " .   $ago;
-            $campaigns[$index]['created_ago'] = $created_ago;
-             $campaigns[$index]['next_send'] = Helper::createDateTime(CampaignSchedule::where('campaign_id', $campaigns[$index]['id'])->first()->schedule_send)->format('l jS \\of F Y h:i:s A');
-             $campaigns[$index]['total_contacts'] =  count(Campaign::getAllEmailWillRecieveTheCampaign($campaigns[$index]['id'])['contacts']);
-        }
-        //dd($campaigns);
+        
+        switch ($kind) {
+              case 'mobile email optin': 
+                  break; 
+              default: 
+                    foreach($campaigns as $index => $campaign)  {
+                        $created_ago = Carbon::createFromTimeStamp(strtotime($campaign['created_at']))->diffForHumans();
+                        // print "ago " .   $ago;
+                        $campaigns[$index]['created_ago'] = $created_ago;
+                         $campaigns[$index]['next_send'] = Helper::createDateTime(CampaignSchedule::where('campaign_id', $campaigns[$index]['id'])->first()->schedule_send)->format('l jS \\of F Y h:i:s A');
+                         $campaigns[$index]['total_contacts'] =  count(Campaign::getAllEmailWillRecieveTheCampaign($campaigns[$index]['id'])['contacts']);
+                    } 
+                  break;
+        } 
+ 
+        // dd($campaigns);
         return $campaigns;
     }
 

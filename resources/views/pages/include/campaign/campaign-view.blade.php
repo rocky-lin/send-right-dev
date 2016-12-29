@@ -50,6 +50,10 @@
                                             <label>Type</label>
                                         </th>
                                         <th>
+                                            <label>Kind</label>
+                                        </th>
+
+                                        <th>
                                             <labe> Created at </labe>
                                         </th>   
                                         <th>
@@ -69,6 +73,7 @@
                                         <td ng-class="{'campaign-inactive': campaign.status === 'inactive', 
                                         'campaign-active' : campaign.status === 'active'}" >@{{campaign.status}}</td>
                                         <td>@{{campaign.type}}</td> 
+                                        <td>@{{campaign.kind}}</td> 
                                         <td>@{{campaign.created_ago}}</td>
                                         <td>   
                                             <span class="glyphicon glyphicon-trash" aria-hidden="true" data-ng-click="deleteCampaign(campaign)"></span>
