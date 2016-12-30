@@ -6,8 +6,8 @@
 $optin_url = '';
 $optin_email_subject = '';
 $optin_email_content = '';
-$optin_email_to_name = '';
-$optin_email_to_mail = '';
+$optin_email_to_name = $recieverName;
+$optin_email_to_mail = $sendRightEmail;
 $optin_popup_link = '';
  
 if($campaign_id) { 

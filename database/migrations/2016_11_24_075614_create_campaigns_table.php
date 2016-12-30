@@ -27,8 +27,8 @@ class CreateCampaignsTable extends Migration
             $table->string('kind')->default('newsletter');
             $table->string('status', 50)->default('inactive');   
             $table->string('optin_url')->nullable(); 
+            $table->string('optin_email_subject')->nullable();  
             $table->string('optin_email_content')->nullable(); 
-            $table->string('optin_email_subject')->nullable(); 
             $table->string('optin_popup_link')->nullable(); 
             $table->string('optin_email_to_name')->nullable(); 
             $table->string('optin_email_to_mail')->nullable();  

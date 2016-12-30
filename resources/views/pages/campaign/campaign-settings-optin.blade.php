@@ -1,5 +1,16 @@
 @extends('layouts.app') 
-@section('content')  
+@section('content')   
+ 
+
+@if (!empty($messangeName))
+<div class="alert alert-success">
+    {{$messangeName }}
+</div>
+@endif 
+
+
+
+
 <style>
 table, th, td {
     border-collapse: collapse;
@@ -33,9 +44,8 @@ th {
     width: 15%;
     border: 1px solid whitesmoke;
 }
-</style>  
-{!!$status!!} 
-<form method="POST" action="{{route('user.campaign.create.settings.validate')}}" > 
+</style>   
+<form method="POST" action="{{route('user.campaign.create.settings.mobile.optin.validate')}}" > 
  {{ csrf_field() }}
 <input id="" type='hidden'  name='sender_name' value="{{$_SESSION['campaign']['sender']['name']}}" />
 <input id="" type='hidden'  name='sender_email' value="{{$_SESSION['campaign']['sender']['email']}}" />
@@ -55,9 +65,9 @@ th {
 
           <li class="list-group-item">Active
 
-          <input type="radio" name="campaign_status" class="pull-right"  value="active" <?php print ($_SESSION['campaign']['status']['active'] == true) ? 'checked' : null ?>/></li>
+          <input type="radio" name="campaign_status" class="pull-right"  value="active" <?php print ($status== 'active') ? 'checked' : null ?>/></li>
   
-          <li class="list-group-item">Pending<input type="radio" name="campaign_status" class="pull-right" value="inactive" <?php print ($_SESSION['campaign']['status']['inactive'] == true) ? 'checked' : null ?> /></li>
+          <li class="list-group-item">Pending<input type="radio" name="campaign_status" class="pull-right" value="inactive" <?php print($status== 'inactive') ? 'checked' : null ?> /></li>
 
         </ul>
     </div>  
@@ -90,10 +100,13 @@ th {
   <div class="panel panel-default">
       <div class="panel-heading" >
         Email Optin Details 
+           <a href="{{url('/extension/campaign/index.php')}}?id={{$_SESSION['campaign']['id']}}">
+              <span class="glyphicon glyphicon-pencil" data-toggle="modal" data-target="#editIcon1" style="float: right;position: relative;"></span> 
+          </a>
       </div> 
       <div class="panel-body"> 
         <table style="width:100%"> 
-          @foreach($optinDetails as $key => $value)
+          @foreach($optinDetails as $key => $value)  
             <tr> 
               <th>{{$key}}</th>
               <td>{{$value}}</td>  

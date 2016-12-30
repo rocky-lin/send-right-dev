@@ -38,11 +38,9 @@ th {
     border: 1px solid whitesmoke;
 }
 </style> 
-
-
+  
 {!!$status!!}
-
-<form method="POST" action="{{route('user.campaign.create.settings.validate')}}" > 
+<form method="POST" action="{{ action('CampaignController@createSettingsValidate')}}" > 
  {{ csrf_field() }}
 <input id="" type='hidden'  name='sender_name' value="{{$_SESSION['campaign']['sender']['name']}}" />
 <input id="" type='hidden'  name='sender_email' value="{{$_SESSION['campaign']['sender']['email']}}" />

@@ -186,6 +186,7 @@ $(document).ready(function(){
  	$('#save_optin_settings').on('click', function() { 
 
 
+
  		var optInUrlInput 	 = $("#optInUrlInput").val(); 
  		var optInEmailSubject = $("#optInEmailSubject").val(); 
  		var optInEmailContent = $("#optInEmailContent").val(); 
@@ -199,8 +200,10 @@ $(document).ready(function(){
  			optin_url:optInUrlInput, optin_email_subject:optInEmailSubject,optin_email_content:optInEmailContent,optin_email_to_name:optInRecieverName,optin_email_to_mail:optInRecieverEmail,optin_popup_link:optInResponseUrl
  		 })
 		  .done(function( data ) {
-		  	  $this.button('reset');
-		    console.log( "Data Loaded: " + data );
+		  	
+		  	  	$this.button('reset');
+
+		    	console.log( "Data Loaded: " + data );
 
 		    	if(data == 'Optin Settings saved successfully') {
 		    		console.log("display success box");
@@ -209,7 +212,15 @@ $(document).ready(function(){
 		    		$('#optin-status').attr('class', 'alert alert-danger'); 
 		    		console.log("display error box");  
 		    	}
+ 
+		    	if(data == 'Optin Settings saved successfully') {  
+			    	setTimeout(function(){
+			    		 $('#emailOptIn').modal('hide');
+			    	}, 3000);
+		    	} 
+
 		    	$('#optin-status').html(data);
+ 
 		  });
 
  
@@ -220,4 +231,22 @@ $(document).ready(function(){
 		console.log(optInUrlTyped);    
 		$("#optInUrlTyped").text(optInUrlTyped); 
 	}); 
-})
+}); 
+
+
+$(document).ready(function(){ 
+	// click the button in mobile optin page
+ 	$('.button-1').on('click', function(){
+
+ 
+		var emailBody = $('#optin_email_content').val(); 
+		var subject   = $('#optin_email_subject').val(); 
+		var link      = $('#optin_popup_link').val(); 
+		var name      = $('#optin_email_to_name').val(); 
+		var email     = $('#optin_email_to_mail').val(); 
+ 
+        document.location = "mailto:"+email+"?subject="+subject+"&body="+emailBody; 
+ 	}); 
+}); 
+
+

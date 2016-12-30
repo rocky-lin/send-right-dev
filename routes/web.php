@@ -56,10 +56,7 @@ Route::get('admin/order', 'admin\OrderController@index');
 Route::get('admin/order/requestPay/{order_id}', 'admin\OrderController@requestPay');
 
 
-
-
-
-
+ 
 
 
 Route::group(['prefix' => 'user' , 'middleware' => 'auth' ], function() {    
@@ -114,18 +111,19 @@ Route::group(['prefix' => 'user' , 'middleware' => 'auth' ], function() {
 			Route::post('campaign/create/sender/update/{id?}', 'CampaignController@createSenderUpdate')->name('user.campaign.sender.update');
 
 			// step 3
-				Route::post('campaign/create/compose', 'CampaignController@composeValidate')->name('user.campaign.create.settings.validate'); 
+				// Route::post('campaign/create/compose', 'CampaignController@composeValidate')->name('user.campaign.create.settings.validate'); 
 			// creation of campaign
 			
 			// step 4
 			Route::get('campaign/create/settings', 'CampaignController@createSettings')->name('user.campaign.create.settings');
 			Route::post('campaign/create/settings', 'CampaignController@createSettingsValidate')->name('user.campaign.create.settings.validate'); 
+	 		Route::post('campaign/create/settings-optin', 'CampaignController@createSettingsMobileOptinValidate')->name('user.campaign.create.settings.mobile.optin.validate'); 
 	 
 			// preview 
 			 	Route::get('campaign/create/settings/preview/mobile', 'CampaignController@getPreviewMobile')->name('user.campaign.create.settings.preview.mobile');
 			 	Route::get('campaign/create/settings/preview/desktop', 'CampaignController@getPreviewDesktop')->name('user.campaign.create.settings.preview.desktop');
 			 	Route::get('campaign/create/settings/preview/tablet', 'CampaignController@getPreviewTablet')->name('user.campaign.create.settings.preview.tablet');
-
+ 
 			// send test email 
 				Route::get('campaign/create/settings/email/send/test/{id?}/{email?}', 'CampaignController@sendTestCampaignEmail')->name('user.campaign.create.settings.email.send.test');
 
@@ -196,12 +194,11 @@ Route::group(['prefix' => 'user' , 'middleware' => 'auth' ], function() {
 	// billing 
 	route::post('product/select/{product?}', 'ProductController@processSelectedProduct')->name('user.product.select');  
 });   
+  
+Route::get('optin/{url?}', 'CampaignController@mobileOptinUrl')->name('user.campaign.mobile.optin.url')->where(['url'=>'[0-9a-zA-Z-]+']);
 
-
-
-
-
-
+ 
+ 
 
 
 

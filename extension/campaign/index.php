@@ -64,8 +64,11 @@ if($campaign_id) {
                             // alert(redirectTo);
                             document.location =  redirectTo;
  
-                        } else {
+                        } else if(data = 'Please update optin settings') {
                             alert(data)
+                             $('#emailOptIn').modal('show');
+                        } else {
+                            alert(data); 
                         }
                         // alert( "Data Loaded: " + data );
                     })  
@@ -73,6 +76,8 @@ if($campaign_id) {
         });
         
     </script>
+
+
 </head>  
 <body>    
 

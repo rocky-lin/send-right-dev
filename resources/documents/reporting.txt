@@ -732,11 +732,32 @@ Todo December 30, 2016
 
 
 
+Todo December 30, 2016 
+1. allow update different path with optin and newsletter, autoresponse
+2. allow edit mobile optin
+3. when edit auto fill mobile optin settings in popup
+4. add validation for mobile optin auto popup and if found an error disable from procceding to settings area
+5. if camapign is mobile optin hide field dropdown and show a popup and if autoresponse or newsletter show dropdown for field but hide popup
+6. allow update popup in ajax
+7. Fix save or update in settings, current issue is no default values for mobile optin 
+8. Fix display correct information in campaign homepage for mobile optin
 
+Todo Jan 2, 2017
+1. Fix display correct information in campaign homepage for mobile optin
+2. when someone subscribed and send email, then filter sender email and name
+3. after filter save to contact and add to specific list
+4. campany email should end with senright.net
+5. add autoforwarder email to server
+6. add auto piping codes for email receiver
+7. check delete for mobile optin.
+ 
+Will upload and do video in the weekend, 
+ 
+Thanks 
 
-
-
-
+Best regards,
+Jesus Erwin Suarez
+ 
 
 ---------------------------------------------------------------------------------------------
 sortable resources docs 
