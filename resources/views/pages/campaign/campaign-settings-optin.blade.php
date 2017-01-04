@@ -47,9 +47,7 @@ th {
 </style>   
 <form method="POST" action="{{route('user.campaign.create.settings.mobile.optin.validate')}}" > 
  {{ csrf_field() }}
-<input id="" type='hidden'  name='sender_name' value="{{$_SESSION['campaign']['sender']['name']}}" />
-<input id="" type='hidden'  name='sender_email' value="{{$_SESSION['campaign']['sender']['email']}}" />
-<input id="" type='hidden'  name='sender_subject' value="{{$_SESSION['campaign']['sender']['subject']}}" />
+ 
 <input id="" type='hidden'  name='title' value="{{$_SESSION['campaign']['name']}}" /> 
 <input id="" type='hidden'  name='template' value="{{$_SESSION['campaign']['template']}}" />
 <input  type='hidden'  name='campaign_id' value="{{$_SESSION['campaign']['id']}}" id="campaign_id" />

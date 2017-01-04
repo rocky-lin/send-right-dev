@@ -278,4 +278,18 @@ class Campaign   extends Model
         // print_r($campaign);
         return $campaign; 
     } 
+    public static function setSessionForOptin($id)
+    {
+
+            $campaign = self::find($id);  
+     
+            // set default campaign status
+            $_SESSION['campaign']['status']['active'] = ($campaign->status == 'active') ? true : false; 
+            $_SESSION['campaign']['status']['inactive'] = ($campaign->status == 'inactive') ? true : false; 
+
+            // set default campaign details
+            $_SESSION['campaign']['name']     = $campaign->title;
+            $_SESSION['campaign']['listIds']  =  self::getListIdsAsString($_SESSION['campaign']['id']);;
+            $_SESSION['campaign']['template'] =  'Default';
+    }
 }

@@ -1,4 +1,6 @@
 // date picker in campaign settings  
+// 
+  var $url_home  = $('#url_home').val(); 
 $(function(){  
 	console.log("contact jquery loaded!...");   
 	$('[data-toggle="popover"]').popover();
@@ -156,22 +158,22 @@ function copyToClipboard(elem) {
 // Home loaded
 // Change code to only load home page view 
 
-	$("#home-activity-preview").load( "http://localhost/rocky/send-right-dev/user/home/preview/activities", function() {
+	$("#home-activity-preview").load( $url_home + "/user/home/preview/activities", function() {
   		console.log( "home activities preview loaded, this should only loaded in home page" );
 	});   
-	$("#home-contact-preview").load('http://localhost/rocky/send-right-dev/user/home/preview/contacts', function(){
+	$("#home-contact-preview").load( $url_home + '/user/home/preview/contacts', function(){
 		console.log( "home contacts preview loaded, this should only loaded in home page" );
 	})
-	$("#home-list-preview").load('http://localhost/rocky/send-right-dev/user/home/preview/lists', function(){
+	$("#home-list-preview").load( $url_home + '/user/home/preview/lists', function(){
 		console.log( "home lists preview loaded, this should only loaded in home page" );
 	})
-	$("#home-form-preview").load('http://localhost/rocky/send-right-dev/user/home/preview/forms', function(){
+	$("#home-form-preview").load( $url_home + '/user/home/preview/forms', function(){
 		console.log( "home forms preview loaded, this should only loaded in home page" );
 	})
-	$("#home-campaign-preview").load('http://localhost/rocky/send-right-dev/user/home/preview/campaigns', function(){
+	$("#home-campaign-preview").load( $url_home + '/user/home/preview/campaigns', function(){
 		console.log( "home campaigns preview loaded, this should only loaded in home page" );
 	})
-	$("#home-statistic-preview").load('http://localhost/rocky/send-right-dev/user/home/preview/statics', function(){
+	$("#home-statistic-preview").load( $url_home + '/user/home/preview/statics', function(){
 		//
 	})
 
@@ -245,7 +247,7 @@ $(document).ready(function(){
 		var name      = $('#optin_email_to_name').val(); 
 		var email     = $('#optin_email_to_mail').val(); 
  
-        document.location = "mailto:"+email+"?subject="+subject+"&body="+emailBody; 
+        document.location = "mailto:"+email+"?subject="+subject+"&body="+emailBody+"&header=From:James <webmaster@example.com>"; 
  	}); 
 }); 
 

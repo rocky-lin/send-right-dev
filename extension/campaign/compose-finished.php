@@ -59,11 +59,14 @@
 				'optin_email_to_mail' => $_SESSION['campaign']['optin']['email_to_mail'], 
 				'optin_popup_link' => $_SESSION['campaign']['optin']['popup_link'] 
 			];   	
-
-
+ 
 		    Campaign::createOrUpdateByCampaignId($campaign); 
 
 			$_SESSION['campaign']['id'] = $_POST['id'];
+
+
+			Campaign::setSessionForOptin($_POST['id']);    
+
   
 		} else {   
 

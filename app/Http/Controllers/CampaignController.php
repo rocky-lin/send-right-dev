@@ -224,7 +224,7 @@ class CampaignController extends Controller
 
             } else {
 
-                print "not mobile optin "; 
+                // print "not mobile optin "; 
                 return view('pages.campaign.campaign-settings', ['status'=>'', 'listNames'=>List1::getCurrentCampaignListNames(), 'campaignSchedule'=>$campaignSchedule, 'campaign'=>$campaign]);
             }
 
@@ -361,10 +361,10 @@ class CampaignController extends Controller
         // print "campaign kind " . $_SESSION['campaign']['kind'];
         if($campaign->kind == 'mobile email optin') {
 
-            print "mobile optin";
+            // print "mobile optin";
             return view('pages/campaign/campaign-settings-optin', compact('status', 'listNames', 'campaignSchedule', 'campaign')); 
         } else {  
-            print "not mobile optin";
+            // print "not mobile optin";
             return view('pages/campaign/campaign-settings', compact('status', 'listNames', 'campaignSchedule', 'campaign'));  
         }
     } 

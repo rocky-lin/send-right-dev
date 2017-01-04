@@ -15,7 +15,8 @@ class Kernel extends ConsoleKernel
     protected $commands = [ 
         Commands\CampaignScheduleSendCommand::class,
         Commands\CampaignAutoResponseSendCommand::class,
-        Commands\SubscriptionCheckCommand::class
+        Commands\SubscriptionCheckCommand::class,
+        Commands\MobileOptInSubscribedCommand::class
     ];
 
     /**
