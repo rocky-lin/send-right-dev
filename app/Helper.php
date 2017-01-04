@@ -88,10 +88,33 @@ class Helper extends Model
             }
         } else {
             return 0; 
-        }
-
-    }
-
-
+        } 
+    }  
  
+    public static function getFirstName($fullName)
+    {
+        $fullNameArr = explode(' ', $fullName);  
+        if (count($fullNameArr) > 2) { 
+            $firstName = '';
+            for ($i=0; $i <count($fullNameArr)-1 ; $i++) { 
+                $firstName .= $fullNameArr[$i] . ' '; 
+            }  
+            return $firstName;
+        } else if (count($fullNameArr) == 2) {
+            return $fullNameArr[0];
+        } else {
+             return $fullName;
+        } 
+    }
+    public static function getLastName($fullName)
+    {
+        $fullNameArr = explode(' ', $fullName);  
+        if (count($fullNameArr) > 2) {  
+            return $fullNameArr[count($fullNameArr)-1];
+        } else if (count($fullNameArr) == 2) {
+            return $fullNameArr[1];
+        } else {
+             return '';
+        } 
+    }
 }

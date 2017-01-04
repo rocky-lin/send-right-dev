@@ -20,10 +20,17 @@ $kind = '';
 if($campaign_id) { 
     $campaign = Campaign::find($campaign_id);  
     // print "kind = " . $campaign->kind; 
-    $kind = $campaign->kind; 
+    $kind          = $campaign->kind; 
+    $campagn_title = $campaign->title; 
+    
 } else {
-    $kind = $_SESSION['campaign']['kind']; 
+    $kind          = $_SESSION['campaign']['kind']; 
+    $campagn_title = $_SESSION['campaign']['name']; 
+
 }
+
+ 
+  // print " this is the title " . $campagn_title; 
  
 // print " kind " . $kind;
 

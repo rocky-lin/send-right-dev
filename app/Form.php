@@ -48,7 +48,9 @@ class Form extends Model
    { 
       // print "form list id " . FormList::where('form_id', $formId)->first()->list_id;
       // exit; 
-       return FormList::where('form_id', $formId)->first()->list_id; 
+       $list_id = FormList::where('form_id', $formId)->first()->list_id;   
+       print_r($list_id);
+       print '<br>'; 
    }
 
    /** 

@@ -27,6 +27,7 @@ class Campaign   extends Model
         'status',
         'type',
         'kind',
+        'email_address',
         'optin_url',
         'optin_email_content',
         'optin_email_subject',
@@ -252,7 +253,7 @@ class Campaign   extends Model
              // print " <br> &nbsp;&nbsp; list id " . $campaignList->list_id;
              foreach ($campaignList->list1->list_contact as $index => $listContact) {
                  // print " <br>  &nbsp;&nbsp; &nbsp; email " . $listContact->contact->email;   
-
+                 
                 $contacts['contacts'][$counter]['email'] = $listContact->contact->email;
                 $contacts['contacts'][$counter]['full_name'] = $listContact->contact->first_name . ' ' . $listContact->contact->last_name;
                 $contacts['contacts'][$counter]['first_name'] =  $listContact->contact->first_name;
@@ -265,7 +266,7 @@ class Campaign   extends Model
                 $counter++; 
             }
         } 
-        return $contacts;  
+        return (count($contacts) > 0) ? $contacts : 0;  
     }
 
     public static function supplyContactFilteres($contactFilters, $campaign)

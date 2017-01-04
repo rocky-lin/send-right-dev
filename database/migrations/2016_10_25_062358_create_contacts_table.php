@@ -23,7 +23,7 @@ class CreateContactsTable extends Migration
             $table->string('phone_number', 50);
             $table->string('telephone_number', 50); 
             $table->string('status',50)->default('active'); 
-            $table->string('type', 50);  
+            $table->string('type', 50);  // contact, subscriber
             $table->string('history')->default('Added from the site');  
             $table->timestamps();  
             $table->softDeletes();

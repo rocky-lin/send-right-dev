@@ -1,6 +1,5 @@
 
-
-
+ 
        <div >
 
                         <div class="row">   
@@ -98,4 +97,4 @@
 				<hr>     
                 <a href="{{ route('user.campaign.create.start')}}" title="">
                     <button type="button" class="btn btn-primary"> Add New Campaign</button>
-         
+     

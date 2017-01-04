@@ -408,7 +408,14 @@ class CampaignController extends Controller
                     foreach($campaigns as $index => $campaign)  { 
                         switch ($campaigns[$index]['kind']) {
                             case 'mobile email optin': 
-                                //
+                                $campaigns[$index]['total_contacts'] =  count(Campaign::getAllEmailWillRecieveTheCampaign($campaigns[$index]['id'])['contacts']); 
+                            break; 
+                            case 'auto responder':
+                                $created_ago = Carbon::createFromTimeStamp(strtotime($campaign['created_at']))->diffForHumans(); 
+                                    // print "ago " .   $ago;
+                                $campaigns[$index]['created_ago'] = $created_ago;
+                                $campaigns[$index]['next_send'] = '';
+                                $campaigns[$index]['total_contacts'] =  count(Campaign::getAllEmailWillRecieveTheCampaign($campaigns[$index]['id'])['contacts']); 
                             break; 
                             default: 
                                 $created_ago = Carbon::createFromTimeStamp(strtotime($campaign['created_at']))->diffForHumans(); 
@@ -436,10 +443,24 @@ class CampaignController extends Controller
         $sorted = $collection->sortBy('id', SORT_REGULAR, true);
         $campaigns = $sorted->values()->all();
 
+
+        // dd($campaigns);
         switch ($kind) {
-              case 'mobile email optin': 
-                  break; 
-              default: 
+            case 'mobile email optin': 
+                foreach($campaigns as $index => $campaign)  {
+                    $campaigns[$index]['total_contacts'] =  count(Campaign::getAllEmailWillRecieveTheCampaign($campaigns[$index]['id'])['contacts']);  
+                }
+            break; 
+            case 'auto responder':
+             foreach($campaigns as $index => $campaign)  {
+                    $created_ago = Carbon::createFromTimeStamp(strtotime($campaign['created_at']))->diffForHumans(); 
+                    // print "ago " .   $ago;
+                    $campaigns[$index]['created_ago'] = $created_ago;
+                    $campaigns[$index]['next_send'] = '';
+                    $campaigns[$index]['total_contacts'] =  count(Campaign::getAllEmailWillRecieveTheCampaign($campaigns[$index]['id'])['contacts']); 
+                } 
+            break; 
+            default: 
                     foreach($campaigns as $index => $campaign)  {
                         $created_ago = Carbon::createFromTimeStamp(strtotime($campaign['created_at']))->diffForHumans();
                         // print "ago " .   $ago;

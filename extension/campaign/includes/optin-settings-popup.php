@@ -6,10 +6,9 @@
 $optin_url = '';
 $optin_email_subject = '';
 $optin_email_content = '';
-$optin_email_to_name = $recieverName;
-$optin_email_to_mail = $sendRightEmail;
+$optin_email_to_name = $recieverName; 
 $optin_popup_link = '';
- 
+ $optin_email_to_mail =  str_replace(' ', '-', $campagn_title) . '@sendright.net'; 
 if($campaign_id) { 
 
     $optin_url           = (!empty($campaign->optin_url)) ? $campaign->optin_url : null;
@@ -18,8 +17,7 @@ if($campaign_id) {
     $optin_email_to_name = (!empty($campaign->optin_email_to_name)) ? $campaign->optin_email_to_name : $recieverName;
     $optin_email_to_mail = (!empty($campaign->optin_email_to_mail)) ? $campaign->optin_email_to_mail : $sendRightEmail;
     $optin_popup_link    = (!empty($campaign->optin_popup_link)) ? $campaign->optin_popup_link : null;
-  
-     
+   
     $_SESSION['campaign']['optin']['url']           = $optin_url;
     $_SESSION['campaign']['optin']['email_subject'] =  $optin_email_subject;
     $_SESSION['campaign']['optin']['email_content'] =  $optin_email_content;
@@ -27,10 +25,10 @@ if($campaign_id) {
     $_SESSION['campaign']['optin']['email_to_mail'] =  $optin_email_to_mail;
     $_SESSION['campaign']['optin']['popup_link']    = $optin_popup_link; 
     $_SESSION['campaign']['optin']['status']        = 'success';  
-    $_SESSION['campaign']['kind']                   = $campaign->kind;  
-
+    $_SESSION['campaign']['kind']                   = $campaign->kind;   
+}  else { 
+    $_SESSION['campaign']['optin']['email_to_mail'] =  $optin_email_to_mail;
 }
- 
 ?>
     <!-- Email OptIn PopUp Container  -->
     <div class="container"  >  

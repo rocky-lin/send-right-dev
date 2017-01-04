@@ -766,3 +766,46 @@ src: https://getuikit.com/docs/sortable.html
 
 
 
+
+
+Jan 4, 2017
+get return 0 if result is empty for getting latest list id
+set get first name and last name 
+set campaign as email 
+after subscriber subscribed set email receiver as the title and start the query of the campaign id 
+insert to list single or multiple list assign to the mobile optin
+add helper file in the system
+set display campaign title as email in compose of campaign page
+
+Jan 5, 2017
+get edit or just created title in compose of campaign page
+remove admin route order
+detect if campaign is inactive when subscribed to email optin 
+add activities details for mobile email optin  
+fix campaign home display for newsletter, auto response and mobile optin
+fix issue when page is data is empty
+check auto response and add form with auto response
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

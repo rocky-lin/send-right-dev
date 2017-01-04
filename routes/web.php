@@ -52,8 +52,8 @@ Route::get('/home/test', 'HomeController@test');
 Route::post('cash/create', 'CashController@store');
 
 
-Route::get('admin/order', 'admin\OrderController@index');
-Route::get('admin/order/requestPay/{order_id}', 'admin\OrderController@requestPay');
+// Route::get('admin/order', 'admin\OrderController@index');
+// Route::get('admin/order/requestPay/{order_id}', 'admin\OrderController@requestPay');
 
 
  

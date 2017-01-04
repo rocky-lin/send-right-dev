@@ -110,6 +110,11 @@ class Database {
 	
 	// Function to SELECT from the database
 	public function select($table, $rows = '*', $join = null, $where = null, $order = null, $limit = null) {
+
+        // print "<br> select $table, $rows = '*', $join = null, $where = null"; 
+
+
+
 		// Create query from the variables passed to the function
 		$q = 'SELECT '.$rows.' FROM '.$table;
 		if($join != null){
@@ -160,6 +165,12 @@ class Database {
 	
 	// Function to insert into the database
     public function insert($table,$params=array()) { 
+
+        // print "<pre>";
+        // print $table;
+        // print_r($params); 
+        // print "</prE>";
+
     	// Check to see if the table exists
     	 if($this->tableExists($table)){
     	 	$sql='INSERT INTO `'.$table.'` (`'.implode('`, `',array_keys($params)).'`) VALUES ("' . implode('", "', $params) . '")';
@@ -245,6 +256,13 @@ class Database {
         $val = $this->result;
         $this->result = array();
         return $val;
+    }
+
+    /** 
+     * Dapat palayo sa response ang pag clear para mo work sia 
+     */
+    public function clearResult() {
+        $this->result = [];
     }
 
     //Pass the SQL back for debugging

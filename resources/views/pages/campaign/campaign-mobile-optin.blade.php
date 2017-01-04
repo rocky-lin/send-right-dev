@@ -26,13 +26,9 @@
 			$content = str_replace('contenteditable="true"', '', $content);
 			echo $content; 
 		?> 
-	</div>
- 
-  <input type="hidden" value="{{$campaign->optin_url}}"   		   name="optin_url" id="optin_url" />
-
-  <input type="hidden" value="{{$campaign->optin_email_content}}"   name="optin_email_content" id="optin_email_content" />
-
-
+	</div> 
+  <input type="hidden" value="{{$campaign->optin_url}}"   		   name="optin_url" id="optin_url" /> 
+  <input type="hidden" value="{{$campaign->optin_email_content}}"   name="optin_email_content" id="optin_email_content" /> 
   {{-- New lines --}}
   <input type="hidden" value="{{$campaign->optin_email_subject}}"   name="optin_email_subject" id="optin_email_subject" />
   <input type="hidden" value="{{$campaign->optin_popup_link}}"      name="optin_popup_link" id="optin_popup_link" />
