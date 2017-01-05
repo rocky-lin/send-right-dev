@@ -35,10 +35,7 @@
                                         </th>
                                         <th>
                                             <label>Campaign Type </label> 
-                                        </th>
-                                        <th>
-                                            <label>Next Send</label>
-                                        </th>
+                                        </th> 
                                         <th>
                                             <label> Total Contacts </label>
                                         </th>
@@ -47,7 +44,7 @@
                                         </th>
                                         <th>
                                             <label>Type</label>
-                                        </th>  
+                                        </th> 
                                         <th>
                                             <labe> Created at </labe>
                                         </th>   
@@ -62,8 +59,7 @@
                                 <tbody>
                                     <tr data-ng-hide="deleteCampaign[campaign.id]"  ng-repeat="campaign in data | filter:q | startFrom:currentPage*pageSize | limitTo:pageSize | orderBy : email" >  
                                         <td>@{{campaign.title }}</td>
-                                        <td>@{{campaign.type }}</td>
-                                        <td> @{{campaign.next_send}} </td> 
+                                        <td>@{{campaign.type }}</td> 
                                         <td> @{{campaign.total_contacts}} </td>
                                         <td ng-class="{'campaign-inactive': campaign.status === 'inactive', 
                                         'campaign-active' : campaign.status === 'active'}" >@{{campaign.status}}</td>
@@ -90,13 +86,15 @@
                 </div>    
 
 				<hr>     
-                {{Form::open(['url'=>route('campaign.create'), 'method'=>'get'])}}
-                        <input type="hidden" value="newsletter" name="ck">
-                        <button type="submit" class="btn btn-primary"> 
-                             Create Newsletter 
-                      </button>
-                {{Form::close()}}
 
+                            {{Form::open(['url'=>route('campaign.create'), 'method'=>'get'])}}
+                                <input type="hidden" value="auto responder" name="ck">
+                                 <button type="submit" class="btn btn-primary"> 
+                                    Create auto responder
+                                </button>
+                            {{Form::close()}}
 
-{{--                 <a href="{{ route('user.campaign.create.start')}}" title="">
-                    <button type="button" class="btn btn-primary"> Add New Campaign</button>  --}}
+           {{--      <a href="{{ route('user.campaign.create.start')}}" title="">
+                    <button type="button" class="btn btn-primary"> Add New Campaign</button>
+     
+ --}}

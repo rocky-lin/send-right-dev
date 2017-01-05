@@ -108,6 +108,8 @@ app.controller( 'myCampaignViewCtr', ['$scope', '$filter', '$http', '$window', f
 
     //};
     $scope.campaignDisplayByKind = function(kind) {
+
+        console.log("kind = " + kind);
         $scope.campaignKindLoader = true;
 
         $scope.myStyle={'display':'block'};
@@ -143,11 +145,9 @@ app.controller( 'myCampaignViewCtr', ['$scope', '$filter', '$http', '$window', f
             alert("something wrong! please campaign send right support. Thank you!");
         });
     };
-
-
+ 
     // initialized data
-    $scope.campaignDisplayByKind('all');
-
+    // $scope.campaignDisplayByKind('all'); 
 
 }]);
 

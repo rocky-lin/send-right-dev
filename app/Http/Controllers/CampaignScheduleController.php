@@ -20,7 +20,15 @@ use App\Contact;
 
 class CampaignScheduleController extends Controller
 {  
-   
+    protected function printError($error) {
+        switch ($error) {
+            case 1:
+                    print "No campaign found, please check."; 
+                break; 
+            default: 
+                break;
+        }
+    }
     public function send()
     {    
          
@@ -33,7 +41,10 @@ class CampaignScheduleController extends Controller
                 if(CampaignList::getTotalCampaignList($campaign->campaign_id) > 0) {
   
                     // send email now to the contacts the belong to the lists of the campaign
-                    $this->sendEmailToContacts($campaign);   
+                    $error = $this->sendEmailToContacts($campaign);   
+
+                    // print error
+                    $this->printError($error);
 
                     // update campaign now with next schedule if repeat and batch send, so that we will know how many times it sent
                     $this->supdateNextScheduleAndUpdateBatch($campaign); 
@@ -181,18 +192,21 @@ class CampaignScheduleController extends Controller
         }   
     }
     public function sendEmailToContacts($campaign)
-    { 
-        $contacts = Campaign::getAllEmailWillRecieveTheCampaign($campaign->campaign_id);  
-
-        $campaign = (array) $campaign;     
-        foreach ($contacts['contacts'] as $id => $contact) {  
-            if(Mail::to($contact['email'])->queue(new CampaignSendMail($contact, $campaign))) { 
-                Activity::create(['account_id'=>$campaign['account_id'], 'table_name'=>'campaigns','table_id'=>$campaign['campaign_id'], 'action'=>'Email successfully sent to ' . $contact['email'] . ' campaign status is ' . $campaign['repeat'] ]);  
-            } else {
-                 Activity::create(['account_id'=>$campaign['account_id'], 'table_name'=>'campaigns','table_id'=>$campaign['campaign_id'], 'action'=>'Email failed sending to ' . $contact['email'] . ' campaign status is ' . $campaign['repeat'] ]);   
+    {  
+        if(!empty($campaign)) { 
+            $contacts = Campaign::getAllEmailWillRecieveTheCampaign($campaign->campaign_id);   
+            $campaign = (array) $campaign;     
+            foreach ($contacts['contacts'] as $id => $contact) {  
+                if(Mail::to($contact['email'])->queue(new CampaignSendMail($contact, $campaign))) { 
+                    Activity::create(['account_id'=>$campaign['account_id'], 'table_name'=>'campaigns','table_id'=>$campaign['campaign_id'], 'action'=>'Email successfully sent to ' . $contact['email'] . ' campaign status is ' . $campaign['repeat'] ]);  
+                } else {
+                     Activity::create(['account_id'=>$campaign['account_id'], 'table_name'=>'campaigns','table_id'=>$campaign['campaign_id'], 'action'=>'Email failed sending to ' . $contact['email'] . ' campaign status is ' . $campaign['repeat'] ]);   
+                }  
+                $this->pauseInHalfOfSeconds(); 
             }  
-            $this->pauseInHalfOfSeconds(); 
-        }  
+        } else {
+            return 1; // no campaign found
+        }
     }
 
     // pause in 1 second in order to send 2 emails per second

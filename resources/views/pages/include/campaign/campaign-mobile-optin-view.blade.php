@@ -1,6 +1,6 @@
 
- 
-       <div >
+    
+       <div>
 
                         <div class="row">   
                             <div class="col-sm-6">
@@ -18,12 +18,7 @@
                                  </select>  
                             <div/> 
                         </div>
-                    </div>
-
-
-
-
-
+                    </div> 
                     <div class="row" style="margin-left:0px; margin-right:0px">
                         <div  class="col-sm-12">
                          <br> <hr>
@@ -32,22 +27,17 @@
                                     <tr> 
                                         <th>
                                             <label>Campaign Title</label> 
-                                        </th>
-                                        <th>
-                                            <label>Campaign Type </label> 
-                                        </th>
-                                        <th>
-                                            <label>Next Send</label>
-                                        </th>
+                                        </th> 
                                         <th>
                                             <label> Total Contacts </label>
                                         </th>
                                         <th>
                                             <label>Status</label>
-                                        </th>
+                                        </th>   
                                         <th>
-                                            <label>Type</label>
-                                        </th>  
+                                            <label>Url</label>
+                                        </th>   
+
                                         <th>
                                             <labe> Created at </labe>
                                         </th>   
@@ -61,13 +51,16 @@
                                 </thead>
                                 <tbody>
                                     <tr data-ng-hide="deleteCampaign[campaign.id]"  ng-repeat="campaign in data | filter:q | startFrom:currentPage*pageSize | limitTo:pageSize | orderBy : email" >  
-                                        <td>@{{campaign.title }}</td>
-                                        <td>@{{campaign.type }}</td>
-                                        <td> @{{campaign.next_send}} </td> 
+                                        <td>@{{campaign.title }}</td>  
                                         <td> @{{campaign.total_contacts}} </td>
                                         <td ng-class="{'campaign-inactive': campaign.status === 'inactive', 
-                                        'campaign-active' : campaign.status === 'active'}" >@{{campaign.status}}</td>
-                                        <td>@{{campaign.type}}</td>  
+                                        'campaign-active' : campaign.status === 'active'}" >@{{campaign.status}}</td> 
+                                        
+                                        <td>
+                                            <a target="_blank" href="{{url('/optin')}}/@{{campaign.optin_url}}">Open Url</a>
+                                            
+
+                                            </td>
                                         <td>@{{campaign.created_ago}}</td>
                                         <td>   
                                             <span class="glyphicon glyphicon-trash" aria-hidden="true" data-ng-click="deleteCampaign(campaign)"></span>
@@ -89,14 +82,16 @@
                     </div>
                 </div>    
 
-				<hr>     
-                {{Form::open(['url'=>route('campaign.create'), 'method'=>'get'])}}
-                        <input type="hidden" value="newsletter" name="ck">
-                        <button type="submit" class="btn btn-primary"> 
-                             Create Newsletter 
-                      </button>
-                {{Form::close()}}
+				<hr>
 
 
-{{--                 <a href="{{ route('user.campaign.create.start')}}" title="">
-                    <button type="button" class="btn btn-primary"> Add New Campaign</button>  --}}
+                            {{Form::open(['url'=>route('campaign.create'), 'method'=>'get'])}}
+                                <input type="hidden" value="mobile email optin" name="ck">
+                                 <button type="submit" class="btn btn-primary"> 
+                                        Create email optin
+                                </button>
+                            {{Form::close()}}
+                         
+               {{--  <a href="{{ route('user.campaign.create.start')}}" title="">
+                    <button type="button" class="btn btn-primary"> Add New Campaign</button>
+      --}}

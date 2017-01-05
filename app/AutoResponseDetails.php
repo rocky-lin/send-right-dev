@@ -13,7 +13,8 @@ class AutoResponseDetails extends Model
         'table_name',
         'table_id',
         'status',
-        'email'
+        'email',
+        'mobile_number'
     ];
     
     protected $hidden = []; 

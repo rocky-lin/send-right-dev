@@ -11,9 +11,10 @@
     <!-- left column -->
     <div class="col-md-4 col-sm-6 col-xs-12">
       <div class="text-center">
-        <img src="{{url('/public/img/others/profile.jpg')}}" class="avatar img-circle img-thumbnail" alt="avatar">
-        <h6>Upload a different photo...</h6>
-        <input type="file" class="text-center center-block well well-sm">
+        <img src="{{url('/public/img/others/profile.jpg')}}" class="avatar img-circle img-thumbnail" alt="avatar" disabled>
+        <h6>Upload profile pic</h6> 
+        <input  type="file" class="text-center center-block well well-sm" style="cursor:not-allowed" disabled>
+        <em> Profile Picture is Coming soon! </em>
       </div>
     </div>
     <!-- edit form column -->

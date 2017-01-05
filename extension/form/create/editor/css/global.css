@@ -239,3 +239,6 @@ span.cfgenwp-button-small{
     background-color: gainsboro;
     padding: 37px; 
 }
+.cfgenwp-formconfig-l, .cfgenwp-target-insertfieldvalue, .cfgenwp-insertfieldvalue{
+	/*display:none;*/
+}

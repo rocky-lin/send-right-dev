@@ -764,33 +764,38 @@ sortable resources docs
 src: https://getuikit.com/docs/sortable.html
 
 
-
-
-
-
+ 
 Jan 4, 2017
-get return 0 if result is empty for getting latest list id
-set get first name and last name 
-set campaign as email 
-after subscriber subscribed set email receiver as the title and start the query of the campaign id 
-insert to list single or multiple list assign to the mobile optin
-add helper file in the system
-set display campaign title as email in compose of campaign page
+1. Fix auto create email in each campaign
+2. check to email and get what is the account id  
+3. get specific lists for this specific mobipe optin 
+4. check if the contact is already added to the list
+5. contact add or update to the specific list
+6. get return 0 if result is empty for getting latest list id
+7. set get first name and last name 
+8. set campaign as email optin
+9. after subscriber subscribed set email receiver as the title and start the query of the campaign id 
+10. insert to list single or multiple list assign to the mobile optin
+11. add helper file in the system
+12. set display campaign title as email in compose of campaign page
 
 Jan 5, 2017
-get edit or just created title in compose of campaign page
-remove admin route order
-detect if campaign is inactive when subscribed to email optin 
-add activities details for mobile email optin  
-fix campaign home display for newsletter, auto response and mobile optin
-fix issue when page is data is empty
-check auto response and add form with auto response
+1. get edit or just created title in compose of campaign page
+2. remove admin route order
+3. detect if campaign is inactive when subscribed to email optin 
+5. add activities details for mobile email optin  
+6. fix campaign home display for newsletter, auto response and mobile optin
+7. fix issue when page is data is empty
+8. check auto response and add form with auto response
 
 
-
-
-
-
+Didn't found about catchable all email in amazon yet, so this can done later will research further later.
+I just prepare the coding for mobile email optin and we will test this one after when we moved to other server or we will be able to work with 
+catchable all email. 
+ 
+Best regards,
+Jesus Erwwin Suarez
+ 
 
 
 

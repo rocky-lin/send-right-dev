@@ -90,8 +90,12 @@ Route::group(['prefix' => 'user' , 'middleware' => 'auth' ], function() {
 		Route::post('form/list/connect/post', 'FormController@postConnectList')->name('user.form.list.connect.post');  
 		Route::resource('form', 'FormController');   
 
-	// campaign  
-	 
+	// campaign   
+
+		Route::get('campaign/newsletters','CampaignController@index')->name('user.campaign.newsletter.view'); 
+		Route::get('campaign/auto-responders','CampaignController@autoResponderIndex')->name('user.campaign.autoresponders.view'); 
+		Route::get('campaign/mobile-optin','CampaignController@mobileOptInIndex')->name('user.campaign.mobileoptin.view'); 
+
 		// create start gate 
 			Route::get('campaign/create/start','CampaignController@createStart')->name('user.campaign.create.start');
 			

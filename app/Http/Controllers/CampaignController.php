@@ -25,9 +25,16 @@ class CampaignController extends Controller
 
     public function index() 
     { 
-    	return view('pages.campaign.campaign');
+        return view('pages/campaign/campaign');
     } 
-
+    public function autoResponderIndex() 
+    { 
+        return view('pages/campaign/campaign-auto-responder-view');
+    } 
+    public function mobileOptInIndex() 
+    {  
+    	return  view('pages/campaign/campaign-mobile-optin-view');
+    }  
     public function createStart()
     {
         // print "test";
@@ -447,7 +454,9 @@ class CampaignController extends Controller
         // dd($campaigns);
         switch ($kind) {
             case 'mobile email optin': 
-                foreach($campaigns as $index => $campaign)  {
+                foreach($campaigns as $index => $campaign)  { 
+                    $created_ago = Carbon::createFromTimeStamp(strtotime($campaign['created_at']))->diffForHumans();  
+                    $campaigns[$index]['created_ago'] = $created_ago;
                     $campaigns[$index]['total_contacts'] =  count(Campaign::getAllEmailWillRecieveTheCampaign($campaigns[$index]['id'])['contacts']);  
                 }
             break; 

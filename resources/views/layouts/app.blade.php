@@ -43,18 +43,32 @@
                     </button> 
 
                     <!-- Branding Image -->
-                    <a class="navbar-brand" href="{{ url('/home') }}">{{ config('app.name', 'Laravel') }}</a>
+                    <a class="navbar-brand" href="{{ url('/home') }}">{{ config('app.name', 'Laravel') }}</a> 
+                    @if (!Auth::guest())    
+                    <ul class="nav navbar-nav navbar-right"> 
+                       <li> <a href="{{ url('/user/contact') }}">Contacts</a>      </li> 
+                       <li> <a href="{{ url('/user/list') }}">List</a>      </li> 
+                       <li> <a href="{{ url('/user/form') }}">Form</a>       </li>
+                       
+                        
  
-                    @if (!Auth::guest())   
-                        <a class="navbar-brand dropdown navbar-menu" href="{{ url('/user/contact') }}">Contacts</a>    
-                        <a class="navbar-brand dropdown navbar-menu" href="{{ url('/user/list') }}">List</a>      
-                        <a class="navbar-brand dropdown navbar-menu" href="{{ url('/user/form') }}">Form</a>      
-                        <a class="navbar-brand dropdown navbar-menu" href="{{ route('campaign.index') }}">Campaign</a>  
-                        {{-- <a class="navbar-brand dropdown navbar-menu" href="{{ route('newsletter.index') }}">Newsletter</a>       --}}
-                    @endif 
 
-                </div>
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                                    Campaign  <span class="caret"></span>
+                                </a> 
+                                <ul class="dropdown-menu" role="menu">
+                                    <li><a  href="{{ route('user.campaign.newsletter.view') }}">Newsletter</a></li>
+                                    <li><a  href="{{ route('user.campaign.autoresponders.view') }}">Auto Responder</a></li>
+                                    <li> <a href="{{ route('user.campaign.mobileoptin.view') }}">Mobile Optin</a></li> 
+                                </ul>
+                            </li>
+                        </ul>
 
+
+
+                    @endif  
+                </div> 
                 <div class="collapse navbar-collapse" id="app-navbar-collapse">
                     <!-- Left Side Of Navbar -->
                     <ul class="nav navbar-nav">

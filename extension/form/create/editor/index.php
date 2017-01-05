@@ -607,6 +607,10 @@ echo $cfgenwp_editor_obj->buildFormDefaultCss($cfgenwp_form_css, array('body'));
 					function getSelectedList() {
 						return $_SESSION['formEntryStep1']['selectedList']; 
 					}
+					function getSelectedAutoResponder() {
+						return $_SESSION['formEntryStep1']['autoresponse']['name']; 
+					}
+
 					function setFormEmail($value){
 						$this->form_email = $value;
 					}
@@ -894,8 +898,14 @@ echo $cfgenwp_editor_obj->buildFormDefaultCss($cfgenwp_form_css, array('body'));
 				$tscfgenform_setting = new TsCfgenFormSetting();
 				$tscfgenform_setting->setFormSettingTitle('Selected List ');
 				$tscfgenform_setting->setFormSettingLabelFor('cfgenwp-config-form-name');
-				$tscfgenform_setting->setFormSettingValue('<input type="text" id="cfgenwp-config-list-name" value="'.$tscfgenform->getSelectedList().'"   disabled />');
-					// $tscfgenform_setting->setFormSettingValue('<input type="hidden" id="cfgenwp-config-list-name-hidden" value="'.$tscfgenform->getSelectedList().'" />');
+				$tscfgenform_setting->setFormSettingValue('<input type="text" id="cfgenwp-config-list-name" value="'.$tscfgenform->getSelectedList().'"   disabled />'); 
+				$tscfgenform_setting->printFormSettingHtml();
+
+				// selected list display
+				$tscfgenform_setting = new TsCfgenFormSetting();
+				$tscfgenform_setting->setFormSettingTitle('Selected Autoresponder');
+				$tscfgenform_setting->setFormSettingLabelFor('cfgenwp-config-form-name');
+				$tscfgenform_setting->setFormSettingValue('<input type="text" id="cfgenwp-config-list-name" value="'.$tscfgenform->getSelectedAutoResponder().'"   disabled />'); 
 				$tscfgenform_setting->printFormSettingHtml();
 
 

@@ -45,12 +45,9 @@ class Form extends Model
     * changed to many result and return an array 
     */
    public static function getListIdFirst($formId) 
-   { 
-      // print "form list id " . FormList::where('form_id', $formId)->first()->list_id;
-      // exit; 
-       $list_id = FormList::where('form_id', $formId)->first()->list_id;   
-       print_r($list_id);
-       print '<br>'; 
+   {   
+       $list = FormList::where('form_id', $formId)->first();     
+       return (!empty($list->list_id)) ? $list->list_id : 0;
    }
 
    /** 
@@ -72,7 +69,9 @@ class Form extends Model
    { 
       // get specific list_id of the contact 
      $listId = self::getListIdFirst($formId); 
+
+     // print "<br> list id  $listId ";
       // get total contact via specific list 
-      return List1::getListTotalContact($listId);
+      return List1::getListTotalContact($listId); 
    }
 }

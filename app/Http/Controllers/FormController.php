@@ -9,6 +9,7 @@ use File;
 use Auth;
 use App\List1;
 use App\Contact;
+use App\Campaign; 
 
  
 
@@ -149,8 +150,15 @@ class FormController extends Controller
  
     public function viewConnectList()
     { 
+        $autoRespondersArr = [];
         $formLists = User::formLists();  
-        return view('pages.form.form-connect-list', compact('formLists')); 
+        $autoResponders = Campaign::where('kind', 'auto responder')->get(); 
+        foreach($autoResponders as $responder) {
+            $autoRespondersArr[$responder->id] = $responder->title; 
+        }
+         // $autoResponders = array_collapse($autoResponders); 
+         // dd($autoResponders); 
+        return view('pages.form.form-connect-list', compact('formLists', 'autoRespondersArr')); 
     } 
 
     public function postConnectList(Request $request)
@@ -160,9 +168,12 @@ class FormController extends Controller
 
     public function registerNewFormStep1(Request $request)
     {    
-        session_start();  
-        $_SESSION['formEntryStep1'] = $request->all();
-        $_SESSION['formEntryStep1']['email'] = Auth::user()->email; 
+        session_start();   
+        print "test"; 
+        $_SESSION['formEntryStep1'] = $request->all(); 
+        $_SESSION['formEntryStep1']['autoresponse']['name'] = Campaign::find($request->get('selectedAutoResponse'))->title;
+        $_SESSION['formEntryStep1']['autoresponse']['id'] = $request->get('selectedAutoResponse');  
+        $_SESSION['formEntryStep1']['email'] = Auth::user()->email;   
         // dd($_SESSION['formEntryStep1']);  
         return redirect(url('extension/form/create/editor/index.php')); 
     }  
