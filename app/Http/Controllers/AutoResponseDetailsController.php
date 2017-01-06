@@ -41,44 +41,51 @@ class AutoResponseDetailsController extends Controller
             print "\n<br>schedule auto response repeat as mins "  . $campaignSchedule->mins;  
             print "\n<br>receiver email " . $autoResponseDetail->email; 
             print "\n<br>created at email " . $autoResponseDetail->created_at;  
-            print "\n<br>campaign id " . $autoResponseDetail->autoResponse->campaign_id;  
-             
-            // calculate total passed hour and min between auto response details created and time now
-            $dayHourInteraval =  Helper::getSpecificDayHowMinInDateTime($autoResponseDetail->created_at);  
-                
-            // if campaign type is immediate response, direct send response no need for validation
-            if($campaign->type == 'immediate response') {
-                $isSendNow = true; 
-                 print "\n <br> no need to validate day and hour interval because the auto response campaign is " . $campaign->type;
-            } 
-            // if campaign type is schedule response, need day and hour validation
-            else if($campaign->type == 'schedule response') {  
-                if(CampaignSchedule::isAutoResponseReachDeadlineSend(['days'=>$campaignSchedule->days, 'hours'=>$campaignSchedule->hours], $dayHourInteraval)) {   
-                    print "\n <br>  need day and hour validation because campaign auto response is in" . $campaign->type;
-                    $isSendNow = true; 
-                } else {
-                    $isSendNow = false; 
-                    print "\n<bR>not time to send";  
-                }
-            } 
-            // else doing nothing, there should be something wrong
-            else { 
-                $isSendNow = false; 
-                print "\n<bR>something wrong!";  
-            }
- 
-            // start sending auto response now
-            if($isSendNow == true) {
-                if($campaignScheduleController->sendAutoResponseToOneReceiver($autoResponseDetail->autoResponse->campaign_id, $autoResponseDetail->email, $autoResponseDetail->table_id)) {
-                    print "\n<br> email sent to responder"; 
-                }   else {
-                    print "\n<br> sending failed" ;
-                }      
+            print "\n<br>campaign id " . $autoResponseDetail->autoResponse->campaign_id;
 
-                // update status to finished
-                if(AutoResponseDetails::find($autoResponseDetail->id)->update(['status'=>'finished'])  )  {
-                    print "\n<br> auto responder status updated finished"; 
-                } 
+
+
+            if($campaign->status == 'active') {
+                // calculate total passed hour and min between auto response details created and time now
+                $dayHourInteraval =  Helper::getSpecificDayHowMinInDateTime($autoResponseDetail->created_at);
+
+                // if campaign type is immediate response, direct send response no need for validation
+                if($campaign->type == 'immediate response') {
+                    $isSendNow = true;
+                     print "\n <br> no need to validate day and hour interval because the auto response campaign is " . $campaign->type;
+                }
+                // if campaign type is schedule response, need day and hour validation
+                else if($campaign->type == 'schedule response') {
+                    if(CampaignSchedule::isAutoResponseReachDeadlineSend(['days'=>$campaignSchedule->days, 'hours'=>$campaignSchedule->hours], $dayHourInteraval)) {
+                        print "\n <br>  need day and hour validation because campaign auto response is in" . $campaign->type;
+                        $isSendNow = true;
+                    } else {
+                        $isSendNow = false;
+                        print "\n<bR>not time to send";
+                    }
+                }
+                // else doing nothing, there should be something wrong
+                else {
+                    $isSendNow = false;
+                    print "\n<bR>something wrong!";
+                }
+
+                // start sending auto response now
+                if($isSendNow == true) {
+
+                    if($campaignScheduleController->sendAutoResponseToOneReceiver($autoResponseDetail->autoResponse->campaign_id, $autoResponseDetail->email, $autoResponseDetail->table_id)) {
+                        print "\n<br> email sent to responder";
+                    }   else {
+                        print "\n<br> sending failed" ;
+                    }
+
+                    // update status to finished
+                    if(AutoResponseDetails::find($autoResponseDetail->id)->update(['status'=>'finished'])  )  {
+                        print "\n<br> auto responder status updated finished";
+                    }
+                }
+            } else {
+                print "\n<br>Sorry can't send auto response campaign because campaing status is inactive. Please turn to active so that we can deliver it to your subscriber correctly.";
             }
         }  
     }

@@ -11,8 +11,22 @@ session_start();
  
 // print "this is the form creation"; 
 // print "<prE>";
-// print_r($_SESSION); 
+// print_r($_SESSION);
 // print "</pre>";
+
+//require laravel
+require "../../../../laravel-load.php";
+//print "test";
+// use App\User;
+//print Auth::user()->name;
+//print_r(User::find(1));
+
+
+
+
+
+
+
 
 $id = (!empty($_GET['id'])) ? $_GET['id'] : false;
 require '../../../autoload.php';  

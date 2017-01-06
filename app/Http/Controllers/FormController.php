@@ -3,15 +3,15 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Account;
 use App\User; 
 use App\Form;
 use File; 
 use Auth;
 use App\List1;
 use App\Contact;
-use App\Campaign; 
-
- 
+use App\Campaign;
+use App\AutoResponse;
 
 class FormController extends Controller
 {
@@ -90,19 +90,25 @@ class FormController extends Controller
     {
         // $deletedRows = Form::where('id', $id)->delete();
         // print "deleted form id " .   $id; 
-            $form = Form::find($id);
+            $form         = Form::find($id);
+            $autoResponse = AutoResponse::where('table_name', 'forms')->where('table_id', $id);
+
             print "form name " . $form->folder_name; 
             // if( $deletedRows ) { 
-            if($form->delete()) {  
+            if($form->delete()) {
+                if($autoResponse->delete()) {
+                    print "<br> Auto response successfully deleted";
+                } else {
+                    print "<br> Auto response failed to delete";
+                }
                 // delete foder of the form
                 $success = File::deleteDirectory('E:/xampp/htdocs/rocky/send-right-dev/extension/form/create/editor/forms/' . $form->folder_name);
                 if($success == true) {  
                     print "successfully deleted";
                 } else {
                     print "failed to delete";
-                }   
-                // delete entry of the form? not sure in this part yet 
-
+                }
+                // delete entry of the form? not sure in this part yet
                 print "folder " .$form->folder_name . " successfully deleted.";
             } else {
                 print "folder " .$form->folder_name . " failed to delete."; 
@@ -132,8 +138,7 @@ class FormController extends Controller
         // } else {
         //     print "folder " .$frm->folder_name . " failed to delete."; 
         // }
-    } 
-
+    }
     public function getUserAccountForms() 
     {   
         $forms = User::getUserAccountForms(); 
@@ -146,38 +151,45 @@ class FormController extends Controller
         $collection = collect( $forms ); 
         $sorted = $collection->sortBy('id', SORT_REGULAR, true); 
         return $sorted->values()->all();
-    } 
- 
+    }
     public function viewConnectList()
     { 
         $autoRespondersArr = [];
+        $autoRespondersArr[0] = 'select..';
+
+
         $formLists = User::formLists();  
-        $autoResponders = Campaign::where('kind', 'auto responder')->get(); 
+        $autoResponders = Campaign::where('account_id', User::getUserAccount())->where('kind', 'auto responder')->get();
+
         foreach($autoResponders as $responder) {
             $autoRespondersArr[$responder->id] = $responder->title; 
         }
          // $autoResponders = array_collapse($autoResponders); 
          // dd($autoResponders); 
         return view('pages.form.form-connect-list', compact('formLists', 'autoRespondersArr')); 
-    } 
-
+    }
     public function postConnectList(Request $request)
     {
         dd($request);
-    }  
-
+    }
     public function registerNewFormStep1(Request $request)
     {    
         session_start();   
         print "test"; 
-        $_SESSION['formEntryStep1'] = $request->all(); 
-        $_SESSION['formEntryStep1']['autoresponse']['name'] = Campaign::find($request->get('selectedAutoResponse'))->title;
-        $_SESSION['formEntryStep1']['autoresponse']['id'] = $request->get('selectedAutoResponse');  
+        $_SESSION['formEntryStep1'] = $request->all();
+
+        if($request->get('selectedAutoResponse') != 0) {
+            $_SESSION['formEntryStep1']['autoresponse']['name'] = Campaign::find($request->get('selectedAutoResponse'))->title;
+            $_SESSION['formEntryStep1']['autoresponse']['id'] = $request->get('selectedAutoResponse');
+        } else {
+            $_SESSION['formEntryStep1']['autoresponse']['name'] = 'not selected..';
+            $_SESSION['formEntryStep1']['autoresponse']['id'] = 0;
+        }
+
         $_SESSION['formEntryStep1']['email'] = Auth::user()->email;   
         // dd($_SESSION['formEntryStep1']);  
         return redirect(url('extension/form/create/editor/index.php')); 
-    }  
-
+    }
     public function viewContacts($id) 
     {   
         $listId = Form::getListIdFirst($id); 

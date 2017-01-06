@@ -4,7 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class autoResponse extends Model
+class AutoResponse extends Model
 {
     protected $table = 'auto_responses';
     protected $fillable = ['campaign_id','table_name', 'table_id'];
@@ -18,5 +18,10 @@ class autoResponse extends Model
     public function campaign()
     {
         return $this->belongsTo('App\Campaign');
+    }
+
+    public static  function createNow($data=[])
+    {
+        return self::create($data);
     }
 }

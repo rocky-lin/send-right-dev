@@ -1,7 +1,9 @@
 <?php
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request; 
+use App\AutoResponse;
+use App\AutoResponseDetails;
+use Illuminate\Http\Request;
 use Validator;
 use App\Http\Requests\ValidateCampaignList;
 use App\Http\Requests\ValidateCampaignSender; 
@@ -492,16 +494,74 @@ class CampaignController extends Controller
 
     public function destroy($id)
     {
-        print "alright delete pa more id " . $id;
-        //        Campaign::find($id)->delete();
-        //        Campaign::find($id)->campaignSchedule()->delete();
-        //        EmailAnalytic::where('table_name', 'campaigns')->whereAnd('tabled_id', $id)->delete();
-        //        Campaign::find($id)->campaignList()->delete();
-        Campaign::find($id)->campaignSchedule()->delete();
-        EmailAnalytic::where('table_name', 'campaigns')->where('table_id', $id)->delete();
-        Campaign::find($id)->campaignList()->delete();
-        Campaign::find($id)->delete();
-    } 
+
+
+
+
+
+
+        if(Campaign::find($id)->campaignSchedule()->delete()) {
+            print "<br> campaign schedule deleted";
+        } else {
+            print "<br> campaign schedule not deleted";
+        }
+
+
+        if(EmailAnalytic::where('table_name', 'campaigns')->where('table_id', $id)->delete()){
+            print "<br> campaign email analytic deleted";
+
+        } else {
+            print "<br> campaign email analytic not deleted";
+        }
+
+
+
+        if(Campaign::find($id)->campaignList()->delete()){
+
+            print "<br> campaign list deleted";
+
+
+        } else {
+
+            print "<br> campaign list not deleted";
+
+        }
+
+
+        if(Campaign::find($id)->delete()){
+
+            print "<br> campaign  deleted";
+
+        } else {
+
+            print "<br> campaign not deleted";
+
+        }
+
+        $autoResponse = AutoResponse::where('campaign_id', $id)->get()->first();
+
+        if($autoResponse) {
+            if ($autoResponse->delete()) {
+                print "<br> auto response deleted";
+                if (AutoResponseDetails::where('auto_response_id', $autoResponse->id)->delete()) {
+                    print "<br> auto response details deleted";
+
+                } else {
+                    print "<br> auto response details not deleted";
+                }
+
+            } else {
+                print "<br> auto response not deleted";
+            }
+        } else {
+            print "<br> no autoresponse to delete for this campaign";
+        }
+
+    }
+
+
+
+
     public function sendTestCampaignEmail($id, $email)
     {  
         // print "$id, $email";

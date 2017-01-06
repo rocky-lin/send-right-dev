@@ -1,4 +1,4 @@
-<?php 
+<?php
 require ('../../../../autoload.php');    
 
 $json_message['form_id'] = $form_id;
@@ -24,12 +24,24 @@ $listId = $list->getListByName($_POST['list_name'])[0]['id'];
 
 
 
+
+
+
+
+
+
+
+
+//$$_SESS['formEntryStep1']['name'];
+//$_SESSION['formEntryStep1']['id'];
 // insert new form
-$jsonDecoded = json_decode($_POST['json_export'], true); 
-$account_id = $_SESSION['account_id'];  
+$jsonDecoded = json_decode($_POST['json_export'], true);
+//print_r_pre($jsonDecoded);
+$account_id = $_SESSION['account_id'];
 $formController = new FormController(new Model);
 $formId = $formController->insertNewFormNow(
   	[
+
   		'account_id'=>$account_id, 
 	  	'folder_name'=>$form_id, 
 	  	'name'=>$jsonDecoded['form_name'], 
@@ -54,4 +66,14 @@ $isListExist = $formList->addOrUpdate(['form_id'=>$formId, 'folder_name'=>$folde
 
 // print  " $formId  $folderName $listId";
 
- 
+
+use App\AutoResponse;
+// set auto response and insert
+if(!empty($_SESSION['formEntryStep1']['autoresponse']['id'])) {
+	$autoResponseData = [
+			'campaign_id' => $_SESSION['formEntryStep1']['autoresponse']['id'],
+			'table_name' => 'forms',
+			'table_id' => $formId,
+	];
+	AutoResponse::createNow($autoResponseData);
+}

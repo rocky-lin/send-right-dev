@@ -7,7 +7,13 @@
  * making the copy and not intended for a collective use.
  *********************************************************************************/
 
+
+//require laravel
+require "../../../../../laravel-load.php";
+
+
 require 'sessionpath.php';
+
 
 require '../class/class.formbuilder.message.php';
 $formbuilder_message_factory = new FormBuilderMessageFactory();
@@ -1896,17 +1902,6 @@ $json_message = array();
 //$json_message['reencode'] = $json_export_decode;
 
 $json_message['response'] = $response;
-
-
-// print "<pre>";	
-	
-	// print "post"; 
-	// print_r($_POST);
-	// print "get"
-	// print_r($_GET);
-
-// print "</pre>"; 
-
 
 echo json_encode($json_message);
 
