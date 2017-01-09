@@ -64,9 +64,9 @@ if($activateEmailCampaign)
 }
 
 $to 	  = 'jesus@sendright.net'; 
-$from     = 'nakew@gmail.com'; 
-$fromName = 'nakew Ong';
-$fromCampaign = 'mobile-optin-2@sendright.net';  
+$from     = 'mrjesuserwinsuarez@gmail.com'; 
+$fromName = 'Jesus Erwin Suarez';
+$fromCampaign = 'new-mobile-optin-test-1@sendright.net';  // to@domain.com
 $fromCampaign = convertToCampaignTitle($fromCampaign); 
 $first_name =  getFirstName($fromName) ;
 $last_name = getLastName($fromName); 
