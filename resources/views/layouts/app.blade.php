@@ -43,8 +43,10 @@
                     </button> 
 
                     <!-- Branding Image -->
-                    <a class="navbar-brand" href="{{ url('/home') }}">{{ config('app.name', 'Laravel') }}</a> 
-                    @if (!Auth::guest())    
+
+                    <a class="navbar-brand" href="{{ url('/home') }}"><img src="{{ url('public/img/logo/SendRight logo v1.png') }}" /></a>
+
+                @if (!Auth::guest())
                     <ul class="nav navbar-nav navbar-right"> 
                        <li> <a href="{{ url('/user/contact') }}">Contacts</a>      </li> 
                        <li> <a href="{{ url('/user/list') }}">List</a>      </li> 
@@ -60,7 +62,13 @@
                                 <ul class="dropdown-menu" role="menu">
                                     <li><a  href="{{ route('user.campaign.newsletter.view') }}">Newsletter</a></li>
                                     <li><a  href="{{ route('user.campaign.autoresponders.view') }}">Auto Responder</a></li>
-                                    <li> <a href="{{ route('user.campaign.mobileoptin.view') }}">Mobile Optin</a></li> 
+                                    @if($addOns['is_has_email_mobile_opt_in'])
+                                        <li> <a href="{{ route('user.campaign.mobileoptin.view') }}">Mobile Optin</a></li>
+                                    @else
+                                        <li>
+                                            <a href="#" data-toggle="modal" data-target="#popUpModal" > <span style="color:#b7b7b7"> Mobile Optin </span>  </a>
+                                        </li>
+                                    @endif;
                                 </ul>
                             </li>
                         </ul>
@@ -116,6 +124,7 @@
             </div>
         </nav>  
         <div class='container'>
+            @include('pages/popup/popup');
             @include('pages/include/subscription/subscription-status-message')
             @yield('content')  
         </div>

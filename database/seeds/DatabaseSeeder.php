@@ -15,7 +15,10 @@ use App\Newsletter;
 use App\Subscription; 
 use App\Product; 
 use App\ProductDetail; 
-use App\Invoice; 
+use App\Invoice;
+use App\AddOn;
+use App\Language;
+
 class DatabaseSeeder extends Seeder
 {
     /**
@@ -24,7 +27,7 @@ class DatabaseSeeder extends Seeder
      * @return void
      */
     public function run()
-    {  
+    {
     	// create specific users with accounts   
     	// Model::unguard();   
     	User::truncate();
@@ -41,8 +44,10 @@ class DatabaseSeeder extends Seeder
         Subscription::truncate(); 
         Product::truncate(); 
         ProductDetail::truncate(); 
-        Invoice::truncate(); 
- 
+        Invoice::truncate();
+        AddOn::truncate();
+        Language::truncate();
+
         // DB::table('users')->truncate();
         // DB::table('users')->truncate();
         // DB::table('users')->truncate(); 
@@ -60,7 +65,9 @@ class DatabaseSeeder extends Seeder
         factory(Product::class, 10)->create();
         factory(ProductDetail::class, 10)->create();
         factory(Invoice::class, 10)->create();
-    
+        factory(Invoice::class, 10)->create();
+        factory(AddOn::class, 10)->create();
+        factory(Language::class, 1)->create();
         // Model::reguarded();  
     }
-}  
+}

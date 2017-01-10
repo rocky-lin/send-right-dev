@@ -38,6 +38,16 @@ class CreateAccountsTable extends Migration
             // sendright email for each user 
             $table->string('sendright_email')->nullable();
 
+
+            // account type
+
+//            /**
+//             * 1 = include newsletter and auto responder
+//             * 2 = include newsletter, auto responder and mobile optin
+//             * 3 = coming soon
+//             */
+//            $table->integer('type')->nullable();
+
             $table->timestamps();
         });
     }

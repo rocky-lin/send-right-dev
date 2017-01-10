@@ -800,17 +800,29 @@ Jesus Erwwin Suarez
 
 
 
+Todo Jan 9, 2017
+
+1. Fix server bugs like delete not working in online, auto response not saving in online. all of this working in my local
+2. Refine all the design
+3. Look for server that fit to our sendright needs
+4. When we have the new server setup mobile optin and do testing
+5. Test all the functions of the process and function
 
 
 
+Update for Jan 9, 2017
+review video sent web binary
+create addons database and migration
+create language database abd migration
+allow to select language as default - language is need more details and can be completed when our design is done
+set dummy data for language and addons
+set database seeder for language and addons
+change logo in the header
+add popup when clicked mobile optin but not added to his account
 
 
+Todo for Jan 10, 2016
 
-
-
-
-
-
-
-
-
+Things that can be discussed and agree
+design
+payment

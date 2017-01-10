@@ -205,4 +205,15 @@ $factory->define(App\Invoice::class, function (Faker\Generator $faker) {
         'total_amount' => rand(200, 2000),
     ];
 });
- 
+ $factory->define(App\AddOn::class, function (Faker\Generator $faker) {
+    return [
+        'account_id' => rand(1, App\Account::count()),
+        'name' => $faker->name
+    ];
+});
+ $factory->define(App\Language::class, function (Faker\Generator $faker) {
+    return [
+        'name' => "en",
+        'status' => 'active'
+    ];
+});

@@ -64,6 +64,11 @@ class Account extends Model
 	{
 		return $this->hasMany('App\Campaign', 'account_id', 'id');
 	}
+	public function addOn()
+	{
+		return $this->hasMany('App\AddOn');
+	}
+
 	public static function getCompanyName() 
 	{
 		$account = self::find(User::getUserAccount()); 
@@ -84,9 +89,6 @@ class Account extends Model
 		$account = self::find(User::getUserAccount()); 
 		return $account->user_name;   
 	}
-
-
-
 	public static function getSubscriptionStatus()
 	{
 		return self::find(User::getUserAccount())->subscription()->first()->status;
@@ -108,10 +110,9 @@ class Account extends Model
 	{
 		return self::where('sendright_email', $sendRightEmail)->count(); 
 	}
-
-
-
-
-
+	public static function getAddOns()
+	{
+		return self::find(User::getUserAccount())->addOn;
+	}
 
 }
