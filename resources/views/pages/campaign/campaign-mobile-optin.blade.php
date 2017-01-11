@@ -12,21 +12,38 @@
     <script src="<?php print url('/'); ?>/public/js/src/jquery-3.1.1.min.js"></script>
     <script src="<?php print url('/'); ?>/public/js/custom_jquery.js"></script>
 
+	
+		<script type="text/javascript"> 
+			$(document).ready(function(){ 
+				var containerCss = $('.bal-content-wrapper div:first-child').attr('style');  
+				console.log(containerCss);
+				$('body').attr('style', containerCss); 
+			}); 
+		</script>
 
 	<style type="text/css" media="screen">
 		.sortable-row-actions{ 
 			display:none;
 		}
+		.bal-content-main { 
+		    /*width: 70%;*/
+		    margin:  0px auto;  
+		}
+		/*.bal-content-wrapper {
+			height: 100%;
+		}*/
 	</style>
 </head>
 <body>
-	<div class="container"> 
+	<div class="container">
+		<br><br>
 		<?php 
 			$content = htmlspecialchars_decode(stripslashes($campaign->content));
 			$content = str_replace('contenteditable="true"', '', $content);
 			echo $content; 
-		?> 
-	</div> 
+		?>  
+	</div>
+
   <input type="hidden" value="{{$campaign->optin_url}}"   		   name="optin_url" id="optin_url" /> 
   <input type="hidden" value="{{$campaign->optin_email_content}}"   name="optin_email_content" id="optin_email_content" /> 
   {{-- New lines --}}

@@ -1,5 +1,6 @@
 @extends('layouts.app')  
 @section('content') 
+@include('errors/error-status')
 <div class="container"  > 
     <div class="row">
         <div class="col-sm-12">     

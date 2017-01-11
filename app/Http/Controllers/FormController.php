@@ -166,7 +166,7 @@ class FormController extends Controller
         }
          // $autoResponders = array_collapse($autoResponders); 
          // dd($autoResponders); 
-        return view('pages.form.form-connect-list', compact('formLists', 'autoRespondersArr')); 
+        return view('pages/form/form-connect-list', compact('formLists', 'autoRespondersArr')); 
     }
     public function postConnectList(Request $request)
     {
@@ -174,10 +174,15 @@ class FormController extends Controller
     }
     public function registerNewFormStep1(Request $request)
     {    
-        session_start();   
-        print "test"; 
-        $_SESSION['formEntryStep1'] = $request->all();
-
+        session_start();    
+ 
+        if(!List1::where('name', $request->get('selectedList') )->count()) { 
+            return redirect()->back()->with('status', 'Please select your correct list correctly.')->withInput();
+        } else if (empty($request->get('formName'))) {
+            return redirect()->back()->with('status', 'Form name is required.')->withInput();
+        }
+ 
+        $_SESSION['formEntryStep1'] = $request->all(); 
         if($request->get('selectedAutoResponse') != 0) {
             $_SESSION['formEntryStep1']['autoresponse']['name'] = Campaign::find($request->get('selectedAutoResponse'))->title;
             $_SESSION['formEntryStep1']['autoresponse']['id'] = $request->get('selectedAutoResponse');

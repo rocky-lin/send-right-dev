@@ -1,24 +1,26 @@
 <?php
 include_once 'includes/db.class.php';
- require_once ('includes.php');
+require_once ('includes.php');
+ 
+use App\Campaign;  
+use App\CampaignTemplate;  
 
-
-  use App\Campaign; 
-
-
+$type = $_GET['type']; 
 $response = array();
-$rows = Campaign::where('account_id', App\User::getUserAccount())->get()->toArray();
+
+if($type == 'template') {  
+	$rows =  CampaignTemplate::where('id', '>', 1)->get()->toArray();  	 
+} else {
+	$rows = Campaign::where('account_id', App\User::getUserAccount())->get()->toArray();
+}
+
+
+
 // print "<pre>"; 
 // print_r($campaigns);
 // print "</pre>";
-
-
 // exit;
-
-
 // $db = new Db();
-
-
 // $rows = $db -> select();
 // $response=array();
 

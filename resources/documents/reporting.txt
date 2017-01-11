@@ -826,3 +826,14 @@ Todo for Jan 10, 2016
 Things that can be discussed and agree
 design
 payment
+
+
+
+
+add account id and category in campaign template 
+
+add template for newsletter
+add template for auto responder
+add template for auto 
+
+

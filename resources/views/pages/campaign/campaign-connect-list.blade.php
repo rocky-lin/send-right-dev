@@ -51,10 +51,19 @@
                     <br><br>  
                     @include('pages.include.list.list-select')  
                     <br><br>  
+
                     @if(empty($campaign))
                         <div class="form-group"> 
                             {{ Form::label('template', 'Select Campaign Template', ['class'=>'label label-primary'])}}
-                            {{ Form::select('template', ['Default' => 'Default','Business'=>'Business','Blog'=>'Blog'], 'list1', ['class'=>'form-control']) }} 
+                        
+                            <select class="form-control"  name="template" >  
+                                <option value="1">Default</option> 
+                                @foreach($campaignTemplate as $template) 
+                                    <option value="{{$template->id}}">{{$template->name}}</option>}  
+                                @endforeach
+                            </select> 
+                          
+                            {{-- {{ Form::select('template', ['Default' => 'Default','Business'=>'Business','Blog'=>'Blog'], 'list1', ['class'=>'form-control']) }}  --}}
                         <div /> 
                     @endif 
                         <br>

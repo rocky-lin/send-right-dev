@@ -246,24 +246,27 @@ class Campaign   extends Model
         $contacts = []; 
         // get lists contact of the specific campaign 
         $campaignLists = Campaign::find($campaignId)->campaignList;   
+
+
         $counter=0; 
         // dd($campaignLists );
         // exit
         foreach ($campaignLists as  $campaignList) {
-             // print " <br> &nbsp;&nbsp; list id " . $campaignList->list_id;
+             // print " <br> &nbsp;&nbsp; list id " . $campaignList->list_id; 
              foreach ($campaignList->list1->list_contact as $index => $listContact) {
-                 // print " <br>  &nbsp;&nbsp; &nbsp; email " . $listContact->contact->email;   
-                 
-                $contacts['contacts'][$counter]['email'] = $listContact->contact->email;
-                $contacts['contacts'][$counter]['full_name'] = $listContact->contact->first_name . ' ' . $listContact->contact->last_name;
-                $contacts['contacts'][$counter]['first_name'] =  $listContact->contact->first_name;
-                $contacts['contacts'][$counter]['last_name'] =  $listContact->contact->last_name;
-                $contacts['contacts'][$counter]['email'] =  $listContact->contact->email;
-                $contacts['contacts'][$counter]['location'] =  $listContact->contact->location;
-                $contacts['contacts'][$counter]['phone_number'] =  $listContact->contact->phone_number;
-                $contacts['contacts'][$counter]['telephone_number'] =  $listContact->contact->telephone_number;
-                $contacts['contacts'][$counter]['contact_id'] =  $listContact->contact->telephone_number;
-                $counter++; 
+                 // print " <br>  &nbsp;&nbsp; &nbsp; email " . $listContact->contact->email;    
+                if(!empty($listContact)) {  
+                    $contacts['contacts'][$counter]['email'] = $listContact->contact->email;
+                    $contacts['contacts'][$counter]['full_name']        = $listContact->contact->first_name . ' ' . $listContact->contact->last_name;
+                    $contacts['contacts'][$counter]['first_name']       =  $listContact->contact->first_name;
+                    $contacts['contacts'][$counter]['last_name']        =  $listContact->contact->last_name;
+                    $contacts['contacts'][$counter]['email']            =  $listContact->contact->email;
+                    $contacts['contacts'][$counter]['location']         =  $listContact->contact->location;
+                    $contacts['contacts'][$counter]['phone_number']     =  $listContact->contact->phone_number;
+                    $contacts['contacts'][$counter]['telephone_number'] =  $listContact->contact->telephone_number;
+                    $contacts['contacts'][$counter]['contact_id']       =  $listContact->contact->telephone_number;
+                    $counter++; 
+                }
             }
         } 
         return (count($contacts) > 0) ? $contacts : 0;  

@@ -21,7 +21,7 @@ use App\Helper;
 use Redirect;
 use App\Http\Controllers\CampaignScheduleController;  
 use Session;
-
+use App\CampaignTemplate;
 class CampaignController extends Controller
 {
 
@@ -38,15 +38,13 @@ class CampaignController extends Controller
     	return  view('pages/campaign/campaign-mobile-optin-view');
     }  
     public function createStart()
-    {
-        // print "test";
-        // exit;
-        return view('pages.campaign.campaign-create-start');
+    {  
+        return view('pages/campaign/campaign-create-start');
     }
 
     // STEP 1
     public function create()
-    { 
+    {  
         session_start();
 
         if(Input::get('ck') == 'newsletter') {   
@@ -63,6 +61,16 @@ class CampaignController extends Controller
             }
         }
 
+        if(!empty(Input::get('ck'))) {   
+
+            $campaignTemplate = CampaignTemplate::getSpecificTemplateByCampaignType(Input::get('ck'));  
+            
+            // foreach ($campaignTemplate as $template) {
+            //      $campaignTemplate = $template['id'];
+            //      $campaignTemplate = $template['name'];
+            // }
+            
+        }
 
 
         $campaign = [];
@@ -97,16 +105,18 @@ class CampaignController extends Controller
 
         $kind =   (!empty($_SESSION['campaign']['kind'])) ? $_SESSION['campaign']['kind'] : '';
 
-        return view('pages.campaign.campaign-connect-list', compact('campaign', 'defaultListIds', 'action', 'id', 'kind'));
+
+        return view('pages/campaign/campaign-connect-list', compact('campaign', 'defaultListIds', 'action', 'id', 'kind', 'campaignTemplate'));
     }
     public function createValidate(ValidateCampaignList $request)
     {   
         session_start();
         $_SESSION['campaign']['name']     = $request->get('campaignName');
         $_SESSION['campaign']['listIds']  =  $request->get('list_ids');
-        $_SESSION['campaign']['template'] =  'Default'; //$request->get('template');
-         $_SESSION['campaign']['kind']  = $request->get('kind'); 
+        $_SESSION['campaign']['template'] = $request->get('template');   
 
+         $_SESSION['campaign']['kind']  = $request->get('kind'); 
+ 
 
         // print  $_SESSION['campaign']['listIds'];
         // 
@@ -458,7 +468,7 @@ class CampaignController extends Controller
             case 'mobile email optin': 
                 foreach($campaigns as $index => $campaign)  { 
                     $created_ago = Carbon::createFromTimeStamp(strtotime($campaign['created_at']))->diffForHumans();  
-                    $campaigns[$index]['created_ago'] = $created_ago;
+                    $campaigns[$index]['created_ago']    = $created_ago;
                     $campaigns[$index]['total_contacts'] =  count(Campaign::getAllEmailWillRecieveTheCampaign($campaigns[$index]['id'])['contacts']);  
                 }
             break; 

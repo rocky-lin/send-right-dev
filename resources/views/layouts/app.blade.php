@@ -62,13 +62,17 @@
                                 <ul class="dropdown-menu" role="menu">
                                     <li><a  href="{{ route('user.campaign.newsletter.view') }}">Newsletter</a></li>
                                     <li><a  href="{{ route('user.campaign.autoresponders.view') }}">Auto Responder</a></li>
+
+                                    
+
                                     @if($addOns['is_has_email_mobile_opt_in'])
                                         <li> <a href="{{ route('user.campaign.mobileoptin.view') }}">Mobile Optin</a></li>
                                     @else
                                         <li>
                                             <a href="#" data-toggle="modal" data-target="#popUpModal" > <span style="color:#b7b7b7"> Mobile Optin </span>  </a>
                                         </li>
-                                    @endif;
+                                    @endif; 
+                                    <li><a  href="{{ url('extension/campaign/index.php?type=template') }}">Create template</a></li>
                                 </ul>
                             </li>
                         </ul>

@@ -107,3 +107,8 @@ AWS EC2 Server password:
 Public DNS	ec2-54-88-210-17.compute-1.amazonaws.com
 User name:	Administrator
 Password:	ZuBHf)@nhKa
+ 
+
+DOMAIN SERVER BILLING INFO Inmotion host:
+domain name：rocky642.com
+account Verification： 0111

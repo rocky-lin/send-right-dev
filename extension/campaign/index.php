@@ -14,6 +14,7 @@ $sendRightEmail  = Account::getSendRightEmail();
 $recieverName = Auth::user()->name;   
 $home_url =  $_SESSION['url']['hoem']; 
 $campaign_id = (!empty($_GET['id']))? $_GET['id'] : null;
+$type = (!empty($_GET['type']))? $_GET['type'] : null;
 
 $kind = ''; 
 // print " id " . $campaign_id;
@@ -29,6 +30,11 @@ if($campaign_id) {
 
 }
 
+
+
+$template_id = (!empty($_SESSION['campaign']['template']) ) ? $_SESSION['campaign']['template'] : 1 ;
+
+ 
  
   // print " this is the title " . $campagn_title; 
  
@@ -60,26 +66,40 @@ if($campaign_id) {
 
     <script type="text/javascript">    
      $(document).ready(function(){ 
-            $('#campaignComposeNext').click(function() {
-                var id = $('#campaignId').val();
-                console.log(id);
-                $.post( "compose-finished.php", { content: $('.bal-content-wrapper').html(), id:id})
-                    .done(function( data ) { 
-                        if(data == 'Ok') { 
-                            
-                            var redirectTo = '<?php print $home_url . "/user/campaign/create/settings"; ?>';  
-                            // alert(redirectTo);
-                            document.location =  redirectTo;
+            $('#campaignComposeNext').click(function() { 
+
+                var campaignTemplate = $('#campaign_template').val()
+
+
+                    // alert("campaign " + campaignTemplate); 
+                if(campaignTemplate != null) {  
+                     $.post( "includes/save-campaign-template.php", { content: $('.bal-content').html(), name: $('#campaign_template_name').val(), type:$('#campaign_template').val(), category:$('#campaign_template_category').val()})
+                        .done(function( data ) {  
+                            alert("Template Successfully Save");
+                            console.log(data);
+                        }) 
  
-                        } else if(data = 'Please update optin settings') {
-                            alert(data)
-                             $('#emailOptIn').modal('show');
-                        } else {
-                            alert(data); 
-                        }
-                        // alert( "Data Loaded: " + data );
+                } else {   
+                    var id = $('#campaignId').val();
+                    console.log(id);
+                    $.post( "compose-finished.php", { content: $('.bal-content').html(), id:id})
+                        .done(function( data ) { 
+                            if(data == 'Ok') { 
+                                
+                                var redirectTo = '<?php print $home_url . "/user/campaign/create/settings"; ?>';  
+                                // alert(redirectTo);
+                                document.location =  redirectTo;
+     
+                            } else if(data = 'Please update optin settings') {
+                                alert(data)
+                                 $('#emailOptIn').modal('show');
+                            } else {
+                                alert(data); 
+                            }
+                            // alert( "Data Loaded: " + data );
                     })  
-            })
+                }
+            }); 
         });
         
     </script>
@@ -92,13 +112,20 @@ if($campaign_id) {
     <?php require_once('includes/optin-settings-popup.php'); ?>
   
     <!--  -->
-	<div class="bal-header container" style="padding:13px;">  
-
+	<div class="bal-header container" style="padding:13px;">   
                 <div class="pull-right"> 
                     &nbsp; &nbsp; 
                     <button class="btn btn-info" id="campaignComposeNext" >Save and Next</button>    
-                </div>  
-                <?php if($kind == 'mobile email optin'): ?>
+                </div>   
+                <?php if($type == 'template'):?> 
+                    <input type="text" placeholder="template name" id="campaign_template_name" style="padding:5px;"  />
+                    <input type="text" placeholder="template category" id="campaign_template_category" style="padding:5px;"  />
+                    <select id="campaign_template" style="padding:5px;" >
+                        <option value="newsletter">Newsletter</option>
+                        <option value="mobile email optin">mobile email optin</option>
+                        <option value="auto responder">auto responder</option> 
+                    </select>
+                <?php elseif($kind == 'mobile email optin'): ?>
                     <div class="pull-right">  
                         <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#emailOptIn">Email Optin Settings</button> 
                     </div>   
@@ -133,7 +160,9 @@ if($campaign_id) {
 	</div> 
 
     <!-- Hidden values -->
+ 
     <input type="hidden" value="<?php print $campaign_id; ?>" id="campaignId" />
+    <input type="hidden" value="<?php print $template_id; ?>" id="templateId" />
    
 <?php 
     $stepLists = ['Campaigns'=>route('campaign.index'), 'Campaign Details'=>route('campaign.create'), 'Sender Details'=>route('user.campaign.create.sender.view'), 'Compose Campaign'=>url('extension/campaign/index.php'), 'Campaign Settings'=>route('user.campaign.create.settings')]; 
@@ -438,45 +467,49 @@ if($campaign_id) {
             },
             onAfterLoad: function(e) {
                 console.log('onAfterLoad html');
+
+                if($('#campaignId').val() > 0){
+                    type = '';   
+                    $template_id = $('#campaignId').val(); 
+
+                } else { 
+                    type = 'template';  
+                    $template_id = $('#templateId').val()
+                }
+ 
                 $.ajax({
-                    url: 'load_templates.php',
+                    url: 'load_templates.php?type='+type,
                     type: 'GET',
                     dataType: 'json',
                     success: function(data) {
                         if (data.code == 0) {
                             _templateItems = '';
-
                             // console.log(data.files[0]['name']);
                             // console.log(data.files[1]['name']);
                             // console.log(data.files[2]['name']);
                             // console.log(data.files[3]['name']);
                             _templateListItems = data.files;
-
                             // set template that to be loaded, this is for edit
+                            // _dataId = 23;
+                           
+                           _dataId = $template_id; 
 
-                            if($('#campaignId').val() > 0){
-                                _dataId = $('#campaignId').val();
-                            } else {
-                                _dataId = 66;
-                            }
-
-
-
+                            // if($('#campaignId').val() > 0){
+                            //     _dataId = $('#campaignId').val();
+                            // } else {
+                            //     _dataId = $("#template_id").val();
+                            // }  
                             // alert(_dataId);
                             //search template in array
+                             
                             var result = $.grep(_templateListItems, function(e) {
                                 return e.id == _dataId;
-                            });
+                            }); 
 
-
-                            // alert(result[1].content);
-
+                            // alert(result[1].content); 
                             _contentText = $('<div/>').html(result[0].content).text();
-                            $('.bal-content-wrapper').html(_contentText);
-
-                            $('#popup_load_template').modal('hide');
-
-
+                            $('.bal-content-wrapper').html(_contentText); 
+                            $('#popup_load_template').modal('hide'); 
                         }
                     },
                     error: function() {}

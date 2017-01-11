@@ -15,8 +15,10 @@ class CreateCampaignTemplatesTable extends Migration
     {
         Schema::create('campaign_templates', function (Blueprint $table) {
             $table->increments('id'); 
+            $table->integer('account_id')->unsigned(); 
             $table->string('name')->nullable(); 
-            $table->string('type')->nullable(); 
+            $table->string('category')->nullable(); 
+            $table->string('type')->default('newsletter'); 
             $table->text('content')->nullable();  
             $table->timestamps();
         });

@@ -5,9 +5,9 @@ $json_message['form_id'] = $form_id;
 $folderName 			 = $form_id; 
  
 
-// get selected list id  
-$list = new List1(new Model()); 
-$listId = $list->getListByName($_POST['list_name'])[0]['id'];
+// get selected list id   
+	$list = new List1(new Model()); 
+	$listId = $list->getListByName($_POST['list_name'])[0]['id']; 
 
 
 
