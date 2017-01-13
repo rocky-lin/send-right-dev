@@ -607,4 +607,9 @@ class CampaignController extends Controller
         // 
         return view('pages/campaign/campaign-mobile-optin', compact('campaign')); 
     } 
-}
+    public function templatePreview($templateId)
+    { 
+        $campaign = CampaignTemplate::find($templateId); 
+        return view('pages/campaign/campaign-selected-template-preview', compact('campaign'));  
+    }
+} 

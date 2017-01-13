@@ -1,5 +1,5 @@
 @extends('layouts.app') 
-@section('content') 
+@section('content')  
 <div class="container" ng-controller="myCampaignViewCtr" ng-init="campaignDisplayByKind('mobile email optin')" >
     <div class="row"> 
         <div class="col-sm-12"> 

@@ -245,10 +245,21 @@ $(document).ready(function(){
 		var subject   = $('#optin_email_subject').val(); 
 		var link      = $('#optin_popup_link').val(); 
 		var name      = $('#optin_email_to_name').val(); 
-		var email     = $('#optin_email_to_mail').val(); 
- 
-        document.location = "mailto:"+email+"?subject="+subject+"&body="+emailBody+"&header=From:James <webmaster@example.com>"; 
+		var email     = $('#optin_email_to_mail').val();  
+        document.location = "mailto:"+email+"?subject="+subject+"&body="+emailBody; 
  	}); 
 }); 
 
+$(document).ready(function(){
+	$('#select-campaign-template').on('change', function(){ 
 
+$('#selected-campaign-template-preview-loader').css('display', 'block');
+		var templateId = $(this).val(); 
+		$.get( $url_home  + "/user/campaign/template/preview/"+templateId, function( data ) {    
+			$('#selected-campaign-template-preview-container').css('display', 'block'); 
+			$('#selected-campaign-template-preview-loader').css('display', 'none'); 
+			// enable this to display the preview
+			$("#selected-campaign-template-preview").html(data);  
+		}); 
+	}); 
+}); 

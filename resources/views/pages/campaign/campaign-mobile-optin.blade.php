@@ -1,7 +1,9 @@
 <!DOCTYPE html>
 <html>
 <head>
+
 	<title> Preview </title>
+
 	<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
 	<link rel="stylesheet" type="text/css" href="assets/css/email-editor.bundle.min.css" />
 	<link rel="stylesheet" type="text/css" href="assets/css/demo.css" />
@@ -10,14 +12,15 @@
 	<link rel="stylesheet" type="text/css" href="assets/css/colorpicker.css" />  
 
     <script src="<?php print url('/'); ?>/public/js/src/jquery-3.1.1.min.js"></script>
-    <script src="<?php print url('/'); ?>/public/js/custom_jquery.js"></script>
-
-	
+    <script src="<?php print url('/'); ?>/public/js/custom_jquery.js"></script>  
+    
 		<script type="text/javascript"> 
 			$(document).ready(function(){ 
-				var containerCss = $('.bal-content-wrapper div:first-child').attr('style');  
-				console.log(containerCss);
-				$('body').attr('style', containerCss); 
+				$( ".bal-content-wrapper" ).each(function( index ) {
+				  console.log(  " index = " + index );
+				  containerCss = $(this).attr('style');   
+				  $('body').attr('style', containerCss); 
+				}); 
 			}); 
 		</script>
 
@@ -33,8 +36,33 @@
 			height: 100%;
 		}*/
 	</style>
-</head>
-<body>
+
+
+{{-- Pusher call back this will only trigger to show a popup  --}} 
+ <script src="https://js.pusher.com/3.2/pusher.min.js"></script> 
+  <script> 
+
+    // Enable pusher logging - don't include this in production
+    Pusher.logToConsole = true; 
+
+    var pusher = new Pusher('5d4540ae0b86caedd37a', {
+      encrypted: true
+    }); 
+
+    var channel = pusher.subscribe('chanel-mobile-optin-1');
+
+    channel.bind('my-event-erwin', function(data) {  
+        console.log("show a popup now");
+    }); 
+  </script> 
+
+
+
+</head> 
+<body>	
+
+
+
 	<div class="container">
 		<br><br>
 		<?php 
@@ -42,7 +70,7 @@
 			$content = str_replace('contenteditable="true"', '', $content);
 			echo $content; 
 		?>  
-	</div>
+	</div>  
 
   <input type="hidden" value="{{$campaign->optin_url}}"   		   name="optin_url" id="optin_url" /> 
   <input type="hidden" value="{{$campaign->optin_email_content}}"   name="optin_email_content" id="optin_email_content" /> 

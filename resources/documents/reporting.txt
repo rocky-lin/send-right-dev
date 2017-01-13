@@ -826,14 +826,17 @@ Todo for Jan 10, 2016
 Things that can be discussed and agree
 design
 payment
+ 
+add account id and category in campaign template  
 
 
-
-
-add account id and category in campaign template 
-
-add template for newsletter
-add template for auto responder
-add template for auto 
-
+Update for Jan 12, 2017
+add template preview for newsletter
+add template preview for responder
+add template preview for auto 
+contact with support - support told us that the server is not yet ready.
+dubgging with  popup but seems we have problem to identify who sent the optin because it has need an event and we cant send and include event when sending an email.
+ 
+Todo for Jan 13, 2017
+Continue with email optin
 

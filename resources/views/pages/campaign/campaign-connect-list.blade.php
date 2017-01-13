@@ -56,12 +56,23 @@
                         <div class="form-group"> 
                             {{ Form::label('template', 'Select Campaign Template', ['class'=>'label label-primary'])}}
                         
-                            <select class="form-control"  name="template" >  
+                            <select class="form-control"  name="template" id="select-campaign-template" >  
                                 <option value="1">Default</option> 
                                 @foreach($campaignTemplate as $template) 
                                     <option value="{{$template->id}}">{{$template->name}}</option>}  
                                 @endforeach
                             </select> 
+                
+                        
+                            <br>  
+                            <div  id="selected-campaign-template-preview-loader" style="display: none " >
+                                <i class="fa fa-circle-o-notch fa-spin" style="font-size:24px;" ></i>
+                                <small>Please wait..</small>
+                            </div>
+                            <div id="selected-campaign-template-preview-container" style="display:none" >  
+                                <h3 class="template-preview-title"> Template Preview </h3>
+                                <div id="selected-campaign-template-preview" class="selected-campaign-template-preview" > </div>
+                            </div>
                           
                             {{-- {{ Form::select('template', ['Default' => 'Default','Business'=>'Business','Blog'=>'Blog'], 'list1', ['class'=>'form-control']) }}  --}}
                         <div /> 

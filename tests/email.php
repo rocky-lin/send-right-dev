@@ -1,7 +1,8 @@
 #!/usr/bin/php -q
-<?php  
+<?php   
+
 $dateTimeNow = date("Y-m-d h:i:s");  
-$activateEmailCampaign = false;
+$activateEmailCampaign = true;
 
 	if($_SERVER['SERVER_NAME'] == 'localhost')  {
 		require ('E:/xampp/htdocs/rocky/send-right-dev/extension/custom_database/Database.php');
@@ -58,10 +59,15 @@ if($activateEmailCampaign)
    
 	// recent sent email record to a file
 	$myfile = fopen("/home/iamroc5/public_html/sendright/tests/newfile.txt", "w") or die("Unable to open file(filename)!");
-	$txt = "1to    $to  email subject  $subject   from   $from  message  $message fromindex0 $fromIndex0 from name $fromName   \n email $email ";
+	$txt = " delivered 1to    $to  email subject  $subject   from   $from  message  $message fromindex0 $fromIndex0 from name $fromName   \n email $email ";
 	fwrite($myfile, $txt); 
 	fclose($myfile);
 }
+
+
+
+
+exit; 
 
 $to 	  = 'jesus@sendright.net'; 
 $from     = 'mrjesuserwinsuarez@gmail.com'; 
@@ -219,3 +225,22 @@ function addActivities($database, $activities=[])
       	$activities
 	);
 }
+ 
+/*
+/* Popup callback chanel
+/* This will trigger the popup after submit
+*/
+$callback = 'my-event-erwin';
+// pusher 
+require_once("pusher/vendor/autoload.php");  
+$options = array(
+'encrypted' => true
+);
+$pusher = new Pusher(
+	'5d4540ae0b86caedd37a',
+	'e1663aa9083a9097aff2',
+	'289307',
+	$options
+);  
+$data['message'] = 'hello world';
+$pusher->trigger('chanel-mobile-optin-1', $callback, $data);

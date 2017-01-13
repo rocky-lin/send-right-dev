@@ -71,7 +71,7 @@
                                         <li>
                                             <a href="#" data-toggle="modal" data-target="#popUpModal" > <span style="color:#b7b7b7"> Mobile Optin </span>  </a>
                                         </li>
-                                    @endif; 
+                                    @endif
                                     <li><a  href="{{ url('extension/campaign/index.php?type=template') }}">Create template</a></li>
                                 </ul>
                             </li>
@@ -128,7 +128,7 @@
             </div>
         </nav>  
         <div class='container'>
-            @include('pages/popup/popup');
+            @include('pages/popup/popup')
             @include('pages/include/subscription/subscription-status-message')
             @yield('content')  
         </div>

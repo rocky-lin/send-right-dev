@@ -123,3 +123,16 @@ body {
 .navbar-brand img {
     height:21px;
 }
+
+.selected-campaign-template-preview {
+    border:1px solid #9e9e9e;
+    min-height: 400px;
+    overflow: hidden;
+    padding:20px;
+}
+.selected-campaign-template-preview .container {
+    width: 90%;
+}
+.template-preview-title { 
+    color:#9e9e9e;
+ }

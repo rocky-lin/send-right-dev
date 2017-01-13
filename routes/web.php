@@ -90,7 +90,7 @@ Route::group(['prefix' => 'user' , 'middleware' => 'auth' ], function() {
 		Route::post('form/list/connect/post', 'FormController@postConnectList')->name('user.form.list.connect.post');  
 		Route::resource('form', 'FormController');   
 
-	// campaign   
+	// 	   
 
 		Route::get('campaign/newsletters','CampaignController@index')->name('user.campaign.newsletter.view'); 
 		Route::get('campaign/auto-responders','CampaignController@autoResponderIndex')->name('user.campaign.autoresponders.view'); 
@@ -127,6 +127,7 @@ Route::group(['prefix' => 'user' , 'middleware' => 'auth' ], function() {
 			 	Route::get('campaign/create/settings/preview/mobile', 'CampaignController@getPreviewMobile')->name('user.campaign.create.settings.preview.mobile');
 			 	Route::get('campaign/create/settings/preview/desktop', 'CampaignController@getPreviewDesktop')->name('user.campaign.create.settings.preview.desktop');
 			 	Route::get('campaign/create/settings/preview/tablet', 'CampaignController@getPreviewTablet')->name('user.campaign.create.settings.preview.tablet');
+				Route::get('campaign/template/preview/{templateId?}', 'CampaignController@templatePreview')->name('campaign.template.preview');  
  
 			// send test email 
 				Route::get('campaign/create/settings/email/send/test/{id?}/{email?}', 'CampaignController@sendTestCampaignEmail')->name('user.campaign.create.settings.email.send.test');
@@ -141,6 +142,9 @@ Route::group(['prefix' => 'user' , 'middleware' => 'auth' ], function() {
 		Route::get('home/preview/lists', 'HomeController@previewLists')->name('home.preview.lists');  
 		Route::get('home/preview/forms', 'HomeController@previewForms')->name('home.preview.forms');  
 		Route::get('home/preview/campaigns', 'HomeController@previewCampaigns')->name('home.preview.campaigns');  
+
+
+
 		Route::get('home/preview/statics', 'HomeController@previewStatistics')->name('home.preview.statistics');   
 
 	//newsletter 
@@ -277,6 +281,7 @@ Route::get('ng-bootstrap-ui', function(){
 	return view('test.ng-strap');
 }); 
    
+Route::get('/campaign-send', 'CampaignScheduleController@send'); 
 Route::get('/campaign-send', 'CampaignScheduleController@send'); 
 
 Route::get('/carbon-test', function(){
