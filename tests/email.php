@@ -4,13 +4,13 @@
 $dateTimeNow = date("Y-m-d h:i:s");  
 $activateEmailCampaign = true;
 
-	if($_SERVER['SERVER_NAME'] == 'localhost')  {
-		require ('E:/xampp/htdocs/rocky/send-right-dev/extension/custom_database/Database.php');
-		$database = new Database('root' , '1234567890'  , 'rocky_sendright');  
-	} else {
-		require ('/home/iamroc5/public_html/sendright/extension/custom_database/Database.php');
-		$database = new Database('iamroc5_rocky123' , 'SehmVz_~RNIO'  , 'iamroc5_sendright');  
-	} 
+if($_SERVER['SERVER_NAME'] == 'localhost')  {
+	require ('E:/xampp/htdocs/rocky/send-right-dev/extension/custom_database/Database.php');
+	$database = new Database('root' , '1234567890'  , 'rocky_sendright');  
+} else {
+	require ('/home/iamroc5/public_html/sendright/extension/custom_database/Database.php');
+	$database = new Database('iamroc5_rocky123' , 'SehmVz_~RNIO'  , 'iamroc5_sendright');  
+} 
 
 if($activateEmailCampaign) 
 {  
@@ -59,30 +59,28 @@ if($activateEmailCampaign)
    
 	// recent sent email record to a file
 	$myfile = fopen("/home/iamroc5/public_html/sendright/tests/newfile.txt", "w") or die("Unable to open file(filename)!");
-	$txt = " delivered 1to    $to  email subject  $subject   from   $from  message  $message fromindex0 $fromIndex0 from name $fromName   \n email $email ";
+	$txt = " delivered 1 to    $to  email subject  $subject   from   $from  fromindex0 $fromIndex0 from name $fromName   \n email $email   message \n\n\n $message  ";
 	fwrite($myfile, $txt); 
 	fclose($myfile);
 }
 
-
-
-
-exit; 
-
-$to 	  = 'jesus@sendright.net'; 
-$from     = 'mrjesuserwinsuarez@gmail.com'; 
-$fromName = 'Jesus Erwin Suarez';
-$fromCampaign = 'new-mobile-optin-test-1@sendright.net';  // to@domain.com
-$fromCampaign = convertToCampaignTitle($fromCampaign); 
+  
+// $to 	  = 'jesus@sendright.net'; 
+// $from     = 'francis123@gmail.com'; 
+// $fromName = 'Francis Suarez';
+ 
+// $toCampaign = 'new-mobile-optin-test-1@sendright.net';  // to@domain.com
+$toCampaign = convertToCampaignTitle($to); 
 $first_name =  getFirstName($fromName) ;
-$last_name = getLastName($fromName); 
+$last_name  = getLastName($fromName); 
  
 // separate first name and lastname 
 // check to email and get what is the account id
 
-print "<br> campaign title <br>" . $fromCampaign . '<br>';
-$database->select('campaigns', '*',   null, " title = '$fromCampaign'" ); 
+print "<br> campaign title <br>" . $toCampaign . '<br>';
+$database->select('campaigns', '*',   null, " title = '$toCampaign'" ); 
 $results = $database->getResult();  
+
 if(count($results) > 0) {  
 	$account_id   = $results[0]['account_id']; 
 	$campaign_id  = $results[0]['id']; 
@@ -173,10 +171,11 @@ if(count($results) > 0) {
 		'action' =>"email optin new entry from $fromName  email $from", 
 		'created_at' =>$dateTimeNow,
 		'updated_at'=>$dateTimeNow, 
-	]);
-
-} // check if found a campaign 
+	]); 
+} 
+// check if found a campaign 
 else {
+
 	print "<br> campaign not found";
 }
 
@@ -225,22 +224,4 @@ function addActivities($database, $activities=[])
       	$activities
 	);
 }
- 
-/*
-/* Popup callback chanel
-/* This will trigger the popup after submit
-*/
-$callback = 'my-event-erwin';
-// pusher 
-require_once("pusher/vendor/autoload.php");  
-$options = array(
-'encrypted' => true
-);
-$pusher = new Pusher(
-	'5d4540ae0b86caedd37a',
-	'e1663aa9083a9097aff2',
-	'289307',
-	$options
-);  
-$data['message'] = 'hello world';
-$pusher->trigger('chanel-mobile-optin-1', $callback, $data);
+  
