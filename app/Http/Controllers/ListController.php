@@ -131,6 +131,7 @@ class ListController extends Controller
     public function edit($id)
     {  
 
+
         $list = List1::find($id); 
         // $this->id = $id; 
         // $listDetails = DB::table('lists')
@@ -154,15 +155,27 @@ class ListController extends Controller
         // insert new list
         $listData = $request->except('_token', 'contact_ids', '_method'); 
         // $listData['account_id'] = User::getUserAccount();    
+        // 
+        // 
+        // dd($listData);
          List1::where('id', $id)->update($listData); 
 
          // delete first all the list contacts
         ListContact::where('list_id', $id)->delete(); 
- 
+         
+        // get length of string in for all the selected contacts
+        $strlen = strlen($request->get('contact_ids'));   
+
         // insert to list contacts 
-        foreach ($this->toArrayContactIds($request->get('contact_ids')) as $contact_id) { 
-            ListContact::firstOrCreate(['list_id'=>$id, 'contact_id'=>$contact_id]); 
-        }   
+        if($strlen > 2) {  
+            foreach ($this->toArrayContactIds($request->get('contact_ids')) as $contact_id) { 
+                ListContact::firstOrCreate(['list_id'=>$id, 'contact_id'=>$contact_id]); 
+            }   
+        } else {
+            return redirect()
+            ->back()
+            ->with('error', 'Faile to update, please select at least 1 contact.');  
+        }
         
         // return response
         return redirect()

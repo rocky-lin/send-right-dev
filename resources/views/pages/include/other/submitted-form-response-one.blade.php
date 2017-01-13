@@ -10,8 +10,16 @@
     </ul>
 </div>
 @endif  
+
 @if (session($messangeName))
 <div class="alert alert-success">
     {{ session($messangeName) }}
 </div>
 @endif 
+ 
+@if (session('error'))
+<div class="alert alert-danger">
+    {{ session('error') }}
+</div>
+@endif 
+

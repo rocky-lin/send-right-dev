@@ -54,31 +54,32 @@
     channel.bind('my-event-erwin', function(data) {  
         console.log("show a popup now");
     }); 
-  </script> 
-
-
-
+  </script>  
 </head> 
-<body>	
-
-
-
+<body>	 
 	<div class="container">
 		<br><br>
 		<?php 
+
 			$content = htmlspecialchars_decode(stripslashes($campaign->content));
 			$content = str_replace('contenteditable="true"', '', $content);
 			echo $content; 
 		?>  
 	</div>  
 
+   
   <input type="hidden" value="{{$campaign->optin_url}}"   		   name="optin_url" id="optin_url" /> 
   <input type="hidden" value="{{$campaign->optin_email_content}}"   name="optin_email_content" id="optin_email_content" /> 
   {{-- New lines --}}
   <input type="hidden" value="{{$campaign->optin_email_subject}}"   name="optin_email_subject" id="optin_email_subject" />
-  <input type="hidden" value="{{$campaign->optin_popup_link}}"      name="optin_popup_link" id="optin_popup_link" />
+  
   <input type="hidden" value="{{$campaign->optin_email_to_name}}"   name="optin_email_to_name" id="optin_email_to_name" />
   <input type="hidden" value="{{$campaign->optin_email_to_mail}}"   name="optin_email_to_mail" id="optin_email_to_mail" />
+
+  @if(!empty($campaign->optin_popup_link)) 
+  	<input type="hidden" value="{{$campaign->optin_popup_link}}"      name="optin_popup_link" id="optin_popup_link" />
+  @endif
+  
  <br><br><br><br>
 </body>
 </html>

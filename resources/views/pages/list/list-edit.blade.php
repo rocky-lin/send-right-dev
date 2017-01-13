@@ -9,8 +9,8 @@
                     @include('pages/include/other/submitted-form-response-one')  
                 	<div data-ng-controller="myListCreateViewCtr" data-ng-init="listId={{$id}}" >    
 						    {!! Form::open(['route' => ['list.update', $id], 'method'=>'PATCH', 'name'=>'addListFrm', 'autocomplete'=>'off']) !!} 
-								@include('pages.include.list.list-form', ['list'=>$list]) 
-					 			@include('pages.include.contact.contact-select')   
+								@include('pages/include/list/list-form', ['list'=>$list]) 
+					 			@include('pages/include/contact/contact-select')   
 			            	{!!Form::close()!!}     
                 	</div>     
                 </div>       

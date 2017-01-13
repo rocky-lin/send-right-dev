@@ -26,26 +26,13 @@ class AppServiceProvider extends ServiceProvider
         // This need to be change and point only to real page of the site
         view()->composer('*', function ($view) {
 
-            if (Auth::user() ) {
+            if (Auth::user() ) { 
 
-
-
-                //                  $addOns = ''; //Account::getAddOns();
-                //                print "name" . $addOns[0]['name'];
-                //                dd($addOns);
-                  $addOns['is_has_email_mobile_opt_in'] = AddOn::isHasMobileOptIn();
-//                    if( $addOns['is_has_email_mobile_opt_in']) {
-//                    print "has subscribed to mobile optin";
-//                    } else {
-//                        print "not subscribed to mobile email optin";
-//                    }
-                  Subscription::updateSubscriptionExpired();
-                  //                print"test";
-                  //                print "total days remaining for your billed account " . Subscription::getRemainingDaysFromSubscription();
-
-
+   
+                $addOns['is_has_email_mobile_opt_in'] = AddOn::isHasMobileOptIn(); 
+                Subscription::updateSubscriptionExpired(); 
                 $subscription_status = Account::getSubscriptionStatus();
-                $view->with(['subscription_status'=>$subscription_status, 'addOns'=>$addOns]);
+                $view->with(['subscription_status'=>$subscription_status, 'addOns'=>$addOns, 'userRole'=>User::getUserRole()]);
             }
         });
     } 

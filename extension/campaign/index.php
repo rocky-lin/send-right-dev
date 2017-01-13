@@ -16,32 +16,28 @@ $home_url =  $_SESSION['url']['hoem'];
 $campaign_id = (!empty($_GET['id']))? $_GET['id'] : null;
 $type = (!empty($_GET['type']))? $_GET['type'] : null;
 
-$kind = ''; 
-// print " id " . $campaign_id;
+$kind = '';  
 if($campaign_id) { 
-    $campaign = Campaign::find($campaign_id);  
-    // print "kind = " . $campaign->kind; 
+    $campaign = Campaign::find($campaign_id);   
     $kind          = $campaign->kind; 
-    $campagn_title = $campaign->title; 
-    
+    $campagn_title = $campaign->title;  
 } else {
     $kind          = $_SESSION['campaign']['kind']; 
-    $campagn_title = $_SESSION['campaign']['name']; 
-
+    $campagn_title = $_SESSION['campaign']['name'];  
 }
-
-
+ 
+if(!empty($_GET['type'])) {
+    $_SESSION['campaign']['kind'] = $_GET['type']; 
+} 
 
 $template_id = (!empty($_SESSION['campaign']['template']) ) ? $_SESSION['campaign']['template'] : 1 ;
-
- 
- 
-  // print " this is the title " . $campagn_title; 
- 
-// print " kind " . $kind;
-
+  
+// print " this is the title " . $campagn_title;  
+// print " kind " . $kind; 
 // echo "kind " . $kind; 
 // print "path " . route('user.campaign.create.settings');
+
+
 ?>
 <html xmlns="http://www.w3.org/1999/xhtml" > 
 <head>

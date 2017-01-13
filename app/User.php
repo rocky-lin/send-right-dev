@@ -48,6 +48,13 @@ class User extends Authenticatable
     { 
         return $this->hasOne('App\UserAccount');
     } 
+
+
+
+    public static function getUserRole()
+    {
+        return self::find(Auth::user()->id)->user_account->role; 
+    }
     
     /** 
      * this will return the users account id

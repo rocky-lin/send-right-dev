@@ -185,11 +185,8 @@ function copyToClipboard(elem) {
 $(document).ready(function(){
  
 	// Save optin settings in campaign editor
- 	$('#save_optin_settings').on('click', function() { 
-
-
-
- 		var optInUrlInput 	 = $("#optInUrlInput").val(); 
+ 	$('#save_optin_settings').on('click', function() {  
+ 		var optInUrlInput 	 = change_space_with_dash($("#optInUrlInput").val()); 
  		var optInEmailSubject = $("#optInEmailSubject").val(); 
  		var optInEmailContent = $("#optInEmailContent").val(); 
  		var optInRecieverName = $("#optInRecieverName").val(); 
@@ -218,42 +215,42 @@ $(document).ready(function(){
 		    	if(data == 'Optin Settings saved successfully') {  
 			    	setTimeout(function(){
 			    		 $('#emailOptIn').modal('hide');
-			    	}, 3000);
+			    	}, 1000);
 		    	} 
 
 		    	$('#optin-status').html(data);
  
-		  });
-
- 
+		  }); 
 	});  
- 	$( "#optInUrlInput" ).keyup(function() {
-  		console.log("typing1");
-		var optInUrlTyped = $(this).val(); 
-		console.log(optInUrlTyped);    
-		$("#optInUrlTyped").text(optInUrlTyped); 
+ 	$( "#optInUrlInput" ).keyup(function() { 
+		var optInUrlTyped = $(this).val();   
+		$("#optInUrlTyped").text(change_space_with_dash(optInUrlTyped) ); 
 	}); 
 }); 
-
-
-$(document).ready(function(){ 
+ 
+$(document).ready(function() { 
 	// click the button in mobile optin page
  	$('.button-1').on('click', function(){
-
  
 		var emailBody = $('#optin_email_content').val(); 
 		var subject   = $('#optin_email_subject').val(); 
 		var link      = $('#optin_popup_link').val(); 
 		var name      = $('#optin_email_to_name').val(); 
 		var email     = $('#optin_email_to_mail').val();  
-        document.location = "mailto:"+email+"?subject="+subject+"&body="+emailBody; 
+		var redirect_link     = $('#optin_popup_link').val();  
+        document.location = "mailto:"+email+"?subject="+subject+"&body="+emailBody;  
+        setTimeout(function(){
+	        if(redirect_link != null) { 
+	        	document.location = redirect_link;  
+	    	}
+    	}, 1000)
  	}); 
 }); 
-
+ 
 $(document).ready(function(){
 	$('#select-campaign-template').on('change', function(){ 
 
-$('#selected-campaign-template-preview-loader').css('display', 'block');
+	$('#selected-campaign-template-preview-loader').css('display', 'block');
 		var templateId = $(this).val(); 
 		$.get( $url_home  + "/user/campaign/template/preview/"+templateId, function( data ) {    
 			$('#selected-campaign-template-preview-container').css('display', 'block'); 
@@ -263,3 +260,9 @@ $('#selected-campaign-template-preview-loader').css('display', 'block');
 		}); 
 	}); 
 }); 
+
+
+function change_space_with_dash(str) 
+{
+	return str.replace(/\s+/g, '-').toLowerCase();  
+}

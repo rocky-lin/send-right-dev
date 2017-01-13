@@ -92,17 +92,14 @@ test website：
 url：http://demo4.iamrockylin.com/wp-admin/
 account:jesus
 password:$%1ig)WaFFQ9gh*XfZWql0PO
-
-
-
+ 
 
 AWS EC2 Setup 
 
 launch-wizard-1
 launch-wizard-1 created 2017-01-10T12:59:55.779+08:00
 
-
-
+ 
 AWS EC2 Server password: 
 Public DNS	ec2-54-88-210-17.compute-1.amazonaws.com
 User name:	Administrator
@@ -112,3 +109,7 @@ Password:	ZuBHf)@nhKa
 DOMAIN SERVER BILLING INFO Inmotion host:
 domain name：rocky642.com
 account Verification： 0111
+ 
+url:http://app.mobileoptin.com/
+usernmae:jesus@supershortcut.com
+password:Mog5945

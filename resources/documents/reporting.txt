@@ -840,3 +840,19 @@ dubgging with  popup but seems we have problem to identify who sent the optin be
 Todo for Jan 13, 2017
 Continue with email optin
 
+
+Update for Jan 13, 2017
+Don't allow to update list when no selected contact for it
+Set supper administrator and this account is have the access all content of the site
+Change submit button in mobile optin popup during composition with "Update Settings"
+In mobile optin change space to dash
+In add type variable in edit campaign for Newsletter, Autoresponse and Mobile Optin
+Update mobile optin settings accept url space to dash 
+Hide create template for normal admin and member but show to supper admin
+Add redirect before and after send the email optin 
+
+Update for Jan 14, 2017
+
+Wait for VPS to be live 
+When VPS is live the setup wildcard email for *@sendright.net 
+Start working with payment

@@ -66,7 +66,11 @@
                                             <span class="glyphicon glyphicon-trash" aria-hidden="true" data-ng-click="deleteCampaign(campaign)"></span>
                                         </td>
                                         <td>
-                                             <span class="glyphicon glyphicon-pencil" aria-hidden="true" data-ng-click="editCampaign(campaign)"></span>
+
+                                             {{-- <span class="glyphicon glyphicon-pencil" aria-hidden="true" data-ng-click="editCampaign(campaign)"></span> --}}
+                                            <a href="{{url("extension/campaign/index.php?type=mobile email optin&id=")}}@{{campaign.id}}" >
+                                                <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
+                                             </a>
                                         </td> 
                                     </tr> 
                                 </tbody>

@@ -50,7 +50,7 @@ if($campaign_id) {
                             <input class="form-control" type="text" value="<?php print $optin_url; ?>" id="optInUrlInput" placeholder="Optin Url"   >  
 
                             <div style="padding-top:5px;">
-                                <small id="emailHelp" class="form-text text-muted"> <?php print url('optin/');  ?>/<span id="optInUrlTyped"><?php print $optin_url; ?></span></small>
+                                <small id="emailHelp" class="form-text text-muted"> <?php print $_SESSION['url']['hoem'] . '/optin';  ?>/<span id="optInUrlTyped"><?php print $optin_url; ?></span></small>
                             </div> 
                         </div>
                     </div>
@@ -98,7 +98,7 @@ if($campaign_id) {
                 </div>
                 <div class="modal-footer">
                   <button type="button" class="btn btn-default" data-dismiss="modal">Close</button> 
-                  <button type="button" class="btn btn-primary btn-lg " id="save_optin_settings" data-loading-text="<i class='fa fa-circle-o-notch fa-spin'></i> Processing Order">Submit Order</button>
+                  <button type="button" class="btn btn-primary btn-lg " id="save_optin_settings" data-loading-text="<i class='fa fa-circle-o-notch fa-spin'></i> Processing Order">Update Settings</button>
                 </div>
               </div> 
             </div>
