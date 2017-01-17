@@ -54,7 +54,7 @@ class CampaignController extends Controller
            $_SESSION['campaign']['kind'] = 'auto responder';
         } else if(Input::get('ck') == 'mobile email optin')  {
             // session('campaign_kind', '');
-           $_SESSION['campaign']['kind'] = 'mobile email optin';
+           $_SESSION['campaign']['kind'] = 'mobile email optin'; 
         } else {
             if(Input::get('action') != 'edit') {
                 return redirect()->route('user.campaign.create.start')->with('status', 'please select campaign type');
@@ -113,8 +113,7 @@ class CampaignController extends Controller
         session_start();
         $_SESSION['campaign']['name']     = $request->get('campaignName');
         $_SESSION['campaign']['listIds']  =  $request->get('list_ids');
-        $_SESSION['campaign']['template'] = $request->get('template');   
-
+        $_SESSION['campaign']['template'] = $request->get('template');    
          $_SESSION['campaign']['kind']  = $request->get('kind'); 
  
 
@@ -124,7 +123,11 @@ class CampaignController extends Controller
         // exit; 
         $listIdsTotal = count(explode(',', $request->get('list_ids'))); 
         // dd($listIdsTotal); 
-        if( $_SESSION['campaign']['kind']  == 'mobile email optin') {
+        if( $_SESSION['campaign']['kind']  == 'mobile email optin') { 
+
+             $campaignId = Campaign::create(['account_id'=>User::getUserAccount(), 'kind'=>$_SESSION['campaign']['kind']]);  
+              
+             $_SESSION['campaign']['optin']['id'] = $campaignId->id;      
 
             // print "successfully added email optin";
             // return Redirect::to();
@@ -216,8 +219,7 @@ class CampaignController extends Controller
 
     // STEP 4
     public function createSettings() 
-    { 
-
+    {  
         session_start(); 
         // print_r($_SESSION['campaign']['listIds']); 
         // exit  
@@ -226,11 +228,13 @@ class CampaignController extends Controller
         $campaignSchedule = CampaignSchedule::where('campaign_id', $_SESSION['campaign']['id'])->first();
         
         $campaign = Campaign::where('id' , $_SESSION['campaign']['id'])->first();
- 
+        
+        // print " kind " . $campaign->kind . ' campaign id ' . $_SESSION['campaign']['id'];
+
             if($campaign->kind == 'mobile email optin') {
  
                 $optinDetails = [
-                    'Optin Url'=>  url('/optin/' . $campaign->optin_url),
+                    'Optin Url'=>  url('/optin/' . $campaign->id . '/' . $campaign->optin_url),
                     'Optin Email Subject'=>$campaign->optin_email_subject, 
                     'Optin Email Content'=>$campaign->optin_email_content, 
                     'Optin Popup Link'=>$campaign->optin_popup_link, 
@@ -276,7 +280,7 @@ class CampaignController extends Controller
 
         // set campaign optin details
         $optinDetails = [
-            'Optin Url'=>  url('/optin/' . $campaign->optin_url),
+            'Optin Url'=>  url('/optin/' . $campaign->id . '/' . $campaign->optin_url),
             'Optin Email Subject'=>$campaign->optin_email_subject, 
             'Optin Email Content'=>$campaign->optin_email_content, 
             'Optin Popup Link'=>$campaign->optin_popup_link, 
@@ -378,12 +382,10 @@ class CampaignController extends Controller
         $campaign = Campaign::where('id' , $_SESSION['campaign']['id'])->first();
     
         // print "campaign kind " . $_SESSION['campaign']['kind'];
-        if($campaign->kind == 'mobile email optin') {
-
+        if($campaign->kind == 'mobile email optin') { 
             // print "mobile optin";
             return view('pages/campaign/campaign-settings-optin', compact('status', 'listNames', 'campaignSchedule', 'campaign')); 
-        } else {  
-            // print "not mobile optin";
+        } else {   
             return view('pages/campaign/campaign-settings', compact('status', 'listNames', 'campaignSchedule', 'campaign'));  
         }
     } 
@@ -593,20 +595,14 @@ class CampaignController extends Controller
         // campaign id
         // send to sender
         // return successfully sent
-    } 
+    }  
 
-    public function mobileOptinUrl($url=null)
-    {
-
-
-        $campaign = Campaign::where('optin_url', $url)->first(); 
-
-        // dd($campaign);
-        // return $campaign;
-        // 
-        // 
+    public function mobileOptinUrl($id, $url=null)
+    {  
+        $campaign = Campaign::where('id', $id)->where('optin_url', $url)->first();   
         return view('pages/campaign/campaign-mobile-optin', compact('campaign')); 
-    } 
+    }  
+    
     public function templatePreview($templateId)
     { 
         $campaign = CampaignTemplate::find($templateId); 

@@ -35,6 +35,9 @@
                                             <a href="#" title="Email" data-toggle="popover" data-trigger="hover" data-content="Type of your contact, subscriber or contact">(?)</a> 
                                         </th> 
                                         <th> 
+                                            <label>Status </label> 
+                                        </th> 
+                                        <th> 
                                             <label>Delete </label>
                                             <a href="#" title="Delete" data-toggle="popover" data-trigger="hover" data-content="Delete your contact forever.">(?)</a> 
                                         </th>
@@ -49,7 +52,7 @@
                                         <td>@{{contact.first_name}} @{{contact.last_name}}</td>
                                         <td>@{{contact.email}}</td>
                                         <td>@{{contact.type}} </td> 
-
+                                        <td>@{{contact.status}} </td>  
                                         <td>   
                                             <span class="glyphicon glyphicon-trash" aria-hidden="true" data-ng-click="deleteContact(contact)"></span>   
                                         </td>

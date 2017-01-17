@@ -20,8 +20,9 @@
 				  console.log(  " index = " + index );
 				  containerCss = $(this).attr('style');   
 				  $('body').attr('style', containerCss); 
-				}); 
+				});  
 			}); 
+
 		</script>
 
 	<style type="text/css" media="screen">

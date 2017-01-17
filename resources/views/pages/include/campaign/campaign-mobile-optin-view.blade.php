@@ -57,7 +57,7 @@
                                         'campaign-active' : campaign.status === 'active'}" >@{{campaign.status}}</td> 
                                         
                                         <td>
-                                            <a target="_blank" href="{{url('/optin')}}/@{{campaign.optin_url}}">Open Url</a>
+                                            <a target="_blank" href="{{url('/optin')}}/@{{campaign.id}}/@{{campaign.optin_url}}">Open Url</a>
                                             
 
                                             </td>

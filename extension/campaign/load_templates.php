@@ -9,7 +9,7 @@ $type = $_GET['type'];
 $response = array();
 
 if($type == 'template') {  
-	$rows =  CampaignTemplate::where('id', '>', 1)->get()->toArray();  	 
+	$rows =  CampaignTemplate::where('id', '>', 0)->get()->toArray();  	 
 } else {
 	$rows = Campaign::where('account_id', App\User::getUserAccount())->get()->toArray();
 }

@@ -41,24 +41,10 @@ Route::post('/', function () {
 Auth::routes();  
 // home page dispaly
 Route::get('/home', 'HomeController@index'); 
-Route::get('/home/test', 'HomeController@test'); 
-
-
-
-
-
-
-
-Route::post('cash/create', 'CashController@store');
-
-
+Route::get('/home/test', 'HomeController@test');  
+Route::post('cash/create', 'CashController@store'); 
 // Route::get('admin/order', 'admin\OrderController@index');
-// Route::get('admin/order/requestPay/{order_id}', 'admin\OrderController@requestPay');
-
-
- 
-
-
+// Route::get('admin/order/requestPay/{order_id}', 'admin\OrderController@requestPay'); 
 Route::group(['prefix' => 'user' , 'middleware' => 'auth' ], function() {    
 
 	// when confirm user registration
@@ -71,6 +57,9 @@ Route::group(['prefix' => 'user' , 'middleware' => 'auth' ], function() {
 	  	Route::get('contact/get/all', 'ContactController@getUserAccountContacts')->name('user.contact.get.all'); 
 	  	Route::get('contact/import', 'ContactController@import')->name('user.contact.import');
 	  	Route::post('contact/import/store', 'ContactController@importStore')->name('user.contact.import.store');  
+
+	  	Route::get('contact/unsubscribe/{id?}/{email?}', 'ContactController@unsubscribe')->name('user.contact.unsubscribe');  
+
 	  	Route::resource('contact', 'ContactController');  
 
 	// list   
@@ -201,46 +190,12 @@ Route::group(['prefix' => 'user' , 'middleware' => 'auth' ], function() {
  
 	// billing 
 	route::post('product/select/{product?}', 'ProductController@processSelectedProduct')->name('user.product.select');  
-});   
-  
-Route::get('optin/{url?}', 'CampaignController@mobileOptinUrl')->name('user.campaign.mobile.optin.url')->where(['url'=>'[0-9a-zA-Z-]+']);
+});    
 
- 
- 
+Route::get('contact/unsubscribe/{email}', 'ContactController@unsubscribe'); 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
- 
-// TESTING CODES AND ROUTES
-
-
-
- 
+Route::get('optin/{id?}/{url?}', 'CampaignController@mobileOptinUrl')->name('user.campaign.mobile.optin.url')->where(['url'=>'[0-9a-zA-Z-]+']);
+// TESTING CODES AND ROUTES 
 // case testing
 Route::get('cash', 'CashController@index');
 Route::get('cash/notify-url', 'CashController@notifyUrl');

@@ -196,14 +196,19 @@ class CampaignScheduleController extends Controller
         if(!empty($campaign)) { 
             $contacts = Campaign::getAllEmailWillRecieveTheCampaign($campaign->campaign_id);   
             $campaign = (array) $campaign;     
-            foreach ($contacts['contacts'] as $id => $contact) {  
-                if(Mail::to($contact['email'])->queue(new CampaignSendMail($contact, $campaign))) { 
-                    Activity::create(['account_id'=>$campaign['account_id'], 'table_name'=>'campaigns','table_id'=>$campaign['campaign_id'], 'action'=>'Email successfully sent to ' . $contact['email'] . ' campaign status is ' . $campaign['repeat'] ]);  
-                } else {
-                     Activity::create(['account_id'=>$campaign['account_id'], 'table_name'=>'campaigns','table_id'=>$campaign['campaign_id'], 'action'=>'Email failed sending to ' . $contact['email'] . ' campaign status is ' . $campaign['repeat'] ]);   
+ 
+            if($contacts) {  
+                foreach ($contacts['contacts'] as $id => $contact) {  
+                    if(Mail::to($contact['email'])->queue(new CampaignSendMail($contact, $campaign))) { 
+                        Activity::create(['account_id'=>$campaign['account_id'], 'table_name'=>'campaigns','table_id'=>$campaign['campaign_id'], 'action'=>'Email successfully sent to ' . $contact['email'] . ' campaign status is ' . $campaign['repeat'] ]);  
+                    } else {
+                         Activity::create(['account_id'=>$campaign['account_id'], 'table_name'=>'campaigns','table_id'=>$campaign['campaign_id'], 'action'=>'Email failed sending to ' . $contact['email'] . ' campaign status is ' . $campaign['repeat'] ]);   
+                    }  
+                    $this->pauseInHalfOfSeconds(); 
                 }  
-                $this->pauseInHalfOfSeconds(); 
-            }  
+            } else {
+                print "<script> alert('No active contact found for this campaign'); </script>";
+            }
         } else {
             return 1; // no campaign found
         }

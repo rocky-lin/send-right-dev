@@ -5,7 +5,6 @@ namespace App\Console\Commands;
 use Illuminate\Console\Command;
 
 use App\Http\Controllers\CampaignScheduleController; 
-
  
 use App\CampaignSchedule; 
 use Carbon\Carbon;
@@ -16,7 +15,6 @@ use Log;
 use App\Helper; 
 use App\Activity; 
 use App\User; 
-
 
  
 class CampaignScheduleSendCommand extends Command

@@ -153,4 +153,16 @@ class ContactController extends Controller
         Contact::find($id)->delete();  
         return "Successfully deleted contact!";  
     }
-}
+    /**
+     * This unsubscribe need more upgrade in coding  
+     */
+    public function unsubscribe($id, $email)
+    {    
+       if(Contact::where('id', $id)->where('email', $email)->update(['status'=> 'unsubscribed'])) {
+            print "Contact successfully un subscribed to this campaign";
+       }else{ 
+            print "Contact failed to unsubscribe, something wrong";
+       } 
+       print " click <a href='". url('/'). "'>  here </a>  to go http://sendright.net"; 
+    } 
+} 

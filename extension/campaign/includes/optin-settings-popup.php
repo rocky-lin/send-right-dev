@@ -3,7 +3,7 @@
 
 <?php  
 
-$optin_url = '';
+$optin_url = str_replace(' ', '-', $_SESSION['campaign']['name']);
 $optin_email_subject = '';
 $optin_email_content = '';
 $optin_email_to_name = $recieverName; 
@@ -50,7 +50,7 @@ if($campaign_id) {
                             <input class="form-control" type="text" value="<?php print $optin_url; ?>" id="optInUrlInput" placeholder="Optin Url"   >  
 
                             <div style="padding-top:5px;">
-                                <small id="emailHelp" class="form-text text-muted"> <?php print $_SESSION['url']['hoem'] . '/optin';  ?>/<span id="optInUrlTyped"><?php print $optin_url; ?></span></small>
+                                <small id="emailHelp" class="form-text text-muted"> <?php print $_SESSION['url']['hoem'] . '/optin/' . $_SESSION['campaign']['optin']['id'];  ?>/<span id="optInUrlTyped"><?php print $optin_url; ?></span></small>
                             </div> 
                         </div>
                     </div>

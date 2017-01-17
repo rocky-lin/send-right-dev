@@ -14,30 +14,59 @@ $sendRightEmail  = Account::getSendRightEmail();
 $recieverName = Auth::user()->name;   
 $home_url =  $_SESSION['url']['hoem']; 
 $campaign_id = (!empty($_GET['id']))? $_GET['id'] : null;
-$type = (!empty($_GET['type']))? $_GET['type'] : null;
-
-$kind = '';  
+$type = (!empty($_GET['type']))? $_GET['type'] : null;  
+$kind = '';   
+ 
 if($campaign_id) { 
-    $campaign = Campaign::find($campaign_id);   
-    $kind          = $campaign->kind; 
-    $campagn_title = $campaign->title;  
-} else {
+
+    $campaign                     = Campaign::find($campaign_id);   
+    $kind                         = $campaign->kind; 
+    $_SESSION['campaign']['kind'] = $campaign->kind; 
+    $campagn_title                = $campaign->title;  
+
+} else if(!empty($_GET['type'])) {
+
+    $_SESSION['campaign']['kind'] = $_GET['type']; 
+
+}else {
+
     $kind          = $_SESSION['campaign']['kind']; 
     $campagn_title = $_SESSION['campaign']['name'];  
-}
- 
-if(!empty($_GET['type'])) {
-    $_SESSION['campaign']['kind'] = $_GET['type']; 
+
 } 
 
-$template_id = (!empty($_SESSION['campaign']['template']) ) ? $_SESSION['campaign']['template'] : 1 ;
+ 
+
+// print " kind  " . $_SESSION['campaign']['kind']; 
+// for mobile optin only 
+if($type != 'template' and $kind  == 'mobile email optin' ) {   
+    if(!empty($_SESSION['campaign']['optin']['id'])) {    
+        if(empty($campaign->title)) {      
+            $campagn_title = rtrim ( $campagn_title );               
+             if(substr($campagn_title, -1) == '-') {
+                // if yes then append only the campaign number     
+                $campagn_title .=  $_SESSION['campaign']['optin']['id'];        
+             }  
+             else {
+                // if not then append - and campaign number
+                $campagn_title .= '-' . $_SESSION['campaign']['optin']['id']; 
+             } 
+        }
+    }  else {
+        $_SESSION['campaign']['optin']['id'] = $campaign_id; 
+    }
+} 
+
+
   
+// print " mobile optin id new created " . $_SESSION['campaign']['optin']['id'];
+// print  " campaign title = " . $campagn_title;   
+// exit; 
+$template_id = (!empty($_SESSION['campaign']['template']) ) ? $_SESSION['campaign']['template'] : 1 ; 
 // print " this is the title " . $campagn_title;  
 // print " kind " . $kind; 
 // echo "kind " . $kind; 
-// print "path " . route('user.campaign.create.settings');
-
-
+// print "path " . route('user.campaign.create.settings'); 
 ?>
 <html xmlns="http://www.w3.org/1999/xhtml" > 
 <head>
@@ -62,6 +91,7 @@ $template_id = (!empty($_SESSION['campaign']['template']) ) ? $_SESSION['campaig
 
     <script type="text/javascript">    
      $(document).ready(function(){ 
+ 
             $('#campaignComposeNext').click(function() { 
 
                 var campaignTemplate = $('#campaign_template').val()
@@ -105,7 +135,14 @@ $template_id = (!empty($_SESSION['campaign']['template']) ) ? $_SESSION['campaig
 <body>    
 
     <!-- popup -->
-    <?php require_once('includes/optin-settings-popup.php'); ?>
+  
+ 
+    
+    <?php
+      if($kind == 'mobile email optin') {
+         require_once('includes/optin-settings-popup.php'); 
+      } 
+     ?>
   
     <!--  -->
 	<div class="bal-header container" style="padding:13px;">   
@@ -138,6 +175,7 @@ $template_id = (!empty($_SESSION['campaign']['template']) ) ? $_SESSION['campaig
                                         <li>  <input type="button" value="Email" table-row-name-id="contact-row-name-email" />  </li> 
                                         <li>  <input type="button" value="Location" table-row-name-id="contact-row-name-location" />  </li>
                                         <li>  <input type="button" value="Phone Number" table-row-name-id="contact-row-name-phone-number" />  </li>
+                                        <li>  <input type="button" value="Un Subscribe" table-row-name-id="contact-row-name-telephone-unsubscribe" />  </li>
                                         <li>  <input type="button" value="Telphone Number" table-row-name-id="contact-row-name-telephone-number" />  
                                     </li> 
                                     </ul> 
@@ -148,6 +186,7 @@ $template_id = (!empty($_SESSION['campaign']['template']) ) ? $_SESSION['campaig
                                         <input type="text" id="contact-row-name-location" value="{{location}}" />
                                         <input type="text" id="contact-row-name-phone-number" value="{{phone_number}}" />
                                         <input type="text" id="contact-row-name-telephone-number" value="{{telephone_number}}" />   
+                                        <input type="text" id="contact-row-name-telephone-unsubscribe" value="{{unsubscribe}}" />   
                                     </div>
                               </div>
                         </div>
@@ -487,7 +526,8 @@ $template_id = (!empty($_SESSION['campaign']['template']) ) ? $_SESSION['campaig
                             _templateListItems = data.files;
                             // set template that to be loaded, this is for edit
                             // _dataId = 23;
-                           
+                            
+                            console.log($template_id);
                            _dataId = $template_id; 
 
                             // if($('#campaignId').val() > 0){

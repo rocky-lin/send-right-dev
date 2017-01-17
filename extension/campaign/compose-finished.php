@@ -26,48 +26,42 @@
 			exit;  
 		}   
 	}
-
-
-
-
-
-
-
+ 
 	// pass the content from compose via post request to session
 	// content will be saved automatically to database
-	$_SESSION['campaign']['content'] = $_POST['content'];  
- 
+	$_SESSION['campaign']['content'] = $_POST['content'];   
+
 	// check if the post request has campaign id and if exist, 
-	// prepare execute the update campaign and other part campaign related tables
-	if(!empty($_POST['id'])) 
-	{   
+	// prepare execute the update campaign and other part campaign related tables 
+	
+	 
+
+
+    if(!empty($_POST['id'])) {   
  
 		// print " kind " .$_SESSION['campaign']['kind'] ;
 		// update mobile email optin
-		if($_SESSION['campaign']['kind'] == 'mobile email optin') {  
- 
-			$campaign = [
-				'id'=> $_POST['id'], 
-				'account_id'=>$_SESSION['account_id'],  
-				'content' =>htmlentities($_SESSION['campaign']['content']), 
-				'optin_url' => $_SESSION['campaign']['optin']['url'], 
-				'optin_email_subject' => $_SESSION['campaign']['optin']['email_subject'], 
-				'optin_email_content' => $_SESSION['campaign']['optin']['email_content'], 
-				'optin_email_to_name' => $_SESSION['campaign']['optin']['email_to_name'], 
-				'optin_email_to_mail' => $_SESSION['campaign']['optin']['email_to_mail'], 
-				'optin_popup_link' => $_SESSION['campaign']['optin']['popup_link'] 
-			];   	
- 
-		    Campaign::createOrUpdateByCampaignId($campaign); 
+	
+    	if($_SESSION['campaign']['kind'] == 'mobile email optin') {   
 
-			$_SESSION['campaign']['id'] = $_POST['id'];
+				$campaign = [
+					'id'=> $_POST['id'], 
+					'account_id'=>$_SESSION['account_id'],  
+					'content' =>htmlentities($_SESSION['campaign']['content']), 
+					'optin_url' => $_SESSION['campaign']['optin']['url'], 
+					'optin_email_subject' => $_SESSION['campaign']['optin']['email_subject'], 
+					'optin_email_content' => $_SESSION['campaign']['optin']['email_content'], 
+					'optin_email_to_name' => $_SESSION['campaign']['optin']['email_to_name'], 
+					'optin_email_to_mail' => $_SESSION['campaign']['optin']['email_to_mail'], 
+					'optin_popup_link' => $_SESSION['campaign']['optin']['popup_link'] 
+				];   	
+	 
+			    $campaignId = Campaign::createOrUpdateByCampaignId($campaign); 
 
-
-			Campaign::setSessionForOptin($_POST['id']);    
-
-  
-		} else {   
-
+				$_SESSION['campaign']['id'] = $campaignId;
+	 
+				Campaign::setSessionForOptin($campaignId);    
+			} else {  
 			// update autoresponse 
 			// update newsletters
 			$campaign = [
@@ -83,8 +77,8 @@
 			$_SESSION['campaign']['id'] = $_POST['id'];
 
 			// // set edit values to session
-			Campaign::setDefaultValueToSession($_POST['id']);    
-		}  
+			Campaign::setDefaultValueToSession($_POST['id']);     
+		}
     } 
 
 	// after checking the campaign id and if not found, 
@@ -103,14 +97,14 @@
 		// exit; 	
 		// prepare campaign details
 		// 
-		 
+	 
 		
 		if($_SESSION['campaign']['kind'] == 'mobile email optin') { 
 
 			$campaign = [ 
-				'id'	     	      => $_POST['id'],
+				'id'	     	      => $_SESSION['campaign']['optin']['id'],
 				'title'	     		  => $_SESSION['campaign']['name'],	
-				'content' =>htmlentities($_SESSION['campaign']['content']),
+				'content' 			  => htmlentities($_SESSION['campaign']['content']),
 				'account_id' 		  => $_SESSION['account_id'],
 				'kind' 	     		  => $_SESSION['campaign']['kind'],  
 				'optin_url' 		  => $_SESSION['campaign']['optin']['url'], 

@@ -29,15 +29,9 @@ class ListController extends Controller
         return; 
    }
 
-    public function getListsAndDetails() {   
-
-
-        $lists = List1::getLists()->toArray();  
-   
-
-
-        // print "test";
-
+    public function getListsAndDetails() {    
+        $lists = List1::getLists()->toArray();   
+        // print "test"; 
         $counter=0;
         foreach($lists as $list) {   
             $lists[$counter]['contact_total'] = List1::getListContactsTotal($list['id']);

@@ -1,18 +1,6 @@
 #!/usr/bin/php -q
-<?php    
-$dateTimeNow = date("Y-m-d h:i:s");  
-$activateEmailCampaign = false;
-
-if($_SERVER['SERVER_NAME'] == 'localhost')  {
-	require ('E:/xampp/htdocs/rocky/send-right-dev/extension/custom_database/Database.php');
-	$database = new Database('root' , '1234567890'  , 'rocky_sendright');  
-} else {
-	require ('/home/iamroc5/public_html/sendright/extension/custom_database/Database.php');
-	$database = new Database('iamroc5_rocky123' , 'SehmVz_~RNIO'  , 'iamroc5_sendright');  
-} 
-
-if($activateEmailCampaign) 
-{  
+<?php     
+if(true){  
 	$sock = fopen ("php://stdin", 'r');
 	$email = ''; 
 	//Read e-mail into buffer
@@ -55,56 +43,57 @@ if($activateEmailCampaign)
 	{
 	    $from = $from2[0];
 	}   
-   
+
 	// recent sent email record to a file
 	$myfile = fopen("/home/iamroc5/public_html/sendright/tests/newfile.txt", "w") or die("Unable to open file(filename)!");
 	$txt = " delivered 1 to    $to  email subject  $subject   from   $from  fromindex0 $fromIndex0 from name $fromName   \n email $email   message \n\n\n $message  ";
 	fwrite($myfile, $txt); 
-	fclose($myfile);
-}
+	fclose($myfile);    
+} 
 
+$dateTimeNow = date("Y-m-d h:i:s");   
+if($_SERVER['SERVER_NAME'] == 'localhost')  {
+	require ('E:/xampp/htdocs/rocky/send-right-dev/extension/custom_database/Database.php');
+	$database = new Database('root' , '1234567890'  , 'rocky_sendright');  
+} else {
+	require ('/home/iamroc5/public_html/sendright/extension/custom_database/Database.php');
+	$database = new Database('iamroc5_rocky123' , 'SehmVz_~RNIO'  , 'iamroc5_sendright');  
+}  
+
+ // $to 	      = 'mobile-optin-testing-in-live-47@sendright.net'; 
+ // $from        = 'mrjesuserwinsuarez@gmail.com'; 
+ // $fromName    = 'Jesus Erwin Suarez';   
   
-$to 	  = 'jesus@sendright.net'; 
-$from     = 'francis123@gmail.com'; 
-$fromName = 'Francis Suarez';
+ $campaignId  = end(explode('-',$to));  // get only campaign id
+ $campaignId  = str_replace('@sendright.net', '', $campaignId);    // remove id from campaign 
+ $to 		  = str_replace('-'.$campaignId, '', $to);
 
  
-
- $to = str_replace(" ", "", $to);
- $from = str_replace(" ", "", $from);
- $fromName = str_replace(" ", "", $fromName);
-
-print "<br> from:  $from name: $fromName  to: $to <br>"; 
- 
+ print " campaign id = " . $campaignId . ' ';   
+ $to 		 = str_replace(" ", "", $to);
+ $from 		 = str_replace(" ", "", $from);
+ //$fromName = str_replace(" ", "", $fromName); 
 // $toCampaign = 'new-mobile-optin-test-1@sendright.net';  // to@domain.com
-$toCampaign = convertToCampaignTitle($to); 
-$first_name =  getFirstName($fromName) ;
-$last_name  = getLastName($fromName); 
- 
+$toCampaign  = convertToCampaignTitle($to); 
+$first_name  = getFirstName($fromName) ;
+$last_name   = getLastName($fromName);  
 // separate first name and lastname 
-// check to email and get what is the account id
-
-print "<br> campaign title <br>" . $toCampaign . '<br>';
-$database->select('campaigns', '*',   null, " title LIKE '$toCampaign'" ); 
+// check to email and get what is the account id 
+print "<br> from:  $from name: $fromName  to: $to <br>";  
+print "campaign title ->[" . $toCampaign . ']';
+$database->select('campaigns', '*',   null, " title = '$toCampaign' and id = $campaignId" ); 
 $results = $database->getResult();  
-print " <br> campaign result"; 
-print_r_pre($results); 
 
 if(count($results) > 0) {  
 	$account_id   = $results[0]['account_id']; 
 	$campaign_id  = $results[0]['id']; 
 	$status	      = $results[0]['status']; 
-
-
-	print " account id " . $account_id;
   	 
 	if($status == 'active')  {  
 		// check contact if already exist for the specific account
 		 $database->select('contacts', '*',   null, "email = '$from' and account_id = $account_id" );  
 		 $contact = $database->getResult();  
 		  
-		 print_r_pre( $contact);
-
 		// if contact is not exist then do insert new contact
 		 if(count($contact) < 1) { 
 		 	 print "<br> not exist and do insert";   
@@ -118,9 +107,13 @@ if(count($results) > 0) {
 					'created_at' =>$dateTimeNow,
 					'updated_at'=>$dateTimeNow, 
 			]);      
+			
 			$contact  = $database->getResult();
+			
 			print_r_pre($contact); 
+			
 			$contact_id = $contact[0];  	
+			
 
 		} else { 
 			$database->select('contacts', 'id',   null, "email = '$from' and account_id = $account_id" ); 

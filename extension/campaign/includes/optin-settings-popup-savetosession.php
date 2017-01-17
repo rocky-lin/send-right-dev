@@ -23,7 +23,7 @@ $error .= checkIfEmpty($_REQUEST['optin_email_to_mail'], 'OptIn Receiver Email')
 
  
 if(empty($error)){
-	$_SESSION['campaign']['optin']['url'] 			 = $_REQUEST['optin_url'];
+	$_SESSION['campaign']['optin']['url'] 		    = $_REQUEST['optin_url'];
 	$_SESSION['campaign']['optin']['email_subject'] = $_REQUEST['optin_email_subject'];
 	$_SESSION['campaign']['optin']['email_content'] = $_REQUEST['optin_email_content'];
 	$_SESSION['campaign']['optin']['email_to_name'] = $_REQUEST['optin_email_to_name'];
