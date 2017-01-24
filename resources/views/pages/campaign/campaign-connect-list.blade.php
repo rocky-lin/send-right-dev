@@ -56,10 +56,9 @@
                         <div class="form-group"> 
                             {{ Form::label('template', 'Select Campaign Template', ['class'=>'label label-primary'])}}
                         
-                            <select class="form-control"  name="template" id="select-campaign-template" >  
-                                <option value="1">Default</option> 
+                            <select class="form-control"  name="template" id="select-campaign-template" >
                                 @foreach($campaignTemplate as $template) 
-                                    <option value="{{$template->id}}">{{$template->name}}</option>}  
+                                    <option value="{{$template->id}}">{{$template->name}}</option>
                                 @endforeach
                             </select> 
                 

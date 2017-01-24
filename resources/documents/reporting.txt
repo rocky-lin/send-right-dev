@@ -856,3 +856,37 @@ Update for Jan 14, 2017
 Wait for VPS to be live 
 When VPS is live the setup wildcard email for *@sendright.net 
 Start working with payment
+
+Will do the video reporting in the weekends, thank you and have a good weekend ahead Rocky. 
+
+Best regards,
+Jesus Erwin Suarez
+
+
+ 
+Jan 16, 2017
+Setup the all catachable email 
+get error when setup catcable and i contacted support about it
+remove space from send to campaign as email to make it successfully matched with specific campaign account
+debugging and doing testing 
+turn piping accept the incoming email, name and campaign accepted to the system
+
+Jan 17, 2017
+need to add account id in the last part of the mobile optin campaign name, in this way we can identify who own the the specific mobile optin
+fix specific campaign through the campaign id 
+fix footer unsubscribe link redirect  
+add filter the unsubscribe link  
+add default design for un subscribe link    
+delivery there is delivery attempt issue 
+need to check why in my desktop email application is not found the campaign name when i optin it from there
+continue debugging and testing 
+change url in mobile optin view
+
+
+
+Jan 18, 2017 
+upload codes to server
+Test with footer and mobile optin online
+setup and assign default template for auto responder and newsletter
+setup and assign default template for mobile optin only
+start payment

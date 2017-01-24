@@ -26,11 +26,11 @@ class SubscriptionController extends Controller
     }
     public function confirmProceed(Request $request) 
     {	
-
+    	print "tst";
     	// dd($request->all());
     	// print "conform procced "; 
     	$product = Product::getProductByProductName($request->get('name'));
- 
+ 		print "tst";
  	    // $orderId = Invoice::orderBy('id', 'desc')->first()->id;
  	    // $orderId++;  
 	    // print "order id" . Invoice::getNewOrderId();  
@@ -38,13 +38,15 @@ class SubscriptionController extends Controller
 		// $orderId = 123;
  
 		$form = $request->except('_token');
-
+	print "tst";
 	    // 建立商店
 	    $pay2go = new Pay2Go(env('CASH_STORE_ID'), env('CASH_STORE_HashKey'), env('CASH_STORE_HashIV'));
-
+	print "tst";
 	    // 商品資訊
 	    $order = $pay2go->setOrder(Invoice::getNewOrderId(), $product->price , $product->name, $request->get('Email'))->submitOrder();  
- 
+ 		
+ 		print $order; 
+ 		exit; 
 	    // 將資訊回傳至自定義 view javascript auto submit
 	    return view('cash.submit')->with(compact('order'));
 		//    	dd($request->all());

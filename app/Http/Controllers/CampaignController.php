@@ -63,13 +63,12 @@ class CampaignController extends Controller
 
         if(!empty(Input::get('ck'))) {   
 
-            $campaignTemplate = CampaignTemplate::getSpecificTemplateByCampaignType(Input::get('ck'));  
-            
+            $campaignTemplate = CampaignTemplate::getSpecificTemplateByCampaignType(Input::get('ck'));
+
             // foreach ($campaignTemplate as $template) {
             //      $campaignTemplate = $template['id'];
             //      $campaignTemplate = $template['name'];
             // }
-            
         }
 
 
