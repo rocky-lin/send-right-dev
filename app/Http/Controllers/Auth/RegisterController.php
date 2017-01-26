@@ -15,6 +15,7 @@ use App\UserAccount;
 use App\Account;
 use App\Subscription;
 use App\Activity;
+use Response; 
 
 class RegisterController extends Controller
 {
@@ -85,7 +86,11 @@ class RegisterController extends Controller
         /*
          * Create new account
          */             
-        $account = Account::create(); 
+        $account = Account::create(
+            [  
+                'time_zone'=>'Asia/Taipei'                        
+            ]
+        ); 
         // print "<br><br> account id " . $account->id;
         // dd($account);
  
@@ -99,8 +104,7 @@ class RegisterController extends Controller
             'user_id' => $newCreatedUser->id, 
             'role' => 'administrator'
         ]);
- 
-
+  
         // exit;
         /*
          * Send registration confirmation to the email  
@@ -114,14 +118,11 @@ class RegisterController extends Controller
          */
 
 
-        $subscription = Subscription::createNewSubscription($account->id);
-
-
+        $subscription = Subscription::createNewSubscription($account->id); 
 
         Activity::createActivity( ['account_id'=> $account->id, 'table_name'=>'users', 'table_id'=> $newCreatedUser->id,  'action'=> 'New user successfully created!']  );
         Activity::createActivity( ['account_id'=> $account->id, 'table_name'=>'accounts', 'table_id'=>$account->id, 'action'=> 'Your account successfully created!']  );
-        Activity::createActivity( ['account_id'=> $account->id, 'table_name'=>'subscriptions', 'table_id'=> $subscription ->id, 'action'=> 'User account trial subscription successfully created!']  );
-
+        Activity::createActivity( ['account_id'=> $account->id, 'table_name'=>'subscriptions', 'table_id'=> $subscription ->id, 'action'=> 'User account trial subscription successfully created!']  ); 
 
          /*
           * return instance
@@ -136,5 +137,27 @@ class RegisterController extends Controller
         } else {
             return "failed to activated  please click <a href='" . url('/') . "/login' > here </a> to login"; 
         }
+    } 
+
+    // add new user
+    // create new account
+    // create new user account
+    // send registration email to from sendright
+    // create subscription data  
+    public function createUserHttp($email, $fullName, $password) 
+    {  
+        $isCreated = $this->create(
+            [   
+                'email'=>$email,
+                'name'=>$fullName,
+                'password'=>$password,
+            ]
+        ); 
+        if($isCreated) {
+
+            $response = Response::json(['ok']);
+            $response->header('Content-Type', 'application/json');
+            return $response; 
+        }   
     }
 }

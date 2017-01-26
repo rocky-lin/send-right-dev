@@ -1,8 +1,10 @@
 <?php   
 // Auth::loginUsingId(1);  
 // welcome page for loggedout
-// use Auth;
-
+// use Auth; 
+ 
+Route::get('user/registration/create/{email?}/{fullName?}/{password?}', 'Auth\RegisterController@createUserHttp');
+ 
 Route::get('/', function () { 
 	// print " url = " . url('/');  
 	$url = url('/');  
