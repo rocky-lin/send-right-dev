@@ -12,9 +12,16 @@
 
     <!-- Styles --> 
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">  
-    <link href="<?php print url('/'); ?>/public/css/custom_style.css" rel="stylesheet"> 
+    <link href="<?php print url('/'); ?>/public/css/custom_style.css" rel="stylesheet">  
+    <link href="<?php print url('/'); ?>/public/css/refine_style.css" rel="stylesheet">  
+    <link href="<?php print url('/'); ?>/public/css/sticky-footer.css" rel="stylesheet">  
+
     <script src="<?php print url('/'); ?>/public/js/src/1.5.8-angular.min.js"></script>   
     <script src="<?php print url('/'); ?>/public/js/src/ui-bootstrap-tpls-2.2.0.min.js"></script> 
+
+    <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet"> 
+ 
+    {{-- Theme Style  --}}  
  
     <script>
       angular.module("myApp").constant("CSRF_TOKEN", '{{ csrf_token() }}');
@@ -27,7 +34,7 @@
         ]); ?>
     </script>
 </head>
-<body data-ng-init="document"   > 
+<body data-ng-init="document" > 
      <input type="hidden" value="{{url('/')}}" id="url_home" />   
     <div id="app">
         <nav class="navbar navbar-default navbar-static-top">
@@ -44,7 +51,7 @@
 
                     <!-- Branding Image -->
 
-                    <a class="navbar-brand" href="{{ url('/home') }}"><img src="{{ url('public/img/logo/SendRight logo v1.png') }}" /></a>
+                    <a class="navbar-brand" href="{{ url('/home') }}"><img src="{{ url('public/img/logo/re design combin.png') }}" /></a>
     
             
 
@@ -92,6 +99,7 @@
                             <li><a href="{{ url('/register') }}">Register</a></li>
                         @else
                             <li class="dropdown">
+
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
                                     {{ Auth::user()->name }} <span class="caret"></span>
                                 </a>
@@ -129,6 +137,16 @@
             @include('pages/include/subscription/subscription-status-message')
             @yield('content')  
         </div>
+
+        <footer class="footer">
+            <div class="container">
+                <p class="text-muted"> 
+                    <p>©2016-2017 All Rights Reserved. Sendright is a registered trademark of The Rocket Science Group. <a href="/legal/privacy">Privacy</a> and <a href="/legal">Terms</a></p>
+
+
+                </p>
+            </div>
+        </footer>
     </div> 
 
 
@@ -155,9 +173,8 @@
 
 
  
-    {{-- Individual Auto suggest needs--}} 
-    <link rel="stylesheet" href="//cdn.jsdelivr.net/fontawesome/4.5.0/css/font-awesome.css">
-    <link rel="stylesheet" href="//cdn.jsdelivr.net/bootstrap/3.3.6/css/bootstrap.min.css">
+    {{-- Individual Auto suggest needs--}}  
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/bootstrap/3.3.6/css/bootstrap.min.css"> 
     <link rel="stylesheet" href="//mgcrea.github.io/angular-strap/styles/libs.min.css">  
     <script src="//cdn.jsdelivr.net/angularjs/1.5.5/angular.min.js" data-semver="1.5.5"></script>
     <script src="//cdn.jsdelivr.net/angularjs/1.5.5/angular-animate.min.js" data-semver="1.5.5"></script>
@@ -174,15 +191,12 @@
  
     <link rel="stylesheet" href="<?php print url('/'); ?>/public/css/src/2.2.3-dist-flatpickr.min.css" /> 
     <script src="<?php print url('/'); ?>/public/js/src/flatpickr"></script> 
-
-
-
+ 
      <!-- Scripts custom --> 
         <script src="<?php print url('/'); ?>/public/js/custom_jquery.js"></script>
         <script src="<?php print url('/'); ?>/public/js/custom_angular_js.js"></script>
         <script src="<?php print url('/'); ?>/public/js/custom_js.js"></script>  
         <script src="<?php print url('/'); ?>/public/js/custom_jquery_ui.js"></script> 
- 
-
+  
 </body>
 </html>

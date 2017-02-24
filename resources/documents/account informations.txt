@@ -1,4 +1,4 @@
-email: jesus@sendright.net
+\email: jesus@sendright.net
 pass: wklk157#1
 -----------------------------------------------------------------------------------------
 Amazon
@@ -71,15 +71,42 @@ jesus@sendright.net
 mQ.oe-gJo@FU
 
 
-PAYMENT
-https://www.spgateway.com/main/login_center/single_login   
+PAYMENT SPGATEWAY
+https://cwww.spgateway.com/main/login_center/single_login   
 https://ccore.spgateway.com/MPG/mpg_gateway 
 53769992 - 企業會員帳號(公司統一編號) - Corporate Account Number (Company Uniform Number) 
 SSC700902 - 管理者帳號 - Administrator account 
 Ssc@70963 - 管理者密碼 - The administrator password
- 
 
- 
+PAYMENT INVOICE
+test mode URL： https://cinv.pay2go.com/main/login_center/single_login
+member number： 53769992
+account： ssc700902
+password： Ssc@70963
+API doc： https://drive.google.com/file/d/0B58o77eCWUhdZlNlMkF1TUFaY28/view?usp=sharing
+refer plugin： https://cloudwp.pro/market/plugins/free-plugins/pay2go-einvoice-woocommerce/
+Membership Number: C063680193
+member name: SUPER TERRITORIES CO., LTD 
+Store name: Super-free
+Store code: 3405394
+HashKey: f2VyML8oSxa82gYhGV9t20CjO51trVWH
+HashIV: YRgKDp8vWjEYADgh
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 My Website：
@@ -110,3 +137,9 @@ account Verification： 0111
 url:http://app.mobileoptin.com/
 usernmae:jesus@supershortcut.com
 password:Mog5945
+
+
+Mailchimp account 
+email: mrjesuserwinsuarez@gmail.com
+user: ransak2017
+pass: wklk157#1A

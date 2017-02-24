@@ -121,7 +121,7 @@ body {
 
 
 .navbar-brand img {
-    height:21px;
+    height:25px !important;
 }
 
 .selected-campaign-template-preview {

@@ -4,9 +4,10 @@
 @section('content')
 <div class="container">
     <div class="row">
-        <div class="col-md-8 col-md-offset-2">
+        <br><br><br><br>    
+        <div class="col-md-8">
             <div class="panel panel-default">
-                <div class="panel-heading">Reset Password</div>
+               <div class="panel-heading"><h3>Reset Password</h3></div>
                 <div class="panel-body">
                     @if (session('status'))
                         <div class="alert alert-success">
@@ -40,6 +41,14 @@
                         </div>
                     </form>
                 </div>
+            </div>
+        </div>
+ 
+        <div class="col-md-4 " >  
+            <div class="panel panel-default">   
+                    <div class="panel-body">
+                        <p>  Welcome back, to our send right application. Thank you for using our services. If need support please contact us atsupport@sendright.net</p>
+                    </div> 
             </div>
         </div>
     </div>

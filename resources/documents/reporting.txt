@@ -890,3 +890,66 @@ Test with footer and mobile optin online
 setup and assign default template for auto responder and newsletter
 setup and assign default template for mobile optin only
 start payment
+
+
+Jan 24, 2017 
+1. Allow spgateway work with template
+2. Get persons information who order the product and this will be used to save in sendright
+3. Allow http request register and create new account via thank you page from woocommerce purchased a product
+4. In sendright create a  function that will create new account and will create other data for specific user
+5. Allow plugin use template 
+6. Allow assign specific template  
+
+
+
+
+Payment is tricky and has a lot of things need to be done, 
+Here is the update.
+
+Jan 25, 2017
+1. Detect if the product purchased is bundled with sendright, if its bundled with sendright then allow template redirect to sendright registration template and thank you.  
+2. Hide other payment method in credit card, possible go to spgateway store 
+3. Detect if no payment made and people visited that thank you page for sendright registration, if its true then redirect the page to specific page that say something error.  
+4. Discuss about how thank you/Create thank you page and sendright user registration, do extra search of how ui works.
+5. Test upload online and test if its working with iframe, member level and bundled product/ as how we can setup and test this part   
+5.1 - iframe - working
+5.3 - register member when order product - working 
+5.2 - membership level - this can be done manual for now 
+
+Jan 26, 2017  
+1. Allow test purchased product locally work test both sendright product and not sendright product and test online too
+2. Test with auto register when customer purchased a product both local and online 
+3. Test with auto create wordpress user local and online
+4. Discuss how we can trigger agreed credit card payment if member already done with credit card payment   
+5. Ask if it cost 3usd in first payment and free trials for 3 months or they need to pay 1usd per month  
+6. prepare, convert docs, install free woocomerece plugin for pay2go invoice
+7. prepare, convert docs, start working with agreed payment way 
+
+Update for Jan 27, 2017
+1. Continue working with agreed credit card plugin 
+
+
+
+4. Create invoice ui display - 1hr 
+5. Create invoice design for email  and sent  -  1hr 
+
+
+
+4. Create product that has a life span 1 month, 2months, 3months or even a trial period - 1h - 3:20
+5. System detect if the payment will be expired in few days coming  - 30m - 3:50
+6. System detect expiration of subscription coming soon, put a warning that say something like user need to pay to do additional subscription -  40m - 4:30
+
+
+
+7. Put link the product to woocomerece for exntension of payment for sendright - 15m - 4:45
+8. System detect the subscription if expired already, if so need to put a message above that say something the subscription is expired and need for payment to continue using the system. - 45m - 5:30
+ 
+debug and fix order and pay via agreed payment way
+make credit card field in after place order hit
+make adding credit card info is dynamic from the user and order
+when ordering working allow remove product in cart
+Make the product status successfully paid in the order
+Fix spgateway agreed payment way wordings and ui and icons
+check how we can set redirect after successfully paid the agreed payment way withoud affecting credit card payment way
+
+

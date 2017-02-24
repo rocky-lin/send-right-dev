@@ -59,3 +59,10 @@ https://www.sitepoint.com/managing-cronjobs-with-laravel/
 
      Jquery convert html to image
      http://codepedia.info/convert-html-to-image-in-jquery-div-or-table-to-jpg-png/
+
+
+
+     Free bootstrap template 
+
+     https://startbootstrap.com/template-categories/all/ 
+     https://bootstrapmade.com/
