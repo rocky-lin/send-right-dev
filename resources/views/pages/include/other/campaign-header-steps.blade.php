@@ -3,7 +3,7 @@
  
 <?php 
 	
-	$stepLists = ['Campaigns'=>'#', 'Campaign Details'=>'#', 'Sender Details'=>'#', 'Compose Campaign'=>'#', 'Campaign Settings'=>'#']; 
+	$stepLists = ['Campaigns'=>'#', 'Campaign Details'=>'#', 'Sender Details'=>'#', 'Select Template'=>'#', 'Compose Campaign'=>'#', 'Campaign Settings'=>'#'];
 
 
 	// $stepLists = ['Campaigns'=>route('campaign.index'), 'Campaign Details'=>route('campaign.create'), 'Sender Details'=>route('user.campaign.create.sender.view'), 'Compose Campaign'=>'#', 'Campaign Settings'=>route('user.campaign.create.settings')]; 

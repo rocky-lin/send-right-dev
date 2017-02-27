@@ -137,19 +137,16 @@
             @include('pages/include/subscription/subscription-status-message')
             @yield('content')  
         </div>
-
-        <footer class="footer">
-            <div class="container">
-                <p class="text-muted"> 
-                    <p>©2016-2017 All Rights Reserved. Sendright is a registered trademark of The Rocket Science Group. <a href="/legal/privacy">Privacy</a> and <a href="/legal">Terms</a></p>
-
-
-                </p>
-            </div>
-        </footer>
-    </div> 
-
-
+    </div>
+     </div></div>
+     <br><br><br>
+     <footer class="footer" style="display:block !important; float:left;">
+         <div class="container">
+             <p class="text-muted">
+             <p>©2016-2017 All Rights Reserved. Sendright is a registered trademark of The Rocket Science Group. <a href="/legal/privacy">Privacy</a> and <a href="/legal">Terms</a></p>
+             </p>
+         </div>
+     </footer>
 
     
 

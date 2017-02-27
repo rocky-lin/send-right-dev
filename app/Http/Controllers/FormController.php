@@ -174,7 +174,7 @@ class FormController extends Controller
     }
     public function registerNewFormStep1(Request $request)
     {    
-        session_start();    
+        //        session_start();
  
         if(!List1::where('name', $request->get('selectedList') )->count()) { 
             return redirect()->back()->with('status', 'Please select your correct list correctly.')->withInput();

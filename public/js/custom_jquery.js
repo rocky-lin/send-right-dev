@@ -266,3 +266,37 @@ function change_space_with_dash(str)
 {
 	return str.replace(/\s+/g, '-').toLowerCase();  
 }
+
+
+$(document).ready(function(){
+
+	$("#campaign-template-preview-container #campaign-template-preview").on('click', function(){
+		var img_src = $(this).attr('data-src');
+		$("#campaign-template-image-src").attr('src', img_src);
+	});
+
+	$("#campaign-template-preview-container #campaign-template-select").on('click', function(){
+
+		var id	    = $(this).attr('data-template-id');
+
+		// remove selected all as default
+		$( "#campaign-template-preview-container .thumbnail" ).each(function() {
+			$(this).attr('style', 'border:1px solid grey');
+		});
+
+
+		// set selected current clicked
+
+		$("#template-thumbnail-" + id).attr('style', 'border:1px solid red');
+		// assign id to a field
+
+		$("#select-campaign-template").val(id);
+		console.log(" id " + id);
+
+
+		$('#campaign-template-next-button').prop('disabled', false);
+		$("#campaign-template-next-button-text").css('display', 'none');
+
+	});
+});
+

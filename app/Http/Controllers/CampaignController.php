@@ -45,7 +45,7 @@ class CampaignController extends Controller
     // STEP 1
     public function create()
     {  
-        session_start();
+        // session_start();
 
         if(Input::get('ck') == 'newsletter') {   
             $_SESSION['campaign']['kind'] = 'newsletter';
@@ -108,12 +108,13 @@ class CampaignController extends Controller
         return view('pages/campaign/campaign-connect-list', compact('campaign', 'defaultListIds', 'action', 'id', 'kind', 'campaignTemplate'));
     }
     public function createValidate(ValidateCampaignList $request)
-    {   
-        session_start();
+    {
+
+        // session_start();
         $_SESSION['campaign']['name']     = $request->get('campaignName');
         $_SESSION['campaign']['listIds']  =  $request->get('list_ids');
         $_SESSION['campaign']['template'] = $request->get('template');    
-         $_SESSION['campaign']['kind']  = $request->get('kind'); 
+        $_SESSION['campaign']['kind']    = $request->get('kind');
  
 
         // print  $_SESSION['campaign']['listIds'];
@@ -130,7 +131,9 @@ class CampaignController extends Controller
 
             // print "successfully added email optin";
             // return Redirect::to();
-            return redirect('extension/campaign/index.php');
+            // return redirect('extension/campaign/index.php');
+
+            return redirect(route('user.get.campaign.choose.template'));
 
         } elseif( $listIdsTotal < 2 ) {
             return Redirect::back()->withInput(Input::all())->with('status', 'Please select at least 1 list.');
@@ -139,10 +142,9 @@ class CampaignController extends Controller
             return redirect(route('user.campaign.create.sender.view'));
         }
     }
-
     public function createUpdate(Request $request, $id)
     { 
-        session_start();
+        // session_start();
         $_SESSION['campaign']['name']     = $request->get('campaignName');
         $_SESSION['campaign']['listIds']  =  $request->get('list_ids');
         $_SESSION['campaign']['template'] =  'Default';//$request->get('template');
@@ -161,7 +163,7 @@ class CampaignController extends Controller
     // STEP 2 
     public function createSender() 
     {    
-        session_start();
+        // session_start();
         // dd($_SESSION['campaign']['sender']);
             $campaign['sender'] = []; 
             $action = ''; 
@@ -187,16 +189,17 @@ class CampaignController extends Controller
     } 
     public function createSenderValidate(ValidateCampaignSender $request) 
     {  
-        session_start();
+        // session_start();
         $_SESSION['campaign']['sender']['name'] = $request->get('senderName'); 
         $_SESSION['campaign']['sender']['email'] = $request->get('senderEmail'); 
         $_SESSION['campaign']['sender']['subject'] = $request->get('emailSubject');  
-        return redirect(url('extension/campaign/index.php'));
+//        return redirect(url('extension/campaign/index.php'));
+        return redirect()->route('user.get.campaign.choose.template');
     }
 
     public function createSenderUpdate(Request $request, $id)
     { 
-        session_start(); 
+        // session_start(); 
         $_SESSION['campaign']['sender']['name'] = $request->get('senderName'); 
         $_SESSION['campaign']['sender']['email'] = $request->get('senderEmail'); 
         $_SESSION['campaign']['sender']['subject'] = $request->get('emailSubject');  
@@ -216,10 +219,76 @@ class CampaignController extends Controller
 
 
 
+
+
     // STEP 4
+
+    public function getChooseTemplate() {
+
+        //        print "<pre>";
+        //        unset($_SESSION['campaign']['template']);
+        //        unset($_SESSION['campaign']['content']);
+
+
+        if($_SESSION['campaign']['kind'] == 'auto responder') {
+        //            print "auto resonder";
+            $templates = CampaignTemplate::where('type', 'auto responder')->get();
+        }
+        else if($_SESSION['campaign']['kind'] == 'mobile email optin') {
+        //            print "mobile optin";
+            $templates = CampaignTemplate::where('type', 'mobile email optin')->get();
+        }
+        else {
+        //            print "newsletter";
+            $templates = CampaignTemplate::where('type', 'newsletter')->get();
+        }
+
+
+        //        print_r($_SESSION['campaign']);
+        //        print_r($_SESSION['campaign']);
+
+
+        // print_r($templates);
+        // exit;
+
+        //        print "</pre>";
+
+        //        $templates = CampaignTemplate::where('type', 'newsletter')->get();
+
+        return view('pages/campaign/campaign-templates', compact('templates'));
+    }
+
+    public function postChooseTemplate(Request $request) {
+
+        if($request->get('template') == null) {
+            return redirect()->back()->with('status', 'Please select campaign template');
+        } else {
+            $_SESSION['campaign']['template'] = $request->get('template');
+        }
+
+        if($_SESSION['campaign']['kind'] == 'auto responder') {
+            return redirect(url('extension/campaign/index.php'));
+        }
+        else if($_SESSION['campaign']['kind'] == 'mobile email optin') {
+
+            return redirect(url('extension/campaign/index.php'));
+        }
+        else {
+            return redirect(url('extension/campaign/index.php'));
+        }
+
+
+
+
+
+
+
+    }
+
+    // STEP 5
     public function createSettings() 
     {  
-        session_start(); 
+        // session_start(); 
         // print_r($_SESSION['campaign']['listIds']); 
         // exit  
         // print "campaign id  " . $_SESSION['campaign']['id'];
@@ -254,9 +323,9 @@ class CampaignController extends Controller
 
     public function createSettingsMobileOptinValidate(Request $request) 
     {   
-        if(!session_id()) {
-            session_start(); 
-        }
+        // if(!session_id()) {
+        //     session_start(); 
+        // }
 
         // dd($request->all());
  
@@ -297,7 +366,7 @@ class CampaignController extends Controller
     }
     public function createSettingsValidate(Request $request) 
     {   
-        session_start();
+        // session_start();
         // dd($request->all());
         // print"<pre>";
         // print_r($_SESSION['campaign']);

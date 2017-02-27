@@ -53,7 +53,7 @@
                     <br><br>  
 
                     @if(empty($campaign))
-                        <div class="form-group"> 
+                        <div class="form-group campaign-choose-template-status" >
                             {{ Form::label('template', 'Select Campaign Template', ['class'=>'label label-primary'])}}
                         
                             <select class="form-control"  name="template" id="select-campaign-template" >
@@ -74,8 +74,8 @@
                             </div>
                           
                             {{-- {{ Form::select('template', ['Default' => 'Default','Business'=>'Business','Blog'=>'Blog'], 'list1', ['class'=>'form-control']) }}  --}}
-                        <div /> 
-                    @endif 
+                            </div>
+                            @endif
                         <br>
                         <div class="form-group">
                             @if(!empty($campaign))

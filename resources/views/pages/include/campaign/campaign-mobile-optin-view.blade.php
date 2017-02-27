@@ -7,7 +7,7 @@
                                 <label for="seach" > Search Campaigns </label> 
                                 <input ng-model="q" id="search" class="form-control" >
                             </div>
-                            <div class="col-sm-6">
+                            <div class="col-sm-6 campaign-choose-template-status"  >
                                 <label for="limit show"> Show Rotal Rows </label> 
                                 <select ng-model="pageSize" id="pageSize" class="form-control"  > 
                                     <option value="5">5</option>

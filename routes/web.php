@@ -92,7 +92,9 @@ Route::group(['prefix' => 'user' , 'middleware' => 'auth' ], function() {
 			
 		// create step 1
 			Route::get('campaign/get/all', 'CampaignController@getAllCampaign')->name('user.campaign.get.all');
+
 		    Route::post('campaign/create/validate', 'CampaignController@createValidate')->name('user.campaign.create.validate');
+
 	    	Route::post('campaign/create/update/{id?}', 'CampaignController@createUpdate')->name('user.campaign.create.update');
 
 			Route::get('campaign/get/all/by/kind/{kind?}', 'CampaignController@getAllCampaignSortByKind')->name('user.campaign.get.all.sort.by.kind');
@@ -105,14 +107,25 @@ Route::group(['prefix' => 'user' , 'middleware' => 'auth' ], function() {
 			Route::post('campaign/create/sender', 'CampaignController@createSenderValidate')->name('user.campaign.create.sender.validate');
 			Route::post('campaign/create/sender/update/{id?}', 'CampaignController@createSenderUpdate')->name('user.campaign.sender.update');
 
+
+
+
 			// step 3
 				// Route::post('campaign/create/compose', 'CampaignController@composeValidate')->name('user.campaign.create.settings.validate'); 
 			// creation of campaign
-			
-			// step 4
+
+			// step 4 ui and template
+
+			Route::get('campaign/templates', 'CampaignController@getChooseTemplate')->name('user.get.campaign.choose.template');
+			Route::post('campaign/templates', 'CampaignController@postChooseTemplate')->name('user.post.campaign.choose.template');
+
+
+			// step 5
 			Route::get('campaign/create/settings', 'CampaignController@createSettings')->name('user.campaign.create.settings');
-			Route::post('campaign/create/settings', 'CampaignController@createSettingsValidate')->name('user.campaign.create.settings.validate'); 
-	 		Route::post('campaign/create/settings-optin', 'CampaignController@createSettingsMobileOptinValidate')->name('user.campaign.create.settings.mobile.optin.validate'); 
+			Route::post('campaign/create/settings', 'CampaignController@createSettingsValidate')->name('user.campaign.create.settings.validate');
+	 		Route::post('campaign/create/settings-optin', 'CampaignController@createSettingsMobileOptinValidate')->name('user.campaign.create.settings.mobile.optin.validate');
+
+
 	 
 			// preview 
 			 	Route::get('campaign/create/settings/preview/mobile', 'CampaignController@getPreviewMobile')->name('user.campaign.create.settings.preview.mobile');
