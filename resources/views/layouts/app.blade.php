@@ -51,7 +51,7 @@
 
                     <!-- Branding Image -->
 
-                    <a class="navbar-brand" href="{{ url('/home') }}"><img src="{{ url('public/img/logo/re design combin.png') }}" /></a>
+                    <a class="navbar-brand" href="{{ url('/home') }}"><img src="{{ url('public/img/logo/re design combin-4 color.png') }}" /></a>
     
             
 
