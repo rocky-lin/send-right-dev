@@ -1,3 +1,7 @@
+html, body
+{
+    height: 100%;
+}
 .navbar-default {
 	background-color: #f2f2f2 !important; 
 } 
@@ -6,7 +10,8 @@
 }
 
 body {
-	background-color:#81D8D0 !important;
+	/*background-color:#81D8D0 !important;*/
+	background-color:#ffffff !important;
 }
 
 .panel-body, .panel-heading{
@@ -18,4 +23,53 @@ body {
 
 .campaign-choose-template-status {
 	display:none;
+} 
+
+/*Home page */
+.container .col-md-8 { 
+  height: auto;
+}  
+.container .col-md-4 { 
+  height: auto;
+}  
+.container .col-md-2 { 
+  height: 200px;
+}  
+.panel-heading {
+  background-color: white !important; 
+} 
+.left-side-container {
+ 
+} 
+.right-side-container {
+ border-right: 3px solid #f2f2f2;
+ height:100% !important;
+}
+.main-row-container {
+	height: 100% !important; 
+}
+
+.navbar {
+	padding:0px;
+}
+
+.container {
+
+  flex-flow: column;
+  height: 100%;
+}
+.container {
+  flex: 1 1 auto;
+}
+ 
+#app {
+	height: 100% !important; 
+}
+
+.panel-body {
+	background-color: #ffffff !important; 
+}
+
+p, span, h1,h2,h3,h4,h5,h6,div, button, input, textarea{
+	font-family: 'PT Sans', sans-serif !important;
 }

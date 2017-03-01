@@ -12,15 +12,20 @@
 
     <!-- Styles --> 
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">  
+    <link type="text/css" rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css"/>
     <link href="<?php print url('/'); ?>/public/css/custom_style.css" rel="stylesheet">  
     <link href="<?php print url('/'); ?>/public/css/refine_style.css" rel="stylesheet">  
     <link href="<?php print url('/'); ?>/public/css/sticky-footer.css" rel="stylesheet">  
 
     <script src="<?php print url('/'); ?>/public/js/src/1.5.8-angular.min.js"></script>   
     <script src="<?php print url('/'); ?>/public/js/src/ui-bootstrap-tpls-2.2.0.min.js"></script> 
+    
+    {{-- https://fonts.google.com/specimen/PT+Sans?selection.family=PT+Sans --}}
+    <link href="https://fonts.googleapis.com/css?family=PT+Sans" rel="stylesheet">
 
-    <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet"> 
- 
+    {{-- https://material.io/icons/ --}}
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet">
     {{-- Theme Style  --}}  
  
     <script>
@@ -36,27 +41,21 @@
 </head>
 <body data-ng-init="document" > 
      <input type="hidden" value="{{url('/')}}" id="url_home" />   
-    <div id="app">
-        <nav class="navbar navbar-default navbar-static-top">
+    <div id="app" >
+        <nav class="navbar-default navbar-static-top">
             <div class="container">
-                <div class="navbar-header">
-
+                <div class="navbar-header"> 
                     <!-- Collapsed Hamburger -->
                     <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#app-navbar-collapse">
                         <span class="sr-only">Toggle Navigation</span>
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
-                    </button> 
-
-                    <!-- Branding Image -->
-
+                    </button>  
+                    <!-- Branding Image --> 
                     <a class="navbar-brand" href="{{ url('/home') }}"><img src="{{ url('public/img/logo/re design combin-4 color.png') }}" /></a>
     
-            
-
- 
-
+             
                 @if (!Auth::guest())
                     <ul class="nav navbar-nav navbar-right"> 
                        <li> <a href="{{ url('/user/contact') }}">Contacts</a>      </li> 
