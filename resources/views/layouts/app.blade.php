@@ -15,8 +15,12 @@
     <link type="text/css" rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css"/>
     <link href="<?php print url('/'); ?>/public/css/custom_style.css" rel="stylesheet">  
     <link href="<?php print url('/'); ?>/public/css/refine_style.css" rel="stylesheet">  
-    <link href="<?php print url('/'); ?>/public/css/sticky-footer.css" rel="stylesheet">  
+    <link href="<?php print url('/'); ?>/public/css/sticky-footer.css" rel="stylesheet"> 
 
+     {{-- @src: http://www.codeply.com/go/ecE6qHNBOC  --}}
+    <link href="<?php print url('/'); ?>/public/css/other-pages-style.css" rel="stylesheet">  
+
+ 
     <script src="<?php print url('/'); ?>/public/js/src/1.5.8-angular.min.js"></script>   
     <script src="<?php print url('/'); ?>/public/js/src/ui-bootstrap-tpls-2.2.0.min.js"></script> 
     
@@ -198,7 +202,7 @@
         <script src="<?php print url('/'); ?>/public/js/custom_jquery.js"></script>
         <script src="<?php print url('/'); ?>/public/js/custom_angular_js.js"></script>
         <script src="<?php print url('/'); ?>/public/js/custom_js.js"></script>  
-        <script src="<?php print url('/'); ?>/public/js/custom_jquery_ui.js"></script> 
-  
+        <script src="<?php print url('/'); ?>/public/js/custom_jquery_ui.js"></script>  
+        <script src="<?php print url('/'); ?>/public/js/refine_jquery.js"></script>  
 </body>
 </html>

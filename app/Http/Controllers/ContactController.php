@@ -22,7 +22,7 @@ class ContactController extends Controller
      */
     public function index()
     {  
-        return view("pages.contact.contact"); 
+        return view("pages/contact/contact"); 
     }
 
     public function getUserAccountContacts() { 

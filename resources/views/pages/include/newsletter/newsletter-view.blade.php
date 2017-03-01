@@ -2,7 +2,7 @@
                     <h3>Your total contact  @{{ totalContact }} </h3>
                         <div class="row">   
                             <div class="col-sm-6">
-                                <label for="seach" > Search Contacts </label> 
+                                <label for="seach" > Search Contacts 1 </label> 
                                 <input ng-model="q" id="search" class="form-control" >
                             </div>
                             <div class="col-sm-6">
