@@ -1,9 +1,7 @@
+@if(!Auth::guest())
 <div class="row">
-<div class="col-sm-12">
-    @if(!Auth::guest())
-        <center> 
-
-        
+<div class="col-sm-12">     
+        <center>  
                 @if($subscription_status == 1) 
                     {{-- <div class="alert alert-info alert-dismissible subscription-status" style="width:103%">
                         <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
@@ -23,22 +21,15 @@
                     {{--subscription billed--}}
                 @else
                     {{--do nothing--}}
-                @endif 
- 
-
-
-
+                @endif  
                 @if(Auth::user()->status == 'inactive')
                   {{--   <div class="alert alert-danger"  style="width:103%" >
                         <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
                         <b>Your account is currently in active, please visit your email and hit comfirm, thank you!</b>
                     </div> --}}
-                @endif 
-
-
-        </center>
-    @endif
-
+                @endif  
+        </center> 
+    </div>
 </div>
-</div>
+@endif
 

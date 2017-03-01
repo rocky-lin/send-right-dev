@@ -97,9 +97,11 @@
                             <li><a href="{{ url('/login') }}">Login</a></li>
                             <li><a href="{{ url('/register') }}">Register</a></li>
                         @else
+                      
                             <li class="dropdown">
 
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                                    <i class="material-icons">mood</i>   
                                     {{ Auth::user()->name }} <span class="caret"></span>
                                 </a>
 
@@ -126,6 +128,8 @@
                                     </li>  
                                 </ul>
                             </li>
+                            <li><a href="#"><span>Help</span></a></li>
+                            <li><a href="#"><i class="material-icons">search</i></a></li>
                         @endif
                     </ul>
                 </div>
@@ -133,12 +137,14 @@
         </nav>  
         <div class='container'>
             @include('pages/popup/popup')
-            @include('pages/include/subscription/subscription-status-message')
+            {{-- @include('pages/include/subscription/subscription-status-message') --}}
             @yield('content')  
         </div>
     </div>
-     </div></div>
-     <br><br><br>
+    </div>
+</div> 
+
+     <div style="clear:both"></div>
      <footer class="footer" style="display:block !important; float:left;">
          <div class="container">
              <p class="text-muted">
