@@ -295,4 +295,8 @@ class ContactController extends Controller
         return $data;
     }
 
+    public function profile($id) 
+    { 
+      return view('pages/contact/contact-profile'); 
+    } 
 } 

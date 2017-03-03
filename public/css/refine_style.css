@@ -119,10 +119,16 @@ p, span, h1,h2,h3,h4,h5,h6,div, button, input, textarea{
 
 .contact-menu-setting {
 	background-color: #f2f2f2;
+	margin-left: -2px !important;
+	margin-right: -2px !important;
 }
 
 .contact-search {
 	padding:5px !important;
 	height:30px !important;
 	margin-top:5px;
+}
+
+. contact-table{
+	text-align: center;
 }

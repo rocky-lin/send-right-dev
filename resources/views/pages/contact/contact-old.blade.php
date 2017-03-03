@@ -9,7 +9,7 @@
                 <div class="panel-body">   
 
  
-                    {{-- @include('pages/include/contact/contact-view')  --}}
+                   @include('pages/include/contact/contact-view')  
 				 
             </div>
         </div>

@@ -108,7 +108,7 @@
 
 
 
-            <ul class="nav nav-tabs contact-sorting-ul" style="border-bottom:none;">
+            <ul class="nav nav-tabs contact-sorting-ul" style="border-bottom:none; padding:5px;">
                 <li role="presentation" class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> Toogle Column <span class="caret"></span> </a>
                     <ul class="dropdown-menu">
@@ -206,7 +206,9 @@
                         <tbody>
                         @for($i=0; $i<10; $i++)
                         <tr>
-                            <td><input type="checkbox" /> &nbsp;&nbsp; John</td>
+                            <td><input type="checkbox" /> &nbsp;&nbsp;
+                                <a href="{{url('user/contact/profile/1')}}">John</a>
+                            </td>
                             <td>Doe</td>
                             <td>john@example.com</td>
                         </tr>

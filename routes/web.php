@@ -64,6 +64,7 @@ Route::group(['prefix' => 'user' , 'middleware' => 'auth' ], function() {
 
 
 	  	Route::get('contact/unsubscribe/{id?}/{email?}', 'ContactController@unsubscribe')->name('user.contact.unsubscribe');
+	  	Route::get('contact/profile/{id?}', 'ContactController@profile')->name('user.contact.profile');
 	  	Route::resource('contact', 'ContactController');  
 
 	// list   
@@ -208,7 +209,7 @@ Route::group(['prefix' => 'user' , 'middleware' => 'auth' ], function() {
 	// billing 
 	route::post('product/select/{product?}', 'ProductController@processSelectedProduct')->name('user.product.select');  
 });    
-
+ 
 Route::get('contact/unsubscribe/{email}', 'ContactController@unsubscribe'); 
 
 Route::get('optin/{id?}/{url?}', 'CampaignController@mobileOptinUrl')->name('user.campaign.mobile.optin.url')->where(['url'=>'[0-9a-zA-Z-]+']);

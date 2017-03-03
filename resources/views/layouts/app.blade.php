@@ -13,9 +13,10 @@
     <!-- Styles --> 
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">  
     <link type="text/css" rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css"/>
-    <link href="<?php print url('/'); ?>/public/css/custom_style.css" rel="stylesheet">  
-    <link href="<?php print url('/'); ?>/public/css/refine_style.css" rel="stylesheet">  
-    <link href="<?php print url('/'); ?>/public/css/sticky-footer.css" rel="stylesheet"> 
+    <link href="<?php print url('/'); ?>/public/css/contact-profile.css" rel="stylesheet">
+    <link href="<?php print url('/'); ?>/public/css/custom_style.css" rel="stylesheet">
+    <link href="<?php print url('/'); ?>/public/css/refine_style.css" rel="stylesheet">
+    <link href="<?php print url('/'); ?>/public/css/sticky-footer.css" rel="stylesheet">
 
      {{-- @src: http://www.codeply.com/go/ecE6qHNBOC  --}}
     <link href="<?php print url('/'); ?>/public/css/other-pages-style.css" rel="stylesheet">  
