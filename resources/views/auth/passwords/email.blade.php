@@ -2,55 +2,89 @@
 
 <!-- Main Content -->
 @section('content')
-<div class="container">
-    <div class="row">
-        <br><br><br><br>    
-        <div class="col-md-8">
-            <div class="panel panel-default">
-               <div class="panel-heading"><h3>Reset Password</h3></div>
-                <div class="panel-body">
-                    @if (session('status'))
-                        <div class="alert alert-success">
-                            {{ session('status') }}
-                        </div>
-                    @endif
 
-                    <form class="form-horizontal" role="form" method="POST" action="{{ url('/password/email') }}">
-                        {{ csrf_field() }}
+    <style>
+        .footer, .navbar-default {
+            display:none !important;
+        }
+        .other-text-login {
+            text-align: center;
+        }
 
-                        <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
-                            <label for="email" class="col-md-4 control-label">E-Mail Address</label>
+        .register-logo {
+            text-align: right;
+        }
+        .container-full {
+            padding:0px;
+            width:100%;
+        }
+        body {
+            overflow-x: hidden;
+        }
 
-                            <div class="col-md-6">
-                                <input id="email" type="email" class="form-control" name="email" value="{{ old('email') }}" required>
-
-                                @if ($errors->has('email'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('email') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <div class="col-md-6 col-md-offset-4">
-                                <button type="submit" class="btn btn-primary">
-                                    Send Password Reset Link
-                                </button>
-                            </div>
-                        </div>
-                    </form>
+        .col-md-4, .col-md-8 {
+            /*border:1px solid red;*/
+        }
+        .forgot-logo, .title {
+            text-align: center;
+        }
+    </style>
+        <div class="row">
+            <div class="col-md-4">
+            </div>
+            <div class="col-md-4">
+                <br><br>
+                <div class="forgot-logo">
+                    <img src="{{url('/public/img/logo/re design combin-4 color.png')}}" />
                 </div>
+
+                <h3 class="title">Reset Password</h3>
+
+                <br>
+                <div>
+                    Fear not. We’ll email you instructions to reset your password.  If you don’t have access to your email anymore, you can try account recovery.
+                </div>
+                <br>
+                @if (session('status'))
+                    <div class="alert alert-success">
+                        {{ session('status') }}
+                    </div>
+                @endif
+                <form class="form-horizontal" role="form" method="POST" action="{{ url('/password/email') }}">
+                    {{ csrf_field() }}
+
+                    <br>
+                    <div class="{{ $errors->has('email') ? ' has-error' : '' }}">
+                        <div > <label class="label label-default" >E-Mail Address</label> </div>
+                        <div >
+                            <input id="email" type="email" class="form-control" name="email" value="{{ old('email') }}" required>
+
+                            @if ($errors->has('email'))
+                                <span class="help-block">
+                                    <strong>{{ $errors->first('email') }}</strong>
+                                </span>
+                            @endif
+                        </div>
+                    </div>
+                    <br>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <button type="submit" class="btn btn-primary">
+                                Send Password Reset Link
+                            </button>
+                        </div>
+                        <div class="col-md-6"><a href="{{url('/login')}}">Return to login</a></div>
+                    </div>
+                </form>
+
+
+                @include("pages/include/footer/simple-footer")
+
+            </div>
+            <div class="col-md-4">
             </div>
         </div>
- 
-        <div class="col-md-4 " >  
-            <div class="panel panel-default">   
-                    <div class="panel-body">
-                        <p>  Welcome back, to our send right application. Thank you for using our services. If need support please contact us atsupport@sendright.net</p>
-                    </div> 
-            </div>
-        </div>
-    </div>
-</div>
+
+
+
 @endsection

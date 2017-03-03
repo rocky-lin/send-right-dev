@@ -47,7 +47,7 @@
      <input type="hidden" value="{{url('/')}}" id="url_home" />   
     <div id="app" >
         <nav class="navbar-default navbar-static-top">
-            <div class="container">
+            <div class="container-full">
                 <div class="navbar-header"> 
                     <!-- Collapsed Hamburger -->
                     <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#app-navbar-collapse">
@@ -139,7 +139,7 @@
                 </div>
             </div>
         </nav>  
-        <div class='container'>
+        <div class='container-full'>
             @include('pages/popup/popup')
             {{-- @include('pages/include/subscription/subscription-status-message') --}}
             @yield('content')  
@@ -149,7 +149,7 @@
 </div> 
 
      <div style="clear:both"></div>
-     <footer class="footer" style="display:block !important; float:left;">
+     <footer class="footer" style=" float:left;">
          <div class="container">
              <p class="text-muted">
              <p>©2016-2017 All Rights Reserved. Sendright is a registered trademark of The Rocket Science Group. <a href="/legal/privacy">Privacy</a> and <a href="/legal">Terms</a></p>
@@ -203,6 +203,56 @@
         <script src="<?php print url('/'); ?>/public/js/custom_angular_js.js"></script>
         <script src="<?php print url('/'); ?>/public/js/custom_js.js"></script>  
         <script src="<?php print url('/'); ?>/public/js/custom_jquery_ui.js"></script>  
-        <script src="<?php print url('/'); ?>/public/js/refine_jquery.js"></script>  
+        <script src="<?php print url('/'); ?>/public/js/refine_jquery.js"></script>
+
+
+    {{--Data tables--}}
+    <script src="//code.jquery.com/jquery-1.12.4.js" ></script>
+    <script src="https://cdn.datatables.net/1.10.13/js/jquery.dataTables.min.js" ></script>
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.13/css/jquery.dataTables.min.css" />
+
+    <script>
+        $.noConflict();
+        jQuery( document ).ready(function( $ ) {
+
+
+
+            // Setup - add a text input to each footer cell
+            $('#contacts thead th').each( function () {
+                var title = $(this).text();
+                $(this).html( '<input type="text" placeholder="Search '+title+'" />' );
+            } );
+            //            $('#contacts tfoot th').each( function () {
+            //                var title = $(this).text();
+            //                $(this).html( '<input type="text" placeholder="Search '+title+'" />' );
+            //            } );
+            // DataTable
+            var table = $('#contacts').DataTable();
+
+            // Apply the search
+            table.columns().every( function () {
+                var that = this;
+
+                $( 'input', this.footer() ).on( 'keyup change', function () {
+                    if ( that.search() !== this.value ) {
+                        that
+                                .search( this.value )
+                                .draw();
+                    }
+                } );
+            } );
+
+
+        });
+
+        //        $.noConflict();
+        //        jQuery( document ).ready(function( $ ) {
+        //            // Code that uses jQuery's $ can follow here.
+        //
+        //            $('#contacts').DataTable();
+        //        });
+
+    </script>
+
 </body>
 </html>

@@ -1,14 +1,14 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
+
     <div class="row">
         <br><br><br><br>    
         <div class="col-md-8  ">
-            <div class="panel panel-default">
+
                 <div class="panel-heading"><h3>Reset Password</h3></div>
 
-                <div class="panel-body">
+
                     <form class="form-horizontal" role="form" method="POST" action="{{ url('/password/reset') }}">
                         {{ csrf_field() }}
 
@@ -63,19 +63,9 @@
                             </div>
                         </div>
                     </form>
-                </div>
-            </div>
+        </div>
         </div>
 
 
-        <div class="col-md-4 " >  
-            <div class="panel panel-default">  
-                <div class="panel-heading"><h3>Thanks you!</h3></div>
-                    <div class="panel-body">
-                        <p>  Welcome back, to our send right application. Thank you for using our services. If need support please contact us atsupport@sendright.net</p>
-                    </div> 
-            </div>
-        </div>
-    </div>
-</div>
+
 @endsection

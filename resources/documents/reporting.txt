@@ -953,3 +953,30 @@ Fix spgateway agreed payment way wordings and ui and icons
 check how we can set redirect after successfully paid the agreed payment way withoud affecting credit card payment way
 
 
+
+
+
+Hi Rocky,
+
+
+Update for March 2, 2017
+
+Update login ui
+Update reset password ui
+Update register ui
+Make the width to full screen
+
+Add table in cotacts but I am having roadblock to it because i am confused what table will be used I am thinking
+normal datatable or server side data table or just manual but after checking all the possibilities of impact when
+data is getting many i decided to use manual table using bootstrap, so i have to add functions like nex, pagination, sorting and other functions
+of the table
+
+Regarding timeframe, i have to agree and do my best for the timeframe as banker wanted to happen.
+Will do my best to get those functions for this march.
+
+Tomorrow continue with contact show total result and other ui design tomorrow
+
+Thanks,
+
+Best regards,
+Jesus Erwin Suarez

@@ -1,7 +1,19 @@
-html, body
-{
-    height: 100%;
+body {
+	background-color:#ffffff !important;
+	height: 100%;
+	margin-bottom: 60px;
+	margin-top: 20px;
+	width: 100%;
 }
+
+.container-full {
+	width:100%;
+	padding-left:20px;
+	padding-right:20px;
+	margin:0 auto;
+	max-width:2500px
+}
+
 .navbar-default {
 	background-color: #f2f2f2 !important; 
 } 
@@ -9,10 +21,6 @@ html, body
 	/*color: #fdfdfd  !important; */
 }
 
-body {
-	/*background-color:#81D8D0 !important;*/
-	background-color:#ffffff !important;
-}
 
 .panel-body, .panel-heading{
 	background-color: #eeeeee !important; 	
@@ -65,10 +73,12 @@ body {
 }
 
 .container {
-
   flex-flow: column;
   height: 100%;
 }
+
+
+
 .container {
   flex: 1 1 auto;
 }
@@ -101,4 +111,18 @@ p, span, h1,h2,h3,h4,h5,h6,div, button, input, textarea{
 .panel-body-home .btn-group  {
 	float:right;
 	margin-top:   -2px;
+}
+
+.contact-sorting-ul {
+	border-bottom: none;
+}
+
+.contact-menu-setting {
+	background-color: #f2f2f2;
+}
+
+.contact-search {
+	padding:5px !important;
+	height:30px !important;
+	margin-top:5px;
 }
