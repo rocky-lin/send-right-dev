@@ -54,9 +54,16 @@ Route::group(['prefix' => 'user' , 'middleware' => 'auth' ], function() {
 		Route::get('confirm', "Auth\RegisterController@confirmUserRegistration")->name('user.registration.confirm'); 
   	});    
 
-	// contact 
+	// contact
+	//
+
+		Route::get('contact/search/{keyword?}', 'ContactController@search')->name('user.contact.search');
+		Route::get('contact/filter/status/{keyword?}', 'ContactController@filterStatus')->name('user.contact.filter.status');
+		Route::get('contact/filter/list/{list_id?}', 'ContactController@filterList')->name('user.contact.filter.list');
+
+
 		Route::get('contact/{contact}/get', 'ContactController@getById')->name('user.contact.get.by.id');
-	  	Route::get('contact/get/all', 'ContactController@getUserAccountContacts')->name('user.contact.get.all'); 
+	  	Route::get('contact/get/all', 'ContactController@getUserAccountContacts')->name('user.contact.get.all');
 	  	Route::get('contact/import', 'ContactController@import')->name('user.contact.import');
 		Route::post('contact/import/store', 'ContactController@importStore')->name('user.contact.import.store');
 

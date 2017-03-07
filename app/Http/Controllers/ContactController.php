@@ -10,6 +10,8 @@ use App\ListContact;
 use Storage; 
 use Excel;
 use App\Activity;
+use DB;
+use App\List1;
 
 class ContactController extends Controller
 {
@@ -21,8 +23,15 @@ class ContactController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {  
-        return view("pages/contact/contact"); 
+    {
+
+        $lists = List1::where('account_id', User::getUserAccount())->get();
+
+
+
+         return view("pages/contact/contact", compact('lists'));
+//        return view("pages/test/pagination");
+//        return view("pages/test/pagination-1");
     }
 
     public function getUserAccountContacts() { 
@@ -32,6 +41,58 @@ class ContactController extends Controller
             return $sorted->values()->all();
     }
  
+
+
+
+
+    public function filterStatus($status=null)
+    {
+        $contacts = DB::table('contacts')
+            ->where('account_id', User::getUserAccount())
+            ->where('status', $status)
+            ->get();
+
+        return $contacts;
+    }
+    public function filterList($listId)
+    {
+        $contacts = DB::table('list_contacts')
+            ->join('contacts', 'contacts.id', '=', 'list_contacts.contact_id')
+            ->select('contacts.*', 'list_contacts.*')
+            ->where('list_contacts.list_id',  $listId)
+            ->get();
+
+        return $contacts;
+
+        //        $contacts = DB::table('contacts')
+        //            ->where('account_id', User::getUserAccount())
+        //            ->where('status', $status)
+        //            ->get();
+        //
+        //        return $contacts;
+    }
+
+    public function search($keyword=null)
+    {
+
+        if($keyword == 'all') {
+            $contacts = DB::table('contacts')
+                ->where('account_id', User::getUserAccount())
+                ->get();
+        } else {
+            $contacts = DB::table('contacts')
+                ->where('account_id', User::getUserAccount())
+                ->where('first_name', 'like', '%' . $keyword . '%')
+                ->orWhere('last_name', 'like', '%' . $keyword . '%')
+                ->orWhere('email', 'like', '%' . $keyword . '%')
+                ->get();
+        }
+
+        return $contacts;
+//        print " keyword " . $keyword;
+
+//        dd($contacts) ;
+    }
 
     /**
      * Show the form for creating a new resource.

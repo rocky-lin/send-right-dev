@@ -129,6 +129,14 @@ p, span, h1,h2,h3,h4,h5,h6,div, button, input, textarea{
 	margin-top:5px;
 }
 
-. contact-table{
+.contact-table{
 	text-align: center;
+}
+
+.hide { 
+	display:none !important;
+  }
+
+.form-control {
+	padding:15px !important;
 }

@@ -980,3 +980,40 @@ Thanks,
 
 Best regards,
 Jesus Erwin Suarez
+
+
+
+
+
+Hi Rocky
+
+Update for march 6, 2017
+
+make filter status working in contact page
+make filter by list working in contact page
+Add pagination in contact page and functions
+Allow search working
+
+Currently having roadblocks in pagination because its showing some not correct issue when sorting
+
+Tomorrow Todo continue contact ui and functions
+
+Thanks,
+
+Best regards,
+Jesus Erwin Suarez
+
+
+
+
+
+
+
+
+
+
+
+
+
+I removed toogle because we have issue with that for now
+I didn't code tag because currently we dont have tagging

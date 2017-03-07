@@ -1,4 +1,4 @@
-obj = new Object(); 
+obj = new Object();
 
 if (location.hostname === "localhost" || location.hostname === "127.0.0.1") { 
     obj.siteUrl = 'http://localhost/rocky/send-right-dev'; 
@@ -6,10 +6,9 @@ if (location.hostname === "localhost" || location.hostname === "127.0.0.1") {
     obj.siteUrl = 'http://sendright.net'; 
 }
 
-var app = angular.module('myApp', ['ngAnimate', 'ngSanitize', 'mgcrea.ngStrap']); 
- 
-app.controller('MainCtrl', function($scope) {
+var app = angular.module('myApp', ['ngAnimate', 'ngSanitize', 'mgcrea.ngStrap', 'ui.bootstrap']);
 
+app.controller('MainCtrl', function($scope) {
      $scope.init = function(value) {
         $scope.testInput= value;    
     }
@@ -154,18 +153,27 @@ app.controller( 'myCampaignViewCtr', ['$scope', '$filter', '$http', '$window', f
 
 
 //contact view
-app.controller('myContactsViewCtr', ['$scope', '$filter', '$http', '$window', function ($scope, $filter, $http, $window) { 
+app.controller('myContactsViewCtr', [ '$scope', '$filter', '$http', '$window', function ($scope, $filter, $http, $window) {
+
     console.log("Contact views loaded angulajs!..");
-    $scope.currentPage = 0; 
-    $scope.pageSize = '5'; 
+
+    $scope.currentPage = 1;
+    $scope.pageSize = '20';
     $scope.data = [];
     $scope.q = ''; 
     $scope.deleteContact = []; 
-     $scope.totalContact = 0;
+    $scope.totalContact = 0;
+    $scope.numPerPage = 10;
+    $scope.maxSize = 10;
+    $scope.results = [];
+
+    //$scope.contact_search_model = '';
+
     $scope.editContact = function(contact) {  
 
         $window.location.href = obj.siteUrl + '/user/contact/'+contact.id+'/edit'; 
-    } 
+    };
+
   	$scope.deleteContact = function(contact) { 
     	if(confirm('are you sure you want to delete this contact?' + contact.id)){ 
             $http({
@@ -182,34 +190,181 @@ app.controller('myContactsViewCtr', ['$scope', '$filter', '$http', '$window', fu
                 $scope.deleteContact[contact.id] = true; 
             }, function(rejection) {
                 alert("Ohps! something wrong, please contact send right support. Thank you!");
-            }); 
-            
+            });
         } else {
             console.log("cancel delete " + contact.id);
         } 
-  	}   
-    $scope.getData = function () { 
+  	};
 
-      return $filter('filter')($scope.data, $scope.q) 
-    } 
+    $scope.getData = function () {
+        return $filter('filter')($scope.data, $scope.search);
+    };
+
     $scope.numberOfPages=function() {
-        
-        return Math.ceil($scope.getData().length/$scope.pageSize);                
-    }   
+        return Math.ceil($scope.getData().length/$scope.pageSize);
+    };
 
-    // When the home page contact loaded
-	$http({
-	  method: 'GET',
-	  url:  obj.siteUrl + '/user/contact/get/all'
-	}).then(function successCallback(response) {   
-	    for (var i = 0; i<response.data.length; i++) {
-	    	$scope.data.push(response.data[i]);
-            $scope.totalContact++; 
-	    } 
-    }, function errorCallback(response) { 
-        alert("something wrong! please contact send right support. Thank you!"); 
-    });    
-}]);  
+    $scope.add_entry_for_total_page_size = function(){
+        // push data from db
+        for (var i = 0; i < $scope.pageSize; i++) {
+            $scope.data.push(['']);
+        }
+    };
+
+    $scope.dataLoaded = function() {
+        // When the home page contact loaded
+
+
+        // load data
+        $http({
+            method: 'GET',
+            url: obj.siteUrl + '/user/contact/get/all'
+        }).then(function successCallback(response) {
+            $scope.results = response;
+
+            $scope.load_content_data(response, true);
+            //for (var i = 0; i < response.data.length; i++) {
+            //    $scope.data.push(response.data[i]);
+            //    $scope.totalContact++;
+            //}
+        }, function errorCallback(response) {
+            alert("something wrong! please contact send right support. Thank you!");
+        });
+    };
+
+    $scope.dataLoaded();
+
+    $scope.numPages = function () {
+        return Math.ceil($scope.getData().length / $scope.pageSize);
+    };
+
+    $scope.selectPage = function() {
+        alert("alert");
+    };
+    // search contact
+    $scope.contact_search = function (event) {
+        console.log( " event keycode = " + event.keyCode);  //this will show the ASCII value of the key pressed
+        if(event.keyCode === 13 || $scope.contact_search_model == '') {
+            console.log("start searching now " + $scope.contact_search_model);
+
+            // compose url
+
+            var keyword = $scope.contact_search_model;
+
+            console.log(" keyword "  + keyword);
+
+            if(keyword === '') {
+                console.log("empty ");
+                keyword = 'all';
+            } else {
+                console.log(" not empty ");
+            }
+
+            var url = obj.siteUrl + '/user/contact/search/' + keyword;
+
+            $scope.contact_query_ajax(url);
+
+
+        }
+    };
+
+    $scope.filterByStatus = function(filterName) {
+       var url = obj.siteUrl + '/user/contact/filter/status/' + filterName;
+        console.log(" url " + url);
+
+        $scope.contact_query_ajax(url);
+
+    };
+
+    $scope.filterByList = function(filterName) {
+        var url = obj.siteUrl + '/user/contact/filter/list/' + filterName;
+        //console.log(" url " + url);
+        $scope.contact_query_ajax(url);
+
+    };
+
+    $scope.filterByTag = function($filterName) {
+        var url = obj.siteUrl + '/user/contact/filter/tag/' + keyword;
+        console.log(" url " + url);
+    };
+
+    $scope.filterByOrder = function($filterName) {
+        var url = obj.siteUrl + '/user/contact/filter/order/' + keyword;
+        console.log(" url " + url);
+    };
+
+
+    $scope.makeTodos = function() {
+
+        $scope.data = [];
+
+        for (i=1;i<=Math.floor((Math.random() * 100) + 1);i++) {
+            $scope.data.push({
+                "email": i + "mrjesuserwins@gmail.com",
+                "type": "mrjesuserwins@gmail.com",
+                "status": "mrjesuserwins@gmail.com",
+                "last_name": "mrjesuserwins@gmail.com",
+                "first_name": "mrjesuserwins@gmail.com"
+            });
+        }
+    };
+
+    // query contact from database and add to display
+    $scope.contact_query_ajax = function(url) {
+
+        $http({
+            method: 'GET',
+            url: url
+        }).then(function successCallback(response) {
+
+            $scope.results = response;
+            $scope.totalContact = 0;
+            $scope.data = [];
+            $scope.currentPage = 1;
+
+            $scope.load_content_data(response, true);
+
+            //// space for
+            //$scope.add_entry_for_total_page_size();
+            //
+            //// push data from db
+            //for (var i = 0; i < response.data.length; i++) {
+            //    $scope.data.push(response.data[i]);
+            //    $scope.totalContact++;
+            //}
+            //console.log(response.data);
+            //$scope.makeTodos();
+
+        }, function errorCallback(response) {
+            alert("something wrong! please contact send right support. Thank you!");
+        });
+    };
+
+
+    $scope.$watch('pageSize', function () {
+
+        console.log("test page size changed " + $scope.pageSize);
+        $scope.load_content_data($scope.results, false);
+    });
+
+
+    $scope.toogleColumn = function() {
+        $scope.data = $scope.data.reverse();
+    };
+
+
+    $scope.load_content_data = function (response, addEmpyRow) {
+        if(addEmpyRow == true) {
+            $scope.add_entry_for_total_page_size();
+        }
+        // push data from db
+        for (var i = 0; i < response.data.length; i++) {
+            $scope.data.push(response.data[i]);
+            $scope.totalContact++;
+        }
+    }
+
+}]);
 
 // list   
 app.controller('myListsViewCtr', ['$scope', '$filter', '$http', '$window', function ($scope, $filter, $http, $window) { 

@@ -1,30 +1,77 @@
        <div ng-controller="myContactsViewCtr">    
-                    <h3>Your total contact  @{{ totalContact }} </h3>
-                        <div class="row">   
-                            <div class="col-sm-6">
-                                <label for="seach" > Search Contacts </label> 
-                                <input ng-model="q" id="search" class="form-control" >
-                            </div>
-                            <div class="col-sm-6">
-                                <label for="limit show"> Show Rotal Rows </label> 
-                                <select ng-model="pageSize" id="pageSize" class="form-control"  > 
-                                    <option value="5">5</option>
-                                    <option value="10">10</option>  
-                                    @for($i=2; $i<10; $i++)  
-                                        <option value="{{$i*10}}">{{$i*10}}</option>    
-                                    @endfor
-                                 </select>  
-                            <div/> 
-                        </div>
-                    </div>
+                    <h4>All Contacts (@{{ totalContact }}) </h4>
+
+
+               <div class="row contact-menu-setting">
+                   <div class="col-md-2  ">
+                       <ul class="nav nav-tabs contact-sorting-ul" style="border-bottom:none; visibility: visible; ">
+                           <li role="presentation" class="dropdown">
+                               <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
+                                  aria-haspopup="true" aria-expanded="false" ng-click="toogleColumn()"> Toogle Column <span class="caret"></span>
+                               </a>
+
+                           </li>
+                       </ul>
+                   </div>
+                   <div class="col-md-2">
+                   </div>
+                   <div class="col-md-2">
+                       <ul class="nav nav-tabs contact-sorting-ul " style="border-bottom:none; visibility: hidden;">
+                           <li role="presentation" class="dropdown ">
+                               <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
+                                  aria-haspopup="true" aria-expanded="false">Filter By Tag<span class="caret"></span>
+                               </a>
+                               <ul class="dropdown-menu">
+                                   <li><a href="#">Tag 1</a></li>
+                                   <li><a href="#">Tag 2</a></li>
+                                   <li><a href="#">Tag 3</a></li>
+                               </ul>
+                           </li>
+                       </ul>
+                   </div>
+                   <div class="col-md-2">
+                       <ul class="nav nav-tabs contact-sorting-ul" style="border-bottom:none;">
+                           <li role="presentation" class="dropdown">
+                               <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
+                                  aria-haspopup="true" aria-expanded="false">Filter By List<span class="caret"></span>
+                               </a>
+                               <ul class="dropdown-menu">
+                                   @foreach($lists as $list)
+                                    <li><a herf="#" ng-click="filterByList({{$list->id}})">{{$list->name}} ({{ App\List1::getTotalContactsInSpecificListById($list->id)}}) </a></li>
+                                   @endforeach
+                               </ul>
+                           </li>
+                       </ul>
+                   </div>
+                   <div class="col-md-2">
+                       <ul class="nav nav-tabs contact-sorting-ul" style="border-bottom:none;">
+                           <li role="presentation" class="dropdown">
+                               <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
+                                  aria-haspopup="true" aria-expanded="false">Filter By Status<span
+                                           class="caret"></span> </a>
+                               <ul class="dropdown-menu">
+                                   <li><a href="#" ng-click="filterByStatus('Active')">Active ({{App\Contact::countByStatus('Active')}})</a></li>
+                                   <li><a href="#" ng-click="filterByStatus('Unconfirmed')" >Unconfirmed ({{App\Contact::countByStatus('Unconfirmed')}})</a></li>
+                                   <li><a href="#" ng-click="filterByStatus('Unsubscribed')" >Unsubscribed ({{App\Contact::countByStatus('Unsubscribed')}})</a></li>
+                                   <li><a href="#" ng-click="filterByStatus('Bounced')" >Bounced ({{App\Contact::countByStatus('Bounced')}})</a></li>
+                               </ul>
+                           </li>
+                       </ul>
+                   </div>
+                   <div class="col-md-2">
+                       <div class="input-group">
+                           <input  type="text" ng-keyup="contact_search($event)"  ng-model="contact_search_model" id="search" class="form-control  contact-search" placeholder="Search for..." >
+                       </div><!-- /input-group -->
+                   </div>
+               </div>
                     <div class="row" style="margin-left:0px; margin-right:0px"> 
                         <div  class="col-sm-12">
                             <table class="table table-hover">
                                 <thead>
                                     <tr>
                                         <th>
-                                        <label>First Name </label>
-                                          <a href="#" title="First Name" data-toggle="popover" data-trigger="hover" data-content="First name of your contact.">(?)</a>  
+                                        <label>Full Name </label>
+                                           <a href="#" title="First Name" data-toggle="popover" data-trigger="hover" data-content="First name of your contact.">(?)</a>
                                         </th>
                                         <th> 
                                             <label>Email </label>
@@ -48,8 +95,10 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr data-ng-hide="deleteContact[contact.id]"  ng-repeat="contact in data | filter:q | startFrom:currentPage*pageSize | limitTo:pageSize | orderBy : email" >
-                                        <td>@{{contact.first_name}} @{{contact.last_name}}</td>
+                                    <tr data-ng-hide="deleteContact[contact.id]"  ng-repeat="contact in data | filter:search | startFrom:currentPage*pageSize | limitTo:pageSize | orderBy : email" >
+
+                                        <td><input type="checkbox" name="name" /> &nbsp;&nbsp; @{{contact.first_name}} @{{contact.last_name}}</td>
+
                                         <td>@{{contact.email}}</td>
                                         <td>@{{contact.type}} </td> 
                                         <td>@{{contact.status}} </td>  
@@ -61,22 +110,34 @@
                                         </td>
                                     </tr> 
                                 </tbody>
-                            </table>  
-                            <button class="btn btn-info" ng-disabled="currentPage == 0" ng-click="currentPage=currentPage-1">
-                                Previous
-                            </button>
-                            @{{currentPage+1}}/@{{numberOfPages()}}
-                            <button class="btn btn-info" ng-disabled="currentPage >= getData().length/pageSize - 1" ng-click="currentPage=currentPage+1">
-                                Next
-                            </button>
+                            </table>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12" style="text-align:center">
+
+                                <div data-pagination="" data-num-pages="numPages()-1    "
+
+                                     data-current-page="currentPage" data-max-size="maxSize"
+                                     data-min-size="1"
+                                     data-boundary-links="true" style="cursor: pointer"></div>
+
+                                    <select ng-model="pageSize" id="pageSize" class="form-control" style="width: 5%;display: inline;margin-top: -23px;"  >
+                                    <option value="5">5</option>
+                                    <option value="10">10</option>
+                                        @for($i=2; $i<10; $i++)
+                                            <option value="{{$i*10}}">{{$i*10}}</option>
+                                        @endfor
+                                    </select>
+
+                            </div>
                         </div>
                     </div>
-                </div>    
+                </div>
 
-				<hr>     
-                <a href="{{ route('contact.create')}}" title="">
-                    <button type="button" class="btn btn-primary"> Add New Contact</button>
-                </a> 
-                <a href="{{ route('user.contact.import')}}" title="">
-                    <button type="button" class="btn btn-primary"> Import Contacts </button>
-                </a> 
+				{{--<hr>     --}}
+                {{--<a href="{{ route('contact.create')}}" title="">--}}
+                    {{--<button type="button" class="btn btn-primary"> Add New Contact</button>--}}
+                {{--</a>--}}
+                {{--<a href="{{ route('user.contact.import')}}" title="">--}}
+                    {{--<button type="button" class="btn btn-primary"> Import Contacts </button>--}}
+                {{--</a>--}}

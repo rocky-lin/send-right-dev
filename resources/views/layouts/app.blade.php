@@ -31,12 +31,24 @@
     {{-- https://material.io/icons/ --}}
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
       rel="stylesheet">
-    {{-- Theme Style  --}}  
+
+
+    {{--angular pagination--}}
+    <link data-require="bootstrap-css@2.3.2" data-semver="2.3.2" rel="stylesheet" href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.min.css" />
+    {{--<script data-require="angular.js@1.1.5" data-semver="1.1.5" src="http://code.angularjs.org/1.1.5/angular.min.js"></script>--}}
+    <script data-require="angular-ui-bootstrap@0.3.0" data-semver="0.3.0" src="http://angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.3.0.min.js"></script>
+
+
+    {{-- Theme Style  --}}
  
     <script>
       angular.module("myApp").constant("CSRF_TOKEN", '{{ csrf_token() }}');
     </script>
- 
+
+
+
+
+
     <!-- Scripts -->
     <script>
         window.Laravel = <?php echo json_encode([
@@ -89,7 +101,7 @@
                         </ul> 
                     @endif  
                 </div> 
-                <div class="collapse navbar-collapse" id="app-navbar-collapse">
+                <div class="  navbar-collapse" id="app-navbar-collapse">
                     <!-- Left Side Of Navbar -->
                     <ul class="nav navbar-nav">
                         &nbsp;
@@ -188,12 +200,15 @@
     <script src="//cdn.jsdelivr.net/angularjs/1.5.5/angular-sanitize.min.js" data-semver="1.5.5"></script>
     <script src="//mgcrea.github.io/angular-strap/dist/angular-strap.js" data-semver="v2.3.8"></script>
     <script src="//mgcrea.github.io/angular-strap/dist/angular-strap.tpl.js" data-semver="v2.3.8"></script>
-    <script src="//mgcrea.github.io/angular-strap/docs/angular-strap.docs.tpl.js" data-semver="v2.3.8"></script> 
+    <script src="//mgcrea.github.io/angular-strap/docs/angular-strap.docs.tpl.js" data-semver="v2.3.8"></script>
 
-    {{--  
-        Date picker 
-        Current used: campaign-settings.blade.php
-    --}}  
+
+     {{--
+         Date picker
+         Current used: campaign-settings.blade.php
+     --}}
+
+
 
  
     <link rel="stylesheet" href="<?php print url('/'); ?>/public/css/src/2.2.3-dist-flatpickr.min.css" /> 

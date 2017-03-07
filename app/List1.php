@@ -139,4 +139,14 @@ class  List1 extends Model
     {  
         return self::getListNamesByListIds($_SESSION['campaign']['listIds']);
     }
+
+    public static function getTotalContactsInSpecificListById($list_id)
+    {
+        $response = DB::table('list_contacts')->where('list_id', $list_id)->count('id');
+
+        return $response;
+    }
+
 }
+
+

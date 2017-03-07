@@ -42,5 +42,10 @@ class Contact extends Model
     public static function getAllContacts($limit=100) 
     {
         return self::where('account_id', User::getUserAccount())->limit($limit)->orderBy('id', 'desc')->get();
-    }    
+    }
+
+    public static function countByStatus($status)
+    {
+        return self::where('status', $status)->count('id');
+    }
 }
