@@ -59,7 +59,7 @@
     <li ng-repeat="todo in todos">@{{todo.text}}</li>
 </ul>
 
-<div data-pagination="" data-num-pages="numPages()"
+<div data-pagination="1" data-num-pages="numPages()"
      data-current-page="currentPage" data-max-size="maxSize"
      data-boundary-links="true"></div>
 </body>

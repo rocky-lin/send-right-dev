@@ -1015,5 +1015,30 @@ Jesus Erwin Suarez
 
 
 
+
+
+
 I removed toogle because we have issue with that for now
 I didn't code tag because currently we dont have tagging
+
+
+
+Hi Rocky
+
+Update for March 7, 2017
+
+Try to fix pagination but still got an issue so i put it to on hold
+Set import link to redirect to import page
+Set add manaul link to redirect add new contact
+Add toggle functions descending or ascending order
+Work with list view ui
+Add pagination with list view
+Add search field with list view
+Add button "add new list" redirect to adding new list
+
+Todo tomorrow continue with list page ui and functions and other tasks
+
+Thanks
+
+Best regards,
+Jesus Erwin Suarez

@@ -22,12 +22,13 @@ class ListController extends Controller
      */
     public function index()
     { 
-       return view('pages.list.list', ['listContacts']); 
-    }  
+       return view('pages/list/list', ['listContacts']);
+//       return view('pages/test/pagination');
+    }
    
-   public function getLists($id) { 
+    public function getLists($id) {
         return; 
-   }
+    }
 
     public function getListsAndDetails() {    
         $lists = List1::getLists()->toArray();   

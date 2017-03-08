@@ -354,6 +354,8 @@ app.controller('myContactsViewCtr', [ '$scope', '$filter', '$http', '$window', f
 
 
     $scope.load_content_data = function (response, addEmpyRow) {
+
+
         if(addEmpyRow == true) {
             $scope.add_entry_for_total_page_size();
         }
@@ -366,9 +368,42 @@ app.controller('myContactsViewCtr', [ '$scope', '$filter', '$http', '$window', f
 
 }]);
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 // list   
-app.controller('myListsViewCtr', ['$scope', '$filter', '$http', '$window', function ($scope, $filter, $http, $window) { 
-  
+app.controller('myListsViewCtr', ['$scope', '$filter', '$http', '$window', function ($scope, $filter, $http, $window) {
     console.log("lists  views loaded angulajs!..");
     $scope.currentPage = 0; 
     $scope.pageSize = '5'; 
@@ -409,23 +444,66 @@ app.controller('myListsViewCtr', ['$scope', '$filter', '$http', '$window', funct
     } 
     $scope.numberOfPages=function() {
 
-        return Math.ceil($scope.getData().length/$scope.pageSize);                
-    }   
+        return Math.ceil($scope.getData().length/$scope.pageSize);
+    }
 
     // When the home page list loaded
     $http({
       method: 'GET',
       url:  obj.siteUrl + '/user/list/get/all'
-    }).then(function successCallback(response) {   
-     
+    }).then(function successCallback(response) {
+        $scope.results = response;
         for (var i = 0; i<response.data.length; i++) {
             $scope.data.push(response.data[i]);
             $scope.totalList++; 
         }   
     }, function errorCallback(response) { 
         alert("something wrong! please contact send right support. Thank you!"); 
-    });    
-}]);  
+    });
+
+
+
+    // pagination
+    $scope.filteredTodos = []
+    ,$scope.currentPage = 1
+    ,$scope.numPerPage = 10
+    ,$scope.maxSize = 10;
+
+    $scope.numPages = function () {
+        return Math.ceil($scope.data.length / $scope.pageSize)-1;
+    };
+
+    var begin = 1;
+
+    console.log( " scope number pages " +  Math.ceil($scope.data.length / $scope.numPerPage));
+
+    // detect where the page selected
+    $scope.$watch('currentPage + numPerPage', function() {
+        var begin = (($scope.currentPage - 1) * $scope.numPerPage)
+            , end = begin + $scope.numPerPage;
+
+        $scope.filteredTodos = $scope.data.slice(begin, end);
+    });
+
+    console.log($scope.data);
+
+    $scope.$watch('pageSize', function () {
+        $scope.numPages();
+        $scope.getData() ;
+    });
+
+}]);
+
+
+
+
+
+
+
+
+
+
+
  
  // list create, edit and suggested contacts
 app.controller('myListCreateViewCtr', ['$scope', '$filter', '$http', '$window', function ($scope, $filter, $http, $window) {   
@@ -475,9 +553,9 @@ app.controller('myListCreateViewCtr', ['$scope', '$filter', '$http', '$window', 
         } 
 
         $scope.numberOfPages = function() {
-            
-            return Math.ceil($scope.getData().length/$scope.pageSize);                
-        }    
+
+            return Math.ceil($scope.getData().length/$scope.pageSize);
+        }
      
         /**
          * [selectContact when user select a contact then it should be stored to an array, this is usfull when hitting next and prev]
