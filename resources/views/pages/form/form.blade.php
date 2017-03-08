@@ -1,15 +1,12 @@
-@extends('layouts.app') 
+@extends('layouts.app')
 @section('content')
-<div class="container"> 
     <div class="row">
-        <div class="col-sm-12"> 
-            <div class="panel panel-default"> 
-
-                <div class="panel-heading">Dashboard</div>   
-                <div class="panel-body">  
-                    @include('pages/include/form/form-view') 
-            </div>
+        <!-- left content as sidebar -->
+        <div class="col-sm-2 ">
+            @include("pages/include/form/form-sidebar")
+        </div>
+        <div class="col-sm-10 right-side-container-opposite"  >
+            @include('pages/include/form/form-view')
         </div>
     </div>
-</div>
 @endsection 

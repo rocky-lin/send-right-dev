@@ -165,8 +165,12 @@ class FormController extends Controller
             $autoRespondersArr[$responder->id] = $responder->title; 
         }
          // $autoResponders = array_collapse($autoResponders); 
-         // dd($autoResponders); 
-        return view('pages/form/form-connect-list', compact('formLists', 'autoRespondersArr')); 
+         // dd($autoResponders);
+
+        // get user lists
+        $lists = List1::where('account_id', User::getUserAccount())->get();
+
+        return view('pages/form/form-connect-list', compact('formLists', 'autoRespondersArr', 'lists'));
     }
     public function postConnectList(Request $request)
     {
@@ -176,7 +180,7 @@ class FormController extends Controller
     {    
         //        session_start();
  
-        if(!List1::where('name', $request->get('selectedList') )->count()) { 
+        if(!List1::where('name', $request->get('selectedList') )->where('account_id', User::getUserAccount())->count()) {
             return redirect()->back()->with('status', 'Please select your correct list correctly.')->withInput();
         } else if (empty($request->get('formName'))) {
             return redirect()->back()->with('status', 'Form name is required.')->withInput();

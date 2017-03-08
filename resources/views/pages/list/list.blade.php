@@ -4,6 +4,7 @@
         <div class="row">
             <div class="col-md-12 col-md-12-padding">
                 <div ng-controller="myListsViewCtr">
+                        <input type="hidden" ng-model="checkbox_checked" />
                         <br>
                         <div class="row">
                             <div class="col-md-6">
@@ -15,7 +16,7 @@
                                 </a>
                             </div>
                         </div>
-                        <br><br><br>
+                        <br>
                         <div class="row">
                             <div class="col-md-6">
                             </div>
@@ -46,21 +47,14 @@
                                 </div>
                             </div>
                         </div>
-
-
-
                         {{--<h3>Your total list  @{{ totalList }} </h3>--}}
-
                         <div class="row ">
-
                             <div class="col-sm-6">
                                 {{--<label for="seach" > Search Lists </label>--}}
                                 {{--<input ng-model="q" id="search" class="form-control" >--}}
                             </div>
                             <div class="col-sm-6">
-
                             <div/>
-
                         </div>
                     </div>
                     <div class="row" style="margin-left:0px; margin-right:0px">
@@ -95,44 +89,45 @@
                                         <td>@{{list.name}}  </td>
                                         <td>@{{list.contact_total}}</td>
                                         <td>
-                                            <span class="glyphicon glyphicon-trash" aria-hidden="true" data-ng-click="deleteList(list)"></span>
+                                            <i class="material-icons" data-ng-click="deleteList(list)"  >delete_forever</i>
+                                            {{--<span class="glyphicon glyphicon-trash" aria-hidden="true" data-ng-click="deleteList(list)" ></span>--}}
                                         </td>
                                         <td>
-                                             <span class="glyphicon glyphicon-pencil" aria-hidden="true" data-ng-click="editList(list)"></span>
+                                            <i class="material-icons" data-ng-click="editList(list)" >mode_edit</i>
+                                             {{--<span class="glyphicon glyphicon-pencil" aria-hidden="true" data-ng-click="editList(list)"></span>--}}
                                         </td>
                                     </tr>
                                 </tbody>
                             </table>
 
 
-                            <div class="row">
-                                <div class="col-md-12 pull-center">
-
-                                    <div data-pagination="" data-num-pages="numPages()" data-current-page="currentPage" data-max-size="maxSize" data-boundary-links="true"></div>
-
-                                    <div style="display: inline">
-                                        <select ng-model="pageSize" id="pageSize"  style="margin-top: -24px;width: 4%;" >
-                                            <option value="5">5</option>
-                                            <option value="10">10</option>
-                                            @for($i=2; $i<10; $i++)  <option value="{{$i*10}}">{{$i*10}}</option>    @endfor
-                                        </select>
-                                    </div>
-                                    <hr>
-
-                                    <button class="btn btn-info" ng-disabled="currentPage == 0" ng-click="currentPage=currentPage-1">
-                                        Previous
-                                    </button>
-
-                                    @{{currentPage+1}} / @{{numberOfPages()}}
-                                    <button class="btn btn-info" ng-disabled="currentPage >= getData().length/pageSize - 1" ng-click="currentPage=currentPage+1">
-                                        Next
-                                    </button>
-
-                                </div>
-                            </div>
+                            @include("pages/include/pagination/pagination")
 
 
-                            <br><br><br>
+                            {{----}}
+                            {{--<div class="row">--}}
+                                {{--<div class="col-md-12 pull-center">--}}
+                                    {{--<div data-pagination="" data-num-pages="numPages()" data-current-page="currentPage" data-max-size="maxSize" data-boundary-links="true"></div>--}}
+                                    {{--<div style="display: inline">--}}
+                                        {{--<select ng-model="pageSize" id="pageSize"  style="margin-top: -24px;width: 4%;" >--}}
+                                            {{--<option value="5">5</option>--}}
+                                            {{--<option value="10">10</option>--}}
+                                            {{--@for($i=2; $i<10; $i++)  <option value="{{$i*10}}">{{$i*10}}</option>    @endfor--}}
+                                        {{--</select>--}}
+                                    {{--</div>--}}
+                                    {{--<hr>--}}
+                                    {{--<button class="btn btn-info" ng-disabled="currentPage == 0" ng-click="currentPage=currentPage-1">--}}
+                                        {{--Previous--}}
+                                    {{--</button>--}}
+                                    {{--@{{currentPage+1}} / @{{numberOfPages()}}--}}
+                                    {{--<button class="btn btn-info" ng-disabled="currentPage >= getData().length/pageSize - 1" ng-click="currentPage=currentPage+1">--}}
+                                        {{--Next--}}
+                                    {{--</button>--}}
+                                {{--</div>--}}
+                            {{--</div>--}}
+                            {{--<br><br><br>--}}
+
+
                         </div>
                     </div>
                 </div>

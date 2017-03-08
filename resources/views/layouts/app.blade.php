@@ -33,8 +33,12 @@
       rel="stylesheet">
 
 
+
+    <link href="<?php print url('/'); ?>/public/css/bootstrap-combined.min.css" rel="stylesheet">
+
+
     {{--angular pagination--}}
-    <link data-require="bootstrap-css@2.3.2" data-semver="2.3.2" rel="stylesheet" href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.min.css" />
+    {{--<link data-require="bootstrap-css@2.3.2" data-semver="2.3.2" rel="stylesheet" href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.min.css" />--}}
     {{--<script data-require="angular.js@1.1.5" data-semver="1.1.5" src="http://code.angularjs.org/1.1.5/angular.min.js"></script>--}}
     <script data-require="angular-ui-bootstrap@0.3.0" data-semver="0.3.0" src="http://angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.3.0.min.js"></script>
 
@@ -56,11 +60,12 @@
         ]); ?>
     </script>
 </head>
-<body data-ng-init="document" > 
-     <input type="hidden" value="{{url('/')}}" id="url_home" />   
+<body data-ng-init="document" >
+     <input type="hidden" value="{{url('/')}}" id="url_home" />
     <div id="app" >
         <nav class="navbar-default navbar-static-top">
             <div class="container-full">
+
                 <div class="navbar-header"> 
                     <!-- Collapsed Hamburger -->
                     <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#app-navbar-collapse">
@@ -151,15 +156,15 @@
                     </ul>
                 </div>
             </div>
-        </nav>  
+        </nav>
+
         <div class='container-full'>
-            @include('pages/popup/popup')
             {{-- @include('pages/include/subscription/subscription-status-message') --}}
-            @yield('content')  
+            @yield('content')
+            @include('pages/popup/popup')
+
         </div>
     </div>
-    </div>
-</div> 
 
      <div style="clear:both"></div>
      <footer class="footer" style=" float:left;">

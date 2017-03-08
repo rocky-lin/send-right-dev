@@ -222,7 +222,7 @@ app.controller('myContactsViewCtr', [ '$scope', '$filter', '$http', '$window', f
         }).then(function successCallback(response) {
             $scope.results = response;
 
-            $scope.load_content_data(response, true);
+            $scope.load_content_data(response, false);
             //for (var i = 0; i < response.data.length; i++) {
             //    $scope.data.push(response.data[i]);
             //    $scope.totalContact++;
@@ -322,7 +322,7 @@ app.controller('myContactsViewCtr', [ '$scope', '$filter', '$http', '$window', f
             $scope.data = [];
             $scope.currentPage = 1;
 
-            $scope.load_content_data(response, true);
+            $scope.load_content_data(response, false);
 
             //// space for
             //$scope.add_entry_for_total_page_size();
@@ -342,7 +342,6 @@ app.controller('myContactsViewCtr', [ '$scope', '$filter', '$http', '$window', f
 
 
     $scope.$watch('pageSize', function () {
-
         console.log("test page size changed " + $scope.pageSize);
         $scope.load_content_data($scope.results, false);
     });
@@ -404,15 +403,23 @@ app.controller('myContactsViewCtr', [ '$scope', '$filter', '$http', '$window', f
 
 // list   
 app.controller('myListsViewCtr', ['$scope', '$filter', '$http', '$window', function ($scope, $filter, $http, $window) {
+
+
+
+
     console.log("lists  views loaded angulajs!..");
-    $scope.currentPage = 0; 
-    $scope.pageSize = '5'; 
+    $scope.currentPage = 0;
+    $scope.pageSize = '20';
     $scope.data = [];
     $scope.q = ''; 
     $scope.deleteList = []; 
     $scope.totalList = 0;
-    $scope.editList = function(list) {  
+    $scope.filteredTodos = [];
+    $scope.numPerPage = 10;
+    $scope.maxSize = 10;
 
+
+    $scope.editList = function(list) {
         $window.location.href = obj.siteUrl + '/user/list/'+list.id+'/edit'; 
     } 
     $scope.deleteList = function(list) { 
@@ -464,10 +471,6 @@ app.controller('myListsViewCtr', ['$scope', '$filter', '$http', '$window', funct
 
 
     // pagination
-    $scope.filteredTodos = []
-    ,$scope.currentPage = 1
-    ,$scope.numPerPage = 10
-    ,$scope.maxSize = 10;
 
     $scope.numPages = function () {
         return Math.ceil($scope.data.length / $scope.pageSize)-1;
@@ -710,11 +713,14 @@ app.controller('myListCtr', ['$scope', '$filter', '$http', '$window', function (
 app.controller('myFormViewCtr', ['$scope', '$filter', '$http', '$window', function ($scope, $filter, $http, $window) { 
     console.log("Form views loaded angulajs!..");
     $scope.currentPage = 0; 
-    $scope.pageSize = '5'; 
+    $scope.pageSize = '20';
     $scope.data = [];
     $scope.q = ''; 
     $scope.deleteForm = []; 
-     $scope.totalForm = 0;
+    $scope.totalForm = 0;
+    $scope.filteredTodos = [];
+    $scope.numPerPage = 10;
+    $scope.maxSize = 10;
 
     $scope.viewFormContacts = function(form) {    
         // alert("redirect to contact views");
@@ -771,7 +777,36 @@ app.controller('myFormViewCtr', ['$scope', '$filter', '$http', '$window', functi
         } 
     }, function errorCallback(response) { 
         alert("something wrong! please form send right support. Thank you!"); 
-    });    
+    });
+
+    // pagination
+
+
+
+    $scope.numPages = function () {
+        return Math.ceil($scope.data.length / $scope.pageSize)-1;
+    };
+
+    var begin = 1;
+
+    console.log( " scope number pages " +  Math.ceil($scope.data.length / $scope.numPerPage));
+
+    // detect where the page selected
+    $scope.$watch('currentPage + numPerPage', function() {
+        var begin = (($scope.currentPage - 1) * $scope.numPerPage)
+            , end = begin + $scope.numPerPage;
+
+        $scope.filteredTodos = $scope.data.slice(begin, end);
+    });
+
+    console.log($scope.data);
+
+    $scope.$watch('pageSize', function () {
+        $scope.numPages();
+        $scope.getData() ;
+    });
+
+
 }]);  
  
 /**

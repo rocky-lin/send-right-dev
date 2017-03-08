@@ -298,5 +298,20 @@ $(document).ready(function(){
 		$("#campaign-template-next-button-text").css('display', 'none');
 
 	});
+
+
+
+	$("#form-side-bar li").mouseover(function(){
+		console.log(" test ");
+		$(this).children('icon').css( "display", "block" );
+		$(this).children('count').css( "display", "none" );
+
+	});
+
+	$("#form-side-bar li").mouseout(function(){
+		$(this).children('icon').css( "display", "none" );
+		$(this).children('count').css( "display", "block" );
+	})
+
 });
 
