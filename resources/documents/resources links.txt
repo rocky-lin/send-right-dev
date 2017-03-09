@@ -55,14 +55,15 @@ https://www.sitepoint.com/managing-cronjobs-with-laravel/
           https://www.pay2go.com/dw_files/info_api/gateway_creditcard_deauthorize_api_V1_0_1.pdf
 
 
-
-
      Jquery convert html to image
      http://codepedia.info/convert-html-to-image-in-jquery-div-or-table-to-jpg-png/
-
-
 
      Free bootstrap template 
 
      https://startbootstrap.com/template-categories/all/ 
      https://bootstrapmade.com/
+
+
+
+     Dropdowns with multiple select
+     http://bootsnipp.com/snippets/featured/button-dropdown-select

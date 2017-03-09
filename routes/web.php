@@ -145,6 +145,7 @@ Route::group(['prefix' => 'user' , 'middleware' => 'auth' ], function() {
  
 			// send test email 
 				Route::get('campaign/create/settings/email/send/test/{id?}/{email?}', 'CampaignController@sendTestCampaignEmail')->name('user.campaign.create.settings.email.send.test');
+				Route::get('campaign/view', 'CampaignController@viewCampaignAll')->name('user.campaign.campaign.view');
 
  		// create step 1
 		Route::resource('campaign', 'CampaignController');  	

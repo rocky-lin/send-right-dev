@@ -25,6 +25,15 @@ use App\CampaignTemplate;
 class CampaignController extends Controller
 {
 
+
+
+    public function viewCampaignAll() {
+
+        $lists = List1::where('account_id', User::getUserAccount())->get();
+        return view('pages/campaign/campaign-all', compact('lists'));
+    }
+
+
     public function index() 
     { 
         return view('pages/campaign/campaign');
@@ -556,8 +565,9 @@ class CampaignController extends Controller
                         $created_ago = Carbon::createFromTimeStamp(strtotime($campaign['created_at']))->diffForHumans();
                         // print "ago " .   $ago;
                         $campaigns[$index]['created_ago'] = $created_ago;
-                        
-                         $campaigns[$index]['next_send'] = Helper::createDateTime(CampaignSchedule::where('campaign_id', $campaigns[$index]['id'])->first()->schedule_send)->format('l jS \\of F Y h:i:s A');
+
+                        // uncomment this when real data is now working
+                        // $campaigns[$index]['next_send'] = Helper::createDateTime(CampaignSchedule::where('campaign_id', $campaigns[$index]['id'])->first()->schedule_send)->format('l jS \\of F Y h:i:s A');
                          $campaigns[$index]['total_contacts'] =  count(Campaign::getAllEmailWillRecieveTheCampaign($campaigns[$index]['id'])['contacts']);
                     } 
                   break;
@@ -574,10 +584,6 @@ class CampaignController extends Controller
 
     public function destroy($id)
     {
-
-
-
-
 
 
         if(Campaign::find($id)->campaignSchedule()->delete()) {

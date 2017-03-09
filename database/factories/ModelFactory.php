@@ -134,6 +134,9 @@ $factory->define(App\Campaign::class, function (Faker\Generator $faker) {
     $typeA = ['direct send', 'schedule send']; 
     $statusA = ['active', 'inactive'];
 
+    $kind = 'newsletter';
+
+
     return [
         'account_id' =>  1,
         'sender_name'=> $faker->firstName,
@@ -142,6 +145,7 @@ $factory->define(App\Campaign::class, function (Faker\Generator $faker) {
         'title'=> $faker->lastName,
         'content'=> $faker->paragraph,
         'type'=> $typeA[rand(0,1)],
+        'kind' => $kind,
         'status'=> $statusA[rand(0,1)]
     ];
 });
@@ -150,7 +154,7 @@ $factory->define(App\CampaignSchedule::class, function (Faker\Generator $faker) 
     return [ 
         'campaign_id' =>1,
         'repeat' =>'One Time',
-        'schedule_send' =>Carbon\Carbon::now(),  
+        'schedule_send' =>Carbon\Carbon::now()
     ];
 }); 
 

@@ -54,11 +54,16 @@ app.controller('myEditContactCtrl',['$scope', '$http', function($scope, $http) {
 app.controller( 'myCampaignViewCtr', ['$scope', '$filter', '$http', '$window', function ($scope, $filter, $http, $window) {
     console.log("Campaign views loaded angulajs!..");
     $scope.currentPage = 0;
-    $scope.pageSize = '5';
+    $scope.pageSize = '20';
     $scope.data = [];
     $scope.q = '';
     $scope.deleteCampaign = [];
     $scope.totalCampaign = 0;
+    $scope.filteredTodos = [];
+    $scope.currentPage = 1;
+    $scope.numPerPage = 10;
+    $scope.maxSize = 10;
+
     $scope.editCampaign = function(campaign) {
 
         $window.location.href = obj.siteUrl + '/extension/campaign/index.php?id='+campaign.id;
@@ -146,8 +151,34 @@ app.controller( 'myCampaignViewCtr', ['$scope', '$filter', '$http', '$window', f
     };
  
     // initialized data
-    // $scope.campaignDisplayByKind('all'); 
+    // $scope.campaignDisplayByKind('all');
 
+
+
+    // pagination
+
+    $scope.numPages = function () {
+        return Math.ceil($scope.data.length / $scope.pageSize)-1;
+    };
+
+    var begin = 1;
+
+    console.log( " scope number pages " +  Math.ceil($scope.data.length / $scope.numPerPage));
+
+    // detect where the page selected
+    $scope.$watch('currentPage + numPerPage', function() {
+        var begin = (($scope.currentPage - 1) * $scope.numPerPage)
+            , end = begin + $scope.numPerPage;
+
+        $scope.filteredTodos = $scope.data.slice(begin, end);
+    });
+
+    console.log($scope.data);
+
+    $scope.$watch('pageSize', function () {
+        $scope.numPages();
+        $scope.getData() ;
+    });
 }]);
 
 

@@ -28,18 +28,15 @@
                        </ul>
                    </div>
                    <div class="col-md-2">
-                       <ul class="nav nav-tabs contact-sorting-ul" style="border-bottom:none;">
-                           <li role="presentation" class="dropdown">
-                               <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
-                                  aria-haspopup="true" aria-expanded="false">Filter By List<span class="caret"></span>
-                               </a>
-                               <ul class="dropdown-menu">
-                                   @foreach($lists as $list)
-                                    <li><a herf="#" ng-click="filterByList({{$list->id}})">{{$list->name}} ({{ App\List1::getTotalContactsInSpecificListById($list->id)}}) </a></li>
-                                   @endforeach
-                               </ul>
-                           </li>
-                       </ul>
+                       <div class="form-group">
+                           <select class="form-control" >
+                               <option>Filter By List</option>
+                               @foreach($lists as $list)
+                                   <option>{{$list->name}}</option>
+                               @endforeach
+                           </select>
+                       </div>
+
                    </div>
                    <div class="col-md-3">
                        <ul class="nav nav-tabs contact-sorting-ul" style="border-bottom:none;">
