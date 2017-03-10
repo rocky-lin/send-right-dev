@@ -171,3 +171,34 @@ p, span, h1,h2,h3,h4,h5,h6,div, button, input, textarea{
 .material-icons {
 	cursor: pointer;
 }
+
+
+
+.template-container {
+	width: 224px;
+}
+
+.template-container-hover {
+	position: absolute;
+	z-index: 100;
+	margin-top: 70px;
+	width: 181px;
+	text-align: center;
+} 
+
+.template-container-hover-bg {
+	border:1px solid grey;
+	background-color: #757575;
+	height: 198px;
+	position:absolute;
+	width: 181px !important;
+	border-radius: 1px;
+	margin-top: 6px;
+	margin-left: 6px;
+	opacity: 0.9;
+	color: black;
+}
+
+.template-container-main-bg {
+	display:none;
+}

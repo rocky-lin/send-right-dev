@@ -25,13 +25,14 @@
     },
     "autoload": {
         "classmap": [
-            "database"
+            "database" 
         ],
         "psr-4": {
             "App\\": "app/"
         },
         "files": [
-            "app/Support/helpers.php"
+            "app/Support/helpers.php", 
+            "app/Support/Popup.php"
         ] 
     },
     "autoload-dev": {

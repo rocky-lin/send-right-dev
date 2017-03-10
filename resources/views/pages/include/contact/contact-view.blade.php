@@ -29,29 +29,36 @@
                    </div>
                    <div class="col-md-2">
                        <div class="form-group">
-                           <select class="form-control" >
-                               <option>Filter By List</option>
+                           <select class="form-control"  ng-model="search.list_id_str" >
+                               <option value="">Filter By List</option>
                                @foreach($lists as $list)
-                                   <option>{{$list->name}}</option>
+                                   <option value="{{$list->name}}">{{$list->name}}</option>
                                @endforeach
                            </select>
                        </div>
 
                    </div>
-                   <div class="col-md-3">
-                       <ul class="nav nav-tabs contact-sorting-ul" style="border-bottom:none;">
+                   <div class="col-md-3"> 
+                      <select class="form-control" ng-model="status.type"> 
+                        <option value="" >Filter By Status</option>
+                        <option value="active">Active</option>
+                        <option value="unconfirmed">Unconfirmed</option>
+                        <option value="unsubscribed">Unsubscribed</option>
+                        <option  value="bounced">Bounced</option>
+                      </select> 
+                      {{--  <ul class="nav nav-tabs contact-sorting-ul" style="border-bottom:none;">
                            <li role="presentation" class="dropdown">
                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
                                   aria-haspopup="true" aria-expanded="false">Filter By Status<span
                                            class="caret"></span> </a>
                                <ul class="dropdown-menu">
-                                   <li><a href="#" ng-click="filterByStatus('Active')">Active ({{App\Contact::countByStatus('Active')}})</a></li>
-                                   <li><a href="#" ng-click="filterByStatus('Unconfirmed')" >Unconfirmed ({{App\Contact::countByStatus('Unconfirmed')}})</a></li>
-                                   <li><a href="#" ng-click="filterByStatus('Unsubscribed')" >Unsubscribed ({{App\Contact::countByStatus('Unsubscribed')}})</a></li>
-                                   <li><a href="#" ng-click="filterByStatus('Bounced')" >Bounced ({{App\Contact::countByStatus('Bounced')}})</a></li>
+                                   <li><a href="#"  >Active ({{App\Contact::countByStatus('Active')}})</a></li>
+                                   <li><a href="#"  >Unconfirmed ({{App\Contact::countByStatus('Unconfirmed')}})</a></li>
+                                   <li><a href="#"  >Unsubscribed ({{App\Contact::countByStatus('Unsubscribed')}})</a></li>
+                                   <li><a href="#"  >Bounced ({{App\Contact::countByStatus('Bounced')}})</a></li>
                                </ul>
                            </li>
-                       </ul>
+                       </ul> --}}
                    </div>
                    <div class="col-md-3">
                        <div class="input-group">
@@ -65,6 +72,7 @@
                             <table class="table table-hover">
                                 <thead>
                                     <tr>
+                                        <th> <input type="checkbox" /> </th>
                                         <th>
                                         <label>Full Name </label>
                                            <a href="#" title="First Name" data-toggle="popover" data-trigger="hover" data-content="First name of your contact.">(?)</a>
@@ -88,22 +96,33 @@
                                             <label>Edit </label>
                                             <a href="#" title="Edit" data-toggle="popover" data-trigger="hover" data-content="Update your contact.">(?)</a> 
                                         </th>
+                                         <th> 
+                                            <label>List</label> 
+                                        </th> 
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr data-ng-hide="deleteContact[contact.id]"  ng-repeat="contact in data | filter:q  | startFrom:currentPage*pageSize | limitTo:pageSize | orderBy : email" >
+                                    <tr data-ng-hide="deleteContact[contact.id]"  ng-repeat="contact in data | filter:q | filter:status.type | filter:search.list_id_str | startFrom:currentPage*pageSize | limitTo:pageSize | orderBy : email" > 
+                                        <td> <input type="checkbox" name="name" /></td>
 
-                                        <td><input type="checkbox" name="name" /> &nbsp;&nbsp; @{{contact.first_name}} @{{contact.last_name}}</td>
+                                        <td> 
+                                        <a href="{{route('user.contact.profile')}}/@{{contact.id}}">
+                                          @{{contact.first_name}} @{{contact.last_name}}
+                                        </a>
 
+                                        </td> 
                                         <td>@{{contact.email}}</td>
                                         <td>@{{contact.type}} </td> 
                                         <td>@{{contact.status}} </td>  
-                                        <td>   
-                                            <span class="glyphicon glyphicon-trash" aria-hidden="true" data-ng-click="deleteContact(contact)"></span>   
+                                        <td>    
+                                            <i class="material-icons"  data-ng-click="deleteContact(contact)" >delete_forever</i>
+                                            {{-- <span class="glyphicon glyphicon-trash" aria-hidden="true" data-ng-click="deleteContact(contact)"></span>    --}}
                                         </td>
                                         <td>
-                                             <span class="glyphicon glyphicon-pencil" aria-hidden="true" data-ng-click="editContact(contact)"></span> 
-                                        </td>
+                                         <i class="material-icons" data-ng-click="editContact(contact)" >mode_edit</i>
+                                             {{-- <span class="glyphicon glyphicon-pencil" aria-hidden="true" data-ng-click="editContact(contact)"></span>  --}}
+                                        </td> 
+                                        <td> @{{contact.list_id_str}} </td>
                                     </tr> 
                                 </tbody>
                             </table>

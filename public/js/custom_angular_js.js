@@ -59,8 +59,7 @@ app.controller( 'myCampaignViewCtr', ['$scope', '$filter', '$http', '$window', f
     $scope.q = '';
     $scope.deleteCampaign = [];
     $scope.totalCampaign = 0;
-    $scope.filteredTodos = [];
-    $scope.currentPage = 1;
+    $scope.filteredTodos = []; 
     $scope.numPerPage = 10;
     $scope.maxSize = 10;
 
@@ -124,7 +123,7 @@ app.controller( 'myCampaignViewCtr', ['$scope', '$filter', '$http', '$window', f
 
         if(kind == 'all') {
             url = url + '/user/campaign/get/all';
-        } else {
+        } else   {
             url = url + '/user/campaign/get/all/by/kind/'+kind;
         }
 
@@ -179,6 +178,32 @@ app.controller( 'myCampaignViewCtr', ['$scope', '$filter', '$http', '$window', f
         $scope.numPages();
         $scope.getData() ;
     });
+ 
+     // label 
+   $scope.saveNewLabel = function ()  {
+ 
+
+        console.log("save new label now name "    + $scope.name  ) ;   
+        // post request to insert new label   
+          
+         $http({
+                method: 'POST',
+                url: obj.siteUrl + '/user/label',
+                data: { type:'campaign', name:$scope.name },
+                headers: {
+                    'Content-type': 'application/json;charset=utf-8'
+                }
+            })
+            .then(function(response) {
+
+                $window.location.reload();
+                
+                // console.log(response);
+            }, function(rejection) {
+                console.log("Ohps! something wrong, please campaign send right support. Thank you!");
+            });
+
+    } 
 }]);
 
 
@@ -890,7 +915,7 @@ app.controller('myListSelectCtr', ['$scope', '$filter', '$http', '$window', func
     console.log("List create views loaded angulajs!..");
     $scope.isContactSelected = [];
     $scope.currentPage = 0;
-    $scope.pageSize = '5';
+    $scope.pageSize = '20';
     $scope.data = [];
     $scope.q = '';
     $scope.deleteContact = [];
@@ -1018,6 +1043,31 @@ app.controller('myListSelectCtr', ['$scope', '$filter', '$http', '$window', func
         alert("something wrong! please contact send right support. Thank you!");
     });
     // }
+    // 
+    // 
+    // 
+    // 
+    // Pagination 
+     
+   $scope.numPages = function () {
+        return Math.ceil($scope.data.length / $scope.pageSize)-1;
+    };
+
+    var begin = 1;
+ 
+    // detect where the page selected
+    $scope.$watch('currentPage + numPerPage', function() {
+        var begin = (($scope.currentPage - 1) * $scope.numPerPage)
+            , end = begin + $scope.numPerPage;
+
+        $scope.filteredTodos = $scope.data.slice(begin, end);
+    });
+  
+    $scope.$watch('pageSize', function () {
+        $scope.numPages();
+        $scope.getData() ;
+    });
+
 }]);
 
 
@@ -1252,6 +1302,202 @@ app.controller('myUserAccountCtrl', ['$scope', '$filter', '$http', '$window', fu
 //         }
 //     };
 // }
+
+// list create, edit and suggested contacts
+app.controller('myTemplateThemeCtr', ['$scope', '$filter', '$http', '$window', function ($scope, $filter, $http, $window) {
+    // $scope.document = function() {
+    console.log("List create views loaded angulajs!..");
+    $scope.isContactSelected = [];
+    $scope.currentPage = 0;
+    $scope.pageSize = '20';
+    $scope.data = [];
+    $scope.q = '';
+    $scope.deleteContact = [];
+    $scope.totalContact = 0;
+    $scope.selectedContactArray = [];
+
+    $scope.editContact = function(contact) {
+
+        $window.location.href = obj.siteUrl + '/user/contact/'+contact.id+'/edit';
+    }
+
+    $scope.deleteContact = function(contact) {
+
+        if(confirm('are you sure you want to delete this contact?' + contact.id)){
+            $http({
+                method: 'DELETE',
+                url: obj.siteUrl + '/user/contact/' + contact.id,
+                data: {
+                    id: contact.id
+                },
+                headers: {
+                    'Content-type': 'application/json;charset=utf-8'
+                }
+            })
+                .then(function(response) {
+                    $scope.deleteContact[contact.id] = true;
+                }, function(rejection) {
+                    alert("Ohps! something wrong, please contact send right support. Thank you!");
+                });
+
+        } else {
+            console.log("cancel delete " + contact.id);
+        }
+    }
+
+    $scope.getData = function () {
+
+        return $filter('filter')($scope.data, $scope.q)
+    }
+
+    $scope.numberOfPages = function() {
+
+        return Math.ceil($scope.getData().length/$scope.pageSize);
+    }
+
+    /**
+     * [selectContact when user select a contact then it should be stored to an array, this is usfull when hitting next and prev]
+     * @param  {[type]} contact [description]
+     * @return {[type]}         [description]
+     */
+    $scope.selectContact = function(contact) {
+        $scope.setCheckBoxUnSelectedContact();
+        var array = $scope.selectedContactArray;
+        if (array.indexOf(contact.id) === -1) {
+            $scope.selectedContactArray.push(contact.id);
+        } else {
+            var index = array.indexOf(contact.id);
+            if (index > -1) {
+                $scope.selectedContactArray.splice(index, 1);
+            }
+        }
+        $scope.setCheckBoxSelectedContact();
+    };
+
+    // set check box as selected and based on the input selected list id or default list id
+    $scope.setCheckBoxSelectedContact = function() {
+        // console.log($scope.selectedContactArray);
+        for (var i = 0; i <  $scope.selectedContactArray.length; i++) {
+            $scope.isContactSelected[$scope.selectedContactArray[i]] = true;
+        }
+    };
+
+    // set check box as un selected and based on the input selected list id or default list id
+    $scope.setCheckBoxUnSelectedContact = function() {
+        // console.log($scope.selectedContactArray);
+        for (var i = 0; i <  $scope.selectedContactArray.length; i++) {
+            $scope.isContactSelected[$scope.selectedContactArray[i]] = false;
+        }
+    };
+
+
+    // load the default list data selecte before
+    // usually this is from the database and when hit edit to to the list or any other that connected to this list
+    // then it should show the default selected list and selected checkboxes
+    $scope.loadDefaultLists = function(list_id) {
+        
+       console.log("doc loaded" + list_id);
+        var listIdArr = list_id.split(',');
+
+        for (var i = 0; i<listIdArr.length; i++) {
+            console.log(" default list id "  +   listIdArr[i]);
+            $scope.selectedContactArray.push(parseInt(listIdArr[i]));
+        }
+        $scope.setCheckBoxSelectedContact();
+    };
+
+    // when edit page loaded get all default contact list set
+    //$scope.$watch('default_list_ids', function () {
+        //$http({
+        //    method: 'GET',
+        //    url:  obj.siteUrl + '/user/list/get/'+$scope.listId+'/contacts'
+        //}).then(function successCallback(response) {
+        //for (var i = 0; i<$scope.default_list_ids.length; i++) {
+        //
+        //    alert($scope.default_list_ids[0]);
+            //$scope.selectedContactArray.push($scope.data[i].contact_id);
+        //}
+        //    $scope.setCheckBoxSelectedContact();
+        //}, function errorCallback(response) {
+        //    alert("something wrong! please contact send right support. Thank you!");
+        //});
+    //});
+    //
+    // When the home page contact loaded
+    $http({
+        method: 'GET',
+        url:  obj.siteUrl + '/user/campaign/template'
+    }).then(function successCallback(response) {
+        for (var i = 0; i<response.data.length; i++) {
+            $scope.data.push(response.data[i]);
+            $scope.totalContact++;
+        }
+    }, function errorCallback(response) {
+
+        alert("something wrong! please contact send right support. Thank you!");
+    });
+    // }
+    // 
+    // 
+    // 
+    // 
+    // Pagination 
+     
+   $scope.numPages = function () {
+        return Math.ceil($scope.data.length / $scope.pageSize)-1;
+    };
+
+    var begin = 1;
+ 
+    // detect where the page selected
+    $scope.$watch('currentPage + numPerPage', function() {
+        var begin = (($scope.currentPage - 1) * $scope.numPerPage)
+            , end = begin + $scope.numPerPage;
+
+        $scope.filteredTodos = $scope.data.slice(begin, end);
+    });
+  
+    $scope.$watch('pageSize', function () {
+        $scope.numPages();
+        $scope.getData() ;
+    });
+
+
+    $scope.selectedTheme = function(campaign) {
+        console.log(campaign.id); 
+        $scope.selectedThemeModel = campaign.id;
+        $scope.templateNextEnable = false;
+        $scope.hideAlertMessage = true;
+    }
+
+}]);
+
+// //edit contact
+// app.controller('',['$scope', '$http', function($scope, $http) {    
+//     console.log('edit contact angularjs loaded!');
+//     // When the edit page is loaded      
+//     $scope.$watch('contactId', function () { 
+//         $http({
+//             method: 'GET',
+//             url: obj.siteUrl + '/user/contact/'+$scope.contactId+'/get', 
+//             headers: {
+//                 'Content-type': 'application/json;charset=utf-8'
+//             }
+//         })
+//         .then(function(response) {   
+//             $scope.firstName = response.data.first_name;
+//             $scope.lastName = response.data.last_name;
+//             $scope.email = response.data.email; 
+//             $scope.location = response.data.location;
+//             $scope.phoneNumber = response.data.phone_number;
+//             $scope.telephoneNumber = response.data.telephone_number;  
+//             $scope.contactType = response.data.type;  
+//         }, function(rejection) {
+//             alert("Ohps! something wrong, please contact send right support. Thank you!");
+//         });  
+
+//     });
+// }]);
 
 
 

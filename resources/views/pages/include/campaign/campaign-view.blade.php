@@ -1,7 +1,4 @@
-
- 
-       <div >
-
+                    <div > 
                         <div class="row">   
                             <div class="col-sm-6">
                                 <label for="seach" > Search Campaigns </label> 
@@ -30,6 +27,7 @@
                             <table class="table table-hover">
                                 <thead>
                                     <tr> 
+                                        <th><input type="checkbox" /></th>
                                         <th>
                                             <label>Campaign Title</label> 
                                         </th>
@@ -61,6 +59,9 @@
                                 </thead>
                                 <tbody>
                                     <tr data-ng-hide="deleteCampaign[campaign.id]"  ng-repeat="campaign in data | filter:q | startFrom:currentPage*pageSize | limitTo:pageSize | orderBy : email" >  
+
+
+                                        <td><input type="checkbox" /></td>
                                         <td>@{{campaign.title }}</td>
                                         <td>@{{campaign.type }}</td>
                                         <td> @{{campaign.next_send}} </td> 

@@ -27,4 +27,19 @@ class ListContact extends Model
     	return $this->belongsTo('App\Contact');
     }
 
+    public static function getStrName($lists=array())
+    {   
+
+
+        $listStr = '';  
+        foreach($lists as $list) {  
+            $listInfo  = List1::find($list->list_id);  
+            if(!empty($listInfo)) {  
+                $listStr .= $listInfo->name . ',';  
+            } 
+        }   
+ 
+        return rtrim($listStr,","); 
+    } 
+
 }

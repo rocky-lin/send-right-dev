@@ -48,6 +48,29 @@ Route::post('cash/create', 'CashController@store');
 // Route::get('admin/order', 'admin\OrderController@index');
 // Route::get('admin/order/requestPay/{order_id}', 'admin\OrderController@requestPay'); 
 Route::group(['prefix' => 'user' , 'middleware' => 'auth' ], function() {    
+ 		
+
+
+ 		Route::post('campaign/template/select/post', 'CampaignController@postChooseTemplateNew')->name('user.post.campaign.select');
+
+	    Route::post('campaign/templates/post', 'CampaignController@postChooseTemplate')->name('user.post.campaign.choose.template');
+
+		Route::get('campaign/templates', 'CampaignController@getChooseTemplate')->name('user.get.campaign.choose.template');
+
+		 
+			
+		Route::get('campaign/view', 'CampaignController@viewCampaignAll')->name('user.campaign.campaign.view');
+		
+	// Campaign Template 
+	// 
+	 	Route::get('campaign/template', 'CampaignTemplateController@getTheme')->name('user.campaign.template.get.theme'); 
+		Route::resource('campaign', 'CampaignTemplateController');  	
+
+
+	// Label  
+	Route::resource('label', 'LabelController'); 
+
+
 
 	// when confirm user registration
 	Route::group(['prefix'=>'registration'], function(){
@@ -92,7 +115,6 @@ Route::group(['prefix' => 'user' , 'middleware' => 'auth' ], function() {
 		Route::resource('form', 'FormController');   
 
 	// 	   
-
 		Route::get('campaign/newsletters','CampaignController@index')->name('user.campaign.newsletter.view'); 
 		Route::get('campaign/auto-responders','CampaignController@autoResponderIndex')->name('user.campaign.autoresponders.view'); 
 		Route::get('campaign/mobile-optin','CampaignController@mobileOptInIndex')->name('user.campaign.mobileoptin.view'); 
@@ -102,6 +124,8 @@ Route::group(['prefix' => 'user' , 'middleware' => 'auth' ], function() {
 			
 		// create step 1
 			Route::get('campaign/get/all', 'CampaignController@getAllCampaign')->name('user.campaign.get.all');
+			Route::get('campaign/get/all/now', 'CampaignController@getAllCampaignNow')->name('user.campaign.get.all.now');
+
 
 		    Route::post('campaign/create/validate', 'CampaignController@createValidate')->name('user.campaign.create.validate');
 
@@ -126,9 +150,7 @@ Route::group(['prefix' => 'user' , 'middleware' => 'auth' ], function() {
 
 			// step 4 ui and template
 
-			Route::get('campaign/templates', 'CampaignController@getChooseTemplate')->name('user.get.campaign.choose.template');
-			Route::post('campaign/templates', 'CampaignController@postChooseTemplate')->name('user.post.campaign.choose.template');
-
+		
 
 			// step 5
 			Route::get('campaign/create/settings', 'CampaignController@createSettings')->name('user.campaign.create.settings');
@@ -145,10 +167,13 @@ Route::group(['prefix' => 'user' , 'middleware' => 'auth' ], function() {
  
 			// send test email 
 				Route::get('campaign/create/settings/email/send/test/{id?}/{email?}', 'CampaignController@sendTestCampaignEmail')->name('user.campaign.create.settings.email.send.test');
-				Route::get('campaign/view', 'CampaignController@viewCampaignAll')->name('user.campaign.campaign.view');
+
+
+				
 
  		// create step 1
 		Route::resource('campaign', 'CampaignController');  	
+	
 		// Route::post('campaign', 'CampaignController@create')->name('user.campaign.create.post');
   
 	// Home 

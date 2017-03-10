@@ -1,8 +1,7 @@
 @extends('layouts.app')   
 @section('content')
-
-<div class="container"  > 
  
+ <br><br>
     @if (count($errors) > 0)
         <div class="alert alert-danger">
             <ul>
@@ -21,21 +20,16 @@
                 </li>
             </ul>
         </div>
-    @endif 
-
-    {{-- {{$kind}}   --}}
-
+    @endif  
+    {{-- {{$kind}}   --}} 
     <div class="row">
-        <div class="col-sm-12">
-            
-        @include('pages.include.other.campaign-header-steps',  ['currentStep' => 'Campaign Details'])
+        <div class="col-sm-12"> 
+        @include('pages.include.other.campaign-header-steps',  ['currentStep' => 'Campaign Details']) 
+         <br><br>
 
         <div class="bs-docs-section" ng-controller="myListConnectCtrl">  
-          <div class="bs-example" style="padding-bottom: 24px;" append-source>
- 
-                
 
-
+          <div class="bs-example" style="padding-bottom: 24px;" append-source> 
                 @if(!empty($action))
                     {{ Form::open(['url'=>[route('user.campaign.create.update', $id)], 'method'=>'post'], ['class'=>'form-control']) }}  
                 @else
@@ -48,8 +42,10 @@
                         {{ Form::label('Campaign Name', 'Campaign Name', ['class'=>'label label-primary'])}}
                         {{ Form::text('campaignName', (!empty($campaign['title'])) ? $campaign['title'] : '' , ['class'=>'form-control', 'placeholder'=>'Campaign Name']) }}
                     </div>  
+
+                    
                     <br><br>  
-                    @include('pages.include.list.list-select')  
+                    @include('pages/include/list/list-select')  
                     <br><br>  
 
                     @if(empty($campaign))
@@ -61,8 +57,7 @@
                                     <option value="{{$template->id}}">{{$template->name}}</option>
                                 @endforeach
                             </select> 
-                
-                        
+                  
                             <br>  
                             <div  id="selected-campaign-template-preview-loader" style="display: none " >
                                 <i class="fa fa-circle-o-notch fa-spin" style="font-size:24px;" ></i>
@@ -76,19 +71,21 @@
                             {{-- {{ Form::select('template', ['Default' => 'Default','Business'=>'Business','Blog'=>'Blog'], 'list1', ['class'=>'form-control']) }}  --}}
                             </div>
                             @endif
-                        <br>
-                        <div class="form-group">
-                            @if(!empty($campaign))
-                                {{Form::submit('Update', ['class'=>'btn btn-primary'])}}
-                            @else
-                                {{Form::submit('Next', ['class'=>'btn btn-primary'])}}
-                            @endif 
-                        </div>   
-
+                        <br> 
+                        <div class="row">
+                            <div class="col-md-12 pull-right " style="text-align: right;" >
+                                <div class="form-group">
+                                    @if(!empty($campaign))
+                                        {{Form::submit('Update', ['class'=>'btn btn-success'])}}
+                                    @else
+                                        {{Form::submit('Next', ['class'=>'btn btn-success'])}}
+                                    @endif 
+                                </div> 
+                            </div>
+                        </div>
             {{ Form::close() }}
             </div> 
         </div>  
         </div>
-    </div>
-</div> 
+    </div> 
 @endsection

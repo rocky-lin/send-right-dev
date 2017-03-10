@@ -83,7 +83,12 @@
                        <li> <a href="{{ url('/user/contact') }}">Contacts</a>      </li> 
                        <li> <a href="{{ url('/user/list') }}">List</a>      </li> 
                        <li> <a href="{{ url('/user/form') }}">Form</a>       </li> 
-                            <li class="dropdown">
+                       <li> <a href="{{ route('user.campaign.campaign.view') }}">Campaigns</a>       </li> 
+
+                        
+
+
+                            <li class="dropdown hide">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
                                     Campaign  <span class="caret"></span>
                                 </a> 
@@ -161,8 +166,7 @@
         <div class='container-full'>
             {{-- @include('pages/include/subscription/subscription-status-message') --}}
             @yield('content')
-            @include('pages/popup/popup')
-
+            @include('pages/popup/popup') 
         </div>
     </div>
 

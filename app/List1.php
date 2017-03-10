@@ -147,6 +147,46 @@ class  List1 extends Model
         return $response;
     }
 
+    /**
+     * list response conver to id as string 
+     * ex: 1,2,3,4,5,5,6,7,8 <-- all of them are list ids
+     * [toStr description]
+     * @param  array  $lists [description]
+     * @return [type]        [description]
+     */
+    public static function toStr($lists=array())
+    {  
+        $listStr = '';  
+        foreach($lists as $list) { 
+            $listStr .= $list->id . ',';  
+        }  
+        return rtrim($listStr,","); 
+    } 
+    /**
+     *
+     * parameter is from database query get related list of specific database info
+     * this will return format as list1,list2,list3
+     * [getStrName description]
+     * @param  array  $lists [description]
+     * @return [type]        [description]
+     */
+    public static function getStrName($lists=array())
+    {   
+
+
+        $listStr = '';  
+        foreach($lists as $list) {  
+            $listInfo  = List1::find($list->id);  
+            if(!empty($listInfo)) {  
+                $listStr .= $listInfo->name . ',';  
+            } 
+        }   
+ 
+        return rtrim($listStr,","); 
+    } 
+
+
+
 }
 
 

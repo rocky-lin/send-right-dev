@@ -1,10 +1,12 @@
 
-<h4>All Forms <span class="badge pull-right" >@{{totalCampaign}}</span> </h4>
- 
+<h4>All Campaigns <span class="badge pull-right" >@{{totalCampaign}}</span> </h4>
+<h4>Draft <span class="badge pull-right ">20</span></h4>
+<hr>
 
 <ul class="list-group form-side-bar" id="form-side-bar">
     <li class="list-group-item">
-         <i class="material-icons pull-right " style="padding:0px;"   data-toggle="modal" data-target="#addFormLabel">note_add</i> 
+         <i class="material-icons pull-right " style="padding:0px;"   data-toggle="modal" data-target="#addCampaignLabel">note_add</i>
+
         Label
     </li>
 

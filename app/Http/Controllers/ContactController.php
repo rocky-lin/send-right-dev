@@ -35,10 +35,20 @@ class ContactController extends Controller
     }
 
     public function getUserAccountContacts() { 
-            $contacts = User::getUserAccountContacts(); 
+
+            $contacts = User::getUserAccountContacts()->toArray(); 
             $collection = collect( $contacts ); 
             $sorted = $collection->sortBy('id', SORT_REGULAR, true); 
-            return $sorted->values()->all();
+
+            $contacts =$sorted->values()->all();
+
+            foreach($contacts as $index => $contact): 
+              $contacts[$index]['list_id_str'] =   ListContact::getStrName(Contact::find($contact['id'])->list_contacts);
+            endforeach;
+
+            // dd($contacts);
+            return $contacts;
+
     }
  
 

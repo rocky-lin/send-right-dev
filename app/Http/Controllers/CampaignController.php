@@ -22,15 +22,28 @@ use Redirect;
 use App\Http\Controllers\CampaignScheduleController;  
 use Session;
 use App\CampaignTemplate;
+use App\Label;
 class CampaignController extends Controller
 {
+ 
+    public function viewCampaignAll() { 
 
-
-
-    public function viewCampaignAll() {
-
+        /** 
+         * Get User lists
+         */
         $lists = List1::where('account_id', User::getUserAccount())->get();
-        return view('pages/campaign/campaign-all', compact('lists'));
+
+        /** 
+         * Get specific campaign labels 
+         */
+        $labels = Label::where('account_id', User::getUserAccount())->where('type', 'campaign')->get();  
+ 
+
+        /**
+         * return to views
+         */
+        return view('pages/campaign/campaign-all', compact('lists', 'labels')); 
+
     }
 
 
@@ -194,7 +207,7 @@ class CampaignController extends Controller
                 $campaign['sender']['subject'] = (!empty($_SESSION['campaign']['sender']['subject'])) ? $_SESSION['campaign']['sender']['subject']  : $campaign1->sender_subject; 
             } 
 
-        return view('pages.campaign.campaign-sender', compact('campaign', 'id', 'action'));  
+        return view('pages/campaign/campaign-sender', compact('campaign', 'id', 'action'));  
     } 
     public function createSenderValidate(ValidateCampaignSender $request) 
     {  
@@ -230,10 +243,14 @@ class CampaignController extends Controller
 
 
 
+
+
     // STEP 4
 
     public function getChooseTemplate() {
+    
 
+ 
         //        print "<pre>";
         //        unset($_SESSION['campaign']['template']);
         //        unset($_SESSION['campaign']['content']);
@@ -267,8 +284,37 @@ class CampaignController extends Controller
         return view('pages/campaign/campaign-templates', compact('templates'));
     }
 
+
+
+
+
+    public function postChooseTemplateNew(Request $request) { 
+        print " posted" ;  
+        if($request->get('template') == null) {
+            return redirect()->back()->with('status', 'Please select campaign template');
+        } else {
+            $_SESSION['campaign']['template'] = $request->get('template');
+        }
+
+        if($_SESSION['campaign']['kind'] == 'auto responder') {
+            return redirect(url('extension/campaign/index.php'));
+        }
+        else if($_SESSION['campaign']['kind'] == 'mobile email optin') {
+
+            return redirect(url('extension/campaign/index.php'));
+        }
+        else {
+            return redirect(url('extension/campaign/index.php'));
+        }
+
+
+    }
+
+
     public function postChooseTemplate(Request $request) {
 
+
+        print " posted" ; 
         if($request->get('template') == null) {
             return redirect()->back()->with('status', 'Please select campaign template');
         } else {
@@ -487,7 +533,7 @@ class CampaignController extends Controller
     // store final data in campaign
     public function store(Request $request)
     {
-
+ 
         dd($request->all());
     }
 
@@ -504,6 +550,7 @@ class CampaignController extends Controller
   
                     
                     foreach($campaigns as $index => $campaign)  { 
+
                         switch ($campaigns[$index]['kind']) {
                             case 'mobile email optin': 
                                 $campaigns[$index]['total_contacts'] =  count(Campaign::getAllEmailWillRecieveTheCampaign($campaigns[$index]['id'])['contacts']); 
@@ -519,16 +566,21 @@ class CampaignController extends Controller
                                 $created_ago = Carbon::createFromTimeStamp(strtotime($campaign['created_at']))->diffForHumans(); 
                                     // print "ago " .   $ago;
                                     $campaigns[$index]['created_ago'] = $created_ago;
-                                    $campaigns[$index]['next_send'] = Helper::createDateTime(CampaignSchedule::where('campaign_id', $campaigns[$index]['id'])->first()->schedule_send)->format('l jS \\of F Y h:i:s A');
+                                    // $campaigns[$index]['next_send'] = Helper::createDateTime(CampaignSchedule::where('campaign_id', $campaigns[$index]['id'])->first()->schedule_send)->format('l jS \\of F Y h:i:s A');
                                 $campaigns[$index]['total_contacts'] =  count(Campaign::getAllEmailWillRecieveTheCampaign($campaigns[$index]['id'])['contacts']); 
                             break; 
-                        } 
-                     
-                    } 
- 
+                        }   
+                        // set campaign list 
+                        //  
+                         $campaigns[$index]['list_id_str'] =  List1::getStrName(Campaign::find($campaigns[$index]['id'])->campaignList);
+                         // $campaigns[$index]['list_id_str'] = List1::toStr(Campaign::find($campaigns[$index]['id'])->campaignList->toArray()); 
+                    }  
+  
         //dd($campaigns);  
         return $campaigns; 
     }
+
+
 
     public function getAllCampaignSortByKind($kind)
     {

@@ -1,8 +1,7 @@
 @extends('layouts.app')   
 @section('content')
 
- 
-<div class="container"  > 
+  
  
 @if (count($errors) > 0)
     <div class="alert alert-danger">
@@ -13,10 +12,12 @@
         </ul>
     </div>
 @endif 
+<br><br>
+
     <div class="row">
         <div class="col-sm-12">     
           @include('pages.include.other.campaign-header-steps',  ['currentStep' => 'Sender Details'])
-          
+            <br><br>      
         <div class="bs-docs-section" ng-controller="myListConnectCtrl">  
           <div class="bs-example" style="padding-bottom: 24px;" append-source> 
                         
@@ -55,8 +56,10 @@
             </div> 
         </div>  
         </div>
-    </div>
-</div> 
+    </div> 
+
+    <br><br><br><br>
+    <br><br><br><br>
 @endsection
 
 

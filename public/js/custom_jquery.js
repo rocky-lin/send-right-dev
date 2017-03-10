@@ -299,19 +299,38 @@ $(document).ready(function(){
 
 	});
 
-
-
+ 
 	$("#form-side-bar li").mouseover(function(){
 		console.log(" test ");
 		$(this).children('icon').css( "display", "block" );
-		$(this).children('count').css( "display", "none" );
-
-	});
-
+		$(this).children('count').css( "display", "none" ); 
+	}); 
 	$("#form-side-bar li").mouseout(function(){
 		$(this).children('icon').css( "display", "none" );
 		$(this).children('count').css( "display", "block" );
 	})
+
+
+
+	$('#template-container-main .template-container').mouseover(function(){
+		console.log(" in ");
+		$(this).children('.template-container-main-bg').css('display', 'block');
+	}); 
+	$('#template-container-main .template-container').mouseout(function(){
+		console.log(" out ");
+		$(this).children('.template-container-main-bg').css('display', 'none');
+	})
+
+
+
+	// template mouse over and out
+	// $('#template-container-main .template-container').hover(function() {
+	//  	$(this).closest('.template-container-main-bg').css('border', '1px solid red');
+	// }, function() {
+	//  	$(this).children('.template-container-main-bg').css('display', 'none');
+	// 	// $('.icontent').hide(1000)
+	// });
+
 
 });
 

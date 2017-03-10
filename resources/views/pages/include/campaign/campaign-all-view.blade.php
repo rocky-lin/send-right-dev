@@ -7,25 +7,35 @@
                         </div>
                         <div class="col-md-3" style="text-align: right">
                             <br>
-                            <a href="{{ route('user.form.list.connect.view') }}">
+                            {{-- <a href="{{ route('user.campaign.create.start')}}"> --}}
+                            <a href="#" data-toggle="modal" data-target="#createNewCampaign">
                                 <input type="button" value="Add New Campaign" class="pull-right btn btn-success" >
                             </a>
                         </div>
                     </div>
                     <br>
                     <div class="row">
-                        <div class="col-md-6">
-                            <input type="button" value="Add Labels" class="pull-left btn btn-default"  data-toggle="modal" data-target="#addFormLabel">
+                        <div class="col-md-3">
+                            <input type="button" value="Add Labels" class="pull-left btn btn-default"  data-toggle="modal" data-target="#addCampaignLabel">
+                        </div>
+                        <div class="col-md-3" style="text-align: right">
+                            <div class="form-group">
+                                <select class="form-control" data-ng-change="" data-ng-model="type" >
+                                    <option value="" >Filter Type</option> 
+                                    <option value="mobile optin">Mobile Optin</option> 
+                                    <option value="newsletter">Newsletter</option> 
+                                    <option value="auto responder">Auto Responder</option> 
+                                </select>
+                            </div>
                         </div>
                         <div class="col-md-3" style="text-align: right">
                             {{--<input type="button" value="Add New List"  class="btn btn-success" />--}}
-                            <!-- Single button -->
-
+                            <!-- Single button --> 
                                 <div class="form-group">
-                                    <select class="form-control" >
-                                        <option>Filter By List</option>
+                                    <select class="form-control" ng-model='list.list_id_str' >
+                                        <option value="">Filter By List</option>
                                         @foreach($lists as $list)
-                                            <option>{{$list->name}}</option>
+                                            <option  >{{$list->name}}</option>
                                         @endforeach
                                     </select>
                                 </div>
@@ -38,19 +48,21 @@
                         </div>
                     </div>
                     <br>
-                    <div>
-
+                    <div> 
                     <div class="row" style="margin-left:0px; margin-right:0px">
                         <div  class="col-sm-12">
                          <br> <hr>
                             <table class="table table-hover">
                                 <thead>
-                                    <tr> 
+                                    <tr>  
+                                         <th>
+                                            <input type="checkbox" />
+                                        </th>  
                                         <th>
                                             <label>Campaign Title</label> 
                                         </th>
                                         <th>
-                                            <label>Campaign Type </label> 
+                                            <label>Send Schedule </label> 
                                         </th>
                                         <th>
                                             <label>Next Send</label>
@@ -67,33 +79,42 @@
                                         <th>
                                             <labe> Created at </labe>
                                         </th>   
+                                          <th>
+                                            <label>List</label> 
+                                        </th> 
                                         <th>
                                             <label>Delete </label> 
                                         </th>
                                         <th>
                                             <label>Edit </label> 
-                                        </th> 
+                                        </th>      
+                                      
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr data-ng-hide="deleteCampaign[campaign.id]"  ng-repeat="campaign in data | filter:q | startFrom:currentPage*pageSize | limitTo:pageSize | orderBy : email" >  
+                                    <tr data-ng-hide="deleteCampaign[campaign.id]"  ng-repeat="campaign in data | filter:q | filter:type | filter:list | startFrom:currentPage*pageSize | limitTo:pageSize | orderBy : email" >  
+                                        <td>  <input type="checkbox" /> </td>
                                         <td>@{{campaign.title }}</td>
                                         <td>@{{campaign.type }}</td>
                                         <td> @{{campaign.next_send}} </td> 
                                         <td> @{{campaign.total_contacts}} </td>
                                         <td ng-class="{'campaign-inactive': campaign.status === 'inactive', 
                                         'campaign-active' : campaign.status === 'active'}" >@{{campaign.status}}</td>
-                                        <td>@{{campaign.type}}</td>  
+                                        <td>@{{campaign.kind}}</td>  
                                         <td>@{{campaign.created_ago}}</td>
+                                        <td>@{{campaign.list_id_str}}</td>
                                         <td>
-                                            <span class="glyphicon glyphicon-trash" aria-hidden="true" data-ng-click="deleteCampaign(campaign)"></span>
+                                            <i class="material-icons" data-ng-click="deleteCampaign(campaign)" >delete_forever</i>
+                                            {{-- <span class="glyphicon glyphicon-trash" aria-hidden="true" data-ng-click="deleteCampaign(campaign)" ></span> --}}
                                         </td>
-                                        <td>
+                                        <td> 
                                             <a href="{{url("extension/campaign/index.php?type=newsletter&id=")}}@{{campaign.id}}" >
-                                                <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
+                                                <i class="material-icons">mode_edit</i>
+                                                {{-- <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span> --}}
                                              </a> 
                                              {{-- <span class="glyphicon glyphicon-pencil" aria-hidden="true" data-ng-click="editCampaign(campaign)"></span> --}}
                                         </td> 
+                                        
                                     </tr> 
                                 </tbody>
                             </table>
@@ -102,11 +123,11 @@
                     </div>
                 </div>
 				<hr>     
-                {{Form::open(['url'=>route('campaign.create'), 'method'=>'get'])}}
+            {{--     {{Form::open(['url'=>route('campaign.create'), 'method'=>'get'])}}
                         <input type="hidden" value="newsletter" name="ck">
                         <button type="submit" class="btn btn-primary"> 
                              Create Newsletter 
                       </button>
-                {{Form::close()}}
+                {{Form::close()}} --}}
 {{--                 <a href="{{ route('user.campaign.create.start')}}" title="">
                     <button type="button" class="btn btn-primary"> Add New Campaign</button>  --}}

@@ -12,6 +12,7 @@ use App\List1;
 use App\Contact;
 use App\Campaign;
 use App\AutoResponse;
+use App\Label;
 
 class FormController extends Controller
 {
@@ -22,7 +23,8 @@ class FormController extends Controller
      */
     public function index()
     {
-        return view('pages.form.form');
+        $labels = Label::where('account_id', User::getUserAccount())->where('type', 'campaign')->get();  
+        return view('pages.form.form', compact('labels'));
     }
 
     /**
