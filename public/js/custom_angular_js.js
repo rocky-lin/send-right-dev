@@ -1468,37 +1468,5 @@ app.controller('myTemplateThemeCtr', ['$scope', '$filter', '$http', '$window', f
         $scope.selectedThemeModel = campaign.id;
         $scope.templateNextEnable = false;
         $scope.hideAlertMessage = true;
-    }
-
-}]);
-
-// //edit contact
-// app.controller('',['$scope', '$http', function($scope, $http) {    
-//     console.log('edit contact angularjs loaded!');
-//     // When the edit page is loaded      
-//     $scope.$watch('contactId', function () { 
-//         $http({
-//             method: 'GET',
-//             url: obj.siteUrl + '/user/contact/'+$scope.contactId+'/get', 
-//             headers: {
-//                 'Content-type': 'application/json;charset=utf-8'
-//             }
-//         })
-//         .then(function(response) {   
-//             $scope.firstName = response.data.first_name;
-//             $scope.lastName = response.data.last_name;
-//             $scope.email = response.data.email; 
-//             $scope.location = response.data.location;
-//             $scope.phoneNumber = response.data.phone_number;
-//             $scope.telephoneNumber = response.data.telephone_number;  
-//             $scope.contactType = response.data.type;  
-//         }, function(rejection) {
-//             alert("Ohps! something wrong, please contact send right support. Thank you!");
-//         });  
-
-//     });
-// }]);
-
-
-
-
+    } 
+}]); 

@@ -1058,3 +1058,101 @@ Thanks,
 
 Best regards,
 Jesus Erwin Suarez
+
+ 
+
+reporting for 6-10 march
+
+Do testing all functions required
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+- WEDNESDAY
+Connect data in home page 
+  a. All Contacts - Display all contacts load more will be linked to contact views
+  b. Contact Chart - Display contact chart, we can do this later since we don't record any contact status
+  c. Top contacts -  we can do this later since we can't identify top contacts
+  d. Auto responder - display all auto responder and when click view more need to redirect campaign with sorting auto responder
+  c. All List - display all list when hit show more, that should redirect to list page
+  d. All Forms - display all forms and when hit show all that should redirect to forms page
+  e. Activities - we don't record activity yet, this can come later.
+  f. Create campaign ui in right side of the page, no need as a dropdown it needs to be clickable button redirect to campaign page
+ 
+- THURSDAY
+Contact profile
+  a. Note - allow save note to database - hit save then insert note to database via angularjs trigger
+  b. List - display activity for list subscription
+  c. Tags - allow save tag to database for specific contact
+  c. Work Flow - none for now 
+  d. right side activity - display activity in the right side
+  e. right side note - none for now
+  f. right side site and event tracking - none for now
+  j. right side filter - none for now
+  h. import contact ui and functions refer mailchimp
+
+
+- FRIDAY
+Navigation, Menu and bread crumbs
+  a. clock seach icon - display a popup for search 
+  b. trigger search function - not sure what is the function yet for now
+  c. click help - display FAQ and other information
+  d. breakcrumb refer mailchimp
+  	 https://www.evernote.com/shard/s94/sh/9ec538f5-1061-41d9-8cc7-2f5de19b7228/23eb717794fa75c9
+  
+- TUESDAY  
+
+	Contact  
+	  a. Top checkbox - allow checked tickbox at top and check all checkbox all the way down  	  
+	  b. Fix ui for add contact page 
+	  c. Fix ui for import contact page
+	  e. left side bar import - none for now
+	  f. left side bar export - none for now 
+	  j. add contact - refer to active campaign
+	     https://www.evernote.com/shard/s94/sh/9ec538f5-1061-41d9-8cc7-2f5de19b7228/23eb717794fa75c9
+
+	List Page
+	  a. Sorting Dropdown - none for now
+	  b. Top checkbox - allow checked tickbox at top and check all checkbox all the way down 
+	  c. Create List page - update ui and change to a popup refer here 
+	     https://www.evernote.com/shard/s94/sh/9ec538f5-1061-41d9-8cc7-2f5de19b7228/23eb717794fa75c9 
+ 
+- MONDAY 
+
+	Form Page
+	  a. Dropdown function - none for now
+	  b. Top Checkbox - allow checked tickbox at top and check all checkbox all the way down 
+	  c. Connect page - remove the form template dropdown 
+	  d. Create label in form 
+	  e. Create label don't allow duplicated label in specific type and name by specific user account in form 
+	  f. Allow delete label in form and delete all the forms under the label
+	  g. When clicked label load all the forms under the label  
+
+	Campaigns 
+	  a. Create label don't allow duplicated label in specific type and name by specific user account in campaign
+	  b. Only display template for campaign  newsletter, auto responder and mobile optin with specific template
+	  c. Set image background for template for now for newsletter, auto responder and mobile optin
+      d. create documentation
+      e. connect campaign list as it is for now - need to have condition allow not to select auto responder 
+
+- OVERTIME 
+      
+
+
+ 
+  
+
+
+
+
+

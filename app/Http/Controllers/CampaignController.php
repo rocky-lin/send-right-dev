@@ -289,6 +289,7 @@ class CampaignController extends Controller
 
 
     public function postChooseTemplateNew(Request $request) { 
+        
         print " posted" ;  
         if($request->get('template') == null) {
             return redirect()->back()->with('status', 'Please select campaign template');
@@ -533,10 +534,10 @@ class CampaignController extends Controller
     // store final data in campaign
     public function store(Request $request)
     {
- 
+
         dd($request->all());
     }
-
+ 
     // other
     public function getAllCampaign()
     {

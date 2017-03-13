@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html ng-app="myModal">
+
+  <head>
+    <title>Modal</title>
+    <script data-require="jquery@1.9.0" data-semver="1.9.0" src="//cdnjs.cloudflare.com/ajax/libs/jquery/1.9.0/jquery.js"></script>
+    <link data-require="bootstrap@3.0.0" data-semver="3.0.0" rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" />
+    <script data-require="bootstrap@3.0.0" data-semver="3.0.0" src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+    <script data-require="angular.js@1.2.14" data-semver="1.2.14" src="http://code.angularjs.org/1.2.14/angular.js"></script>
+    <script src="script.js"></script>
+  </head>
+
+  <body>
+    <div ng-controller="mymodalcontroller">  
+
+    <ul data-ng-repeat="i in data">
+      <li >  
+        <!-- directive -->
+        <modal lolo="modal1" modal-body="body" modal-footer="footer" modal-header="header"  data-ng-click-right-button="myRightButton()"> 
+        </modal>  
+        <!-- clickable button to trigger popup -->
+        <a href="#{{modal1}}" role="button" class="btn btn-success"  data-toggle="modal" data-ng-click="loadUrl( 'google.com' + i )">Launch Demo Modal</a>
+        
+      </li>
+
+
+    </ul>
+
+    </div>
+  </body>
+
+</html>

@@ -400,10 +400,14 @@ Route::get('/sortable-div', function(){
 </html>
 	<?php 
 }); 
-	
-	
-
+ 
 Route::group(['prefix' => 'debugging' ], function() {     
 	Route::get('/data-tables', 'TestPagesController@dataTable'); 
+}); 
+
+/**
+ * Test Angularjs
+ */
+Route::group(['prefix' => 'test/angular' , 'middleware' => 'auth' ], function() {      
+	Route::get('popup', 'TestController@angularJsPopup'); 
 });
-	

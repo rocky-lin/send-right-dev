@@ -37,6 +37,8 @@
         <div class="col-md-2 template-container"  style="width:100%" ng-mouseenter="templateBackgroundBg={display:'block'}"  ng-mouseleave="templateBackgroundBg={display:'none'}" >    
             <div class="template-container-main-bg" style="height:100%; width:100%" ng-style="templateBackgroundBg"> 
                 <div class="template-container-hover" > 
+
+ 
                     <input type="button" value="Select" class="btn btn-info" ng-click="selectedTheme(campaign)">  <br><br>
                     @{{selectedCampaignTemplate}}
                     <input type="button" value="Preview" class="btn btn-default">  
@@ -77,3 +79,4 @@
         </div>
     </div>
 </div>
+ 
