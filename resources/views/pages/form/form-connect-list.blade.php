@@ -33,8 +33,10 @@
                     </div>
                     <br><br>
                     <div class="form-group">
-                        {{ Form::label('template', 'Select Form Template', ['class'=>'label label-primary'])}}
-                        {{ Form::select('template', ['Default','Business','Blog'], 'list1', ['class'=>'form-control']) }}
+    
+            {{--                 {{ Form::label('template', 'Select Form Template', ['class'=>'label label-primary'])}}
+                            {{ Form::select('template', ['Default','Business','Blog'], 'list1', ['class'=>'form-control']) }}
+ --}}
                         <br>
                         <div class="form-group">
                             {{Form::submit('Next', ['class'=>'btn btn-primary'])}}

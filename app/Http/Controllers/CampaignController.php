@@ -537,7 +537,43 @@ class CampaignController extends Controller
 
         dd($request->all());
     }
+    
+
+    public function getById($id)
+    {  
+
+        $campaign = Campaign::where('id', $id)->get()->toArray();   
+        $campaign = $campaign[0]; 
  
+
+          
+
+        switch ($campaign['kind']) {
+            case 'mobile email optin': 
+                $campaign['total_contacts'] =  count(Campaign::getAllEmailWillRecieveTheCampaign($campaign['id'])['contacts']); 
+            break; 
+            case 'auto responder':
+                $created_ago = Carbon::createFromTimeStamp(strtotime($campaign['created_at']))->diffForHumans();  
+                $campaign['created_ago'] = $created_ago;
+                $campaign['next_send'] = '';
+                $campaign['total_contacts'] =  count(Campaign::getAllEmailWillRecieveTheCampaign($campaign['id'])['contacts']); 
+            break; 
+            default: 
+                $created_ago = Carbon::createFromTimeStamp(strtotime($campaign['created_at']))->diffForHumans();  
+                    $campaign['created_ago'] = $created_ago;
+                    // $campaigns[$index]['next_send'] = Helper::createDateTime(CampaignSchedule::where('campaign_id', $campaigns[$index]['id'])->first()->schedule_send)->format('l jS \\of F Y h:i:s A');
+                $campaign['total_contacts'] =  count(Campaign::getAllEmailWillRecieveTheCampaign($campaign['id'])['contacts']); 
+            break; 
+        }    
+
+        // set campaign list  
+        $campaign['list_id_str'] =  List1::getStrName(Campaign::find($campaign['id'])->campaignList); 
+
+        // return specific campaigns
+        // 
+        // dd($campaign); 
+        return $campaign; 
+    }
     // other
     public function getAllCampaign()
     {
@@ -735,4 +771,22 @@ class CampaignController extends Controller
         $campaign = CampaignTemplate::find($templateId); 
         return view('pages/campaign/campaign-selected-template-preview', compact('campaign'));  
     }
+
+    public function getAllByLabel($label_id=null)
+    {   
+        $data = [];   
+
+        // get all form under this label     
+        $labelDetails = Label::find($label_id)->labelDetails;    
+        // dd($labelDetails);
+
+            // exit;
+        // // get form by label details table id and add it in array    
+        foreach($labelDetails as $labelDetail) {  
+             $data[] = $this->getById($labelDetail->table_id); 
+        }   
+        
+        //  return form, to be display in front end  
+        return $data; 
+    } 
 } 

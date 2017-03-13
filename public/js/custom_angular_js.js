@@ -17,8 +17,7 @@ app.controller('MainCtrl', function($scope) {
 'use strict'; 
  
 //add contact
-app.controller('myAddContactCtrl', ['$scope', function($scope) { 
-
+app.controller('myAddContactCtrl', ['$scope', function($scope) {  
     console.log("add countact angulajs loaded");
 }]);  
 
@@ -114,6 +113,7 @@ app.controller( 'myCampaignViewCtr', ['$scope', '$filter', '$http', '$window', f
 
         console.log("kind = " + kind);
         $scope.campaignKindLoader = true;
+        $scope.showCampaignInitLoader = true;
 
         $scope.myStyle={'display':'block'};
 
@@ -133,18 +133,20 @@ app.controller( 'myCampaignViewCtr', ['$scope', '$filter', '$http', '$window', f
         }).then(function successCallback(response) {
 
             $scope.data = [];
+            $scope.totalCampaign = 0;
             $scope.myStyle={'display':'none'};
             // console.log(response);
             for (var i = 0; i < response.data.length; i++) {
                 $scope.data.push(response.data[i]);
                 $scope.totalCampaign++;
             }
-            $scope.campaignKindLoader = false;
-
+            $scope.showCampaignInitLoader = false;
+            $scope.campaignKindLoader = false; 
 
         }, function errorCallback(response) {
             $scope.myStyle={'display':'none'};
             //$scope.campaignKindLoader = false;
+            $scope.showCampaignInitLoader = false;
             alert("something wrong! please campaign send right support. Thank you!");
         });
     };
@@ -179,14 +181,15 @@ app.controller( 'myCampaignViewCtr', ['$scope', '$filter', '$http', '$window', f
         $scope.getData() ;
     });
  
-     // label 
-   $scope.saveNewLabel = function ()  {
- 
-
+    // add label  
+    $scope.saveNewLabel = function ()  { 
         console.log("save new label now name "    + $scope.name  ) ;   
-        // post request to insert new label   
-          
-         $http({
+        if($scope.name == null)  {
+            $scope.label_popup_message = true; 
+        } else {
+            $scope.label_popup_message = false; 
+            // post request to insert new label    
+             $http({
                 method: 'POST',
                 url: obj.siteUrl + '/user/label',
                 data: { type:'campaign', name:$scope.name },
@@ -194,16 +197,57 @@ app.controller( 'myCampaignViewCtr', ['$scope', '$filter', '$http', '$window', f
                     'Content-type': 'application/json;charset=utf-8'
                 }
             })
-            .then(function(response) {
-
-                $window.location.reload();
-                
+            .then(function(response) { 
+                $window.location.reload(); 
                 // console.log(response);
             }, function(rejection) {
                 console.log("Ohps! something wrong, please campaign send right support. Thank you!");
-            });
+            }); 
+        } 
+    }
 
+    // delete label 
+    
+    $scope.deleteNewLabel  = function () { 
+        $http({ 
+            method: 'DELETE',  
+            url: obj.siteUrl + '/user/label/'+$scope.label_id,  
+            data: { id:$scope.label_id}, 
+            headers: {
+                'Content-type': 'application/json;charset=utf-8'
+            }  
+        })
+        .then(function(response) { 
+            $window.location.reload();  
+        }, function(rejection) {
+            console.log("Ohps! something wrong, please campaign send right support. Thank you!");
+        });  
     } 
+
+
+
+    // load label
+    $scope.loadAllByLabel = function(id) {
+         $scope.showCampaignLabelLoader[id] = true;
+      $http({ 
+            method: 'GET',  
+            url: obj.siteUrl + '/user/campaign/get/all/label/'+id,  
+            data: { id:id}, 
+            headers: {
+                'Content-type': 'application/json;charset=utf-8'
+            }   
+         }).then(function successCallback(response) {   
+            $scope.data = [];
+            for (var i = 0; i<response.data.length; i++) {
+                $scope.data.push(response.data[i]); 
+            } 
+             $scope.showCampaignLabelLoader[id] = false;
+        }, function(rejection) {
+            console.log("Ohps! something wrong, please campaign send right support. Thank you!");
+             $scope.showCampaignLabelLoader[id] = false;
+        });    
+    }
+    
 }]);
 
 
@@ -823,22 +867,27 @@ app.controller('myFormViewCtr', ['$scope', '$filter', '$http', '$window', functi
     }   
 
     // When the home page Form loaded
-    $http({
-      method: 'GET',
-      url:  obj.siteUrl + '/user/form/get/all'
-    }).then(function successCallback(response) {   
-        for (var i = 0; i<response.data.length; i++) {
-            $scope.data.push(response.data[i]);
-            $scope.totalForm++; 
-        } 
-    }, function errorCallback(response) { 
-        alert("something wrong! please form send right support. Thank you!"); 
-    });
+    $scope.InitForm = function() {   
+        $scope.showFormInitLoader = true;  
+        $http({
+          method: 'GET',
+          url:  obj.siteUrl + '/user/form/get/all'
+        }).then(function successCallback(response) {   
+            $scope.data = []; 
+            $scope.totalForm = 0;
+            for (var i = 0; i<response.data.length; i++) {
+                $scope.data.push(response.data[i]);
+                $scope.totalForm++; 
+            } 
+            $scope.showFormInitLoader = false;
+        }, function errorCallback(response) { 
+            alert("something wrong! please form send right support. Thank you!"); 
+            $scope.showFormInitLoader = false;
+        });
+    } 
+    $scope.InitForm(); 
 
-    // pagination
-
-
-
+    // pagination   
     $scope.numPages = function () {
         return Math.ceil($scope.data.length / $scope.pageSize)-1;
     };
@@ -861,6 +910,73 @@ app.controller('myFormViewCtr', ['$scope', '$filter', '$http', '$window', functi
         $scope.numPages();
         $scope.getData() ;
     });
+
+
+    // add new label
+    $scope.saveNewLabel = function ()  { 
+    console.log("save new label now name "    + $scope.name  ) ;    
+    if($scope.name == null)  {
+        $scope.label_popup_message = true; 
+    } else {
+        $scope.label_popup_message = false;  
+        // post request to insert new label    
+         $http({
+                method: 'POST',
+                url: obj.siteUrl + '/user/label',
+                data: { type:'form', name:$scope.name },
+                headers: {
+                    'Content-type': 'application/json;charset=utf-8'
+                }
+            })
+            .then(function(response) { 
+                $window.location.reload(); 
+                // console.log(response);
+            }, function(rejection) {
+                console.log("Ohps! something wrong, please campaign send right support. Thank you!");
+            }); 
+        } 
+    } 
+
+    // delete new label 
+    $scope.deleteNewLabel  = function () { 
+        $http({ 
+            method: 'DELETE',  
+            url: obj.siteUrl + '/user/label/'+$scope.label_id,  
+            data: { id:$scope.label_id}, 
+            headers: {
+                'Content-type': 'application/json;charset=utf-8'
+            }  
+        })
+        .then(function(response) { 
+            $window.location.reload();  
+        }, function(rejection) {
+            console.log("Ohps! something wrong, please campaign send right support. Thank you!");
+        });  
+    } 
+
+    // load label
+    $scope.loadAllByLabel = function(id) {
+         $scope.showFormLabelLoader[id] = true;
+      $http({ 
+            method: 'GET',  
+            url: obj.siteUrl + '/user/form/get/all/label/'+id,  
+            data: { id:id}, 
+            headers: {
+                'Content-type': 'application/json;charset=utf-8'
+            }   
+         }).then(function successCallback(response) {   
+            $scope.data = [];
+            for (var i = 0; i<response.data.length; i++) {
+                $scope.data.push(response.data[i]); 
+            } 
+             $scope.showFormLabelLoader[id] = false;
+        }, function(rejection) {
+            console.log("Ohps! something wrong, please campaign send right support. Thank you!");
+             $scope.showFormLabelLoader[id] = false;
+        });    
+
+    }
+
 
 
 }]);  
@@ -1090,8 +1206,7 @@ app.controller('myListSelectCtr', ['$scope', '$filter', '$http', '$window', func
 app.controller('myUserAccountCtrl', ['$scope', '$filter', '$http', '$window', function ($scope, $filter, $http, $window) { 
         
         $scope.accountInfoInit = [];    
-        
-
+         
         // Change password
             //Typing in field current password
             $scope.$watch('current_password', function(newValue, oldValue) {  

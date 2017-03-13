@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Label;
 use App\User;
+use DB; 
 
 class LabelController extends Controller
 {
@@ -36,10 +37,12 @@ class LabelController extends Controller
      */
     public function store(Request $request)
     {   
+
+
         /** 
          *  
          */
-        $data = $request->all(); 
+        $data = $request->all();  
 
         /**
          * 
@@ -51,8 +54,7 @@ class LabelController extends Controller
          */
         $response = Label::create($data); 
   
-
-
+  
         return $data;
         /**
          * 
@@ -105,7 +107,12 @@ class LabelController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
-    {
-        //
+    {  
+        DB::transaction(function ($id) use ($id)  { 
+            DB::table('labels')->where('id', $id)->delete(); 
+            DB::table('label_details')->where('label_id', $id)->delete(); 
+        });  
+        
+        return 'success';
     }
 }

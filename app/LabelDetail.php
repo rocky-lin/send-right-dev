@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class LabelDetail extends Model
 {
     protected $table = 'label_details'; 
-    protected $fillable = ['label_id', 'table_id']; 
+    protected $fillable = ['label_id', 'table_id', 'table_name']; 
 
     public function label() 
     {

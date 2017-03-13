@@ -1,6 +1,6 @@
 @extends('layouts.app')
 @section('content')
-    <div class="row">
+    <div class="row" ng-controller="myFormViewCtr" >
         <!-- left content as sidebar -->
         <div class="col-sm-2 ">
             @include("pages/include/form/form-sidebar")

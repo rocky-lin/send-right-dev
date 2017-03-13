@@ -23,7 +23,7 @@ class FormController extends Controller
      */
     public function index()
     {
-        $labels = Label::where('account_id', User::getUserAccount())->where('type', 'campaign')->get();  
+        $labels = Label::where('account_id', User::getUserAccount())->where('type', 'form')->get();  
         return view('pages.form.form', compact('labels'));
     }
 
@@ -215,4 +215,20 @@ class FormController extends Controller
         // return  List1::amazingTest();
         return List1::getListContactsWithDetails($listId);
     }  
+  
+    public function getAllByLabel($label_id=null)
+    {   
+        $data = [];   
+
+        // get all form under this label     
+        $labelDetails = Label::find($label_id)->labelDetails;    
+
+        // // get form by label details table id and add it in array    
+        foreach($labelDetails as $labelDetail) {  
+             $data[] = Form::find($labelDetail->table_id); 
+        }  
+  
+        //  return form, to be display in front end  
+        return $data; 
+    } 
 }

@@ -105,6 +105,9 @@ Route::group(['prefix' => 'user' , 'middleware' => 'auth' ], function() {
 	  	Route::resource('list', 'ListController');   
 
 	//  form  
+
+
+		Route::get('form/get/all/label/{label_id?}', 'FormController@getAllByLabel')->name('user.form.get.all.by.label');   
 		Route::get('form/get/all', 'FormController@getUserAccountForms')->name('user.form.get.all');   
 		Route::get('form/list/connect/view', 'FormController@viewConnectList')->name('user.form.list.connect.view'); 
 		Route::post('form/register/step1', 'FormController@registerNewFormStep1')->name('user.form.register.step1'); 
@@ -114,7 +117,8 @@ Route::group(['prefix' => 'user' , 'middleware' => 'auth' ], function() {
 		Route::post('form/list/connect/post', 'FormController@postConnectList')->name('user.form.list.connect.post');  
 		Route::resource('form', 'FormController');   
 
-	// 	   
+	// 	    
+		Route::get('campaign/get/all/label/{label_id?}', 'CampaignController@getAllByLabel')->name('user.campaign.get.all.by.label');   
 		Route::get('campaign/newsletters','CampaignController@index')->name('user.campaign.newsletter.view'); 
 		Route::get('campaign/auto-responders','CampaignController@autoResponderIndex')->name('user.campaign.autoresponders.view'); 
 		Route::get('campaign/mobile-optin','CampaignController@mobileOptInIndex')->name('user.campaign.mobileoptin.view'); 

@@ -1,4 +1,7 @@
-<div ng-controller="myFormViewCtr">
+<div> 
+    {{Support\Popup::form_delete_label()}}
+    {{Support\Popup::form_add_label()}}
+
     <div class="row">
         <div class="col-md-6">
              <h3>Forms</h3>
@@ -45,7 +48,7 @@
                 <thead>
                     <tr>
                         <th>
-                            <input type="checkbox" />
+                            <input type="checkbox"  data-ng-click="checked_all === true? checked_all = false: checked_all=true" />
                         </th>
                         <th>
                         <label>Name</label>
@@ -73,7 +76,7 @@
                     <tr data-ng-hide="deleteForm[form.id]"  ng-repeat="form in data | filter:q | startFrom:currentPage*pageSize | limitTo:pageSize | orderBy : email" >
 
 
-                        <td> <input type="checkbox" /> </td>
+                        <td> <input type="checkbox" data-ng-checked="checked_all" /> </td>
                         <td>@{{form.name}} </td>
                         <td>
                             <i class="material-icons" data-ng-click="viewNowForm(form)"  style="cursor:pointer;">remove_red_eye</i>

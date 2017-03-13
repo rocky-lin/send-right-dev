@@ -17,7 +17,7 @@
 </div>
 
 {{-- new popup for add form label--}}
-<div class="modal fade" id="addFormLabel" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+{{-- <div class="modal fade" id="addFormLabel" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -34,13 +34,13 @@
             </div>
         </div>
     </div>
-</div>
+</div> --}}
 {{-- end popup for add form label--}}
 
 
 
 {{-- new popup for delete label --}}
-<div class="modal fade" id="deleteFormLabel" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+{{-- <div class="modal fade" id="deleteFormLabel" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -56,7 +56,7 @@
             </div>
         </div>
     </div>
-</div>
+</div> --}}
 {{-- end popup for delete label --}}
 
 {{-- new camapign popup create --}}

@@ -10,8 +10,8 @@ class Label extends Model
  	
  	protected $fillable = ['type', 'name', 'account_id'];
 
- 	public function labelDetails () 
+ 	public function labelDetails() 
  	{
- 		return $this->hasMany('App\LebelDetail'); 
+ 		return $this->hasMany('App\LabelDetail'); 
  	}
 }

@@ -26,8 +26,12 @@ class CreateLabelDetailsTable extends Migration
              * This could be form id or campaign id
              */
             $table->integer('table_id')->unsigned();
- 
 
+            /**
+             * This could be the basis if delete a form or campaign then it should be deleted too..  
+             */
+            $table->string('table_name')->nullable();
+  
             $table->timestamps();
         });
     }

@@ -2,6 +2,7 @@
 @section('content')
     <div class="row" ng-controller="myCampaignViewCtr" ng-init="campaignDisplayByKind('all')" >  		 
 		{{Support\Popup::campaign_add_label()}}   
+		{{Support\Popup::campaign_delete_label()}}   
         <div class="col-sm-2 ">
             @include("pages/include/campaign/campaign-sidebar")
         </div>
