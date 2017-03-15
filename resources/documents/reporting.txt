@@ -28,9 +28,15 @@
 
 
 
-		  k. save new label should add table name and table id to label details -  done
-		  
-		  j. delete label details form when form is deleted  - 
+
+
+
+		k. save new label should add table name and table id to label details -  done		  
+		j. Delete label details form when form is deleted  -  
+      	h. delete form will also delete label record 
+
+
+
 
 	Campaigns 
       g. When clicked label load all the forms under the label  - done
@@ -47,28 +53,24 @@
 	  h. Campaign: allow check top checkbox and check all checkbox all the way down - done
 
 
+
+
       k. save new label should add table name and table id to label details -  done
-      g. allow assign campaign to a label - working
+      g. allow assign campaign to a label - done
+      h. change campaign template text to only text content 
+      h. delete campaign will also delete label record 
 
 
 
 
 
-
-
-
-
-
+ 
 
 
 
 
       d. create documentation - 
-      e. connect campaign list as it is for now - need to have condition allow not to select auto responder 
-	  j. delete label details form when form is deleted  - 
-
-
-
+      e. connect campaign list as it is for now - need to have condition allow not to select auto responder  
 - WEDNESDAY	
 Connect data in home page 
   a. All Contacts - Display all contacts load more will be linked to contact views

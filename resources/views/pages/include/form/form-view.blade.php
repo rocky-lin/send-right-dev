@@ -56,6 +56,7 @@
                     <tr>
                         <th>
                             <input type="checkbox" data-ng-init="checked_all=false"  ng-model="main_checkbox" data-ng-click="checked_all === true? checked_all = false: checked_all=true;manageCheckStatus()"    />
+
                         </th>
                         <th>
                         <label>Name</label>

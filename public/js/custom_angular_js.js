@@ -246,6 +246,51 @@ app.controller( 'myCampaignViewCtr', ['$scope', '$filter', '$http', '$window', f
             console.log("Ohps! something wrong, please campaign send right support. Thank you!");
              $scope.showCampaignLabelLoader[id] = false;
         });    
+    } 
+    
+    /**  click checkbox show label dropdown, check all and check individual */
+    $scope.checked_all = []; 
+    $scope.checked_all_model = []; 
+    $scope.selected_item = [];  
+    $scope.manageCheckStatus = function () {  
+        $scope.selected_item = [];   
+        $scope.selected_item = [];  
+        /**  push data to list of selected item  */
+        $scope.data.forEach(function(item) {      
+            if ($scope.checked_all_model[item.id] == true) {  
+                $scope.selected_item.push(item.id); 
+            } else {  
+            }
+        });     
+        /** show hide list dropdown */
+        if( $scope.selected_item.length > 0) {
+            $scope.assignLabelDropdownShow = true;
+        } else {
+            $scope.assignLabelDropdownShow = false;
+        } 
+        console.log($scope.selected_item);    
+    }  
+    /** Save assignment of label */
+    $scope.assignLabel = function(label_id) {  
+
+        $scope.assignListShow = true; 
+        
+
+        $http({ 
+            method: 'POST',  
+            url: obj.siteUrl + '/user/label-detail',  
+            data: { table_ids:$scope.selected_item, table_name:'campaigns', label_id:$scope.labelSelectedId}, 
+            headers: {
+                'Content-type': 'application/json;charset=utf-8'
+            }   
+        }).then(function successCallback(response) {   
+            alert("successfully added to a list");
+            $scope.assignListShow = false; 
+        }, function(rejection) {
+            console.log("Ohps! something wrong, please campaign send right support. Thank you!"); 
+            $scope.assignListShow = false; 
+        });      
+        console.log("save label assignment now");  
     }
     
 }]);
@@ -1019,15 +1064,8 @@ app.controller('myFormViewCtr', ['$scope', '$filter', '$http', '$window', functi
         }, function(rejection) {
             console.log("Ohps! something wrong, please campaign send right support. Thank you!"); 
             $scope.assignListShow = false; 
-        });     
-    
-
-
-
-        console.log("save label assignment now"); 
-
-
-
+        });      
+        console.log("save label assignment now");  
     }
 
 
