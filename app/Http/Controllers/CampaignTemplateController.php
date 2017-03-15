@@ -28,16 +28,16 @@ class CampaignTemplateController extends Controller
     }
 
     public function getTheme() {   
-        // if($_SESSION['campaign']['kind'] == 'auto responder') { 
-        // $templates = CampaignTemplate::where('type', $_SESSION['campaign']['kind'])->get();
-        // } else if($_SESSION['campaign']['kind'] == 'mobile email optin') { 
-        //     $templates = CampaignTemplate::where('type', 'mobile email optin')->get();
-        // } else { 
-        //     $templates = CampaignTemplate::where('type', 'newsletter')->get();
-        // }  
+        if($_SESSION['campaign']['kind'] == 'auto responder') { 
+        $templates = CampaignTemplate::where('type', $_SESSION['campaign']['kind'])->get();
+        } else if($_SESSION['campaign']['kind'] == 'mobile email optin') { 
+            $templates = CampaignTemplate::where('type', 'mobile email optin')->get();
+        } else { 
+            $templates = CampaignTemplate::where('type', 'newsletter')->get();
+        }  
         // dd($templates); 
 
-        $templates = CampaignTemplate::where('id', '>', 0)->get() ;
+        // $templates = CampaignTemplate::where('id', '>', 0)->get() ;
 
         return $templates;
     }

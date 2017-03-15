@@ -56,7 +56,7 @@
                                 <thead>
                                     <tr>  
                                          <th>
-                                            <input type="checkbox" />
+                                            <input type="checkbox" data-ng-click="checked_all === true? checked_all = false: checked_all=true"  />
                                         </th>  
                                         <th>
                                             <label>Campaign Title</label> 
@@ -93,7 +93,7 @@
                                 </thead>
                                 <tbody>
                                     <tr data-ng-hide="deleteCampaign[campaign.id]"  ng-repeat="campaign in data | filter:q | filter:type | filter:list | startFrom:currentPage*pageSize | limitTo:pageSize | orderBy : email" >  
-                                        <td>  <input type="checkbox" /> </td>
+                                        <td>  <input type="checkbox" data-ng-checked="checked_all" /> </td>
                                         <td>@{{campaign.title }}</td>
                                         <td>@{{campaign.type }}</td>
                                         <td> @{{campaign.next_send}} </td> 

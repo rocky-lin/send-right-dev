@@ -246,42 +246,35 @@ class CampaignController extends Controller
 
 
     // STEP 4
-
-    public function getChooseTemplate() {
     
+    public function getChooseTemplate() {
 
- 
         //        print "<pre>";
         //        unset($_SESSION['campaign']['template']);
         //        unset($_SESSION['campaign']['content']);
 
-
+        // print " alert alert " . $_SESSION['campaign']['kind']; 
+            
+        $kind = $_SESSION['campaign']['kind']; 
         if($_SESSION['campaign']['kind'] == 'auto responder') {
-        //            print "auto resonder";
+            // print "auto resonder";
             $templates = CampaignTemplate::where('type', 'auto responder')->get();
         }
         else if($_SESSION['campaign']['kind'] == 'mobile email optin') {
-        //            print "mobile optin";
+            // print "mobile optin";
             $templates = CampaignTemplate::where('type', 'mobile email optin')->get();
         }
         else {
-        //            print "newsletter";
+            // print "newsletter";
             $templates = CampaignTemplate::where('type', 'newsletter')->get();
-        }
-
-
-        //        print_r($_SESSION['campaign']);
-        //        print_r($_SESSION['campaign']);
-
-
+        } 
+        // print_r($_SESSION['campaign']);
+        // print_r($_SESSION['campaign']); 
         // print_r($templates);
-        // exit;
-
-        //        print "</pre>";
-
-        //        $templates = CampaignTemplate::where('type', 'newsletter')->get();
-
-        return view('pages/campaign/campaign-templates', compact('templates'));
+        // exit; 
+        // print "</pre>"; 
+        // $templates = CampaignTemplate::where('type', 'newsletter')->get(); 
+        return view('pages/campaign/campaign-templates', compact('templates', 'kind'));
     }
 
 
@@ -540,13 +533,9 @@ class CampaignController extends Controller
     
 
     public function getById($id)
-    {  
-
+    {   
         $campaign = Campaign::where('id', $id)->get()->toArray();   
-        $campaign = $campaign[0]; 
- 
-
-          
+        $campaign = $campaign[0];  
 
         switch ($campaign['kind']) {
             case 'mobile email optin': 
@@ -784,7 +773,7 @@ class CampaignController extends Controller
         // // get form by label details table id and add it in array    
         foreach($labelDetails as $labelDetail) {  
              $data[] = $this->getById($labelDetail->table_id); 
-        }   
+        }    
         
         //  return form, to be display in front end  
         return $data; 

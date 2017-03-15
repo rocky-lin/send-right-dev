@@ -1,6 +1,75 @@
 
+- MONDAY 
 
-- WEDNESDAY
+	Form Page
+	  a. Dropdown function - none for now
+	  b. Top Checkbox - allow checked tickbox at top and check all checkbox all the way down - done
+	  c. Connect page - remove the form template dropdown - done
+	  d. Create label in form - done
+	  h. add counter to the label - done
+	  l. add loader in label left sidebard - done
+	  f. Allow delete label in form and delete all the forms under the label - done
+	  g. When clicked label load all the forms under the label  - done    
+
+	  e. Form: Create label don't allow duplicated label in specific type and name by specific user account in form  - done 
+	  i. Form: allow assign form to a label - done
+
+
+		1. Form: Create label don't allow duplicated label in specific type and name by specific user account in form  - done 
+		2. Form: allow assign form to a label - done
+		3. Campaign: Fix template ui - working 
+		4. Campaign: Create label don't allow duplicated label in specific type and name by specific user account in campaign - done 
+		5. Campaign: Only display template for campaign  newsletter, auto responder and mobile optin with specific template - done
+		6. Campaign: fix ui and tab dynamic change - done 
+		7. Campaign: show border when selected a theme, disable enable button when selected -  done  
+		8. Campaign: Set image background for template for now for newsletter, auto responder and mobile optin - done
+		9. Campaign: create basic templates for newsletter, auto responder and mobile optin - done 
+		10. Campaign: allow check top checkbox and check all checkbox all the way down - done
+
+
+
+		  k. save new label should add table name and table id to label details -  done
+		  
+		  j. delete label details form when form is deleted  - 
+
+	Campaigns 
+      g. When clicked label load all the forms under the label  - done
+      l. add loader in label left sidebard -  done 
+      f. add counter to the label - done  
+
+      g. Campaign: Fix template ui - working 
+	  a. Campaign: Create label don't allow duplicated label in specific type and name by specific user account in campaign - done 
+	  b. Campaign: Only display template for campaign  newsletter, auto responder and mobile optin with specific template - done
+	  e. Campaign: fix ui and tab dynamic change - done 
+	  f. Campaign: show border when selected a theme, disable enable button when selected -  done  
+	  c. Campaign: Set image background for template for now for newsletter, auto responder and mobile optin - done
+	  f. Campaign: create basic templates for newsletter, auto responder and mobile optin - done 
+	  h. Campaign: allow check top checkbox and check all checkbox all the way down - done
+
+
+      k. save new label should add table name and table id to label details -  done
+      g. allow assign campaign to a label - working
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      d. create documentation - 
+      e. connect campaign list as it is for now - need to have condition allow not to select auto responder 
+	  j. delete label details form when form is deleted  - 
+
+
+
+- WEDNESDAY	
 Connect data in home page 
   a. All Contacts - Display all contacts load more will be linked to contact views
   b. Contact Chart - Display contact chart, we can do this later since we don't record any contact status
@@ -30,10 +99,9 @@ Navigation, Menu and bread crumbs
   b. trigger search function - not sure what is the function yet for now
   c. click help - display FAQ and other information
   d. breakcrumb refer mailchimp
-  	 https://www.evernote.com/shard/s94/sh/9ec538f5-1061-41d9-8cc7-2f5de19b7228/23eb717794fa75c9
-  
-- TUESDAY  
+  	 https://www.evernote.com/shard/s94/sh/9ec538f5-1061-41d9-8cc7-2f5de19b7228/23eb717794fa75c9 
 
+- TUESDAY   
 	Contact  
 	  a. Top checkbox - allow checked tickbox at top and check all checkbox all the way down  	  
 	  b. Fix ui for add contact page 
@@ -49,34 +117,6 @@ Navigation, Menu and bread crumbs
 	  c. Create List page - update ui and change to a popup refer here 
 	     https://www.evernote.com/shard/s94/sh/9ec538f5-1061-41d9-8cc7-2f5de19b7228/23eb717794fa75c9 
  
-- MONDAY 
-
-	Form Page
-	  a. Dropdown function - none for now
-	  b. Top Checkbox - allow checked tickbox at top and check all checkbox all the way down - done
-	  c. Connect page - remove the form template dropdown - done
-	  d. Create label in form - done
-	  h. add counter to the label - done
-	  e. Create label don't allow duplicated label in specific type and name by specific user account in form  
-	  f. Allow delete label in form and delete all the forms under the label - done
-	  g. When clicked label load all the forms under the label  - done
-	  i. allow assign form to a label - 
-	  j. delete label details form when form is deleted  - 
-	  k. save new label should add table name and table id to label details
-	  l. add loader in label left sidebard - done
- 
-	Campaigns 
-	  a. Create label don't allow duplicated label in specific type and name by specific user account in campaign
-	  b. Only display template for campaign  newsletter, auto responder and mobile optin with specific template
-	  c. Set image background for template for now for newsletter, auto responder and mobile optin
-      d. create documentation - 
-      e. connect campaign list as it is for now - need to have condition allow not to select auto responder 
-      f. add counter to the label - done
-      g. allow assign campaign to a label - 
-      g. When clicked label load all the forms under the label  - done
-      l. add loader in label left sidebard -  done 
-	  j. delete label details form when form is deleted  - 
-
 
 
 

@@ -24,7 +24,7 @@ class FormController extends Controller
     public function index()
     {
         $labels = Label::where('account_id', User::getUserAccount())->where('type', 'form')->get();  
-        return view('pages.form.form', compact('labels'));
+        return view('pages/form/form', compact('labels'));
     }
 
     /**

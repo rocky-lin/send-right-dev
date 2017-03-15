@@ -36,10 +36,8 @@
     {{-- @for($i=0; $i<10; $i++)  --}}
         <div class="col-md-2 template-container"  style="width:100%" ng-mouseenter="templateBackgroundBg={display:'block'}"  ng-mouseleave="templateBackgroundBg={display:'none'}" >    
             <div class="template-container-main-bg" style="height:100%; width:100%" ng-style="templateBackgroundBg"> 
-                <div class="template-container-hover" > 
-
- 
-                    <input type="button" value="Select" class="btn btn-info" ng-click="selectedTheme(campaign)">  <br><br>
+                <div class="template-container-hover" >  
+                    <input type="button" value="Select" class="btn btn-info" ng-click="selectedTheme(campaign)" ng-disabled="buttonThemeSelectedEnabled[campaign.id]" data-ng-init="buttonThemeSelectedEnabled[campaign.id]=false" >  <br><br>
                     @{{selectedCampaignTemplate}}
                     <input type="button" value="Preview" class="btn btn-default">  
                 </div> 
@@ -47,36 +45,51 @@
                 </div>
             </div> 
             <div class="thumbnail" style="width:193px">   
-                <img alt="100%x200" data-src="holder.js/100%x200" src="data:image/smc+" data-holder-rendered="true" style="height: 200px; width: 100%; display: block;">   
+ 
+                    @if($kind == 'auto responder') 
+                        <img alt="@{{campaign.name}}" src="{{url('/public/img/template/Auto Responder')}}/@{{campaign.name}}.png" data-holder-rendered="true" style="height: 200px; width: 100%; display: block;">   
+                    @elseif($kind == 'mobile email optin')  
+                        <img alt="@{{campaign.name}}" src="{{url('/public/img/template/Mobile Optin')}}/@{{campaign.name}}.png" data-holder-rendered="true" style="height: 200px; width: 100%; display: block;">   
+                    @else  
+                        <img alt="@{{campaign.name}}" src="{{url('/public/img/template/News Letter')}}/@{{campaign.name}}.png" data-holder-rendered="true" style="height: 200px; width: 100%; display: block;">   
+                    @endif
+                
+
+
+
             </div>     
             <div class="pull-center">     
+
                 <p> @{{campaign.name}} </p>              
                 {{-- <p> {{$i}} </p> --}}
            </div>
         </div>   
     {{-- @endfor --}}
-	</div>  
-	<hr> 
+	</div>   
 	<div class="row"> 
 		<div class="col-md-12">
 				@include("pages/include/pagination/pagination")
 		</div>   
 	</div> 
+
     <div class="row"> 
-        <div class="col-md-12"> 
+        <div class="col-md-12" style="text-align: right;">
         <form action="{{ route('user.post.campaign.select') }}" method="POST"  >
             {{csrf_field()}}   
 
-                <input type="text" name="template" id="select-campaign-template" ng-model="selectedThemeModel" data-ng-value="selectedThemeModel"   /> <br>   
+                <input type="hidden" name="template" id="select-campaign-template" ng-model="selectedThemeModel" data-ng-value="selectedThemeModel"   /> <br>   
 
                 <input type="hidden" name="method" value="POST"  /> <br> 
-
-                <input type="submit" class="btn btn-info" value="Next" id="campaign-template-next-button"   ng-disabled="templateNextEnable" ng-init="templateNextEnable=true" />
-
-                <small id="campaign-template-next-button-text" style="color:red" ng-hide="hideAlertMessage"> Please select template to enable next button..</small>  
                 
+                <input type="submit" class="btn btn-success" value="Next" id="campaign-template-next-button"   ng-disabled="templateNextEnable" ng-init="templateNextEnable=true" />
+                <br>
+                <small id="campaign-template-next-button-text" style="color:red" ng-hide="hideAlertMessage"> Please select template to enable next button..</small>   
             </form>
-        </div>
+            <br><br><br>    
+        </div> 
     </div>
+
+    </div> 
 </div>
+
  

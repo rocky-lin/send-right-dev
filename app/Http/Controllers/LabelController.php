@@ -37,8 +37,6 @@ class LabelController extends Controller
      */
     public function store(Request $request)
     {   
-
-
         /** 
          *  
          */
@@ -51,19 +49,21 @@ class LabelController extends Controller
 
         /**  
          * 
-         */
-        $response = Label::create($data); 
-  
-  
-        return $data;
+         */  
+        if(Label::where('name', $data['name'])->where('account_id', $data['account_id'])->count('id') < 1) { 
+            if(Label::create($data)) {
+                return 'Successfully added'; 
+            } else { 
+                return 'Failed to add';  
+            } 
+        }   else {
+            return 'label already exist';
+        } 
+
         /**
          * 
          */
-        if($response) {
-            return 'success added new label'; 
-        } else {
-            return 'something wrong, adding new label'; 
-        } 
+        return $data; 
     }
 
     /**

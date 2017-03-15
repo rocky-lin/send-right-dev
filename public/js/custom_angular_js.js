@@ -928,7 +928,7 @@ app.controller('myFormViewCtr', ['$scope', '$filter', '$http', '$window', functi
                     'Content-type': 'application/json;charset=utf-8'
                 }
             })
-            .then(function(response) { 
+            .then(function(response) {  
                 $window.location.reload(); 
                 // console.log(response);
             }, function(rejection) {
@@ -957,14 +957,14 @@ app.controller('myFormViewCtr', ['$scope', '$filter', '$http', '$window', functi
     // load label
     $scope.loadAllByLabel = function(id) {
          $scope.showFormLabelLoader[id] = true;
-      $http({ 
+         $http({ 
             method: 'GET',  
             url: obj.siteUrl + '/user/form/get/all/label/'+id,  
             data: { id:id}, 
             headers: {
                 'Content-type': 'application/json;charset=utf-8'
             }   
-         }).then(function successCallback(response) {   
+        }).then(function successCallback(response) {   
             $scope.data = [];
             for (var i = 0; i<response.data.length; i++) {
                 $scope.data.push(response.data[i]); 
@@ -973,9 +973,63 @@ app.controller('myFormViewCtr', ['$scope', '$filter', '$http', '$window', functi
         }, function(rejection) {
             console.log("Ohps! something wrong, please campaign send right support. Thank you!");
              $scope.showFormLabelLoader[id] = false;
-        });    
+        });     
+    } 
+ 
+
+
+    /**  click checkbox show label dropdown, check all and check individual */
+    $scope.checked_all = []; 
+    $scope.checked_all_model = []; 
+    $scope.selected_item = [];  
+    $scope.manageCheckStatus = function () {  
+        $scope.selected_item = [];   
+        $scope.selected_item = [];  
+        /**  push data to list of selected item  */
+        $scope.data.forEach(function(item) {      
+            if ($scope.checked_all_model[item.id] == true) {  
+                $scope.selected_item.push(item.id); 
+            } else {  
+            }
+        });     
+        /** show hide list dropdown */
+        if( $scope.selected_item.length > 0) {
+            $scope.assignLabelDropdownShow = true;
+        } else {
+            $scope.assignLabelDropdownShow = false;
+        } 
+        console.log($scope.selected_item);    
+    }  
+    /** Save assignment of label */
+    $scope.assignLabel = function(label_id) {  
+
+        $scope.assignListShow = true; 
+        
+
+        $http({ 
+            method: 'POST',  
+            url: obj.siteUrl + '/user/label-detail',  
+            data: { table_ids:$scope.selected_item, table_name:'forms', label_id:$scope.labelSelectedId}, 
+            headers: {
+                'Content-type': 'application/json;charset=utf-8'
+            }   
+        }).then(function successCallback(response) {   
+            alert("successfully added to a list");
+            $scope.assignListShow = false; 
+        }, function(rejection) {
+            console.log("Ohps! something wrong, please campaign send right support. Thank you!"); 
+            $scope.assignListShow = false; 
+        });     
+    
+
+
+
+        console.log("save label assignment now"); 
+
+
 
     }
+
 
 
 
@@ -1578,10 +1632,25 @@ app.controller('myTemplateThemeCtr', ['$scope', '$filter', '$http', '$window', f
     });
 
 
+    $scope.buttonThemeSelectedEnabled = [];  
+
     $scope.selectedTheme = function(campaign) {
+
+        // other settings
         console.log(campaign.id); 
         $scope.selectedThemeModel = campaign.id;
         $scope.templateNextEnable = false;
-        $scope.hideAlertMessage = true;
+        $scope.hideAlertMessage = true;  
+
+        // set disabled button clicked
+        $scope.buttonThemeSelectedEnabled[campaign.id] = true;  
+
+        // enable all button except clicked button
+        $scope.data.forEach(function(item) {  
+            console.log(" item id "  + item.id  + " campaign id " + campaign.id);  
+            if (item.id !== campaign.id) { 
+                $scope.buttonThemeSelectedEnabled[item.id] = false; 
+            }  
+        });   
     } 
-}]); 
+}]);

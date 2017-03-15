@@ -18,7 +18,14 @@
     <br>
     <div class="row">
         <div class="col-md-6">
-              <input type="button" value="Add Labels" class="pull-left btn btn-default"  data-toggle="modal" data-target="#addFormLabel">
+                <input type="button" value="Add Labels" class="pull-left btn btn-default"  data-toggle="modal" data-target="#addFormLabel"> 
+                <select ng-model="labelSelectedId" data-ng-change="assignLabel()" data-ng-show="assignLabelDropdownShow" data-ng-init="assignLabelDropdownShow=false"  name=""  style="width: 30%;margin-left: 27px;padding: 6px;border-radius: 5px;border: 1px solid #cccccc;"  >
+                    <option value="">Please select label..</option>   
+                    @foreach($labels as $label)
+                        <option value="{{$label->id}}">{{ucfirst($label->name)}}</option>
+                    @endforeach  
+                </select>
+                 <i class="fa fa-spinner fa-spin" aria-hidden="true" data-ng-show="assignListShow" data-ng-init="assignListShow=false"></i>
         </div>
         <div class="col-md-3" style="text-align: right">
             {{--<input type="button" value="Add New List"  class="btn btn-success" />--}}
@@ -48,7 +55,7 @@
                 <thead>
                     <tr>
                         <th>
-                            <input type="checkbox"  data-ng-click="checked_all === true? checked_all = false: checked_all=true" />
+                            <input type="checkbox" data-ng-init="checked_all=false"  ng-model="main_checkbox" data-ng-click="checked_all === true? checked_all = false: checked_all=true;manageCheckStatus()"    />
                         </th>
                         <th>
                         <label>Name</label>
@@ -76,7 +83,7 @@
                     <tr data-ng-hide="deleteForm[form.id]"  ng-repeat="form in data | filter:q | startFrom:currentPage*pageSize | limitTo:pageSize | orderBy : email" >
 
 
-                        <td> <input type="checkbox" data-ng-checked="checked_all" /> </td>
+                        <td> <input type="checkbox" data-ng-checked="checked_all"  data-ng-model="checked_all_model[form.id]" ng-click="manageCheckStatus()" /> </td>
                         <td>@{{form.name}} </td>
                         <td>
                             <i class="material-icons" data-ng-click="viewNowForm(form)"  style="cursor:pointer;">remove_red_eye</i>
