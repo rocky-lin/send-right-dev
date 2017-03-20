@@ -64,6 +64,8 @@ if($activateEmailCampaign)
 }
 
   
+ 
+
 $to 	  = 'jesus@sendright.net'; 
 $from     = 'francis123@gmail.com'; 
 $fromName = 'Francis Suarez';
@@ -79,16 +81,18 @@ print "<br> from:  $from name: $fromName  to: $to <br>";
 // $toCampaign = 'new-mobile-optin-test-1@sendright.net';  // to@domain.com
 $toCampaign = convertToCampaignTitle($to); 
 $first_name =  getFirstName($fromName) ;
-$last_name  = getLastName($fromName); 
+$last_name  =  getLastName($fromName); 
  
 // separate first name and lastname 
-// check to email and get what is the account id
+// check to email and get what is the account id 
 
 print "<br> campaign title <br>" . $toCampaign . '<br>';
 $database->select('campaigns', '*',   null, " title LIKE '$toCampaign'" ); 
 $results = $database->getResult();  
 print " <br> campaign result"; 
 print_r_pre($results); 
+
+
 
 if(count($results) > 0) {  
 	$account_id   = $results[0]['account_id']; 
@@ -192,6 +196,23 @@ else {
 
 	print "<br> campaign not found";
 }
+
+ 
+// get list id 
+// get auto responder for list id
+// save auto response id and contact id 
+
+
+
+
+
+
+
+
+
+
+
+
 
 function print_r_pre($response) 
 {

@@ -119,7 +119,7 @@
                                             {{-- <span class="glyphicon glyphicon-trash" aria-hidden="true" data-ng-click="deleteCampaign(campaign)" ></span> --}}
                                         </td>
                                         <td> 
-                                            <a href="{{url("extension/campaign/index.php?type=newsletter&id=")}}@{{campaign.id}}" >
+                                            <a href="{{url("extension/campaign/index.php")}}?type=@{{campaign.kind}}&id=@{{campaign.id}}" >
                                                 <i class="material-icons">mode_edit</i>
                                                 {{-- <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span> --}}
                                              </a> 

@@ -231,4 +231,7 @@ function addActivities($database, $activities=[])
       	$activities
 	);
 }
-  
+ 
+/** Get list assigned to email optin */ 
+
+/** Get auto responder for a list */ 

@@ -8,14 +8,19 @@
                     <div class="media">
                         <div class="media-left media-middle">
                             <a href="#">
+
                                 <img class="img-circle contact-profile-pic-sm"
-                                     src="//lh3.googleusercontent.com/-6V8xOA6M7BA/AAAAAAAAAAI/AAAAAAAAAAA/rzlHcD0KYwo/photo.jpg?sz=120"/>
+                                     src="https://www.w3schools.com/bootstrap/img_avatar1.png"/>
+
+
                             </a>
                         </div>
                         <div class="media-body"><br/>
-                            <i class="material-icons contact-message-icon pull-right">message</i>
-                            <h4 class="media-heading">User name</h4>
-                            <span class="contact-profile-user-email"> user@email.com</span>
+                            <a href="{{url('user/contact/' . $contact->id . '/edit')}}">
+                                <i class="material-icons contact-message-icon pull-right">message</i>
+                            </a> 
+                            <h4 class="media-heading">{{$contact->first_name . '' . $contact->last_name}}</h4>
+                            <span class="contact-profile-user-email">{{$contact->email}}</span>
                         </div>
                     </div>
                 </div>
@@ -99,69 +104,86 @@
                 <div class="col-md-12  contact-profile-content-right"  >
                     <div class="tab-content">
                         <div id="home" class="tab-pane fade in active">
-                            <div class="activity-feed">
-                                <div class="feed-item">
-                                    <div class="date">Sep 25</div>
-                                    <div class="text">Responded to need <a href="single-need.php">“Volunteer opportunity”</a>
+                            <div class="activity-feed">  
+                                <h1> Activities </h1> <br> 
+                                @if(false) 
+                                    <div class="feed-item">
+                                        <div class="date">Sep 25</div>
+                                        <div class="text">Responded to need <a href="single-need.php">“Volunteer opportunity”</a>
+                                        </div>
+                                    </div> 
+                                    <div class="feed-item">
+                                        <div class="date">Sep 25</div>
+                                        <div class="text">Responded to need <a href="single-need.php">“Volunteer opportunity”</a>
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="feed-item">
-                                    <div class="date">Sep 25</div>
-                                    <div class="text">Responded to need <a href="single-need.php">“Volunteer opportunity”</a>
+                                    <div class="feed-item">
+                                        <div class="date">Sep 25</div>
+                                        <div class="text">Responded to need <a href="single-need.php">“Volunteer opportunity”</a>
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="feed-item">
-                                    <div class="date">Sep 25</div>
-                                    <div class="text">Responded to need <a href="single-need.php">“Volunteer opportunity”</a>
+                                    <div class="feed-item">
+                                        <div class="date">Sep 25</div>
+                                        <div class="text">Responded to need <a href="single-need.php">“Volunteer opportunity”</a>
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="feed-item">
-                                    <div class="date">Sep 25</div>
-                                    <div class="text">Responded to need <a href="single-need.php">“Volunteer opportunity”</a>
+                                    <div class="feed-item">
+                                        <div class="date">Sep 25</div>
+                                        <div class="text">Responded to need <a href="single-need.php">“Volunteer opportunity”</a>
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="feed-item">
-                                    <div class="date">Sep 25</div>
-                                    <div class="text">Responded to need <a href="single-need.php">“Volunteer opportunity”</a>
+                                    <div class="feed-item">
+                                        <div class="date">Sep 25</div>
+                                        <div class="text">Responded to need <a href="single-need.php">“Volunteer opportunity”</a>
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="feed-item">
-                                    <div class="date">Sep 25</div>
-                                    <div class="text">Responded to need <a href="single-need.php">“Volunteer opportunity”</a>
+                                    <div class="feed-item">
+                                        <div class="date">Sep 25</div>
+                                        <div class="text">Responded to need <a href="single-need.php">“Volunteer opportunity”</a>
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="feed-item">
-                                    <div class="date">Sep 25</div>
-                                    <div class="text">Responded to need <a href="single-need.php">“Volunteer opportunity”</a>
+                                    <div class="feed-item">
+                                        <div class="date">Sep 25</div>
+                                        <div class="text">Responded to need <a href="single-need.php">“Volunteer opportunity”</a>
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="feed-item">
-                                    <div class="date">Sep 25</div>
-                                    <div class="text">Responded to need <a href="single-need.php">“Volunteer opportunity”</a>
+                                    <div class="feed-item">
+                                        <div class="date">Sep 25</div>
+                                        <div class="text">Responded to need <a href="single-need.php">“Volunteer opportunity”</a>
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="feed-item">
-                                    <div class="date">Sep 25</div>
-                                    <div class="text">Responded to need <a href="single-need.php">“Volunteer opportunity”</a>
+                                    <div class="feed-item">
+                                        <div class="date">Sep 25</div>
+                                        <div class="text">Responded to need <a href="single-need.php">“Volunteer opportunity”</a>
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="feed-item">
-                                    <div class="date">Sep 25</div>
-                                    <div class="text">Responded to need <a href="single-need.php">“Volunteer opportunity”</a>
-                                    </div>
-                                </div>
+                                @else  
+                                    <div  class="alert alert-default">No contact activities yet.</div>  
+                                @endif 
                             </div>
                         </div>
-                        <div id="menu1" class="tab-pane fade">
-                            <h3>Notes</h3>
-                            <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+                        <div id="menu1" class="tab-pane fade"> 
+
+                            <h3>Notes</h3> <br>
+
+                            @if(false)                             
+                                <ul class="list-group">
+                                  <li class="list-group-item">New </li>
+                                  <li class="list-group-item">Deleted </li> 
+                                  <li class="list-group-item">Warnings </li> 
+                                </ul>                              
+                            @else 
+                                <div  class="alert alert-default">No note yet.</div> 
+                            @endif 
+
                         </div>
                         <div id="menu2" class="tab-pane fade">
-                            <h3>Site & Event Tracking 2</h3>
-                            <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam.</p>
+                            <h3>Site & Event Tracking 2</h3> 
+                            <br> 
+                            <div  class="alert alert-default">No Site & event tracking yet.</div> 
                         </div>
                         <div id="menu3" class="tab-pane fade">
-                            <h3>Filter</h3>
+                            <h3>Filter</h3> 
                             <p>Eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.</p>
                         </div>
                     </div>

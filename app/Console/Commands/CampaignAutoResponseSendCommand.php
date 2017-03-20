@@ -18,7 +18,7 @@ class CampaignAutoResponseSendCommand extends Command
      *
      * @var string
      */
-    protected $description = 'Command description';
+    protected $description = 'Trigger send auto responders queue';
 
     /**
      * Create a new command instance.

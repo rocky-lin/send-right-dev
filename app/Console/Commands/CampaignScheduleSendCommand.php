@@ -31,7 +31,7 @@ class CampaignScheduleSendCommand extends Command
      *
      * @var string
      */
-    protected $description = 'This will trigger campaign schedule check and send to email,sms or notification.';
+    protected $description = 'Trigger campaign schedule check and send to email,sms or notification.';
 
     /**
      * Create a new command instance.

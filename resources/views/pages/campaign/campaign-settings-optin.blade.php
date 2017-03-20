@@ -2,6 +2,7 @@
 @section('content')   
  
 
+<br>
 @if (!empty($messangeName))
 <div class="alert alert-success">
     {{$messangeName }}
@@ -74,7 +75,11 @@ th {
       <div class="panel-heading" >
         Campaign Details
           <a href="{{route('campaign.create')}}?action=edit&id={{$_SESSION['campaign']['id']}}">
-              <span class="glyphicon glyphicon-pencil" data-toggle="modal" data-target="#editIcon1" style="float: right;position: relative;"></span> 
+
+          <div class="pull-right"> 
+            <i class="material-icons">mode_edit</i>
+          </div>  
+              {{-- <span class="glyphicon glyphicon-pencil" data-toggle="modal" data-target="#editIcon1" style="float: right;position: relative;"></span>  --}}
           </a>
       </div> 
       <div class="panel-body"> 
@@ -99,7 +104,11 @@ th {
       <div class="panel-heading" >
         Email Optin Details 
            <a href="{{url('/extension/campaign/index.php')}}?id={{$_SESSION['campaign']['id']}}">
-              <span class="glyphicon glyphicon-pencil" data-toggle="modal" data-target="#editIcon1" style="float: right;position: relative;"></span> 
+                   
+            <div class="pull-right"> 
+              <i class="material-icons">mode_edit</i>
+            </div>  
+              {{-- <span class="glyphicon glyphicon-pencil" data-toggle="modal" data-target="#editIcon1" style="float: right;position: relative;"></span>  --}}
           </a>
       </div> 
       <div class="panel-body"> 

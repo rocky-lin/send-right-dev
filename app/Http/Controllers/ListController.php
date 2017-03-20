@@ -62,39 +62,36 @@ class ListController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Requests\StoreListReuquest $request)
-    {   
-
-        print "list " . $request->get('contact_ids');
-
-        // $totalContact = explode(',', $request->get('contact_ids')); 
-        $totalContactLen = strlen($request->get('contact_ids')); 
-
-        // dd($totalContact); 
-
-        // if less than 3 meaning user didn't select a contact that belongs to the list 
-        if($totalContactLen < 3) {
-            return Redirect::back()->withInput(Input::all())->with('status_contact', 'Please select at least 1 contact.');
+    {      
+        /**
+         * print "list " . $request->get('contact_ids');
+         * if less than 3 meaning user didn't select a contact that belongs to the list
+         */
+        if(strlen($request->get('contact_ids')) < 3) {
+            /**
+             * return Redirect::back()->withInput(Input::all())->with('status_contact', 'Please select at least 1 contact.');
+             */
+        } else {         
+            
+            /**
+             * insert to list contacts
+             */
+            foreach ($this->toArrayContactIds($request->get('contact_ids')) as $contact_id) { 
+                ListContact::firstOrCreate(['list_id'=>$list1->id, 'contact_id'=>$contact_id]); 
+            }   
         }
-
-
-
-        // insert new list
+ 
+        /**
+         * [$listData description]
+         * @var [type]
+         */
         $listData = $request->except('_token', 'contact_ids'); 
         $listData['account_id'] = User::getUserAccount();    
         $list1 = List1::create($listData);   
- 
-
-
-
-        // insert to list contacts 
-        foreach ($this->toArrayContactIds($request->get('contact_ids')) as $contact_id) { 
-            ListContact::firstOrCreate(['list_id'=>$list1->id, 'contact_id'=>$contact_id]); 
-        }  
-
-
-
-
-        // return response
+  
+        /**
+         * return response
+         */
         return redirect()
             ->back()
             ->with('status', 'successfully added new list');  

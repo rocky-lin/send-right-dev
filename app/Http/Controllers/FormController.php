@@ -13,6 +13,7 @@ use App\Contact;
 use App\Campaign;
 use App\AutoResponse;
 use App\Label;
+use App\LabelDetail;
 
 class FormController extends Controller
 {
@@ -89,57 +90,29 @@ class FormController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
-    {
-        // $deletedRows = Form::where('id', $id)->delete();
-        // print "deleted form id " .   $id; 
-            $form         = Form::find($id);
-            $autoResponse = AutoResponse::where('table_name', 'forms')->where('table_id', $id);
-
-            print "form name " . $form->folder_name; 
-            // if( $deletedRows ) { 
-            if($form->delete()) {
-                if($autoResponse->delete()) {
-                    print "<br> Auto response successfully deleted";
-                } else {
-                    print "<br> Auto response failed to delete";
-                }
-                // delete foder of the form
-                $success = File::deleteDirectory('E:/xampp/htdocs/rocky/send-right-dev/extension/form/create/editor/forms/' . $form->folder_name);
-                if($success == true) {  
-                    print "successfully deleted";
-                } else {
-                    print "failed to delete";
-                }
-                // delete entry of the form? not sure in this part yet
-                print "folder " .$form->folder_name . " successfully deleted.";
+    {    
+        $form         = Form::find($id);  
+        $autoResponse = AutoResponse::where('table_name', 'forms')->where('table_id', $id);   
+        if($form->delete()) {
+            if($autoResponse->delete()) {
+                print "<br> Auto response successfully deleted";
             } else {
-                print "folder " .$form->folder_name . " failed to delete."; 
-            }
-             // dd($form);
-        // } else {
-            // print "<br>failed to delete form row id $id"; 
-        // } 
-        // exit;
-        // $form = Form::find($id);
-        // delete form 
-        // if($form->delete()){
-        //     print "form " . $id . " row successfully deleted.";
-        // } else {
-        //     print "fold " . $id . " row failed to delete.";
-        // } 
-        // delete form list 
-        // delete form build  
-        // delete file 
-        // $frm = Form::find($id); 
-        // print  ' id - ' . $id . " folder name = " . $frm->folder_name;  
-        // dd($form);
-        // print "delete this folder name" . $form->folder_name;  
-        // $success = File::deleteDirectory('E:/xampp/htdocs/rocky/send-right-dev/extension/form/create/editor/forms/' . $frm->folder_name);
-        // if($success == true) {
-        //     print "folder " .$frm->folder_name . " successfully deleted.";
-        // } else {
-        //     print "folder " .$frm->folder_name . " failed to delete."; 
-        // }
+                print "<br> Auto response failed to delete";
+            } 
+            $success = File::deleteDirectory('E:/xampp/htdocs/rocky/send-right-dev/extension/form/create/editor/forms/' . $form->folder_name);
+            if($success == true) {  
+                print "successfully deleted";
+            } else {
+                print "failed to delete";
+            } 
+            print "folder " .$form->folder_name . " successfully deleted.";
+        } else {
+            print "folder " .$form->folder_name . " failed to delete."; 
+        } 
+ 
+        // delete form labels details 
+        LabelDetail::where('table_id', $id)->where('table_name', 'forms')->delete(); 
+
     }
     public function getUserAccountForms() 
     {   
@@ -205,7 +178,7 @@ class FormController extends Controller
     {   
         $listId = Form::getListIdFirst($id); 
         // return "test". $listId;
-        return view('pages.form.form-contact-detail', compact('listId'));  
+        return view('pages/form/form-contact-detail', compact('listId'));  
     }   
     public function getContacts($listId) 
     { 

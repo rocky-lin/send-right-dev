@@ -367,7 +367,8 @@ class ContactController extends Controller
     }
 
     public function profile($id) 
-    { 
-      return view('pages/contact/contact-profile'); 
+    {  
+      $contact = Contact::find($id);
+      return view('pages/contact/contact-profile', compact('contact')); 
     } 
 } 

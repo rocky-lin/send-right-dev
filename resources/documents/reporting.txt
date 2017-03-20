@@ -1,6 +1,45 @@
 
-- MONDAY 
+Monday:  
 
+March 20, 2017  
+ 
+Create label popup needs to remove number at the top, both form and campaign 
+
+Fix some pagination 
+
+    - contact pagination and other ui under forms view  - done, we still have lil issue dropdown default is blank - done
+    - create newsletter -  done
+    
+Check and setup cronjobs for campaign and auto responder -  cronjobs got issue we need to contact support for this  - 
+
+Add function that will allow send auto response for list in mobile optin 
+	- get list id 
+	- get list auto responder 
+	- save auto responder id to database and contact id
+	
+
+
+
+Make mobile optin responsive 
+
+Sending campaign and auto response - too many email per second   
+ 
+
+Friday:     
+
+Hi Rocky, 
+Update for March 17, 2017 
+
+Check campaign schedule send and fix issue found - done
+Check Autoresponder for form and fix issue found send - done  
+Make list create allow zero contact -  done  
+Change template same to all for autoresponder, newsletter and mobile optin -  done  
+Only show create template for supper admin - done  
+Fix newsletter edit, empty content - done  
+Upload online - done
+Check mobile optin, only can be checked online -  done   
+
+- MONDAY  
 	Form Page
 	  a. Dropdown function - none for now
 	  b. Top Checkbox - allow checked tickbox at top and check all checkbox all the way down - done
@@ -28,12 +67,9 @@
 
 
 
-
-
-
-		k. save new label should add table name and table id to label details -  done		  
-		j. Delete label details form when form is deleted  -  
-      	h. delete form will also delete label record 
+		March 15, 2017 
+		k. Form: Save new label should add table name and table id to label details -  done		  
+		j. Form: Delete label details form when form is deleted  - done  
 
 
 
@@ -52,49 +88,97 @@
 	  f. Campaign: create basic templates for newsletter, auto responder and mobile optin - done 
 	  h. Campaign: allow check top checkbox and check all checkbox all the way down - done
 
-
-
-
-      k. save new label should add table name and table id to label details -  done
-      g. allow assign campaign to a label - done
-      h. change campaign template text to only text content 
-      h. delete campaign will also delete label record 
-
-
-
-
-
- 
+	  March 15, 2017
+      k. Campaign: save new label should add table name and table id to label details -  done
+      g. Campaign: allow assign campaign to a label - done
+      h. Campaign: delete campaign will also delete label record - done
+      h. Campaign: change campaign template text to only text content - done
 
 
 
 
-      d. create documentation - 
-      e. connect campaign list as it is for now - need to have condition allow not to select auto responder  
+
+
+
+
+
+
+
+
+
+
+      March 16, 2017
+      a. create documentation - 
+      b. connect campaign list as it is for now - need to have condition allow not to select auto responder - done
+      c. campaign newsletter: change all the edit icon in campaign settings - done
+      c. campaign mobile optin: change all the edit icon in campaign settings - done
+      d. campaign newsletter: fix breakcrumb spacing - done
+      e. campaign newsletter: fix message after save position - done 
+      f. update pagination ui - done
+      f. pagination change page numbers - done 
+   
+      if note is empty say "no note yet" -
+      if tag is empty say "no tag yet"
+      if list is empty say "no list yet"
+      if activity is empty say "no activity yet"
+
+      g. navigation menu change profile smiley to person icon  
+      h. click search icon show a popup say search here..
+      i. make import contact as a popup 
+
+
 - WEDNESDAY	
-Connect data in home page 
-  a. All Contacts - Display all contacts load more will be linked to contact views
-  b. Contact Chart - Display contact chart, we can do this later since we don't record any contact status
-  c. Top contacts -  we can do this later since we can't identify top contacts
-  d. Auto responder - display all auto responder and when click view more need to redirect campaign with sorting auto responder
-  c. All List - display all list when hit show more, that should redirect to list page
-  d. All Forms - display all forms and when hit show all that should redirect to forms page
-  e. Activities - we don't record activity yet, this can come later.
-  f. Create campaign ui in right side of the page, no need as a dropdown it needs to be clickable button redirect to campaign page
- 
+
+Connect data in home page  
+
+  March 15, 2017
+  a. Dashboard: All Contacts - Display all contacts load more will be linked to contact views - done
+  d. Dashboard: Auto responder - display all auto responder and when click view more need to redirect d. campaign with sorting auto responder - done
+  c. Dashboard: All List - display all list when hit show more, that should redirect to list page - done 
+  d. Dashboard: All Forms - display all forms and when hit show all that should redirect to forms page - done
+  
+
+  b. Contact Chart - Display contact chart, we can do this later since we don't record any contact status - no need for now  
+  c. Top contacts -  we can do this later since we can't identify top contacts - no need for now 
+  e. Activities - we don't record activity yet, this can come later. - no need for now 
+
+  March 16, 2017
+
+  f. Right side campaign allow clickable dropdown - 
+      f.1 mobile optin    - done
+      f.2 auto responder  - done
+      f.3 newsletter      - done
+
+  a. Change create campaign from redirect to a popup - done
+
+  b. Add function activities box - done
+  
 - THURSDAY
-Contact profile
-  a. Note - allow save note to database - hit save then insert note to database via angularjs trigger
+
+  
+  Contact profile  
   b. List - display activity for list subscription
-  c. Tags - allow save tag to database for specific contact
   c. Work Flow - none for now 
   d. right side activity - display activity in the right side
   e. right side note - none for now
   f. right side site and event tracking - none for now
   j. right side filter - none for now
-  h. import contact ui and functions refer mailchimp
+  h. import contact ui and functions refer mailchimp 
+
+ March 16, 2017
+ 
+  display contact name - done
+  display contact email - done
+  click email redirect to edit contact  - working	
+  c. Tags - allow save tag to database for specific contact
+  a. Note - allow save note to database - hit save then insert note to database via angularjs trigger
+   
 
 
+
+
+
+ 
 - FRIDAY
 Navigation, Menu and bread crumbs
   a. clock seach icon - display a popup for search 
@@ -124,21 +208,6 @@ Navigation, Menu and bread crumbs
 
 - OVERTIME 
   
- 
-  
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -500,20 +569,21 @@ Add menu as default values in database form builder
 Check and test forms
 Finalize our form for mvp, clean codes   
 
-campaign
+campaig
+
 Create campaign migration and database
 Create data faker entries 
-
+ 
 Todo for November 25, 2016
-discuss to buy product for email/campaign bulder
-create campaign home page 
-setup view for campaign name 
+discuss to buy product for email/campaign bulde
+
+create campaign home pagsetup view for campaign name 
 setup view for select campaign list
+
 setup view for select template   
 
 Todo for November 28, 2016
-setup view to select type of view
-integrate purchased product, email/campaign builder
+setup view to select type of viintegrate purchased product, email/campaign builder
 setup summary view for the campaign
 delete campaign
  
@@ -557,15 +627,16 @@ Update for November 28, 2016
 - add create new campaign redirect
 - set campaign purchased to login  
 - set disable index with csrf validation, this will be used in the extensions codes/plugins  
-- save campaign to send right database, when new campaign created
+- save campaign to send right database, when new campaign create
+
 - put validation in connect list and create campaign name 
  
 Todo for November 29, 2016
-- put validation in create sender
+
+- put validation in create sen e 
 - put next button at top menu in compose campaign and set ajax send composed content to save in session and redirect to new page settings
 - create ui in settings
-- dispaly sender email, subject, name
-- allow preview  campaign title and campaign content
+- dispaly sender email, subject, na- allow preview  campaign title and campaign content
 - choose type schedule or direct send
 - send test email
 
@@ -847,15 +918,15 @@ Update for December 28, 2016
 review the view for mobile optin
 create planning for mobile optin 
 create database relationship 
-create migration for campaign template and update tables for campaign to match the mobile optin function
+create migration for campaign template and update tables for campaign to match the mobile optin functio
+
 add icon and clickable as option in create a campaign and when clicked mobile optin allow to add name and list and after hit next then will redirect to create campaign 
 add popup settings for mobile optin in campaign creation
-when hit save add loading in the button, that load only inside the button
+when hit save add loading in the button, that load only inside the but o 
+
 
 Todo December 29, 2016
-Continue with mobile optin
-
-
+Continue with mobile opti
 Update for December 29, 2016
 1. create the mobile optin button settings as popup 
 2. set the sendright email as default email of the user, in this way when subscriber send an email then sendright system can detect it and save it to sepcific lists that is assign list to the mobile optin 

@@ -11,6 +11,7 @@ use App\Campaign;
 
 class AutoResponseDetailsController extends Controller
 {
+    
     /**
      * @return string
      */

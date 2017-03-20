@@ -81,7 +81,7 @@
                 </tbody>
             </table>
 <hr>
-      @include("pages/include/pagination/pagination-1")
+      @include("pages/include/pagination/pagination")
 
             
            {{--  <input type="button" class="btn btn-info" ng-disabled="currentPage == 0" ng-click="currentPage=currentPage-1; setCheckBoxSelectedContact()" value="Previous" />

@@ -95,11 +95,11 @@
                         {{Form::close()}}
                     </div> 
                 </div> 
-  
-                   {{-- @if($userRole == 'supper administrator') --}}
-                        <hr> 
-                        <a  href="{{ url('extension/campaign/index.php?type=template') }}">Create template</a> 
-                    {{-- @endif --}}
+                            
+
+                        {{-- @if($userRole == 'supper administrator')  --}}
+                            <hr><a  href="{{ url('extension/campaign/index.php?type=template') }}">Create template</a>  
+                        {{-- @endif --}}
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>

@@ -30,16 +30,22 @@ class CampaignScheduleController extends Controller
         }
     }
     public function send()
-    {    
-         
-    	//  get all campaign that on time and also exceeding the time already
-        $campaignScheduleReachDeadline = CampaignSchedule::getReachDeadline(); 
- 
+    {     
+        print "\n start process sending.."; 
+        //  get all campaign that on time and also exceeding the time already
+        $campaignScheduleReachDeadline = CampaignSchedule::getReachDeadline();  
+
+        print "\ntotal reach schedule " . count($campaignScheduleReachDeadline); 
+
+        if(count($campaignScheduleReachDeadline) > 0)  {  
             // get campaign template
-            foreach ($campaignScheduleReachDeadline as $campaign) {     
+            foreach ($campaignScheduleReachDeadline as $index => $campaign) {     
      
+                  print "\n  " . $index . ".) campaign title  "  . $campaign->title;  
+
                 if(CampaignList::getTotalCampaignList($campaign->campaign_id) > 0) {
-  
+                    print "\n prepare process sending.."; 
+         
                     // send email now to the contacts the belong to the lists of the campaign
                     $error = $this->sendEmailToContacts($campaign);   
 
@@ -47,21 +53,23 @@ class CampaignScheduleController extends Controller
                     $this->printError($error);
 
                     // update campaign now with next schedule if repeat and batch send, so that we will know how many times it sent
-                    $this->supdateNextScheduleAndUpdateBatch($campaign); 
-     
+                    $this->supdateNextScheduleAndUpdateBatch($campaign);  
                     // break; 
                 } else {
                     print "<br>\n No list found in the campaign";
                 } 
                 $this->pauseInHalfOfSeconds();
-            }
+            }  
+        } else {
+            print "\n no reach schedule found for campaign send";
+        }
     }  
 
     public function directSend($campaign_id) 
     {
         // get campaign content
         $campaignScheduleReachDeadline = CampaignSchedule::getScpecificCampaignByCampaignId($campaign_id); 
-      
+        
         // get contact of the specific campaign
            foreach ($campaignScheduleReachDeadline as $campaign) {     
 
@@ -201,15 +209,25 @@ class CampaignScheduleController extends Controller
                 foreach ($contacts['contacts'] as $id => $contact) {  
                     if(Mail::to($contact['email'])->queue(new CampaignSendMail($contact, $campaign))) { 
                         Activity::create(['account_id'=>$campaign['account_id'], 'table_name'=>'campaigns','table_id'=>$campaign['campaign_id'], 'action'=>'Email successfully sent to ' . $contact['email'] . ' campaign status is ' . $campaign['repeat'] ]);  
+ 
+                        print "\n<br> sent campaign to " . $contact['email'] . ' campaign title ' . $campaign['title']; 
+
                     } else {
+
                          Activity::create(['account_id'=>$campaign['account_id'], 'table_name'=>'campaigns','table_id'=>$campaign['campaign_id'], 'action'=>'Email failed sending to ' . $contact['email'] . ' campaign status is ' . $campaign['repeat'] ]);   
+                        print "\n<br> failed campaign to " . $contact['email'] . ' campaign title ' . $campaign['title']; 
+
                     }  
+
                     $this->pauseInHalfOfSeconds(); 
+                    
                 }  
             } else {
+                print "\n no contact for campaign found"; 
                 print "<script> alert('No active contact found for this campaign'); </script>";
             }
         } else {
+            print "\n no campaign found"; 
             return 1; // no campaign found
         }
     }

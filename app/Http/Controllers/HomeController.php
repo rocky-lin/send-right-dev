@@ -11,6 +11,7 @@ use App\Contact;
 use App\Campaign; 
 use App\List1; 
 use App\Form;
+use App\Http\Controllers\CampaignController;  
 
 class HomeController extends Controller
 {
@@ -28,15 +29,33 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request)
-    { 
-
-        // return home view
+    public function index()
+    {   
         // distroy mobile optin after insert or update     
-        unset($_SESSION['campaign']['optin']);
+        unset($_SESSION['campaign']['optin']);  
+    
+        /** Get all contact */
+        $contacts = Contact::all(); 
 
-        return view('home');
-    }
+        /** get all auto responder */
+        $campaignController = new CampaignController(); 
+        $autoResponders = $campaignController->getAllCampaignSortByKind('auto responder'); 
+              
+        /** Get all lists */
+        $lists = List1::all(); 
+ 
+        /** Get all form */
+        $forms = Form::all();
+        
+        /** Get all activity for specific user */
+        $activities = Activity::where('account_id', User::getUserAccount())->orderBy('id','desc')->get(); 
+
+
+
+        // dd($activities);
+        // dd($autoResponders);
+        return view('home', compact('contacts', 'autoResponders', 'lists', 'forms', 'activities'));
+    } 
 
     public function previewActivities() 
     { 

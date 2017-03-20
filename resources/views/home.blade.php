@@ -1,3 +1,4 @@
+
 @extends('layouts.app')
 
 @section('content') 
@@ -10,28 +11,44 @@
             </div>
      
               <!-- Top level !-->
-            <div class="row ">           
-                <div class="col-md-4 ">
-
-                    <div class="panel panel-default panel-body-home">
-                         <div class="panel-heading">   
+                  <div class="row ">           
+                    <div class="col-md-4 "> 
+                      <div class="panel panel-default panel-body-home">
+                        <div class="panel-heading">   
                             <i class="material-icons">supervisor_account</i> 
-                            <span>All Contacts</span>
-                            <a href="#" class="btn btn-default"> Create </a> 
-                        </div>
-                    
-                        <div class="panel-body ">
-                            <ul class="list-group">
-                                <li class="list-group-item">Cras justo odio</li>
-                                <li class="list-group-item">Dapibus ac facilisis in</li>
-                                <li class="list-group-item">Morbi leo risus</li>
-                                <li class="list-group-item">Porta ac consectetur ac</li>
-                                <li class="list-group-item">Vestibulum at eros</li>
-                            </ul> 
-                        </div>
+                            <span>All Contacts</span>  {{count($contacts)}} 
+                            <a href="{{url('user/contact/create')}}" class="btn btn-default"> Create </a> 
+                        </div>  
 
+                        @if(count($contacts) > 0) 
+                          <div class="panel-body-content"  >
+
+                            <ul class="list-group">
+                                @foreach($contacts as $contact) 
+                                  @if($contact->first_name != null)
+                                    <li class="list-group-item">
+                                      <a href="{{url('user/contact/profile', $contact->id)}}">
+                                        {{$contact->first_name}}
+                                      </a>
+                                    </li>   
+                                  @endif
+                                @endforeach
+                            </ul>  
+                            <div class="pull-center">  
+                              <a href="{{url('user/contact')}}">
+                                <input type="button" value="More.." class="btn btn-info" />
+                              </a>
+                            </div>
+                            <br> 
+
+                          </div> 
+                        @else
+                          <div class="panel-body panel-body-content"> 
+                              <div>Subscriber not added yet. <a href="{{url('user/contact/create')}}"> Click here to add subscriber</a> </div> 
+                          </div> 
+                        @endif 
+                      </div> 
                     </div> 
-                </div> 
 
 
                 <div class="col-md-4"> 
@@ -55,7 +72,7 @@
                     <div class="btn-group"> 
                     </div> 
                 </div>
-                <div class="panel-body ">  
+                <div class="panel-body panel-body-content">  
                     <div class="alert alert-info" > 
                         Use filter to see the chart
                     </div> 
@@ -69,7 +86,7 @@
                     <i class="material-icons">face</i>
                     <span> Top Contacts  </span>
                     </div>
-                    <div class="panel-body "> 
+                    <div class="panel-body panel-body-content"> 
                         <div>Subscriber not added yet. <a href="#"> Click here to add subscriber</a> </div> 
                     </div>
                 </div>
@@ -87,12 +104,49 @@
                     <div class="panel panel-default panel-body-home"> 
                         <div class="panel-heading"> 
                             <i class="material-icons">settings_phone</i>
-                            <span>Auto Responders</span>
-                            <a href="#" class="btn btn-default"> Create </a> 
-                        </div>
-                        <div class="panel-body ">  
+                            <span>Auto Responders</span>  {{count($autoResponders)}}  
+                            <a href="{{url('user/campaign/create?ck=auto+responder')}}" class="btn btn-default"> Create </a>  
+                        </div> 
+                        @if(count($contacts) > 0) 
+                          <div class="panel-body-content"  > 
+                            <ul class="list-group">
+                                @foreach($autoResponders as $autoResponder) 
+                                  @if($autoResponder['title'] != null)
+                                    <li class="list-group-item">
+                                      <a href="#">
+                                        {{$autoResponder['title']}}
+                                      </a>
+
+                                      <span class="pull-right">{{$autoResponder['created_ago']}}</span>
+
+
+                                    </li>   
+                                  @endif
+                                @endforeach
+                            </ul>  
+                            <div class="pull-center">  
+                              <a href="{{url('user/campaign/view?type=auto responder')}}">
+                                <input type="button" value="More.." class="btn btn-info" />
+                              </a>
+                            </div>
+                            <br> 
+
+                          </div> 
+                        @else
+                        <div class="panel-body panel-body-content">  
                             <div class="alert alert-info" >No autoresponder found</div>
                         </div>
+                        @endif 
+
+
+
+
+
+
+
+
+
+
                     </div> 
                 </div>  
             <!-- All animation !-->  
@@ -103,7 +157,7 @@
                         <span>Automations</span>
                         <a href="#" class="btn btn-default"> Create </a>   
                     </div>  
-                    <div class="panel-body ">
+                    <div class="panel-body panel-body-content">
                         <div class="alert alert-info" >No record found to list</div>
                     </div>
                 </div>
@@ -116,7 +170,7 @@
                         <span>Campaigns</span>
                         <a href="#" class="btn btn-default"> Create </a> 
                     </div>
-                    <div class="panel-body "> 
+                    <div class="panel-body panel-body-content"> 
                         <div class="alert alert-info" >No record found to list</div>
                     </div>
                 </div>
@@ -129,16 +183,47 @@
                 <div class="panel panel-default panel-body-home">
                     <div class="panel-heading">   
                         <i class="material-icons">format_list_bulleted</i>
-                        <span>All lists</span>
-                        <a href="#" class="btn btn-default"> Create </a>   
-                    </div>  
-                    <div class="panel-body "> 
-                        <div class="text-center"> Subscriber not added yet </div> 
-                        <br/>  
-                        <div class="text-center">  
-                            <a href="#">Click here to add subscriber</a>  
-                       </div> 
-                    </div>
+                        <span>All lists</span> {{count($lists)}}  
+                        <a href="{{url('user/list/create')}}" class="btn btn-default"> Create </a>   
+                    </div>   
+                      @if(count($lists) > 0) 
+                          <div class="panel-body-content"  > 
+                            <ul class="list-group">
+                                @foreach($lists as $list) 
+                                  @if($list->name != null)
+                                    <li class="list-group-item">
+                                      <a href="{{url('user/list/' . $list->id . '/edit')}}">{{$list->name}} </a>   
+                                      <span class="badge"> {{App\List1::getListTotalContact($list->id) }} </span>
+                                    </li>   
+                                  @endif
+                                @endforeach
+                            </ul>  
+                            <div class="pull-center">  
+                              <a href="{{url('user/list')}}">
+                                <input type="button" value="More.." class="btn btn-info" />
+                              </a>
+                            </div>
+                            <br> 
+
+                          </div> 
+                      @else
+                        <div class="panel-body panel-body-content"> 
+                          <div class="text-center"> Subscriber not added yet </div> 
+                          <br/>  
+                          <div class="text-center">  
+                              <a href="#">Click here to add subscriber</a>  
+                         </div> 
+                        </div> 
+                      @endif
+
+
+
+
+                    
+
+
+
+
                 </div> 
             </div>
             
@@ -149,19 +234,49 @@
                     <div class="panel-heading">
     
                     <i class="material-icons">folder</i>
-                    <span>All Forms</span> 
-                    <!-- Single button --> 
-                     <button class="btn btn-default"> Create</button>
+                    <span>All Forms</span>  {{count($forms)}}  
+                        <a href="{{url('user/form/list/connect/view')}}" class="btn btn-default"> Create </a>   
                     <div class="btn-group"> 
                 </div> 
             </div>
-                <div class="panel-body ">  
-                    <div class="text-center"> No form added yet </div> 
-                    <br/>  
-                    <div class="text-center">  
-                        <a href="#">Click here to add form</a>  
-                    </div>
-                </div>
+      
+
+
+                        @if(count($forms) > 0) 
+                          <div class="panel-body-content"  > 
+                            <ul class="list-group">
+                                @foreach($forms as $form) 
+                                  @if($form->name != null)
+                                    <li class="list-group-item">
+                                      <a href="{{url('user/form/' . $form->id . '/contacts/view')}}">{{$form->name}} </a>    
+                                    </li>   
+                                  @endif
+                                @endforeach
+                            </ul>  
+                            <div class="pull-center">  
+                              <a href="{{url('user/form')}}">
+                                <input type="button" value="More.." class="btn btn-info" />
+                              </a>
+                            </div>
+                            <br> 
+
+                          </div> 
+                      @else
+                        <div class="panel-body panel-body-content"> 
+                          <div class="text-center"> Subscriber not added yet </div> 
+                          <br/>  
+                          <div class="text-center">  
+                              <a href="#">Click here to add subscriber</a>  
+                         </div> 
+                        </div> 
+                      @endif
+
+
+
+
+
+
+
             </div> 
         </div> 
 
@@ -170,13 +285,47 @@
               <div class="panel panel-default panel-body-home">
                   <div class="panel-heading">
                     <i class="material-icons">grid_on</i>
-                    <span> Activities  </span>
-                    </div>
-                      <div class="panel-body "> 
-                        <div class="alert alert-info">
-                            No actvities found yet
-                        </div> 
-                    </div>
+                    <span> Activities  </span> {{count($activities)}}
+                  </div>
+  
+                  @if(count($activities) > 0) 
+                          <div class="panel-body-content"  >
+
+                            <ul class="list-group">
+                                @foreach($activities as $activity) 
+                                  @if($activity->action != null)
+                                    <li class="list-group-item"> 
+                                        {{$activity->action}}   
+                                        <small class="alert-success">   
+                                        {{$created_ago = Carbon\Carbon::createFromTimeStamp(strtotime($activity->created_at))->diffForHumans()}}
+                                        </small>
+                                    </li>   
+                                  @endif
+                                @endforeach
+                            </ul>  
+
+                            <div class="pull-center" style="display:none">  
+                              <a href="#">
+                                <input type="button" value="More.." class="btn btn-info" />
+                              </a>
+                            </div>
+                            <br> 
+
+                          </div> 
+                        @else
+                        <div class="panel-body panel-body-content"> 
+                          <div class="alert alert-info">
+                              No activities found yet
+                          </div> 
+                        </div>
+
+                        @endif 
+
+                    
+
+
+
+
                   </div>
             </div>  
           </div>  
@@ -203,17 +352,17 @@
           </button>
           <ul class="dropdown-menu" style="width:100%;" >
             <li>
-                <a href="#">
+                <a href="{{url('user/campaign/create?ck=newsletter')}}">
                     Create Newsletter
                 </a>
             </li>
             <li>
-                <a href="#">
+                <a href="{{url('user/campaign/create?ck=auto+responder')}}">
                     Create Auto Responder
                 </a> 
             </li>
             <li>
-              <a href="#">
+              <a href="{{url('user/campaign/create?ck=mobile+email+optin')}}">
                 Create Mobile Optin
               </a> 
             </li>

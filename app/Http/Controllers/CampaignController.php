@@ -23,6 +23,8 @@ use App\Http\Controllers\CampaignScheduleController;
 use Session;
 use App\CampaignTemplate;
 use App\Label;
+use App\LabelDetail;
+
 class CampaignController extends Controller
 {
  
@@ -38,11 +40,11 @@ class CampaignController extends Controller
          */
         $labels = Label::where('account_id', User::getUserAccount())->where('type', 'campaign')->get();  
  
-
+ 
         /**
          * return to views
          */
-        return view('pages/campaign/campaign-all', compact('lists', 'labels')); 
+        return view('pages/campaign/campaign-all', compact('lists', 'labels'));  
 
     }
 
@@ -592,7 +594,11 @@ class CampaignController extends Controller
                                 $created_ago = Carbon::createFromTimeStamp(strtotime($campaign['created_at']))->diffForHumans(); 
                                     // print "ago " .   $ago;
                                     $campaigns[$index]['created_ago'] = $created_ago;
-                                    // $campaigns[$index]['next_send'] = Helper::createDateTime(CampaignSchedule::where('campaign_id', $campaigns[$index]['id'])->first()->schedule_send)->format('l jS \\of F Y h:i:s A');
+
+                                    $campaignSchedule = CampaignSchedule::where('campaign_id', $campaigns[$index]['id'])->first();  
+                                    if(!empty($campaignSchedule))  {  
+                                        $campaigns[$index]['next_send'] = Helper::createDateTime(CampaignSchedule::where('campaign_id', $campaigns[$index]['id'])->first()->schedule_send)->format('l jS \\of F Y h:i:s A'); 
+                                    }   
                                 $campaigns[$index]['total_contacts'] =  count(Campaign::getAllEmailWillRecieveTheCampaign($campaigns[$index]['id'])['contacts']); 
                             break; 
                         }   
@@ -719,13 +725,12 @@ class CampaignController extends Controller
             }
         } else {
             print "<br> no autoresponse to delete for this campaign";
-        }
-
+        } 
+ 
+        /** Delete labels */  
+        LabelDetail::where('table_id', $id)->where('table_name', 'campaigns')->delete();  
     }
-
-
-
-
+ 
     public function sendTestCampaignEmail($id, $email)
     {  
         // print "$id, $email";

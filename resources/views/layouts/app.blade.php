@@ -127,8 +127,8 @@
                       
                             <li class="dropdown">
 
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-                                    <i class="material-icons">mood</i>   
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"> 
+                                    <i class="material-icons">mood</i>    
                                     {{ Auth::user()->name }} <span class="caret"></span>
                                 </a>
 

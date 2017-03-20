@@ -296,13 +296,12 @@ app.controller( 'myCampaignViewCtr', ['$scope', '$filter', '$http', '$window', f
 }]);
 
 
-
 //contact view
 app.controller('myContactsViewCtr', [ '$scope', '$filter', '$http', '$window', function ($scope, $filter, $http, $window) {
 
     console.log("Contact views loaded angulajs!..");
 
-    $scope.currentPage = 1;
+    $scope.currentPage = 0;
     $scope.pageSize = '20';
     $scope.data = [];
     $scope.q = ''; 
@@ -778,15 +777,19 @@ app.controller('myListCreateViewCtr', ['$scope', '$filter', '$http', '$window', 
  */
 //contact view
 app.controller('myListCtr', ['$scope', '$filter', '$http', '$window', function ($scope, $filter, $http, $window) { 
+    
     console.log("Contact views loaded angulajs!..");
-    $scope.currentPage = 0; 
-    $scope.pageSize = '5'; 
+    $scope.currentPage = 0;
+    $scope.pageSize = '20';
     $scope.data = [];
-    $scope.q = ''; 
-    $scope.deleteContact = []; 
-    $scope.totalContact = 0;
-  
+    $scope.q = '';
+    $scope.deleteCampaign = [];
+    $scope.totalCampaign = 0;
+    $scope.filteredTodos = []; 
+    $scope.numPerPage = 10;
+    $scope.maxSize = 10;
 
+   
    $scope.editContact = function(contact) {  
         
         $window.location.href = obj.siteUrl + '/user/contact/'+contact.id+'/edit'; 
@@ -807,14 +810,12 @@ app.controller('myListCtr', ['$scope', '$filter', '$http', '$window', function (
                 $scope.deleteContact[contact.id] = true; 
             }, function(rejection) {
                 alert("Ohps! something wrong, please contact send right support. Thank you!");
-            }); 
-            
+            });  
         } else {
             console.log("cancel delete " + contact.id);
         } 
     }   
-
-
+ 
     $scope.getData = function () {  
       return $filter('filter')($scope.data, $scope.q) 
     } 
@@ -841,14 +842,31 @@ app.controller('myListCtr', ['$scope', '$filter', '$http', '$window', function (
             for (var i = 0; i<response.data.length; i++) {
 
                 $scope.data.push(response.data[i]);
-                $scope.totalContact++; 
-
-            } 
-
+                $scope.totalContact++;  
+            }  
         }, function errorCallback(response) { 
             alert("something wrong! please contact send right support. Thank you!"); 
         });     
     }); 
+
+ 
+    // pagination
+    $scope.numPages = function () {
+        return Math.ceil($scope.data.length / $scope.pageSize)-1;
+    }; 
+    var begin = 1; 
+    console.log( " scope number pages " +  Math.ceil($scope.data.length / $scope.numPerPage)); 
+    // detect where the page selected
+    $scope.$watch('currentPage + numPerPage', function() {
+        var begin = (($scope.currentPage - 1) * $scope.numPerPage)
+            , end = begin + $scope.numPerPage; 
+        $scope.filteredTodos = $scope.data.slice(begin, end);
+    }); 
+    console.log($scope.data); 
+    $scope.$watch('pageSize', function () {
+        $scope.numPages();
+        $scope.getData() ;
+    });
 }]);  
 
 

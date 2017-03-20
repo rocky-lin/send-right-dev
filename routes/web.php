@@ -296,8 +296,7 @@ Route::get('ng-bootstrap-ui', function(){
 Route::get('/campaign-send', 'CampaignScheduleController@send'); 
 Route::get('/campaign-send', 'CampaignScheduleController@send'); 
 
-Route::get('/carbon-test', function(){
-
+Route::get('/carbon-test', function(){ 
 	// create($year = null, $month = null, $day = null, $hour = null, $minute = null, $second = null, $tz = null); 
 	  
 	$dateTime = Helper::dateTimeExplode('2016-12-09 06:45:40'); 
