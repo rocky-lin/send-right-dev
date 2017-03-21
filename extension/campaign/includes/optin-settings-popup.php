@@ -1,9 +1,7 @@
-
-
-
-<?php  
-
-$optin_url = str_replace(' ', '-', $_SESSION['campaign']['name']);
+<?php   
+$campaignName = (!empty($_SESSION['campaign']['name'])) ? $_SESSION['campaign']['name'] : null; 
+$optin_url = str_replace(' ', '-', $campaignName);
+  
 $optin_email_subject = '';
 $optin_email_content = '';
 $optin_email_to_name = $recieverName; 

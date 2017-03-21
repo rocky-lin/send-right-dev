@@ -35,17 +35,17 @@ class HomeController extends Controller
         unset($_SESSION['campaign']['optin']);  
     
         /** Get all contact */
-        $contacts = Contact::all(); 
+        $contacts = Contact::where('account_id', User::getUserAccount())->get();
 
         /** get all auto responder */
         $campaignController = new CampaignController(); 
         $autoResponders = $campaignController->getAllCampaignSortByKind('auto responder'); 
               
         /** Get all lists */
-        $lists = List1::all(); 
+        $lists = List1::where('account_id', User::getUserAccount())->get();
  
         /** Get all form */
-        $forms = Form::all();
+        $forms = Form::where('account_id', User::getUserAccount())->get();
         
         /** Get all activity for specific user */
         $activities = Activity::where('account_id', User::getUserAccount())->orderBy('id','desc')->get(); 

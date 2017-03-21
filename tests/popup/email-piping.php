@@ -49,8 +49,9 @@ if(true){
 	$txt = " delivered 1 to    $to  email subject  $subject   from   $from  fromindex0 $fromIndex0 from name $fromName   \n email $email   message \n\n\n $message  ";
 	fwrite($myfile, $txt); 
 	fclose($myfile);    
-
 } 
+
+
 
 
 
@@ -79,49 +80,30 @@ if($_SERVER['SERVER_NAME'] == 'localhost')  {
  $to 		 = str_replace(" ", "", $to);
  $from 		 = str_replace(" ", "", $from);
  //$fromName = str_replace(" ", "", $fromName); 
-
 // $toCampaign = 'new-mobile-optin-test-1@sendright.net';  // to@domain.com
 $toCampaign  = convertToCampaignTitle($to); 
-// $campaign_id = getCampaignIdFromTo($to); s
 $first_name  = getFirstName($fromName) ;
-$last_name   = getLastName($fromName); 
-  
- // print "<br> to campaign " . $toCampaign;
- // print "<br> to campaign_id " . $campaign_id;
- // print "<br> to first_name " . $first_name;
- // print "<br> to last_name " . $last_name;
-
-
-
+$last_name   = getLastName($fromName);  
 // separate first name and lastname 
 // check to email and get what is the account id 
-
-// print "campaign id " . $campaign_id;
-// print "<br> campaign title <br>" . $toCampaign . '<br>';
-// print "<br> campaign id <br>" .  $campaignId . '<br>';
-
+// print "<br> from:  $from name: $fromName  to: $to <br>";  
+// print "campaign title ->[" . $toCampaign . ']';
 $database->select('campaigns', '*',   null, " title = '$toCampaign' and id = $campaignId" ); 
 $results = $database->getResult();  
-// print " <br> campaign result"; 
-// print_r_pre($results); 
- 
+
 if(count($results) > 0) {  
 	$account_id   = $results[0]['account_id']; 
 	$campaign_id  = $results[0]['id']; 
 	$status	      = $results[0]['status']; 
- 
-	// print " account id " . $account_id;
   	 
 	if($status == 'active')  {  
 		// check contact if already exist for the specific account
 		 $database->select('contacts', '*',   null, "email = '$from' and account_id = $account_id" );  
 		 $contact = $database->getResult();  
 		  
-		 // print_r_pre( $contact);
-
 		// if contact is not exist then do insert new contact
 		 if(count($contact) < 1) { 
-		 	 // print "<br>\n not exist and do insert";   
+		 	 // print "<br> not exist and do insert";   
 			$rseponse = $database->insert('contacts', [
 					'account_id' => $account_id,
 			      	'first_name' => $first_name,
@@ -132,20 +114,24 @@ if(count($results) > 0) {
 					'created_at' =>$dateTimeNow,
 					'updated_at'=>$dateTimeNow, 
 			]);      
+			
 			$contact  = $database->getResult();
+			
 			// print_r_pre($contact); 
+			
 			$contact_id = $contact[0];  	
+			
 
 		} else { 
 			$database->select('contacts', 'id',   null, "email = '$from' and account_id = $account_id" ); 
 		 	$contact 	= $database->getResult();   
 			$contact_id = $contact[0]['id'];  	
-			// print "<br>\n contact exist, not do insert"; 
+			// print "<br> contact exist, not do insert"; 
 
 		}
 		  
 		// get contact id, the recent added or the 1 new registered  
-		// print "<br>\n newly inserted contact id $contact_id under account id $account_id";  
+		// print "<br> newly inserted contact id $contact_id under account id $account_id";  
 		// get campaign list ids
 		$database->select('campaign_lists', '*',   null, "campaign_id = $campaign_id" ); 
 		$campaign_lists = $database->getResult(); 
@@ -160,7 +146,7 @@ if(count($results) > 0) {
 			 
 			// if not exist list id and contact id in list_contacts table then do insert
 			if(count($list_contact) < 1) { 
-				// print "<br>\n insert list to list_contacts id $list_id and contact id $contact_id ";  
+				// print "<br> insert list to list_contacts id $list_id and contact id $contact_id ";  
 				$database->insert('list_contacts', 
 					[
 						'list_id' => $list_id,
@@ -171,11 +157,11 @@ if(count($results) > 0) {
 				); 
 				  
 			} else {
-				// print "<br>\n exist not insert to list_contacts list id $list_id and contact id $contact_id "; 
+				// print "<br> exist not insert to list_contacts list id $list_id and contact id $contact_id "; 
 			} 
 			$database->clearResult();
 		}    
-		 // print "<br>\n account id $account_id  campaign id $campaign_id contact id  $contact_id ";
+		 // print "<br> account id $account_id  campaign id $campaign_id contact id  $contact_id ";
 		// contact add or update to the specific list
 		  
 		// set activity 
@@ -189,7 +175,7 @@ if(count($results) > 0) {
 		// ]);
 	} // end if is active
 	else { 
-		// print "<br>\n current campaign is in active, please turn to active so that we can start adding contact to it.";  
+		// print "<br> current campaign is in active, please turn to active so that we can start adding contact to it.";  
 	}
 
 	addActivities($database, [
@@ -202,119 +188,10 @@ if(count($results) > 0) {
 	]); 
 } 
 // check if found a campaign 
-else {  	
-	// print "<br>\n campaign not found";
+else {
+
+	// print "<br> campaign not found";
 }
- 
-$auto_responder_ids = getListIdAutoResponder($database, $campaign_id);   
-addNewContactForAutoResponse($database, $contact_id, $from, $auto_responder_ids, $dateTimeNow); 
-
-// print "  $contact_id, $from, $auto_responder_ids, $dateTimeNow "; 
-
-function getListIdAutoResponder($database, $campaign_id) { 
-	/** Get mobile optin list id */
-	// print "<br>\n campaign id " .  $campaign_id; 
-	$list_ids = []; 
-	$campaign_ids  = []; 
-	$campaign_ids_final  = [];   
-	/** Get list of specific mobile optin */
- 	$database->clearResult(); 
-	$database->select('campaign_lists', '*',   null, " campaign_id = " . $campaign_id ); 
- 	$results = $database->getResult();    
- 	// print_r_pre($results); 
- 	// exit;  
- 	// print "test";
- 	foreach($results as $res) { 
- 		$list_ids[] = $res['list_id'];      
-    }         
-    // print_r_pre($list_ids);  
-    // exit;  
-    /** Get auto responder of the list ids  */
-	foreach($list_ids as $list_id) { 
-
-		/** auto list ids with specific list */
-		$database->clearResult();
-		$database->select('campaign_lists', '*',   null, " list_id = $list_id" ); 
- 		$list_ids1  = $database->getResult();       
-
- 		/** Get campaign id that is a type of auto responder */
- 		foreach($list_ids1 as $list_id1) {    
- 			// $list_id2[] =  $list_id1; 
-			$database->clearResult(); 
-			$database->select('campaigns', '*',   null, " kind = 'auto responder' and id = " . $list_id1['campaign_id'] );  
-	 		$campaign = $database->getResult();      
-	 		if(!empty($campaign )) {  
- 				$campaign_ids[] = $campaign[0]['id'];   
- 			}
- 		}  
-    }       
-    // print_r_pre($campaign_ids);   
-    // print_r_pre($campaign_ids);  
-	// print_r_pre($results); 
-	// return $list_ids; 
- 
-    return $campaign_ids; 
-} 
- 
-function addNewContactForAutoResponse($database, $contact_id, $contact_email, $campaign_id, $dateTimeNow) {   
-     
-	// save auto response id and contact id  
-	foreach($campaign_id as $campaign_id) {   
-        
-		/**
-		 * Save auto responses
-		 */
-		$database->clearResult(); 
-		$database->select('auto_responses', '*',   null, " table_name =  'mobile email optin' and campaign_id = " . $campaign_id); 
-	 	$auto_responses_results = $database->getResult();  
-	 	$auto_responses_id = $auto_responses_results[0]['id']; 
-        
-	 	/**
-	 	 * insert new auto responses if not exist
-	 	 */
-	 	if(empty($auto_responses_id)) {
-			$database->clearResult();
-			$response = $database->insert('auto_responses', [
-				'campaign_id'=>$campaign_id,
-				'table_name'=>'mobile email optin',
-				'table_id'=>$campaign_id,
-				'created_at' =>$dateTimeNow,
-				'updated_at'=>$dateTimeNow,
-			]);
-	 		
-	 		$database->clearResult(); 
-			$database->select('auto_responses', '*',   null, " table_name =  'mobile email optin' and campaign_id = " . $campaign_id); 
-		 	$auto_responses_results = $database->getResult();  
-		 	$auto_responses_id = $auto_responses_results[0]['id']; 
-		}	 
- 			
-        // print " autoresponse id " . $auto_responses_id; 
-        
-		/**
-		* Save auto response details
-		*/
-		$database->clearResult(); 
-		$database->select('auto_response_details', '*',   null, " email =  '$contact_email'  and auto_response_id = $auto_responses_id "); 
-	 	$auto_response_detail_result = $database->getResult();       
-        
-	 	/**
-	 	 * Insert auto response details if not exist
-	 	 */
-	 	if(empty($auto_response_detail_result)) {  
-			$database->clearResult(); 
-			$rseponse = $database->insert('auto_response_details', [  
-				'auto_response_id'=>$auto_responses_id,
-				'table_name'=>'contacts',
-				'email'=>$contact_email,
-				'table_id'=>$contact_id,
-				'status'=>'active',
-				'created_at' =>$dateTimeNow,
-				'updated_at'=>$dateTimeNow,
-			]);
-		}	  
-        
-	} 
-}	   
 
 function print_r_pre($response) 
 {
@@ -322,7 +199,6 @@ function print_r_pre($response)
 		print_r($response);
 	print "</pre>";  
 }  
-
 function getFirstName($fullName)
 {
 	$fullNameArr = explode(' ', $fullName);  
@@ -338,7 +214,6 @@ function getFirstName($fullName)
 		 return $fullName;
 	} 
 }
-
 function getLastName($fullName)
 {
 	$fullNameArr = explode(' ', $fullName);  
@@ -350,23 +225,12 @@ function getLastName($fullName)
 		 return '';
 	} 
 } 
- 
-function getCampaignIdFromTo($to)
-{ 
-	$to = strtolower($to); 
-	$campaign_id = preg_replace('/[a-z]+-/', '', $to);  
-	$campaign_id = str_replace("@sendright.net", "", $campaign_id); 
-	return $campaign_id; 
-}
-
 function convertToCampaignTitle($toMail)
 {
 	$campaignTitle = str_replace('-', ' ', $toMail); 
 	$campaignTitle = str_replace('@sendright.net', '', $campaignTitle); 
-	$campaignTitle = preg_replace('/[0-9]+/', '', $campaignTitle); 
 	return $campaignTitle; 
 }
-
 function addActivities($database, $activities=[])
 {
 	$database->insert(

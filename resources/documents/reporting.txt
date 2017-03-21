@@ -1,29 +1,51 @@
 
 Monday:  
 
-March 20, 2017  
+March 20, 2017   
+
+Create label popup needs to remove number at the top, both form and campaign  
  
-Create label popup needs to remove number at the top, both form and campaign 
-
-Fix some pagination 
-
+Fix some pagination  
     - contact pagination and other ui under forms view  - done, we still have lil issue dropdown default is blank - done
     - create newsletter -  done
     
 Check and setup cronjobs for campaign and auto responder -  cronjobs got issue we need to contact support for this  - 
+   - sending campaign in schedule - done
+   - sending auto responder for form - done
 
 Add function that will allow send auto response for list in mobile optin 
-	- get list id 
-	- get list auto responder 
-	- save auto responder id to database and contact id
-	
+	- remove number in the title - done
+	- get list id  - done 
 
+Todo tomorrow 
 
+Hi Rocky, 
 
-Make mobile optin responsive 
-
-Sending campaign and auto response - too many email per second   
+Update for March 21, 2017 
+	- get list auto responder  - done
+	- create database migration for auto respond ques - done
+	- save auto responder id to database and contact id - done
+activity show specific for specific user - done
+fix error when edit mobile optin - done
+  
+Todo tomorrow 
+  Start working with payshortcut 
+  
+Onhold tasks
+Make mobile optin responsive  - on hold 
+Mobile optin and auto response, when customer signedup again it needs to update customer info to active if its already finished - onhold
+Sending campaign and auto response - too many email per second   - onhold till we come tested it to real email sending 
  
+ 
+
+
+
+
+
+Thanks,
+
+Best regards,
+Jesus Erwin Suarez
 
 Friday:     
 

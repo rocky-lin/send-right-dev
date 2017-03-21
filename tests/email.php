@@ -62,16 +62,14 @@ if($activateEmailCampaign)
 	fwrite($myfile, $txt); 
 	fclose($myfile);
 }
-
-  
  
-
-$to 	  = 'jesus@sendright.net'; 
-$from     = 'francis123@gmail.com'; 
-$fromName = 'Francis Suarez';
-
+// $to 	  = 'jesus@sendright.net'; 
+// $from     = 'francis123@gmail.com'; 
+// $fromName = 'Francis Suarez';
+$to 	  = 'test-email-optin-284@sendright.net'; 
+$from     = 'james@gmail.com'; 
+$fromName = 'James Enanod';
  
-
  $to = str_replace(" ", "", $to);
  $from = str_replace(" ", "", $from);
  $fromName = str_replace(" ", "", $fromName);
@@ -79,27 +77,26 @@ $fromName = 'Francis Suarez';
 print "<br> from:  $from name: $fromName  to: $to <br>"; 
  
 // $toCampaign = 'new-mobile-optin-test-1@sendright.net';  // to@domain.com
-$toCampaign = convertToCampaignTitle($to); 
-$first_name =  getFirstName($fromName) ;
-$last_name  =  getLastName($fromName); 
+$toCampaign  = convertToCampaignTitle($to); 
+$campaign_id = getCampaignIdFromTo($to); 
+$first_name  = getFirstName($fromName) ;
+$last_name   = getLastName($fromName); 
  
 // separate first name and lastname 
 // check to email and get what is the account id 
 
+print "campaign id " . $campaign_id;
 print "<br> campaign title <br>" . $toCampaign . '<br>';
-$database->select('campaigns', '*',   null, " title LIKE '$toCampaign'" ); 
+$database->select('campaigns', '*',   null, " id = $campaign_id" ); 
 $results = $database->getResult();  
 print " <br> campaign result"; 
 print_r_pre($results); 
-
-
-
+ 
 if(count($results) > 0) {  
 	$account_id   = $results[0]['account_id']; 
 	$campaign_id  = $results[0]['id']; 
 	$status	      = $results[0]['status']; 
-
-
+ 
 	print " account id " . $account_id;
   	 
 	if($status == 'active')  {  
@@ -192,27 +189,118 @@ if(count($results) > 0) {
 	]); 
 } 
 // check if found a campaign 
-else {
-
+else { 
+	
 	print "<br> campaign not found";
 }
-
  
-// get list id 
-// get auto responder for list id
-// save auto response id and contact id 
+$auto_responder_ids = getListIdAutoResponder($database, $campaign_id);   
+addNewContactForAutoResponse($database, $contact_id, $from, $auto_responder_ids, $dateTimeNow);
 
+function getListIdAutoResponder($database, $campaign_id) { 
+	/** Get mobile optin list id */
+	print "<br> campaign id " .  $campaign_id; 
+	$list_ids = []; 
+	$campaign_ids  = []; 
+	$campaign_ids_final  = [];   
+	/** Get list of specific mobile optin */
+ 	$database->clearResult(); 
+	$database->select('campaign_lists', '*',   null, " campaign_id = " . $campaign_id ); 
+ 	$results = $database->getResult();    
+ 	// print_r_pre($results); 
+ 	// exit;  
+ 	print "test";
+ 	foreach($results as $res) { 
+ 		$list_ids[] = $res['list_id'];      
+    }         
+    print_r_pre($list_ids);  
+    // exit;  
+    /** Get auto responder of the list ids  */
+	foreach($list_ids as $list_id) { 
 
+		/** auto list ids with specific list */
+		$database->clearResult();
+		$database->select('campaign_lists', '*',   null, " list_id = $list_id" ); 
+ 		$list_ids1  = $database->getResult();       
 
-
-
-
-
-
-
-
-
-
+ 		/** Get campaign id that is a type of auto responder */
+ 		foreach($list_ids1 as $list_id1) {    
+ 			// $list_id2[] =  $list_id1; 
+			$database->clearResult(); 
+			$database->select('campaigns', '*',   null, " kind = 'auto responder' and id = " . $list_id1['campaign_id'] );  
+	 		$campaign = $database->getResult();      
+	 		if(!empty($campaign )) {  
+ 				$campaign_ids[] = $campaign[0]['id'];   
+ 			}
+ 		}  
+    }       
+    // print_r_pre($campaign_ids);   
+    // print_r_pre($campaign_ids);  
+	// print_r_pre($results); 
+	// return $list_ids; 
+ 
+    return $campaign_ids; 
+} 
+ 
+function addNewContactForAutoResponse($database, $contact_id, $contact_email, $campaign_id, $dateTimeNow) {   
+     
+	// save auto response id and contact id  
+	foreach($campaign_id as $campaign_id) {   
+        
+		/**
+		 * Save auto responses
+		 */
+		$database->clearResult(); 
+		$database->select('auto_responses', '*',   null, " table_name =  'mobile email optin' and campaign_id = " . $campaign_id); 
+	 	$auto_responses_results = $database->getResult();  
+	 	$auto_responses_id = $auto_responses_results[0]['id']; 
+        
+	 	/**
+	 	 * insert new auto responses if not exist
+	 	 */
+	 	if(empty($auto_responses_id)) {
+			$database->clearResult();
+			$response = $database->insert('auto_responses', [
+				'campaign_id'=>$campaign_id,
+				'table_name'=>'mobile email optin',
+				'table_id'=>$campaign_id,
+				'created_at' =>$dateTimeNow,
+				'updated_at'=>$dateTimeNow,
+			]);
+	 		
+	 		$database->clearResult(); 
+			$database->select('auto_responses', '*',   null, " table_name =  'mobile email optin' and campaign_id = " . $campaign_id); 
+		 	$auto_responses_results = $database->getResult();  
+		 	$auto_responses_id = $auto_responses_results[0]['id']; 
+		}	 
+ 			
+        print " autoresponse id " . $auto_responses_id; 
+        
+		/**
+		* Save auto response details
+		*/
+		$database->clearResult(); 
+		$database->select('auto_response_details', '*',   null, " email =  '$contact_email'  and auto_response_id = $auto_responses_id "); 
+	 	$auto_response_detail_result = $database->getResult();       
+        
+	 	/**
+	 	 * Insert auto response details if not exist
+	 	 */
+	 	if(empty($auto_response_detail_result)) {  
+			$database->clearResult(); 
+			$rseponse = $database->insert('auto_response_details', [  
+				'auto_response_id'=>$auto_responses_id,
+				'table_name'=>'contacts',
+				'email'=>$contact_email,
+				'table_id'=>$contact_id,
+				'status'=>'active',
+				'created_at' =>$dateTimeNow,
+				'updated_at'=>$dateTimeNow,
+			]);
+		}	  
+        
+	} 
+}	   
 
 function print_r_pre($response) 
 {
@@ -220,6 +308,7 @@ function print_r_pre($response)
 		print_r($response);
 	print "</pre>";  
 }  
+
 function getFirstName($fullName)
 {
 	$fullNameArr = explode(' ', $fullName);  
@@ -235,6 +324,7 @@ function getFirstName($fullName)
 		 return $fullName;
 	} 
 }
+
 function getLastName($fullName)
 {
 	$fullNameArr = explode(' ', $fullName);  
@@ -246,12 +336,25 @@ function getLastName($fullName)
 		 return '';
 	} 
 } 
+ 
+function getCampaignIdFromTo($to)
+{ 
+	$to = strtolower($to); 
+	$campaign_id = preg_replace('/[a-z]+-/', '', $to);  
+	$campaign_id = str_replace("@sendright.net", "", $campaign_id); 
+
+
+	return $campaign_id; 
+}
+
 function convertToCampaignTitle($toMail)
 {
 	$campaignTitle = str_replace('-', ' ', $toMail); 
 	$campaignTitle = str_replace('@sendright.net', '', $campaignTitle); 
+	$campaignTitle = preg_replace('/[0-9]+/', '', $campaignTitle); 
 	return $campaignTitle; 
 }
+
 function addActivities($database, $activities=[])
 {
 	$database->insert(

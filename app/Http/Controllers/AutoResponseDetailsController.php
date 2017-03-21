@@ -26,11 +26,11 @@ class AutoResponseDetailsController extends Controller
         // init campaign schedule controller
         $campaignScheduleController = new CampaignScheduleController(); 
         
-        foreach($autoResponseDetails as $autoResponseDetail) {  
-            
-            // get campaign auto response schedule
-            $campaignSchedule = $autoResponseDetail->autoResponse->campaign->campaignSchedule()->first();  
+        foreach($autoResponseDetails as $autoResponseDetail) {   
 
+            // get campaign auto response schedule
+            $campaignSchedule = $autoResponseDetail->autoResponse->campaign->campaignSchedule()->first();   
+            
             // get specific campaign data
             // will be used in email sending campaign
             $campaign = Campaign::find($autoResponseDetail->autoResponse->campaign_id); 
