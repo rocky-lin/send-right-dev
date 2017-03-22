@@ -286,18 +286,22 @@ function addNewContactForAutoResponse($database, $contact_id, $contact_email, $c
 	 	/**
 	 	 * Insert auto response details if not exist
 	 	 */
-	 	if(empty($auto_response_detail_result)) {  
-			$database->clearResult(); 
-			$rseponse = $database->insert('auto_response_details', [  
-				'auto_response_id'=>$auto_responses_id,
-				'table_name'=>'contacts',
-				'email'=>$contact_email,
-				'table_id'=>$contact_id,
-				'status'=>'active',
-				'created_at' =>$dateTimeNow,
-				'updated_at'=>$dateTimeNow,
+	 	if(empty($auto_response_detail_result)) {
+			print "insert auto response details";
+			$database->clearResult();
+			$rseponse = $database->insert('auto_response_details', [
+					'auto_response_id' => $auto_responses_id,
+					'table_name' => 'contacts',
+					'email' => $contact_email,
+					'table_id' => $contact_id,
+					'status' => 'active',
+					'created_at' => $dateTimeNow,
+					'updated_at' => $dateTimeNow,
 			]);
-		}	  
+		} else {
+			print "update auto response details";
+			$database->update('auto_response_details', array('status' => 'active'), " email =  '$contact_email'  and auto_response_id = $auto_responses_id ");
+		}
         
 	} 
 }	   

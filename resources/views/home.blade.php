@@ -87,7 +87,7 @@
                     <span> Top Contacts  </span>
                     </div>
                     <div class="panel-body panel-body-content"> 
-                        <div>Subscriber not added yet. <a href="#"> Click here to add subscriber</a> </div> 
+                        <div>Subscriber not added yet. <a href="#" > Click here to add subscriber</a> </div> 
                     </div>
                 </div>
             </div>  
@@ -211,7 +211,7 @@
                           <div class="text-center"> Subscriber not added yet </div> 
                           <br/>  
                           <div class="text-center">  
-                              <a href="#">Click here to add subscriber</a>  
+                              <a href="{{url('user/list/create')}}">Click here to add list</a>  
                          </div> 
                         </div> 
                       @endif
@@ -266,7 +266,7 @@
                           <div class="text-center"> Subscriber not added yet </div> 
                           <br/>  
                           <div class="text-center">  
-                              <a href="#">Click here to add subscriber</a>  
+                              <a href="{{url('user/form')}}">Click here to add form</a>  
                          </div> 
                         </div> 
                       @endif
