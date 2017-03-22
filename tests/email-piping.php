@@ -312,6 +312,7 @@ function addNewContactForAutoResponse($database, $contact_id, $contact_email, $c
 				'updated_at'=>$dateTimeNow,
 			]);
 		} else {
+			print "update auto response details";
 			$database->update('auto_response_details', array('status' => 'active'), " email =  '$contact_email'  and auto_response_id = $auto_responses_id ");
 		}
 
