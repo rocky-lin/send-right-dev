@@ -66,17 +66,22 @@ if($activateEmailCampaign)
 // $to 	  = 'jesus@sendright.net'; 
 // $from     = 'francis123@gmail.com'; 
 // $fromName = 'Francis Suarez';
-$to 	  = 'test-email-optin-284@sendright.net'; 
-$from     = 'james@gmail.com'; 
-$fromName = 'James Enanod';
- 
+$to 	  = 'for-test-only-288@sendright.net';
+$from     = 'jesus123@gmail.com';
+$fromName = 'Jesus 123';
+
+
+$campaignId  = end(explode('-',$to));  // get only campaign id
+$campaignId  = str_replace('@sendright.net', '', $campaignId);    // remove id from campaign
+$to 		  = str_replace('-'.$campaignId, '', $to);
+
  $to = str_replace(" ", "", $to);
  $from = str_replace(" ", "", $from);
  $fromName = str_replace(" ", "", $fromName);
 
-print "<br> from:  $from name: $fromName  to: $to <br>"; 
- 
-// $toCampaign = 'new-mobile-optin-test-1@sendright.net';  // to@domain.com
+print "<br> from:  $from name: $fromName  to: $to <br>";
+
+//$toCampaign = 'new-mobile-optin-test-1@sendright.net';  // to@domain.com
 $toCampaign  = convertToCampaignTitle($to); 
 $campaign_id = getCampaignIdFromTo($to); 
 $first_name  = getFirstName($fromName) ;
@@ -84,10 +89,11 @@ $last_name   = getLastName($fromName);
  
 // separate first name and lastname 
 // check to email and get what is the account id 
-
-print "campaign id " . $campaign_id;
+print "campaign id now " . $campaignId;
+print "campaign id later " . $campaign_id;
 print "<br> campaign title <br>" . $toCampaign . '<br>';
-$database->select('campaigns', '*',   null, " id = $campaign_id" ); 
+
+$database->select('campaigns', '*',   null, " id = $campaignId" );
 $results = $database->getResult();  
 print " <br> campaign result"; 
 print_r_pre($results); 
@@ -258,23 +264,24 @@ function addNewContactForAutoResponse($database, $contact_id, $contact_email, $c
 	 	/**
 	 	 * insert new auto responses if not exist
 	 	 */
-	 	if(empty($auto_responses_id)) {
+		if(empty($auto_responses_id)) {
 			$database->clearResult();
 			$response = $database->insert('auto_responses', [
 				'campaign_id'=>$campaign_id,
-				'table_name'=>'mobile email optin',
+				'table_name'=>'auto responder',
 				'table_id'=>$campaign_id,
 				'created_at' =>$dateTimeNow,
 				'updated_at'=>$dateTimeNow,
 			]);
-	 		
-	 		$database->clearResult(); 
-			$database->select('auto_responses', '*',   null, " table_name =  'mobile email optin' and campaign_id = " . $campaign_id); 
-		 	$auto_responses_results = $database->getResult();  
-		 	$auto_responses_id = $auto_responses_results[0]['id']; 
-		}	 
- 			
-        print " autoresponse id " . $auto_responses_id; 
+
+			$database->clearResult();
+			$database->select('auto_responses', '*',   null, " table_name =  'auto responder' and campaign_id = " . $campaign_id);
+			$auto_responses_results = $database->getResult();
+			$auto_responses_id = $auto_responses_results[0]['id'];
+		}
+
+
+		print " autoresponse id " . $auto_responses_id;
         
 		/**
 		* Save auto response details

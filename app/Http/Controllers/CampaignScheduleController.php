@@ -14,8 +14,8 @@ use App\Helper;
 use App\Activity; 
 use App\User; 
 use App\CampaignList;
-use App\Contact; 
-
+use App\Contact;
+use App\AutoResponseDetails;
 
 
 class CampaignScheduleController extends Controller
@@ -93,12 +93,14 @@ class CampaignScheduleController extends Controller
         // update 
     }
 
-    public function sendAutoResponseToOneReceiver($campaign_id, $email, $contact_id=null) {
+    public function sendAutoResponseToOneReceiver($campaign_id, $email, $contact_id=null, $auto_response_detail_id) {
  
         if(empty($contact_id))  {
+            print "send one recepeint";
             return $this->sendOneRecipeint($campaign_id, $email, ' as auto response.'); 
-        } else {    
-            return $this->sendOneRecipentContact($campaign_id, $contact_id, ' as auto responder');
+        } else {
+            print "send one recepient contact";
+            return $this->sendOneRecipentContact($campaign_id, $contact_id, ' as auto responder', $auto_response_detail_id);
         }
     }
     
@@ -168,37 +170,56 @@ class CampaignScheduleController extends Controller
         // update 
     }
     
-    public function sendOneRecipentContact($campaign_id, $contact_id, $action= null) 
+    public function sendOneRecipentContact($campaign_id, $contact_id, $action= null, $auto_response_detail_id)
     { 
         // get campaing details 
         $campaign = Campaign::where('id', $campaign_id)->first()->toArray(); 
 
         // get contact details 
-        $contact = Contact::where('id', $contact_id)->first()->toArray();   
-        
 
-        // print "<pre>";
-        // print "test";
-        // print_r(  $contact );
-        // exit; 
+        $isContactExist = $contact = Contact::where('id', $contact_id)->get();
 
-        // $contact['contacts']['first_name']        =  $contact1['first_name']; 
-        // $contact['contacts']['last_name']         =  $contact1['last_name']; 
-        // $contact['contacts']['email']             =  $contact1['email']; 
-        // $contact['contacts']['location']          =  $contact1['location']; 
-        // $contact['contacts']['phone_number']      =  $contact1['phone_number']; 
-        // $contact['contacts']['telephone_number']  =  $contact1['telephone_number']; 
- 
-        if(Mail::to($contact['email'])->queue(new CampaignSendMail($contact, $campaign))) {
-        
-            Activity::create(['account_id'=>$campaign['account_id'], 'table_name'=>'campaigns','table_id'=>$campaign['id'], 'action'=>'Email successfully sent to ' . $contact['email'] . ' ' . $action ]); 
-            return true; 
 
-        } else {
-             Activity::create(['account_id'=>$campaign['account_id'], 'table_name'=>'campaigns','table_id'=>$campaign['id'], 'action'=>'Email failed sending to ' . $contact['email']  . ' ' . $action  ]);  
-             return false; 
-        }   
+        /**
+         * If contact is found then execute sending auto response email
+         */
+        if(count($isContactExist) > 0) {
+            $contact = $isContactExist->first()->toArray();
+            print "\n  $contact_id contact info";
+            print "<pre>";
+            print_r($contact );
+            // print "<pre>";
+            // print "test";
+            // print_r(  $contact );
+            // exit;
+            // $contact['contacts']['first_name']        =  $contact1['first_name'];
+            // $contact['contacts']['last_name']         =  $contact1['last_name'];
+            // $contact['contacts']['email']             =  $contact1['email'];
+            // $contact['contacts']['location']          =  $contact1['location'];
+            // $contact['contacts']['phone_number']      =  $contact1['phone_number'];
+            // $contact['contacts']['telephone_number']  =  $contact1['telephone_number'];
+            if(Mail::to($contact['email'])->queue(new CampaignSendMail($contact, $campaign))) {
+                Activity::create(['account_id'=>$campaign['account_id'], 'table_name'=>'campaigns','table_id'=>$campaign['id'], 'action'=>'Email successfully sent to ' . $contact['email'] . ' ' . $action ]);
+                return true;
+            } else {
+                Activity::create(['account_id'=>$campaign['account_id'], 'table_name'=>'campaigns','table_id'=>$campaign['id'], 'action'=>'Email failed sending to ' . $contact['email']  . ' ' . $action  ]);
+                return false;
+            }
+        }
+        /**
+         * set finished queue contact
+         */
+        else {
+            print "set status to finished because not found ";
+            $status = AutoResponseDetails::where('id', $auto_response_detail_id)->update(['status'=>'finished']);
+            Activity::create(['account_id'=>$campaign['account_id'], 'table_name'=>'campaigns','table_id'=>$campaign['id'], 'action'=>'Auto response not sent because contact not found, we just set auto response queue to finished!']
+            );
+        }
+        return $status;
     }
+
+
+
     public function sendEmailToContacts($campaign)
     {  
         if(!empty($campaign)) { 

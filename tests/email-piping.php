@@ -100,7 +100,7 @@ $last_name   = getLastName($fromName);
 // print "<br> campaign title <br>" . $toCampaign . '<br>';
 // print "<br> campaign id <br>" .  $campaignId . '<br>';
 
-$database->select('campaigns', '*',   null, " title = '$toCampaign' and id = $campaignId" ); 
+$database->select('campaigns', '*',   null, " id = $campaignId" );
 $results = $database->getResult();  
 // print " <br> campaign result"; 
 // print_r_pre($results); 
@@ -276,14 +276,14 @@ function addNewContactForAutoResponse($database, $contact_id, $contact_email, $c
 			$database->clearResult();
 			$response = $database->insert('auto_responses', [
 				'campaign_id'=>$campaign_id,
-				'table_name'=>'mobile email optin',
+				'table_name'=>'auto responder',
 				'table_id'=>$campaign_id,
 				'created_at' =>$dateTimeNow,
 				'updated_at'=>$dateTimeNow,
 			]);
 	 		
 	 		$database->clearResult(); 
-			$database->select('auto_responses', '*',   null, " table_name =  'mobile email optin' and campaign_id = " . $campaign_id); 
+			$database->select('auto_responses', '*',   null, " table_name =  'auto responder' and campaign_id = " . $campaign_id);
 		 	$auto_responses_results = $database->getResult();  
 		 	$auto_responses_id = $auto_responses_results[0]['id']; 
 		}	 
@@ -312,10 +312,10 @@ function addNewContactForAutoResponse($database, $contact_id, $contact_email, $c
 				'updated_at'=>$dateTimeNow,
 			]);
 		} else {
-			print "update auto response details";
+//			print "update auto response details";
 			$database->update('auto_response_details', array('status' => 'active'), " email =  '$contact_email'  and auto_response_id = $auto_responses_id ");
 		}
- 
+
 	} 
 }	   
 

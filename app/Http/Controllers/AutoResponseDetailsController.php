@@ -74,7 +74,7 @@ class AutoResponseDetailsController extends Controller
                 // start sending auto response now
                 if($isSendNow == true) {
 
-                    if($campaignScheduleController->sendAutoResponseToOneReceiver($autoResponseDetail->autoResponse->campaign_id, $autoResponseDetail->email, $autoResponseDetail->table_id)) {
+                    if($campaignScheduleController->sendAutoResponseToOneReceiver($autoResponseDetail->autoResponse->campaign_id, $autoResponseDetail->email, $autoResponseDetail->table_id, $autoResponseDetail->id)) {
                         print "\n<br> email sent to responder";
                     }   else {
                         print "\n<br> sending failed" ;
