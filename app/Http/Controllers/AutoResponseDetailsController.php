@@ -74,14 +74,16 @@ class AutoResponseDetailsController extends Controller
                 // start sending auto response now
                 if($isSendNow == true) {
 
-                    if($campaignScheduleController->sendAutoResponseToOneReceiver($autoResponseDetail->autoResponse->campaign_id, $autoResponseDetail->email, $autoResponseDetail->table_id, $autoResponseDetail->id)) {
+                    if($response = $campaignScheduleController->sendAutoResponseToOneReceiver($autoResponseDetail->autoResponse->campaign_id, $autoResponseDetail->email, $autoResponseDetail->table_id, $autoResponseDetail->id)) {
                         print "\n<br> email sent to responder";
                     }   else {
                         print "\n<br> sending failed" ;
                     }
 
+
+                    if($response != 'deleted auto response queue')
                     // update status to finished
-                    if(AutoResponseDetails::find($autoResponseDetail->id)->update(['status'=>'finished'])  )  {
+                    if(AutoResponseDetails::find($autoResponseDetail->id)->update(['status'=>'finished'])) {
                         print "\n<br> auto responder status updated finished";
                     }
                 }

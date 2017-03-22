@@ -211,11 +211,12 @@ class CampaignScheduleController extends Controller
          */
         else {
             print "set status to finished because not found ";
-            $status = AutoResponseDetails::where('id', $auto_response_detail_id)->update(['status'=>'finished']);
+            AutoResponseDetails::where('id', $auto_response_detail_id)->delete();
             Activity::create(['account_id'=>$campaign['account_id'], 'table_name'=>'campaigns','table_id'=>$campaign['id'], 'action'=>'Auto response not sent because contact not found, we just set auto response queue to finished!']
             );
+
+            return 'deleted auto response queue';
         }
-        return $status;
     }
 
 
