@@ -40,7 +40,7 @@ th {
 }
 </style> 
   
-{!!$status!!}
+
 <form method="POST" action="{{ action('CampaignController@createSettingsValidate')}}" > 
  {{ csrf_field() }}
 <input id="" type='hidden'  name='sender_name' value="{{$_SESSION['campaign']['sender']['name']}}" />
@@ -55,7 +55,18 @@ th {
 
   
 @include('pages.include.other.campaign-header-steps',  ['currentStep' => 'Campaign Settings'])
- 
+
+@if(count(session('campaignSendLog')) > 0)
+    <div class=" alert alert-info" style="max-height: 250px;overflow-y: scroll;" >
+        @foreach(session('campaignSendLog') as $index => $campaignLog)
+            {{$index+1 . ' ' . $campaignLog}}<br>
+        @endforeach
+        {!!session()->forget('campaignSendLog')!!}
+    </div>
+@else
+    {!!$status!!}
+@endif
+
 <div class="panel panel-default">
     <div class="panel-heading">
       <h3 class="panel-title">Campaign Status</h3>

@@ -347,7 +347,8 @@ class CampaignController extends Controller
         $campaignSchedule = CampaignSchedule::where('campaign_id', $_SESSION['campaign']['id'])->first();
         
         $campaign = Campaign::where('id' , $_SESSION['campaign']['id'])->first();
-        
+
+
         // print " kind " . $campaign->kind . ' campaign id ' . $_SESSION['campaign']['id'];
 
             if($campaign->kind == 'mobile email optin') {
@@ -361,15 +362,15 @@ class CampaignController extends Controller
                     'Optin Receiver To Email'=>$campaign->optin_email_to_mail, 
 
                 ];      
-  
+
+                //                print "mobile optin";
                 return view('pages/campaign/campaign-settings-optin', ['optinDetails'=>$optinDetails, 'status'=>$campaign->status, 'listNames'=>List1::getCurrentCampaignListNames(), 'campaignSchedule'=>$campaignSchedule, 'campaign'=>$campaign]); 
 
             } else {
 
-                // print "not mobile optin "; 
-                return view('pages.campaign.campaign-settings', ['status'=>'', 'listNames'=>List1::getCurrentCampaignListNames(), 'campaignSchedule'=>$campaignSchedule, 'campaign'=>$campaign]);
+                //                 print "not mobile optin ";
+                return view('pages/campaign/campaign-settings', ['status'=>'', 'listNames'=>List1::getCurrentCampaignListNames(), 'campaignSchedule'=>$campaignSchedule, 'campaign'=>$campaign]);
             }
-
     }   
 
     public function createSettingsMobileOptinValidate(Request $request) 

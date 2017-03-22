@@ -16,6 +16,7 @@ use App\User;
 use App\CampaignList;
 use App\Contact;
 use App\AutoResponseDetails;
+use Session;
 
 
 class CampaignScheduleController extends Controller
@@ -222,37 +223,52 @@ class CampaignScheduleController extends Controller
 
 
     public function sendEmailToContacts($campaign)
-    {  
+    {
+
+        $campaignSendLog = [];
+
+
         if(!empty($campaign)) { 
             $contacts = Campaign::getAllEmailWillRecieveTheCampaign($campaign->campaign_id);   
             $campaign = (array) $campaign;     
  
             if($contacts) {  
-                foreach ($contacts['contacts'] as $id => $contact) {  
-                    if(Mail::to($contact['email'])->queue(new CampaignSendMail($contact, $campaign))) { 
-                        Activity::create(['account_id'=>$campaign['account_id'], 'table_name'=>'campaigns','table_id'=>$campaign['campaign_id'], 'action'=>'Email successfully sent to ' . $contact['email'] . ' campaign status is ' . $campaign['repeat'] ]);  
- 
-                        print "\n<br> sent campaign to " . $contact['email'] . ' campaign title ' . $campaign['title']; 
+                foreach ($contacts['contacts'] as $id => $contact) {
 
+                    if(Mail::to($contact['email'])->queue(new CampaignSendMail($contact, $campaign))) { 
+
+                        Activity::create(['account_id'=>$campaign['account_id'], 'table_name'=>'campaigns','table_id'=>$campaign['campaign_id'], 'action'=>'Email successfully sent to ' . $contact['email'] . ' campaign status is ' . $campaign['repeat'] ]);
+                        //                        print "\n<br> sent campaign to " . $contact['email'] . ' campaign title ' . $campaign['title'];
+//                        $campaignSendLog[] = "Sent campaign to " . $contact['email'] . ' campaign title ' . $campaign['title'];
+                        $campaignSendLog[] =  "Sending campaign  to " . $contact['email'] . ' success.';
                     } else {
 
-                         Activity::create(['account_id'=>$campaign['account_id'], 'table_name'=>'campaigns','table_id'=>$campaign['campaign_id'], 'action'=>'Email failed sending to ' . $contact['email'] . ' campaign status is ' . $campaign['repeat'] ]);   
-                        print "\n<br> failed campaign to " . $contact['email'] . ' campaign title ' . $campaign['title']; 
+                        Activity::create(['account_id'=>$campaign['account_id'], 'table_name'=>'campaigns','table_id'=>$campaign['campaign_id'], 'action'=>'Email failed sending to ' . $contact['email'] . ' campaign status is ' . $campaign['repeat'] ]);
+                        //                         print "\n<br> failed campaign to " . $contact['email'] . ' campaign title ' . $campaign['title'];
 
-                    }  
 
-                    $this->pauseInHalfOfSeconds(); 
-                    
-                }  
+                        $campaignSendLog[] =  "Sending campaign  to " . $contact['email'] . ' failed.';
+
+                    }
+
+                    $this->pauseInHalfOfSeconds();
+
+                }
+
+                session(['campaignSendLog' => $campaignSendLog]);
+
             } else {
+
                 print "\n no contact for campaign found"; 
                 print "<script> alert('No active contact found for this campaign'); </script>";
+
             }
         } else {
             print "\n no campaign found"; 
             return 1; // no campaign found
         }
     }
+
 
     // pause in 1 second in order to send 2 emails per second
     private function pauseInHalfOfSeconds()
