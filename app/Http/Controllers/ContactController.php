@@ -26,9 +26,7 @@ class ContactController extends Controller
     {
 
         $lists = List1::where('account_id', User::getUserAccount())->get();
-
-
-
+ 
          return view("pages/contact/contact", compact('lists'));
 //        return view("pages/test/pagination");
 //        return view("pages/test/pagination-1");
@@ -104,6 +102,7 @@ class ContactController extends Controller
 //        dd($contacts) ;
     }
 
+
     /**
      * Show the form for creating a new resource.
      *
@@ -111,11 +110,22 @@ class ContactController extends Controller
      */
     public function create()
     {
-          return view("pages.contact.contact-create"); 
+          return view("pages/contact/contact-create"); 
        //return "show form to create a contact";
     }
-        
+         
 
+    public function importChoose() {
+        return view('pages/contact/contact-import-choose');
+    }
+         
+    public function importChoosePost(Request $requests) {  
+      // dd($requests->all()); 
+      if($requests->get('import_contact') == 'csv_txt') {   
+        return redirect()->route('user.contact.import'); 
+      }
+    }
+         
     public function import() {
         return view('pages/contact/contact-import');
     }

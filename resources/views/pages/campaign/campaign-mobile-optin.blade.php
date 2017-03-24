@@ -2,7 +2,7 @@
 <html>
 <head>
 
-	<title> Preview </title>
+	<title> Preview 1231323</title>
 
 	<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
 	<link rel="stylesheet" type="text/css" href="assets/css/email-editor.bundle.min.css" />
@@ -10,9 +10,14 @@
 	<link rel="stylesheet" type="text/css" href="assets/css/colorpicker.css" /> 
 	{{-- <link rel="stylesheet" type="text/css" href="http://cdn.tinymce.com/4/skins/lightgray/content.inline.min.css"/>   --}}
 	<link rel="stylesheet" type="text/css" href="assets/css/colorpicker.css" />  
+	<link rel="stylesheet"   type="text/css" href="{{url('public/css/mobile-optin.css')}}" />  
+
+
 
     <script src="<?php print url('/'); ?>/public/js/src/jquery-3.1.1.min.js"></script>
     <script src="<?php print url('/'); ?>/public/js/custom_jquery.js"></script>  
+
+
     
 		<script type="text/javascript"> 
 			$(document).ready(function(){ 
@@ -60,8 +65,7 @@
 <body>	 
 	<div class="container">
 		<br><br>
-		<?php 
-
+		<?php  
 			$content = htmlspecialchars_decode(stripslashes($campaign->content));
 			$content = str_replace('contenteditable="true"', '', $content);
 			echo $content; 

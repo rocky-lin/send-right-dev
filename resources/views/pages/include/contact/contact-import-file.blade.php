@@ -25,18 +25,19 @@
 // Storage::disk('local')->put('file.txt', 'Contents');
 ?>
 <!-- the avatar markup -->
+<br><br><br><br><br><br><br><br><br>
 <div id="kv-avatar-errors-1" class="center-block" style="width:800px;display:none"></div>
 {{-- <form class="text-center" action="/avatar_upload.php" method="post" enctype="multipart/form-data"> --}}
     {!! Form::open(['url'=>route('user.contact.import.store'), 'files'=>true]) !!}
     <div class="kv-avatar center-block" style="width:200px">
         <div class="form-group">
             <center>
-                <input id="avatar-1" name="importFile" type="file" class="file-loading">
+                <input id="avatar-1" name="importFile" type="file" class="file-loading" style="border: 1px solid #b2b2b2;padding: 60px;" />
             </center>
         </div>
         <div class="form-group">
             <center> 
-                {!! Form::submit('importContacts', ['class'=>'btn btn-info']) !!}
+                {!! Form::submit('importContacts', ['class'=>'btn btn-info pull-left']) !!}
             </center>
         </div>
     </div>

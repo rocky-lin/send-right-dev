@@ -8,16 +8,10 @@
 <div ng-controller="myAddContactCtrl">
 {{ Form::open(['route' => 'contact.store', 'method'=>'post', 'name'=>'addContactFrm', 'autocomplete'=>'off'])}}    
 @endif 
-    <div class="form-group">
-        {{ Form::label('First Name', null, ['class' => 'control-label']) }}
-        {{Form::text('first_name', null, ['class' => 'form-control', 'ng-model'=>'firstName', 'required' ]) }}                                
-        <div style="margin-top:5px" class="alert alert-warning ng-hide" ng-show="!addContactFrm.first_name.$valid && !addContactFrm.first_name.$pristine"> First ame is required! </div>
-    </div>     
-    <div class="form-group">
-        {{ Form::label('Last Name', null, ['class' => 'control-label']) }}
-        {{Form::text('last_name', null ,['class' => 'form-control', 'ng-model'=>'lastName',  'required']) }}   
-         <div style="margin-top:5px" class="alert alert-warning ng-hide" ng-show="!addContactFrm.last_name.$valid && !addContactFrm.last_name.$pristine"> Last Name is required! </div>
-    </div>       
+
+    <h3>Contact Details</h3>
+    <br><br>
+
     <div class="form-group">
         {{ Form::label('Email', null, ['class' => 'control-label']) }}
         {{Form::email('email', null ,['class' => 'form-control', 'ng-model'=>'email', 'required']) }}     
@@ -28,6 +22,19 @@
             Email is valid
         </div>  
     </div>      
+    <div class="form-group">
+        {{ Form::label('First Name', null, ['class' => 'control-label']) }}
+        {{Form::text('first_name', null, ['class' => 'form-control', 'ng-model'=>'firstName', 'required' ]) }}                                
+        <div style="margin-top:5px" class="alert alert-warning ng-hide" ng-show="!addContactFrm.first_name.$valid && !addContactFrm.first_name.$pristine"> First ame is required! </div>
+    </div>     
+    <div class="form-group">
+        {{ Form::label('Last Name', null, ['class' => 'control-label']) }}
+        {{Form::text('last_name', null ,['class' => 'form-control', 'ng-model'=>'lastName',  'required']) }}   
+         <div style="margin-top:5px" class="alert alert-warning ng-hide" ng-show="!addContactFrm.last_name.$valid && !addContactFrm.last_name.$pristine"> Last Name is required! </div>
+    </div>      
+    <br><br>
+    <hr>
+    <br><br> 
     <div class="form-group">
         {{ Form::label('Location', null, ['class' => 'control-label']) }}
         {{Form::text('location', null ,['class' => 'form-control', 'ng-model'=>'location']) }}   
@@ -53,6 +60,26 @@
                 {{ Form::select('type', ['contact' => 'contact', 'subscriber' => 'subscriber'], 'contact', ['class'=>'form-control']) }}
             </div> 
         @endif  
+
+
+
+        <br>
+        <div class="form-group"> 
+            <label class="control-label"> Custom Field 1</label> <small>(coming soon..)</small>
+             <input type="text" class="form-control" disabled="" />
+        </div>      
+        <br>
+        <div class="form-group"> 
+            <label class="control-label"> Custom Field 2</label> <small>(coming soon..)</small>
+             <input type="text" class="form-control" disabled="" />
+        </div>      
+        <br>
+        <div class="form-group"> 
+            <label class="control-label"> Custom Field 3</label> <small>(coming soon..)</small>
+             <input type="text" class="form-control" disabled="" />
+        </div>     
+
+
 
    </div>  
     <div class="form-group">

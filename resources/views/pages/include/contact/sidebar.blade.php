@@ -6,7 +6,7 @@
                     class="material-icons">note_add</i><span
                     class="collapse in hidden-xs">Add Contact<span class="caret"></span></span></a>
         <ul class="nav nav-stacked collapse left-submenu" id="item1">
-            <li><a style="cursor: pointer;" href="{{ route('user.contact.import')}}" class="menu-sub-dropdown"><i class="material-icons">import_contacts</i><span
+            <li><a style="cursor: pointer;" href="{{ route('user.contact.import.choose')}}" class="menu-sub-dropdown"><i class="material-icons">import_contacts</i><span
                             class="collapse in hidden-xs">Import</span></a></li>
             <li><a style="cursor: pointer;" href="{{ route('contact.create')}}" class="menu-sub-dropdown"><i class="material-icons">contact_mail</i> <span
                             class="collapse in hidden-xs">Add Manual</span></a></li>

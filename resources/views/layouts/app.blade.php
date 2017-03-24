@@ -155,18 +155,25 @@
                                     </li>  
                                 </ul>
                             </li>
-                            <li><a href="#"><span>Help</span></a></li>
-                            <li><a href="#"><i class="material-icons">search</i></a></li>
+                            <li><a href="#" data-toggle="modal" data-target="#helpGlobal" ><span>Help</span></a></li>
+                            <li>
+                                <a href="#" data-toggle="modal" data-target="#searchGlobal" ><i class="material-icons">search</i></a>
+                            </li>
                         @endif
                     </ul>
                 </div>
             </div>
         </nav>
 
+
+
         <div class='container-full'>
+            {!! Support\Popup::globalSearchPopup()!!}
+            {!! Support\Popup::globalHelpPopup()!!}
             {{-- @include('pages/include/subscription/subscription-status-message') --}}
             @yield('content')
-            @include('pages/popup/popup') 
+            @include('pages/popup/popup')
+
         </div>
     </div>
 

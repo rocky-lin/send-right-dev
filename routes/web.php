@@ -89,7 +89,12 @@ Route::group(['prefix' => 'user' , 'middleware' => 'auth' ], function() {
 
 		Route::get('contact/{contact}/get', 'ContactController@getById')->name('user.contact.get.by.id');
 	  	Route::get('contact/get/all', 'ContactController@getUserAccountContacts')->name('user.contact.get.all');
-	  	Route::get('contact/import', 'ContactController@import')->name('user.contact.import');
+
+	  	Route::get('contact/import/choose', 'ContactController@importChoose')->name('user.contact.import.choose');
+	  	Route::post('contact/import/choose', 'ContactController@importChoosePost')->name('user.contact.import.choose.post');
+
+	  	Route::get('contact/import/start', 'ContactController@import')->name('user.contact.import');
+
 		Route::post('contact/import/store', 'ContactController@importStore')->name('user.contact.import.store');
 
 		Route::get('contact/data-table/test', 'ContactController@testContact')->name('user.contact.data.table.test');

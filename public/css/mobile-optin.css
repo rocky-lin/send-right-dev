@@ -1,0 +1,95 @@
+@media only screen and (max-width: 1024px) and (min-width: 200px)  { 
+	body { 
+		padding:0px !important;
+
+	} 
+	h1 { 
+		font-size:300%;
+	} 
+	.element-content {  
+		font-size:300%;
+	 } 
+	.mce-item-table { 
+		width:100%;
+	} 
+	.content-image  {
+		max-width: 100% !important;
+		}
+	td div {
+		width:100%;
+		font-size:105% !important; 
+	} 
+	p, span { 
+		font-size:100% !important;
+	}
+	 
+	img {
+		max-width: 100% !important;
+	} 
+	a { 
+		font-size:250% !important;
+		padding:10% !important;
+	}  
+
+	.element-content table tbody tr td {
+		width:100% !important;
+		font-size: 150% !important;
+		line-height: 120% !important;
+	}
+	td div {
+    width: 100%;
+    font-size: 200% !important;
+    line-height: 120% !important;
+    width: 100% !important;
+    text-align: justify;
+}
+table.main{
+	width: 100%;
+
+}
+td, th {
+    padding: 0;
+    display: inline-block;
+}
+img {
+    width: 100%;
+    display: block;
+}
+a {
+    font-size: 250% !important;
+    padding: 3% !important;
+}
+div.element-contenteditable.active{
+	font-size: 100%;
+}
+td.page-header.element-conter{
+    width: 100%;
+    font-size: 105% !important;
+    font-size: 300% !important;
+    line-height: 120% !important;
+    width: 100% !important;
+    height: 100% !important;
+    text-align: justify;
+}
+
+td.element-content {
+		font-size:100% !important;
+		line-height: 120% !important;
+		width: 100% !important;
+
+	}
+div{
+	font-size: 100%;
+}
+.element-content table tbody tr td div {
+    font-size: 150% !important;
+    line-height: 140% !important;
+    width: 100% !important;
+}
+a.button-1.hyperlink{
+	width: 30% !important;
+	font-size: 100% !important;
+
+}
+
+} 

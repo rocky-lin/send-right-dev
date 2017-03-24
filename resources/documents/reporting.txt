@@ -1,3 +1,104 @@
+Check campaign direct send 
+Check campaign schedule send one time
+Check campaign schedule send daily 
+Check campaign schedule send weekly  
+Check campaign schedule send monthly 
+
+Check campaign auto response for form
+Check campaign auto response for mobile optin with auto response immediate 
+Check campaign auto response for mobile optin with auto response in an hour 
+Check campaign auto response for mobile optin with auto response in an hour and day
+
+
+
+
+
+
+
+
+
+
+
+
+Hi Rocky,
+
+Update for 22, 2017
+
+In campain add sent log when direct send - done
+Sending campaign and auto response - too many email per second   - onhold till we come tested it to real email sending - i tested this issue again and it looks ok, can be address if found any issue like this in the future - done
+Mobile optin and auto response, when customer signedup again it needs to update customer info to active if its already finished - done
+Fix pagination in list - done
+Check mobile optin with auto responder lists - done
+Mobile optin having issue with number - done
+Make delete autoresponse when contact is empty - done
+
+Todo for 23, 2017
+
+
+
+Fix ui import contact -  done 
+Fix ui create contact - done
+Make mobile optin responsive
+	display image in mobile optin with correct source url - done
+    create different mobile optin and do testing with responsive design -  done
+	test all ement and make it all responsive - done
+	responsive all ement -  done
+	use design fonts lie em, % etc.. -  done
+	make all container element with full width like div, table etc.. - done
+	use media queries, if its mobile view it needs to show responsive  - done 
+	use media queries, if its desktop view no need to use responsive  - done
+	make all the button responsive - done 
+	play with mobile optin creation -  done
+
+
+
+
+Check the entire site for functions now working propperly - 
+
+Thanks,
+
+Best regards,
+Jesus Erwin Suarez
+
+
+
+
+
+
+
+
+Hi Rocky,
+
+Update for March 21, 2017 
+	- get list auto responder  - done
+	- create database migration for auto respond ques - done
+	- save auto responder id to database and contact id - done
+activity show specific for specific user - done
+fix error when edit mobile optin - done
+  
+Todo tomorrow 
+  Start working with payshortcut 
+  
+Onhold tasks
+
+
+
+
+
+
+Todo
+
+Auto responder
+make auto response delete when done processed both table auto_response_details and auto_responses
+delete auto_responses based on finished entry in auto_response_details and use cronjobs to delete it
+
+
+
+
+
+
+
+
 
 Monday:  
 
@@ -18,25 +119,6 @@ Add function that will allow send auto response for list in mobile optin
 	- get list id  - done 
 
 Todo tomorrow 
-
-Hi Rocky, 
-
-Update for March 21, 2017 
-	- get list auto responder  - done
-	- create database migration for auto respond ques - done
-	- save auto responder id to database and contact id - done
-activity show specific for specific user - done
-fix error when edit mobile optin - done
-  
-Todo tomorrow 
-  Start working with payshortcut 
-  
-Onhold tasks
-Make mobile optin responsive  - on hold 
-Mobile optin and auto response, when customer signedup again it needs to update customer info to active if its already finished - onhold
-Sending campaign and auto response - too many email per second   - onhold till we come tested it to real email sending 
- 
- 
 
 
 
