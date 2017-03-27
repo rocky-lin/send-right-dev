@@ -1,3 +1,18 @@
+Login and authenticate to payshortcut
+Login to sendright and retrieve all the subscription in payshortcut database
+Display all subscription in payshortcut 
+Allow specific subscription 
+Check specific subscribtion and enable function in sendright based on account
+Enable basic subscription for now
+Enable auto renew subscription for agree payment
+Invoice list all the subscription and purchased product from payshortcut
+User allow deactivate agreed payment method
+Detect agreed payment and check last paid date if its already 1 month or not then detect if need to pay again with billing cycle 
+
+
+
+
+
 Check campaign direct send 
 Check campaign schedule send one time
 Check campaign schedule send daily 
