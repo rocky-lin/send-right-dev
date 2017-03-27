@@ -57,10 +57,13 @@ app.controller( 'myCampaignViewCtr', ['$scope', '$filter', '$http', '$window', f
     $scope.data = [];
     $scope.q = '';
     $scope.deleteCampaign = [];
+
     $scope.totalCampaign = 0;
+
     $scope.filteredTodos = []; 
     $scope.numPerPage = 10;
     $scope.maxSize = 10;
+    $scope.showCampaignInitLoader = [];
 
     $scope.editCampaign = function(campaign) {
 
@@ -109,11 +112,12 @@ app.controller( 'myCampaignViewCtr', ['$scope', '$filter', '$http', '$window', f
         //alert("test" + data);
 
     //};
-    $scope.campaignDisplayByKind = function(kind) {
+
+    $scope.campaignDisplayByKind = function(kind, index) {
 
         console.log("kind = " + kind);
         $scope.campaignKindLoader = true;
-        $scope.showCampaignInitLoader = true;
+        $scope.showCampaignInitLoader[index] = true;
 
         $scope.myStyle={'display':'block'};
 
@@ -140,13 +144,13 @@ app.controller( 'myCampaignViewCtr', ['$scope', '$filter', '$http', '$window', f
                 $scope.data.push(response.data[i]);
                 $scope.totalCampaign++;
             }
-            $scope.showCampaignInitLoader = false;
-            $scope.campaignKindLoader = false; 
+            $scope.showCampaignInitLoader[index]= false;
+            $scope.campaignKindLoader = false;
 
         }, function errorCallback(response) {
             $scope.myStyle={'display':'none'};
             //$scope.campaignKindLoader = false;
-            $scope.showCampaignInitLoader = false;
+            //$scope.showCampaignDraftInitLoader = false;
             alert("something wrong! please campaign send right support. Thank you!");
         });
     };
@@ -291,8 +295,33 @@ app.controller( 'myCampaignViewCtr', ['$scope', '$filter', '$http', '$window', f
             $scope.assignListShow = false; 
         });      
         console.log("save label assignment now");  
+    };
+
+
+    $scope.campaign_label_hide = [];
+    $scope.removeCampaignFromLabel = function(label_detail){
+        //console.log(" label detail id " + label_detail.id);
+        if(confirm("Are you sure you want to remove this label?")) {
+            $http({
+                method: 'POST',
+                url: obj.siteUrl + '/user/label-detail-delete',
+                data: { id:label_detail.id},
+                headers: {
+                    'Content-type': 'application/json;charset=utf-8'
+                }
+            }).then(function successCallback(response) {
+                $scope.campaign_label_hide[label_detail.id] = true;
+                //alert("successfully added to a list");
+                $scope.assignListShow = false;
+            }, function(rejection) {
+                console.log("Ohps! something wrong, please campaign send right support. Thank you!");
+                $scope.assignListShow = false;
+            });
+
+        } else {
+
+        }
     }
-    
 }]);
 
 

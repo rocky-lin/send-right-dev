@@ -116,6 +116,31 @@ class LabelDetailController extends Controller
      */
     public function destroy($id)
     {
-        //
+
+
+         $LDdeleted = LabelDetail::where("id", $id)->delete();
+
+        if($LDdeleted) {
+            print "successfully dlete label detail $id";
+        } else {
+            print "failed to dleted label detail $id";
+        }
+
     }
+
+    public function ajaxDelete(Request $request)
+    {
+        $id = $request->get('id');
+
+         $LDdeleted = LabelDetail::where("id", $id)->delete();
+
+        if($LDdeleted) {
+            print "successfully dlete label detail $id";
+        } else {
+            print "failed to dleted label detail $id";
+        }
+
+    }
+
+
 }

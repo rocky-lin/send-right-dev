@@ -1,14 +1,26 @@
 
-<h4 data-ng-click="campaignDisplayByKind('all')" style="cursor: pointer" >All Campaigns
+<h4 data-ng-click="campaignDisplayByKind('all', 1)" style="cursor: pointer" >All Campaigns
 
-<span ng-show="showCampaignInitLoader" data-ng-init="showCampaignInitLoader=false" >
+<span ng-show="showCampaignInitLoader[1]" data-ng-init="showCampaignInitLoader[1]=false" >
     <i class="fa fa-spinner fa-spin" aria-hidden="true"></i>
 </span>
 
- <span class="badge pull-right" >@{{totalCampaign}}</span> </h4>
+ <span class="badge pull-right" >{{$totalCampaignAll}}</span>
+
+</h4>
 
 
-<h4>Draft <span class="badge pull-right ">0</span></h4>
+<h4 data-ng-click="campaignDisplayByKind('draft', 2)" style="cursor: pointer" >Draft
+
+    <span ng-show="showCampaignInitLoader[2]" data-ng-init="showCampaignInitLoader[2]=false" >
+        <i class="fa fa-spinner fa-spin" aria-hidden="true"></i>
+    </span>
+    <span class="badge pull-right ">{{$totalCampaignDraft}}</span>
+</h4>
+
+
+
+
 <hr> 
 <ul class="list-group form-side-bar" id="form-side-bar">
     <li class="list-group-item">

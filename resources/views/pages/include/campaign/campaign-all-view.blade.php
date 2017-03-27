@@ -105,7 +105,16 @@
                                         {{-- <td>  <input type="checkbox" data-ng-checked="checked_all" /> </td> --}}
                                         <td><input type="checkbox" data-ng-checked="checked_all"  data-ng-model="checked_all_model[campaign.id]" ng-click="manageCheckStatus()" /></td>
 
-                                        <td>@{{campaign.title }}</td>
+                                        <td>
+                                            @{{campaign.title }}
+                                            <br>
+                                            <button   type="button" class="btn btn-primary" style="margin-right: 5px;margin-bottom: 5px;padding: 0px;padding: 4px;" ng-hide="campaign_label_hide[@{{label_assign.id}}]" ng-repeat="label_assign in campaign.label_assignment">
+                                                @{{label_assign.name}} <span class="badge"   data-ng-click="removeCampaignFromLabel(label_assign)" >x</span>
+                                            </button>
+
+                                        </td>
+
+
                                         <td>@{{campaign.type }}</td>
                                         <td> @{{campaign.next_send}} </td> 
                                         <td> @{{campaign.total_contacts}} </td>

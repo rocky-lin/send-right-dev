@@ -167,7 +167,7 @@
 
 
 
-        <div class='container-full'>
+        <div class='container-full' style="min-height: 590px;">
             {!! Support\Popup::globalSearchPopup()!!}
             {!! Support\Popup::globalHelpPopup()!!}
             {{-- @include('pages/include/subscription/subscription-status-message') --}}

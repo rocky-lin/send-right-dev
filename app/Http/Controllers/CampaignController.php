@@ -27,29 +27,37 @@ use App\LabelDetail;
 
 class CampaignController extends Controller
 {
- 
-    public function viewCampaignAll() { 
 
-        /** 
+
+    public function viewCampaignAll() {
+
+        /**
          * Get User lists
          */
         $lists = List1::where('account_id', User::getUserAccount())->get();
 
-        /** 
-         * Get specific campaign labels 
+        /**
+         * Get specific campaign labels
          */
-        $labels = Label::where('account_id', User::getUserAccount())->where('type', 'campaign')->get();  
- 
- 
+        $labels = Label::where('account_id', User::getUserAccount())->where('type', 'campaign')->get();
+
+        /**
+         * Count total draft campaign
+         */
+        $totalCampaignDraft = Campaign::where('status', 'inactive')->count();
+
+        /**
+         * Count total campaign all
+         */
+        $totalCampaignAll  = Campaign::all()->count();
+
         /**
          * return to views
          */
-        return view('pages/campaign/campaign-all', compact('lists', 'labels'));  
+        return view('pages/campaign/campaign-all', compact('lists', 'labels', 'totalCampaignDraft', 'totalCampaignAll'));
 
     }
-
-
-    public function index() 
+    public function index()
     { 
         return view('pages/campaign/campaign');
     } 
@@ -556,7 +564,24 @@ class CampaignController extends Controller
                     // $campaigns[$index]['next_send'] = Helper::createDateTime(CampaignSchedule::where('campaign_id', $campaigns[$index]['id'])->first()->schedule_send)->format('l jS \\of F Y h:i:s A');
                 $campaign['total_contacts'] =  count(Campaign::getAllEmailWillRecieveTheCampaign($campaign['id'])['contacts']); 
             break; 
-        }    
+        }
+
+
+
+        /**
+         * get campaign label info
+         */
+        $labelInfo = DB::table('label_details')
+            ->join('labels', 'labels.id', '=', 'label_details.label_id')
+            ->select('labels.*', 'label_details.*')
+            ->where('label_details.table_id', $id)
+            ->where('label_details.table_name', 'campaigns')
+            ->get()
+            ->toArray();
+
+        foreach($labelInfo as $label) {
+            $campaign['label_assignment'][] = $label;
+        }
 
         // set campaign list  
         $campaign['list_id_str'] =  List1::getStrName(Campaign::find($campaign['id'])->campaignList); 
@@ -582,14 +607,16 @@ class CampaignController extends Controller
 
                         switch ($campaigns[$index]['kind']) {
                             case 'mobile email optin': 
-                                $campaigns[$index]['total_contacts'] =  count(Campaign::getAllEmailWillRecieveTheCampaign($campaigns[$index]['id'])['contacts']); 
+                                $campaigns[$index]['total_contacts'] =  count(Campaign::getAllEmailWillRecieveTheCampaign($campaigns[$index]['id'])['contacts']);
                             break; 
                             case 'auto responder':
                                 $created_ago = Carbon::createFromTimeStamp(strtotime($campaign['created_at']))->diffForHumans(); 
                                     // print "ago " .   $ago;
                                 $campaigns[$index]['created_ago'] = $created_ago;
                                 $campaigns[$index]['next_send'] = '';
-                                $campaigns[$index]['total_contacts'] =  count(Campaign::getAllEmailWillRecieveTheCampaign($campaigns[$index]['id'])['contacts']); 
+                                $campaigns[$index]['total_contacts'] =  count(Campaign::getAllEmailWillRecieveTheCampaign($campaigns[$index]['id'])['contacts']);
+
+
                             break; 
                             default: 
                                 $created_ago = Carbon::createFromTimeStamp(strtotime($campaign['created_at']))->diffForHumans(); 
@@ -600,17 +627,39 @@ class CampaignController extends Controller
                                     if(!empty($campaignSchedule))  {  
                                         $campaigns[$index]['next_send'] = Helper::createDateTime(CampaignSchedule::where('campaign_id', $campaigns[$index]['id'])->first()->schedule_send)->format('l jS \\of F Y h:i:s A'); 
                                     }   
-                                $campaigns[$index]['total_contacts'] =  count(Campaign::getAllEmailWillRecieveTheCampaign($campaigns[$index]['id'])['contacts']); 
-                            break; 
-                        }   
-                        // set campaign list 
-                        //  
-                         $campaigns[$index]['list_id_str'] =  List1::getStrName(Campaign::find($campaigns[$index]['id'])->campaignList);
-                         // $campaigns[$index]['list_id_str'] = List1::toStr(Campaign::find($campaigns[$index]['id'])->campaignList->toArray()); 
-                    }  
+                                $campaigns[$index]['total_contacts'] =  count(Campaign::getAllEmailWillRecieveTheCampaign($campaigns[$index]['id'])['contacts']);
+
+                            break;
+                        }
+
+
+
+                        /**
+                         * get campaign label info
+                         */
+                        $labelInfo = DB::table('label_details')
+                            ->join('labels', 'labels.id', '=', 'label_details.label_id')
+                            ->select('labels.*', 'label_details.*')
+                            ->where('label_details.table_id', $campaigns[$index]['id'])
+                            ->where('label_details.table_name', 'campaigns')
+                            ->get()
+                            ->toArray();
+
+                        foreach($labelInfo as $label) {
+                            $campaigns[$index]['label_assignment'][] = $label;
+                        }
+
+                        /**
+                         * set campaign list
+                         */
+                        $campaigns[$index]['list_id_str'] =  List1::getStrName(Campaign::find($campaigns[$index]['id'])->campaignList);
+
+                    }
+
+
   
         //dd($campaigns);  
-        return $campaigns; 
+        return $campaigns;
     }
 
 
@@ -618,46 +667,68 @@ class CampaignController extends Controller
     public function getAllCampaignSortByKind($kind)
     {
 
-        // get campaign based on sorting
-        $campaigns = Campaign::getCampaignsByAccountSortByKind($kind)->toArray(); 
+
+
+
+            // get campaign based on sorting
+            $campaigns = Campaign::getCampaignsByAccountSortByKind($kind)->toArray();
+
+
 
         // sort campaign result by id in descending order
         $collection = collect( $campaigns ); 
         $sorted = $collection->sortBy('id', SORT_REGULAR, true);
         $campaigns = $sorted->values()->all();
 
+        foreach($campaigns as $index => $campaign) {
+            // dd($campaigns);
+            switch ($kind) {
+                case 'mobile email optin':
 
-        // dd($campaigns);
-        switch ($kind) {
-            case 'mobile email optin': 
-                foreach($campaigns as $index => $campaign)  { 
-                    $created_ago = Carbon::createFromTimeStamp(strtotime($campaign['created_at']))->diffForHumans();  
-                    $campaigns[$index]['created_ago']    = $created_ago;
-                    $campaigns[$index]['total_contacts'] =  count(Campaign::getAllEmailWillRecieveTheCampaign($campaigns[$index]['id'])['contacts']);  
-                }
-            break; 
-            case 'auto responder':
-             foreach($campaigns as $index => $campaign)  {
-                    $created_ago = Carbon::createFromTimeStamp(strtotime($campaign['created_at']))->diffForHumans(); 
+                    $created_ago = Carbon::createFromTimeStamp(strtotime($campaign['created_at']))->diffForHumans();
+                    $campaigns[$index]['created_ago'] = $created_ago;
+                    $campaigns[$index]['total_contacts'] = count(Campaign::getAllEmailWillRecieveTheCampaign($campaigns[$index]['id'])['contacts']);
+
+                    break;
+                case 'auto responder':
+
+                    $created_ago = Carbon::createFromTimeStamp(strtotime($campaign['created_at']))->diffForHumans();
                     // print "ago " .   $ago;
                     $campaigns[$index]['created_ago'] = $created_ago;
                     $campaigns[$index]['next_send'] = '';
-                    $campaigns[$index]['total_contacts'] =  count(Campaign::getAllEmailWillRecieveTheCampaign($campaigns[$index]['id'])['contacts']); 
-                } 
-            break; 
-            default: 
-                    foreach($campaigns as $index => $campaign)  {
-                        $created_ago = Carbon::createFromTimeStamp(strtotime($campaign['created_at']))->diffForHumans();
-                        // print "ago " .   $ago;
-                        $campaigns[$index]['created_ago'] = $created_ago;
+                    $campaigns[$index]['total_contacts'] = count(Campaign::getAllEmailWillRecieveTheCampaign($campaigns[$index]['id'])['contacts']);
 
-                        // uncomment this when real data is now working
-                        // $campaigns[$index]['next_send'] = Helper::createDateTime(CampaignSchedule::where('campaign_id', $campaigns[$index]['id'])->first()->schedule_send)->format('l jS \\of F Y h:i:s A');
-                         $campaigns[$index]['total_contacts'] =  count(Campaign::getAllEmailWillRecieveTheCampaign($campaigns[$index]['id'])['contacts']);
-                    } 
-                  break;
-        } 
- 
+                    break;
+                default:
+
+                    $created_ago = Carbon::createFromTimeStamp(strtotime($campaign['created_at']))->diffForHumans();
+                    // print "ago " .   $ago;
+                    $campaigns[$index]['created_ago'] = $created_ago;
+
+                    // uncomment this when real data is now working
+                    // $campaigns[$index]['next_send'] = Helper::createDateTime(CampaignSchedule::where('campaign_id', $campaigns[$index]['id'])->first()->schedule_send)->format('l jS \\of F Y h:i:s A');
+                    $campaigns[$index]['total_contacts'] = count(Campaign::getAllEmailWillRecieveTheCampaign($campaigns[$index]['id'])['contacts']);
+
+                    break;
+            }
+
+
+            /**
+             * get campaign label info
+             */
+            $labelInfo = DB::table('label_details')
+                ->join('labels', 'labels.id', '=', 'label_details.label_id')
+                ->select('labels.*', 'label_details.*')
+                ->where('label_details.table_id', $campaigns[$index]['id'])
+                ->where('label_details.table_name', 'campaigns')
+                ->get()
+                ->toArray();
+
+            foreach($labelInfo as $label) {
+                $campaigns[$index]['label_assignment'][] = $label;
+            }
+        }
+
         // dd($campaigns);
         return $campaigns;
     }
@@ -777,10 +848,18 @@ class CampaignController extends Controller
 
             // exit;
         // // get form by label details table id and add it in array    
-        foreach($labelDetails as $labelDetail) {  
-             $data[] = $this->getById($labelDetail->table_id); 
+        foreach($labelDetails as $index => $labelDetail) {
+
+             $data[$index] = $this->getById($labelDetail->table_id);
+
+
         }    
-        
+
+
+
+
+
+
         //  return form, to be display in front end  
         return $data; 
     } 

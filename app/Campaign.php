@@ -53,11 +53,18 @@ class Campaign   extends Model
         return Account::find(User::getUserAccount())->campaigns;
     }
     public static function getCampaignsByAccountSortByKind($kind)
-    { 
-        $campaigns = Account::find(User::getUserAccount())
-            ->campaigns()
-            ->where('kind', $kind)
-            ->get();
+    {
+        if($kind == 'draft') {
+            $campaigns = Account::find(User::getUserAccount())
+                ->campaigns()
+                ->where('status', 'inactive')
+                ->get();
+        } else {
+            $campaigns = Account::find(User::getUserAccount())
+                ->campaigns()
+                ->where('kind', $kind)
+                ->get();
+        }
 
         return $campaigns; 
     }

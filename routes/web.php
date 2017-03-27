@@ -51,7 +51,8 @@ Route::group(['prefix' => 'user' , 'middleware' => 'auth' ], function() {
  		
 
 
-		Route::resource('label-detail', 'LabelDetailController');  
+		Route::post('label-detail-delete', 'LabelDetailController@ajaxDelete');
+		Route::resource('label-detail', 'LabelDetailController');
 
  		Route::post('campaign/template/select/post', 'CampaignController@postChooseTemplateNew')->name('user.post.campaign.select');
 

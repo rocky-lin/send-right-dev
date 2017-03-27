@@ -18,6 +18,31 @@ Check campaign auto response for mobile optin with auto response in an hour and 
 
 
 
+Hi Rocky
+
+Update for March 24, 2017
+
+Check campaign direct send
+Click help - display FAQ and other information  as a popup
+Click seach icon - display a popup for search
+When create list and not selected any of the list dropdown then display this message "please select your correct list correctly click here to create new list."  in form
+Remove number at the top of the create label
+Add min-height of the container so that the footer will be located all the way down of the page event content is empty
+Make the draft working for campaigns
+Add allow remove campaign from label
+Add label design in each campaign under label
+
+Todo in weekend
+
+Do more testing and make video
+
+
+Thanks,
+
+Best regards,
+Jesus Erwin Suarez
+
+
 
 
 Hi Rocky,

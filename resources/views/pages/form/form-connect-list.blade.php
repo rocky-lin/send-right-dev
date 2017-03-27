@@ -19,12 +19,8 @@
                     <br><br>
                     <div class="form-group">
                         <h3 class="label label-primary" >Select List</h3>
-
-
                         <select class="form-control" name='selectedList' >
-
                             <option value="">Select..</option>
-
                             @foreach($lists  as $list)
                                 <option value="{{$list->name}}">{{$list->name}}</option>
                             @endforeach

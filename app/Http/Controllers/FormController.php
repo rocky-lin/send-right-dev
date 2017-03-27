@@ -154,9 +154,9 @@ class FormController extends Controller
     public function registerNewFormStep1(Request $request)
     {    
         //        session_start();
- 
+
         if(!List1::where('name', $request->get('selectedList') )->where('account_id', User::getUserAccount())->count()) {
-            return redirect()->back()->with('status', 'Please select your correct list correctly.')->withInput();
+            return redirect()->back()->with('status', "Please select your correct list correctly or <a href='".route('list.create')."'> click</a> here to create new list.")->withInput();
         } else if (empty($request->get('formName'))) {
             return redirect()->back()->with('status', 'Form name is required.')->withInput();
         }

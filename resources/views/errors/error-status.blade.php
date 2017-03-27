@@ -12,7 +12,7 @@
         <div class="alert alert-danger">
             <ul>
                 <li>
-                    {{ session('status') }}
+                    {!!  session('status')  !!}
                 </li>
             </ul>
         </div>
