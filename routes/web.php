@@ -4,7 +4,24 @@
 // use Auth; 
  
 Route::get('user/registration/create/{email?}/{fullName?}/{password?}', 'Auth\RegisterController@createUserHttp');
- 
+
+
+
+Route::get("test/curl", function(){
+
+	$payShortCutUrl = 'http://payshortcut.net/api/member/get-by-mail';
+
+	print "<pre>";
+
+	$getMember = curlGetRequest(['email'=>'mrjesuserwinsuarez@gmail.com'], $payShortCutUrl);
+
+	print "results from  123";
+
+	print_r($getMember);
+
+
+});
+
 Route::get('/', function () { 
 	// print " url = " . url('/');  
 	$url = url('/');  

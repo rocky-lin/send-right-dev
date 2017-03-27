@@ -1,0 +1,7 @@
+﻿exception 'ErrorException' with message 'mysqli_connect(): (HY000/1045): Access denied for user 'root'@'localhost' (using password: YES)' in D:\xampp\htdocs\rocky\send-right-dev\extension\campaign\includes\db.class.php:8
+Stack trace:
+#0 [internal function]: Illuminate\Foundation\Bootstrap\HandleExceptions->handleError(2, 'mysqli_connect(...', 'D:\\xampp\\htdocs...', 8, Array)
+#1 D:\xampp\htdocs\rocky\send-right-dev\extension\campaign\includes\db.class.php(8): mysqli_connect('localhost', 'root', '1234567890', 'rocky_sendright...')
+#2 D:\xampp\htdocs\rocky\send-right-dev\extension\campaign\includes\db.class.php(89): Db->connect()
+#3 D:\xampp\htdocs\rocky\send-right-dev\extension\campaign\index.php(10): Db->getUserName(1)
+#4 {main}

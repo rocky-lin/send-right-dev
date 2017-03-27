@@ -1,7 +1,17 @@
 
+ 
+
 @extends('layouts.app')
 
 @section('content') 
+
+
+    <?php 
+    $member = session('payshortcut_member');
+        print_r($member); 
+
+      ?>
+
    <div class="row main-row-container">  
         <div class="col-md-9 right-side-container">   
             <br><br>
