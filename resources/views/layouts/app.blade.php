@@ -275,6 +275,12 @@
             } );
 
 
+
+
+            $('#billing-invoice').DataTable()
+
+
+
         });
 
         //        $.noConflict();

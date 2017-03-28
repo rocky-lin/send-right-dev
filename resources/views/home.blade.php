@@ -6,10 +6,9 @@
 @section('content') 
 
 
-    <?php 
-    $member = session('payshortcut_member');
-        print_r($member); 
-
+       <?php
+        $member = session('payshortcut_member');
+        print_r($member);
       ?>
 
    <div class="row main-row-container">  
