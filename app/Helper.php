@@ -6,11 +6,7 @@ use Carbon\Carbon;
 
 
 class Helper extends Model
-{ 
-
-
-
-
+{
 
     // 2016-12-15 17:38:07
     public static function getSpecificDayHowMinInDateTime($dateTime)
@@ -33,6 +29,7 @@ class Helper extends Model
         // return interval days and hours
         return $dayHourInteraval;
     }
+
     public static function dateTimeExplode($dateTime)
     {  
      	if(empty($dateTime)) {
@@ -61,10 +58,12 @@ class Helper extends Model
     	 $dateTimeExploded = Helper::dateTimeExplode($dateTime); 
     	return Carbon::create($dateTimeExploded['year'], $dateTimeExploded['month'], $dateTimeExploded['day'],  $dateTimeExploded['hour'], $dateTimeExploded['min'], $dateTimeExploded['sec']); 
     }
+
     public static function toAgo($dateTime)
     {
     	return Carbon::createFromTimeStamp(strtotime($dateTime))->diffForHumans(); 
     }
+
     public static function responseAddCreatedAtAgo($response) 
     {
         foreach($response as $index => $respond) {

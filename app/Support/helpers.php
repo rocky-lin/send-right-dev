@@ -83,13 +83,14 @@ if(!function_exists('curlPostRequest')) {
  * @return mixed
  */
 if(!function_exists('curlGetRequest')) {
-	function curlGetRequest($getData, $url)
+	function curlGetRequest($getData, $url, $type="")
 	{
+		if($type!='full') {
+			$getData = http_build_query($getData, "", "&");
+			$url = $url . '?' . $getData;
+		}
 
-		$getData = http_build_query($getData, "", "&");
-
-		$url = $url . '?' . $getData;
-
+		//print " url " . $url;
 
 		$ch = curl_init();
 
@@ -145,5 +146,13 @@ if(!function_exists('time_elapsed_string')) {
 
 		if (!$full) $string = array_slice($string, 0, 1);
 		return $string ? implode(', ', $string) . ' ago' : 'just now';
+	}
+}
+
+
+if(!function_exists('human_readable_date_time')) {
+	function human_readable_date_time($date)
+	{
+		return date("F j, Y, g:i a", strtotime($date));
 	}
 }

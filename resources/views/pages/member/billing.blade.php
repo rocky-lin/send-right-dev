@@ -1,56 +1,68 @@
 @extends('layouts.app') 
 @section('content')  
 <link rel="stylesheet" type="text/css" href="{{url('/public/css/billing.css')}}" />
-<div class="container">
-    <div class="container">
-        <ul class="nav nav-tabs">
-            <li class="active"><a data-toggle="tab" href="#home">Subscription</a></li>
-            <li><a data-toggle="tab" href="#menu1">Invoice</a></li>
-        </ul>
-        <div class="tab-content">
-            <div id="home" class="tab-pane fade in active">
-                <div class="panel panel-default">
-                    <div class="panel-heading" style="text-align: left;">billing</div>
-                    <div class="panel-body">
-                        @include('pages/include/member/billing');
-                    </div>
+
+    <br><br>
+    <ul class="nav nav-tabs">
+        <li class="active"><a data-toggle="tab" href="#home">Subscription</a></li>
+        <li><a data-toggle="tab" href="#menu1">Invoice</a></li>
+    </ul>
+    <div class="tab-content">
+        <div id="home" class="tab-pane fade in active">
+            <div class="panel panel-default">
+                <div class="panel-heading" style="text-align: left;">billing</div>
+                <div class="panel-body">
+                    @include('pages/include/member/billing');
                 </div>
             </div>
-            <div id="menu1" class="tab-pane fade">
-                <br><br><br>
-                <table id="billing-invoice" class="display" cellspacing="0" width="100%">
-                    <thead>
-                    <tr>
-                        <th>Product Name</th>
-                        <th>Marchant Order Number</th>
-                        <th>Amount</th>
-                        <th>Date Created</th>
-                        <th>Status</th>
-                    </tr>
-                    </thead>
-                    <tfoot>
-                    <tr>
-                        <th>Product Name</th>
-                        <th>Marchant Order Number</th>
-                        <th>Amount</th>
-                        <th>Date Created</th>
-                        <th>Status</th>
-                    </tr>
-                    </tfoot>
-                    <tbody>
-                    @foreach($payshortcut_member_orders as $order)
+        </div>
+        <div id="menu1" class="tab-pane fade">
+            <br><br><br>
+            <table id="billing-invoice" class="display" cellspacing="0" width="100%">
+                <thead>
+                <tr>
+                    <th style="display:none" >id</th>
+                    <th>Product Name</th>
+                    <th>Order Number</th>
+                    <th>Amount</th>
+                    <th>Date Paid</th>
+                    <th>Status</th>
+                    <th></th>
+                </tr>
+                </thead>
+                <tfoot>
+                <tr>
+                    <th style="display:none" >id</th>
+                    <th>Product Name</th>
+                    <th>Order Number</th>
+                    <th>Amount</th>
+                    <th>Date Paid</th>
+                    <th>Status</th>
+                    <th></th>
+                </tr>
+                </tfoot>
+                <tbody>
+                @foreach($payshortcut_member_orders as $order)
+                    @if($order['title'] == 'Sendright Lite Plan')
                         <tr>
+                            <td style="display:none" >{{$order['id']}}</td>
                             <td>{{$order['title']}}</td>
                             <td>{{$order['merchant_order_no']}}</td>
                             <td>${{number_format($order['amt'])}}</td>
-                            <td>{{$order['created_at']}}</td>
-                            <td>{{$order['status']}}</td>
+                            <td>{{human_readable_date_time($order['created_at'])}}</td>
+                            <td>
+                                <button class="btn btn-success">{{$order['status']}}</button>
+                            </td>
+                            <td><a href="{{route('user.billing.invoice', $order['id'])}}" class="btn btn-info">View </a></td>
                         </tr>
-                    @endforeach
-                    </tbody>
-                </table>
-            </div>
+                    @endif
+                @endforeach
+                </tbody>
+            </table>
+
+            <hr>
+            <h4>Next billing </h4>
+            <b>{{$nextPaymentDate}}</b>
         </div>
     </div>
-</div> 
 @endsection

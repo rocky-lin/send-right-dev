@@ -3,8 +3,7 @@
         <div class="col-xs-12 col-md-3">
             <div class="panel panel-primary">
                 <div class="panel-heading">
-                    <h3 class="panel-title">
-                        {{ $bronze['product']->name}}</h3>
+                    <h3 class="panel-title"  style="color:black">{{ $bronze['product']->name}}</h3>
                 </div>
                 <div class="panel-body">
                     <div class="the-price">
@@ -33,15 +32,14 @@
 
                     </table>
                 </div> 
-                <div class="panel-footer"> 
-               {{-- {{ " staus " . $subscriptionStatus  }} --}}
-                @if($subscriptionStatus <  3)
-                    {{Form::open(['url'=>route('user.billing.confirm'), 'method'=>'post'])}}
-                        <input type="hidden" name="name" value="{{$bronze['product']->name}}" /> 
-                        <button type="submit"  class="btn btn-info" > Upgrade </button>  1 month FREE trial</div>  
-                    {{Form::close()}}
+                <div class="panel-footer">
+                @if(App\Account::isSubscribedAndValid('basic') === true)
+                        <button type="submit"  class="btn btn-info"  disabled> Selected </button>  1 month FREE trial </div>
                 @else
-                    <button type="submit"  class="btn btn-info"  disabled> Selected </button>  1 month FREE trial </div> 
+                    {{Form::open(['url'=>route('user.billing.confirm'), 'method'=>'post'])}}
+                        <input type="hidden" name="name" value="{{$bronze['product']->name}}" />
+                        <button type="submit"  class="btn btn-info" > Upgrade </button>  1 month FREE trial</div>
+                    {{Form::close()}}
                 @endif
             </div>
         </div>

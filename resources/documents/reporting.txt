@@ -1,3 +1,107 @@
+Hi Rocky,
+
+Update for March 28, 2017
+
+Create product in demo4
+Order product in demo4
+create new account for specific email subscribed in demo4
+check display if retrieved or not from payshortcut
+make date paid readable to ago
+create function display only "Sendright Lite Plan" product
+Calculate 1 month for the current subscription paid
+Calculate next payment
+Check specific subscribtion and enable function in sendright based on account
+allow order details view
+
+
+Todo for March 29, 2017
+disable functions if not not subscribed
+disable functions if expiredHi Rocky,
+
+                            Update for March 28, 2017
+
+                            Create product in demo4
+                            Order product in demo4
+                            create new account for specific email subscribed in demo4
+                            check display if retrieved or not from payshortcut
+                            make date paid readable to ago
+                            create function display only "Sendright Lite Plan" product
+                            Calculate 1 month for the current subscription paid
+                            Calculate next payment
+                            Check specific subscribtion and enable function in sendright based on account
+                            allow order details view
+
+
+                            Todo for March 29, 2017
+                            disable functions if not not subscribed
+                            disable functions if expired
+                            send email if subscription is expired
+                            delete with in 7 days after subscription expired
+                            add allow subscription if not subscribed
+                            list only the subscription functions
+                            Allow specific subscription
+                            Enable basic subscription for now
+
+
+
+                            Thanks,
+
+                            Best regards,
+                            Jesus Erwin Suarez
+send email if subscription is expired
+delete with in 7 days after subscription expired
+add allow subscription if not subscribed
+list only the subscription functions
+Allow specific subscription
+Enable basic subscription for now
+
+
+
+Thanks,
+
+Best regards,
+Jesus Erwin Suarez
+
+
+
+
+
+Invoice list all the subscription and purchased product from payshortcut -
+
+
+
+
+
+
+
+
+
+Clarifications:
+1. Payment cycle is monthly?
+2. If not paid the subscription and they have account what will happen?
+3. If they have expired account what will happen?
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 Login and authenticate to payshortcut
 Login to sendright and retrieve all the subscription in payshortcut database
 Display all subscription in payshortcut 

@@ -10,6 +10,8 @@ use App\Account;
 use App\Product;
 use App\Subscription;
 use Session;
+use Carbon\Carbon;
+use App\Helper;
 
 class UserController extends Controller
 {
@@ -48,19 +50,32 @@ class UserController extends Controller
     }
     public function billing() 
     {
-        $payshortcut_member = session("payshortcut_member");
-        $payshortcut_member_id = $payshortcut_member['id'];
-        $payShortCutUrl = 'http://payshortcut.net/api/member/get/order';
-        print "<br> id $payshortcut_member_id";
-        $payshortcut_member_orders = curlGetRequest(['id'=>$payshortcut_member_id], $payShortCutUrl);
-//        dd($payshortcut_member_orders);
+
+
         $bronze['product'] = Product::first();
-        // dd(  $bronze['product'] );
         $bronze['product']['details'] = Product::getProductDetails(Product::first()->id);
-        // Product::find(1)
-        $subscriptionStatus =  Account::getSubscriptionStatus(); 
-    	return view('pages/member/billing', compact('bronze', 'subscriptionStatus', 'payshortcut_member_orders'));
-    } 
+
+        $subscriptionStatus =  Account::getSubscriptionStatus();
+
+        $payshortcut_member_orders = Account::getBillingRecords();
+        $nextPaymentDate           = Account::getNextPaymentDate();
+ 
+    	return view('pages/member/billing', compact('bronze', 'subscriptionStatus', 'payshortcut_member_orders', 'nextPaymentDate'));
+
+    }
+
+
+    public function billingInvoice($billingId)
+    {
+        $payShortCutUrl = 'http://payshortcut.net/api/order/' . $billingId;
+
+        $orderDetail = curlGetRequest(['id'=>$billingId], $payShortCutUrl, 'full');
+
+         //print_r_pre($orderDetail);
+
+        return view("pages/member/billing-invoice", compact('orderDetail'));
+    }
+
     public function changePassword() 
     {
     	return view('pages/member/change-password'); 

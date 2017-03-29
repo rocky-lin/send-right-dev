@@ -44,12 +44,12 @@ class CampaignController extends Controller
         /**
          * Count total draft campaign
          */
-        $totalCampaignDraft = Campaign::where('status', 'inactive')->count();
+        $totalCampaignDraft = Campaign::where('status', 'inactive')->where('account_id', User::getUserAccount())->count();
 
         /**
          * Count total campaign all
          */
-        $totalCampaignAll  = Campaign::all()->count();
+        $totalCampaignAll  = Campaign::where('account_id', User::getUserAccount())->count();
 
         /**
          * return to views

@@ -277,7 +277,9 @@
 
 
 
-            $('#billing-invoice').DataTable()
+            $('#billing-invoice').DataTable({
+                "order": [[ 0, "desc" ]]
+            } )
 
 
 

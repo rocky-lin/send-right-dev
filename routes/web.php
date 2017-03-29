@@ -143,7 +143,7 @@ Route::group(['prefix' => 'user' , 'middleware' => 'auth' ], function() {
 		Route::resource('form', 'FormController');   
 
 	// 	    
-		Route::get('campaign/get/all/label/{label_id?}', 'CampaignController@getAllByLabel')->name('user.campaign.get.all.by.label');   
+		Route::get('campaign/get/all/label/{label_id?}', 'CampaignController@getAllByLabel')->name('user.campaign.get.all.by.label');
 		Route::get('campaign/newsletters','CampaignController@index')->name('user.campaign.newsletter.view'); 
 		Route::get('campaign/auto-responders','CampaignController@autoResponderIndex')->name('user.campaign.autoresponders.view'); 
 		Route::get('campaign/mobile-optin','CampaignController@mobileOptInIndex')->name('user.campaign.mobileoptin.view'); 
@@ -238,6 +238,9 @@ Route::group(['prefix' => 'user' , 'middleware' => 'auth' ], function() {
 		Route::get('auto-response/start/process', 'AutoResponseDetailsController@startResponse');
 
 	// member
+
+		Route::get('billing/invoice/{billingId?}', 'UserController@billingInvoice')->name('user.billing.invoice');
+
 		Route::get('profile', 'UserController@profile')->name('user.profile');
 
 		Route::get('billing', 'UserController@billing')->name('user.billing');
