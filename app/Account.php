@@ -5,6 +5,8 @@ namespace App;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use App\User;
+use Auth;
+
 class Account extends Model
 { 
 	protected $table = 'accounts'; 
@@ -118,12 +120,18 @@ class Account extends Model
 
 	public static function getLatestSubscription()
 	{
+
 		$payshortcut_member_orders = self::getBillingRecords(); //curlGetRequest(['id'=>$payshortcut_member_id], $payShortCutUrl);
-		foreach($payshortcut_member_orders as $order ) {
-			if($order['title'] == 'Sendright Lite Plan') {
- 				return $order;
+
+		if(!empty($payshortcut_member_orders )) {
+			foreach ($payshortcut_member_orders as $order) {
+				if ($order['title'] == 'Sendright Lite Plan') {
+					return $order;
+				}
 			}
 		}
+
+		return;
 	}
 
 
@@ -132,16 +140,31 @@ class Account extends Model
 		$order = self::getLatestSubscription();
 		$date = Helper::createDateTime($order['created_at']);
 		return $date->addMonths(1);
+
+
 	}
 
 	public static function getNextPaymentDate()
 	{
-		$order = self::getLatestSubscription(); 
-		// print "latest subscription created at " . $order['created_at']; 
-		if(!empty($order['created_at'])) { 
+
+		$created_at = Auth::user()->created_at;
+
+		$order = self::getLatestSubscription();
+
+		if(!empty($order['created_at']))
+		{
+			//print "order is not empty";
 			$date = Helper::createDateTime($order['created_at']);
 			return human_readable_date_time($date->addMonths(1));
-		} else {
+		}
+		else if (!empty($created_at))
+		{
+			//print "order is empty then when user registered created at";
+			return human_readable_date_time($created_at) . ' <br> <b style="color:red">Current free version!</b>';
+		}
+		else
+		{
+			//print "nothing";
 			return 'Not available';
 		}
 	}
@@ -195,14 +218,58 @@ class Account extends Model
 
 	public static function isSubscribedAndValid($type='basic')
 	{
-		if($type == 'basic') {
-			if (self::isAccountHasSubscribed() == true and self::isHasNotExpired() == true and self::getAccountSubscription() == 'basic') {
+
+
+
+		//print " type = " . $type;
+
+		if($type == 'basic')
+		{
+			/** Active subscription */
+			if (self::isAccountHasSubscribed() == true and self::isHasNotExpired() == true and self::getAccountSubscription() == 'basic' )
+			{
+				//print "with valid subscription";
  				return true;
-			} else {
+			}
+
+			/** Free version */
+			else if (self::isCurrentFreeVersion()== true)
+			{
+				//print "with free version";
+				return true;
+			}
+
+			/** expired */
+			else
+			{
+				//print "with expired version";
 				return false;
 			}
+
 		}
 
 		return false;
 	}
+
+	public static function isCurrentFreeVersion()
+	{
+		// 		$user = User::find(User::getUserAccount());
+		//
+		//		$created_at = $user->created_at; //'2017-03-29 03:35:33'; //
+
+		$created_at = Auth::user()->created_at;
+
+		if (30 - ((new \Carbon\Carbon($created_at, 'UTC'))->diffInDays()) < 0)
+		{
+			// echo "The date is older than 30 days";
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+	}
+
 }
+
+

@@ -7,20 +7,11 @@ Route::get('user/registration/create/{email?}/{fullName?}/{password?}', 'Auth\Re
 
 
 
-Route::get("test/curl", function(){
-
-	$payShortCutUrl = 'http://payshortcut.net/api/member/get-by-mail';
-
-	print "<pre>";
-
-	$getMember = curlGetRequest(['email'=>'mrjesuserwinsuarez@gmail.com'], $payShortCutUrl);
-
-	print "results from  123";
-
-	print_r($getMember);
 
 
-});
+
+
+
 
 Route::get('/', function () { 
 	// print " url = " . url('/');  
@@ -64,9 +55,7 @@ Route::get('/home/test', 'HomeController@test');
 Route::post('cash/create', 'CashController@store'); 
 // Route::get('admin/order', 'admin\OrderController@index');
 // Route::get('admin/order/requestPay/{order_id}', 'admin\OrderController@requestPay'); 
-Route::group(['prefix' => 'user' , 'middleware' => 'auth' ], function() {    
- 		
-
+Route::group(['prefix' => 'user' , 'middleware' =>  'auth' ], function() {
 
 		Route::post('label-detail-delete', 'LabelDetailController@ajaxDelete');
 		Route::resource('label-detail', 'LabelDetailController');
@@ -307,7 +296,46 @@ Route::get('csv', function(){
 // Testing development 
 use Carbon\Carbon;
 use App\Helper; 
-use App\Mail\OrderShipped;  
+use App\Mail\OrderShipped;
+
+
+	Route::get("test/billing/deactivate", function(){
+
+	print "test";
+
+		$Check_code = array (
+			"MerchantID" => ' 1422967 ',
+			"Amt" => ' 100 ',
+			"MerchantOrderNo" => '840f022',
+			"TRadeNo "=> ' 14061313541640927 ',
+		 );
+
+		Ksort($Check_code);
+		$Check_str = http_build_query ($Check_code);
+		$CheckCode_str = "HashIV=1234567&$Check_str&HashKey=Abcdefg";
+		$CheckCode = strtoupper(hash("sha256", $CheckCode_str));
+
+
+		foreach ($spgateway_args as $key => $value) {
+			$spgateway_args_array[] = '<input type="hidden" name="' . esc_attr($key) . '" value="' . esc_attr($value) . '" />';
+		}
+		?>
+
+		 <form accept-charset="ISO-8859-1" id="spgateway" name="spgateway" action=" ' . $spgateway_gateway . ' " method="post" target="_top">
+		  <?php implode('', $spgateway_args_array); ?>
+		 <input type="submit" class="button-alt" id="submit_spgateway_payment_form" value="' . __('前往 spgateway 支付頁面', 'spgateway') . '" />
+	<?php
+
+
+});
+
+Route::get("test/curl", function(){
+	$payShortCutUrl = 'http://payshortcut.net/api/member/get-by-mail';
+	print "<pre>";
+	$getMember = curlGetRequest(['email'=>'mrjesuserwinsuarez@gmail.com'], $payShortCutUrl);
+	print "results from  123";
+	print_r($getMember);
+});
 
 
 

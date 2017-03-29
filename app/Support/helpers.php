@@ -156,3 +156,19 @@ if(!function_exists('human_readable_date_time')) {
 		return date("F j, Y, g:i a", strtotime($date));
 	}
 }
+
+if(!function_exists('redirect')) {
+	function redirect($url)
+	{
+		print "-----test-----";
+		?>
+			<script>
+				document.location = '<?php echo $url ?>';
+			</script>
+		<?php
+	}
+}
+
+
+
+

@@ -11,6 +11,7 @@ use App\Subscription;
 use App\AddOn;
 use App;
 use App\Language;
+use Route;
  
 class AppServiceProvider extends ServiceProvider
 {
@@ -28,14 +29,26 @@ class AppServiceProvider extends ServiceProvider
 
 
         Language::setCurrentLanguage();
+
+
         // App::setLocale('pl');
         // This need to be change and point only to real page of the site
         view()->composer('*', function ($view) {
 
             if (Auth::user() ) {
 
-                // Use this data anywhere in the project
+                /**  redirect billing page if, billing is not valid */
+                if(Account::isSubscribedAndValid() == false) {
+                    if (Route::current()->getName() != 'user.billing') {
+                        $urlBilling = url('user/billing');
+                        ?>
+                        <script>
+                            document.location = '<?php echo $urlBilling; ?>';
+                        </script> <?php
+                    }
+                }
 
+                /**  Use this data anywhere in the project  */
                 $_SESSION['UserId'] = Auth::user()->id;
                 $_SESSION['account_id'] = User::getUserAccount();
                 $_SESSION['extension']['db_name'] = env('DB_DATABASE');
@@ -46,7 +59,7 @@ class AppServiceProvider extends ServiceProvider
                 $_SESSION['form_builder']['db_contact']['entry_fields_filters'] = ['first_name', 'last_name', 'email', 'location', 'phone', 'telephone'];
                 $_SESSION['url']['hoem'] =  url('/');
 
-                // global variables
+                /**  global variables  */
                 $addOns['is_has_email_mobile_opt_in'] = AddOn::isHasMobileOptIn(); 
                 Subscription::updateSubscriptionExpired(); 
                 $subscription_status = Account::getSubscriptionStatus();

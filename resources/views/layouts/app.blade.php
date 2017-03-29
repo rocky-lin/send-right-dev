@@ -179,9 +179,9 @@
 
      <div style="clear:both"></div>
      <footer class="footer" style=" float:left;">
-         <div class="container">
+         <div class="container" >
              <p class="text-muted">
-             <p>©2016-2017 All Rights Reserved. Sendright is a registered trademark of The Rocket Science Group. <a href="/legal/privacy">Privacy</a> and <a href="/legal">Terms</a></p>
+                <p>©2016-2017 All Rights Reserved. Sendright is a registered trademark of The Rocket Science Group. <a href="/legal/privacy">Privacy</a> and <a href="/legal">Terms</a></p>
              </p>
          </div>
      </footer>

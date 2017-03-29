@@ -1,7 +1,6 @@
 @extends('layouts.app') 
-@section('content')  
-<link rel="stylesheet" type="text/css" href="{{url('/public/css/billing.css')}}" />
-
+@section('content')
+    <link rel="stylesheet" type="text/css" href="{{url('/public/css/billing.css')}}" />
     <br><br>
     <ul class="nav nav-tabs">
         <li class="active"><a data-toggle="tab" href="#home">Subscription</a></li>
@@ -42,27 +41,39 @@
                 </tr>
                 </tfoot>
                 <tbody>
-                @foreach($payshortcut_member_orders as $order)
-                    @if($order['title'] == 'Sendright Lite Plan')
-                        <tr>
-                            <td style="display:none" >{{$order['id']}}</td>
-                            <td>{{$order['title']}}</td>
-                            <td>{{$order['merchant_order_no']}}</td>
-                            <td>${{number_format($order['amt'])}}</td>
-                            <td>{{human_readable_date_time($order['created_at'])}}</td>
-                            <td>
-                                <button class="btn btn-success">{{$order['status']}}</button>
-                            </td>
-                            <td><a href="{{route('user.billing.invoice', $order['id'])}}" class="btn btn-info">View </a></td>
-                        </tr>
-                    @endif
-                @endforeach
+                @if(!empty($payshortcut_member_orders))
+                    @foreach($payshortcut_member_orders as $order)
+                        @if($order['title'] == 'Sendright Lite Plan')
+                            <tr>
+                                <td style="display:none" >{{$order['id']}}</td>
+                                <td>{{$order['title']}}</td>
+                                <td>{{$order['merchant_order_no']}}</td>
+                                <td>${{number_format($order['amt'])}}</td>
+                                <td>{{human_readable_date_time($order['created_at'])}}</td>
+                                <td>
+                                    <button class="btn btn-success">{{$order['status']}}</button>
+                                </td>
+                                <td><a href="{{route('user.billing.invoice', $order['id'])}}" class="btn btn-info">View </a></td>
+                            </tr>
+                        @endif
+                    @endforeach
+                @endif
                 </tbody>
             </table>
-
             <hr>
             <h4>Next billing </h4>
-            <b>{{$nextPaymentDate}}</b>
+            <b>{!! $nextPaymentDate !!}</b>
+            @if(strpos($nextPaymentDate, "free version")  <= 0)
+
+
+
+
+
+
+                    <br><br>
+                    <input type="submit" value="Deactivate" class="btn btn-danger" />
+
+            @endif
         </div>
     </div>
 @endsection
