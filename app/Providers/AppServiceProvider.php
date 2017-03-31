@@ -12,6 +12,7 @@ use App\AddOn;
 use App;
 use App\Language;
 use Route;
+use Session;
  
 class AppServiceProvider extends ServiceProvider
 {

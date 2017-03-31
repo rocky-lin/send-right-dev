@@ -124,6 +124,8 @@ class Account extends Model
 
 		$payshortcut_member = session("payshortcut_member");
 
+		//print_r_pre($payshortcut_member, 'account'); 
+
 		if(!empty($payshortcut_member)) {  
 			$payshortcut_member_id = $payshortcut_member['id'];
 			$url = 'http://payshortcut.net/api/order/get/sendright/subscription/' . $payshortcut_member_id . '/Sendright%20Lite%20Plan';

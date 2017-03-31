@@ -62,7 +62,7 @@ class UserController extends Controller
 
         // compsoe deactivate button
         $subscription = Account::getLatestSubscription();
-//         dd($subscription);
+        //print_r_pre($subscription, 'user controller');
         
         if ($subscription['status'] == 'deactivated')  {
            $deactivateButton = 'deactivated';

@@ -92,15 +92,11 @@ if(!function_exists('curlGetRequest')) {
 	function curlGetRequest($getData, $url, $type="")
 	{
 		if($type!='full') {
-			$getData = http_build_query($getData, "", "&");
-			$url = $url . '?' . $getData;
+			$getData = http_build_query($getData, "", "&"); 
+			$url = $url . '?' . $getData; 
+			$url = urldecode($url); 
 		}
-
-
-
- 		
-		// print " get url " . $url;
-
+  
 		$ch = curl_init();
 
 		curl_setopt($ch, CURLOPT_URL, $url);
