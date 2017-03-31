@@ -51,7 +51,7 @@ class UserController extends Controller
     public function billing() 
     {
 
-
+        $deactivateButton = '';
         $bronze['product'] = Product::first();
         $bronze['product']['details'] = Product::getProductDetails(Product::first()->id);
 
@@ -59,8 +59,25 @@ class UserController extends Controller
 
         $payshortcut_member_orders = Account::getBillingRecords();
         $nextPaymentDate           = Account::getNextPaymentDate();
- 
-    	return view('pages/member/billing', compact('bronze', 'subscriptionStatus', 'payshortcut_member_orders', 'nextPaymentDate'));
+
+        // compsoe deactivate button
+        $subscription = Account::getLatestSubscription();
+//         dd($subscription);
+        if($subscription != false) {
+            $deactivateButton = Account::composeDeactivateButtonForm(
+                $data = [
+                    'TradeNo' => $subscription['trade_no'], //'17022412014777462',
+                    'MerchantOrderNo' => $subscription['merchant_order_no'], //'5095',
+                    'Amt' => $subscription['amt'], //'6600',
+                    'HashIV' => 't8jUsqArVyJOPZcF',
+                    'HashKey' => 'YK5drj7GZuYiSgfoPlc24OhHJj5g6I35',
+                    'MerchantID_' => 'MS3709347',
+                    'url' => 'https://ccore.spgateway.com/API/CreditCard/Cancel',
+                ]
+            );
+        }
+
+    	return view('pages/member/billing', compact('bronze', 'subscriptionStatus', 'payshortcut_member_orders', 'nextPaymentDate', 'deactivateButton'));
 
     }
 

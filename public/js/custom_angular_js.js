@@ -541,6 +541,58 @@ app.controller('myContactsViewCtr', [ '$scope', '$filter', '$http', '$window', f
 }]);
 
 
+//campaign view
+app.controller( 'myBillingCtr', ['$scope', '$filter', '$http', '$window', function ($scope, $filter, $http, $window) {
+
+
+
+
+    $scope.deactivateSubmit = function() {
+
+        console.log( "Post data merchant id " + $scope.merchant_id);
+
+        console.log( "Post data post data " + $scope.post_data);
+
+        console.log( "Post data post test " + $scope.test);
+
+
+        //$http({
+        //    method: 'POST',
+        //    url: obj.siteUrl + '/user/billing/deactivate',
+        //    data: {MerchantID_:'test'},
+        //    headers: {
+        //        'Content-type': 'applicat ion/json;charset=utf-8'
+        //    }
+        //}).then(function successCallback(response) {
+        //
+        //}, function errorCallback(response) {
+        //    console.log("something wrong, please check");
+        //});
+    };
+
+    //
+    //$scope.campaignDisplayByKind = function(kind, index) {
+    //
+    //
+    //
+    //
+    //    $http({
+    //        method: 'POST',
+    //        url: obj.siteUrl + '/user/billing/deactivate',
+    //        data: {  },
+    //        headers: {
+    //            'Content-type': 'application/json;charset=utf-8'
+    //        }
+    //    }).then(function successCallback(response) {
+    //
+    //    }, function errorCallback(response) {
+    //       console.log("something wrong, please check");
+    //    });
+    //};
+
+
+}]);
+
 
 
 

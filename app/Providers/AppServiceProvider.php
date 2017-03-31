@@ -37,7 +37,16 @@ class AppServiceProvider extends ServiceProvider
 
             if (Auth::user() ) {
 
-                /**  redirect billing page if, billing is not valid */
+
+                /**
+                 * Query subscription in payshortcut and store to a session
+                 */
+                Account::getLatestSubscriptionQueryToPayshortcut();
+
+
+                /**
+                 * redirect billing page if, billing is not valid
+                 */
                 if(Account::isSubscribedAndValid() == false) {
                     if (Route::current()->getName() != 'user.billing') {
                         $urlBilling = url('user/billing');

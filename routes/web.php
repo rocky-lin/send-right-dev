@@ -57,6 +57,15 @@ Route::post('cash/create', 'CashController@store');
 // Route::get('admin/order/requestPay/{order_id}', 'admin\OrderController@requestPay'); 
 Route::group(['prefix' => 'user' , 'middleware' =>  'auth' ], function() {
 
+
+	// billing
+
+		Route::post('billing/deactivate', 'BillingController@deactivate')->name('user.billing.deactivate');
+		Route::get('billing/test', 'BillingController@testing')->name('user.billing.deactivate');
+
+
+
+
 		Route::post('label-detail-delete', 'LabelDetailController@ajaxDelete');
 		Route::resource('label-detail', 'LabelDetailController');
 
@@ -301,31 +310,40 @@ use App\Mail\OrderShipped;
 
 	Route::get("test/billing/deactivate", function(){
 
-	print "test";
 
-		$Check_code = array (
-			"MerchantID" => ' 1422967 ',
-			"Amt" => ' 100 ',
-			"MerchantOrderNo" => '840f022',
-			"TRadeNo "=> ' 14061313541640927 ',
-		 );
+        $settings = [
+            'HashIV'=>'t8jUsqArVyJOPZcF',
+            'HashKey'=>'YK5drj7GZuYiSgfoPlc24OhHJj5g6I35',
+            "MerchantID_" => 'MS3709347',
+            'url' => 'https://ccore.spgateway.com/API/CreditCard/Cancel',
+            'PostData_' => '',
+        ];
 
-		Ksort($Check_code);
-		$Check_str = http_build_query ($Check_code);
-		$CheckCode_str = "HashIV=1234567&$Check_str&HashKey=Abcdefg";
-		$CheckCode = strtoupper(hash("sha256", $CheckCode_str));
+        $post_data_str = [
+            'RespondType' => 'JSON',
+            'Version' => '1.0',
+            'Amt' => 6600,
+            'MerchantOrderNo' => '5097',
+            'TradeNo' => '17022412335368443',
+            'IndexType' => '1',
+            'TimeStamp' => time(),
+            'NotifyURL' => 'http://google.com/test',
+        ];
 
+        $post_data_str = http_build_query ($post_data_str);
+        // print " prepare encryp  " . $post_data_str;
+        $post_data = trim(bin2hex(mcrypt_encrypt(MCRYPT_RIJNDAEL_128, $settings['HashKey'], addpadding($post_data_str), MCRYPT_MODE_CBC, $settings['HashIV'])));
+        // echo " encrypted string " . $post_data;
+        ?>
 
-		foreach ($spgateway_args as $key => $value) {
-			$spgateway_args_array[] = '<input type="hidden" name="' . esc_attr($key) . '" value="' . esc_attr($value) . '" />';
-		}
-		?>
+        <form method="post" action="<?php print $settings['url']; ?>"  target="_top">
+            <input type="text" value="<?php print $post_data; ?>" name="PostData_" />
+            <input type="text" value="<?php print $settings['MerchantID_']; ?>" name="MerchantID_" />
+            <input type="submit" class="button-alt" id="submit_spgateway_payment_form" value="Deactivate" />
 
-		 <form accept-charset="ISO-8859-1" id="spgateway" name="spgateway" action=" ' . $spgateway_gateway . ' " method="post" target="_top">
-		  <?php implode('', $spgateway_args_array); ?>
-		 <input type="submit" class="button-alt" id="submit_spgateway_payment_form" value="' . __('前往 spgateway 支付頁面', 'spgateway') . '" />
-	<?php
+        </form>
 
+        <?php
 
 });
 

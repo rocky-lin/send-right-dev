@@ -1,3 +1,137 @@
+ 
+
+1. Continue with deactivate function via jquery 
+  - click deactivate button
+    - set url and data to spgateway via ajax
+    - set return url   
+  execute above without ajax but manual 
+     - set url and data to spgateway via ajax
+     - set return url   
+     - if success 
+
+  in sendright check if status if found deactivated then 
+     - redirect billing page 
+     - display activate button 
+        - when hit activate button it should redirect to woocomerce product to purchase product again
+        - if login again then it should activate and again allow to use the site again
+
+2. Update payshortcut order when subscription is deactivated in sendright
+  - when deactivated sendright billing payshortcut status should update to deactivated 
+  - deactivated should be latest billing
+
+3. Payshortcut create user account on Sendirght - 
+    - create api for create user in sendright 
+    - only create user in sendright if not exist 
+    - create api in sendright and call in payshortcut when success order 
+    - set default password 
+4. Enable auto renew subscription for agree payment in payshortcut via cronjobs
+   - debug renew subscription  
+   - renew only if its not deactivated status
+   - renew only if already passed in 1 month or 31 days
+   - if success renew then auto create new subscription in sendright/update created_at column to latest date 
+
+
+
+
+
+
+
+
+
+Hi Rocky,
+
+Update for March 30, 2017
+
+I had roadblock today in trigger deactivate.
+
+In payshortcut.net create api to get specific subscription for sendright, this will allow speed up site query
+Create route api in payshortcut for new functions
+Sendright get lastest subscription and call api in payshortcut
+Allow subscription deactivate in payshortcut order with credit card in sendright - tobe continue
+Allow billing controller accept deactivate data
+Allow load once from payshortcut subscription and store it to session this will allow speed up site
+Use jquery to deactivate not angular js
+
+
+Current work percentage of work for this week is 70%/100%
+
+
+Todo tomorrow
+1. Continue with deactivate function via jquery
+2. Update payshortcut order when subscription is deactivated in sendright
+3. Payshortcut create user account on Sendirght
+4. Enable auto renew subscription for agree payment in payshortcut via cronjobs
+
+
+Thanks,
+
+Best regards,
+Jesus Erwin Suarez
+
+
+
+
+
+
+
+
+Hi Rocky
+
+Update for March 29, 2017
+
+1. Getting next payment if no payment made yet for agreed, it needs to based on account created so it should display as free account for 1 month
+2. Detect if valid subscription with condition of free version
+3. Detect free version if has already expired or not return true or false
+4. If bill expired then it needs to redirect to billing page, this should work in all pages if visited. This will also disable all the subscribed function
+5. Add deactivate button no functions yet for now
+
+Todo tomorrow
+
+1. Continue with deactivate button
+2. purchased product in woocomerce auto create account in sendright from payshortcut
+3. Enable auto renew subscription for agree payment in payshortcut via cronjobs
+
+Current percentage of work is 55%
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 Hi Rocky,
 
 Update for March 28, 2017
@@ -18,36 +152,36 @@ Todo for March 29, 2017
 disable functions if not not subscribed
 disable functions if expiredHi Rocky,
 
-                            Update for March 28, 2017
+Update for March 28, 2017
 
-                            Create product in demo4
-                            Order product in demo4
-                            create new account for specific email subscribed in demo4
-                            check display if retrieved or not from payshortcut
-                            make date paid readable to ago
-                            create function display only "Sendright Lite Plan" product
-                            Calculate 1 month for the current subscription paid
-                            Calculate next payment
-                            Check specific subscribtion and enable function in sendright based on account
-                            allow order details view
-
-
-                            Todo for March 29, 2017
-                            disable functions if not not subscribed
-                            disable functions if expired
-                            send email if subscription is expired
-                            delete with in 7 days after subscription expired
-                            add allow subscription if not subscribed
-                            list only the subscription functions
-                            Allow specific subscription
-                            Enable basic subscription for now
+Create product in demo4
+Order product in demo4
+create new account for specific email subscribed in demo4
+check display if retrieved or not from payshortcut
+make date paid readable to ago
+create function display only "Sendright Lite Plan" product
+Calculate 1 month for the current subscription paid
+Calculate next payment
+Check specific subscribtion and enable function in sendright based on account
+allow order details view
 
 
+Todo for March 29, 2017
+disable functions if not not subscribed
+disable functions if expired
+send email if subscription is expired
+delete with in 7 days after subscription expired
+add allow subscription if not subscribed
+list only the subscription functions
+Allow specific subscription
+Enable basic subscription for now
 
-                            Thanks,
 
-                            Best regards,
-                            Jesus Erwin Suarez
+
+Thanks,
+
+Best regards,
+Jesus Erwin Suarez
 send email if subscription is expired
 delete with in 7 days after subscription expired
 add allow subscription if not subscribed

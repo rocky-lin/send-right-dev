@@ -6,6 +6,7 @@ use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use App\User;
 use Auth;
+use Session;
 
 class Account extends Model
 { 
@@ -118,20 +119,18 @@ class Account extends Model
 		return self::find(User::getUserAccount())->addOn;
 	}
 
+	public static function getLatestSubscriptionQueryToPayshortcut()
+	{
+		$payshortcut_member = session("payshortcut_member");
+		$payshortcut_member_id = $payshortcut_member['id'];
+		$url = 'http://payshortcut.net/api/order/get/sendright/subscription/' . $payshortcut_member_id . '/Sendright%20Lite%20Plan';
+		$payshortcut_member_orders = curlGetRequest(null, $url, 'full');
+		session(['latestSubscription'=>$payshortcut_member_orders]);
+		return $payshortcut_member_orders;
+	}
 	public static function getLatestSubscription()
 	{
-
-		$payshortcut_member_orders = self::getBillingRecords(); //curlGetRequest(['id'=>$payshortcut_member_id], $payShortCutUrl);
-
-		if(!empty($payshortcut_member_orders )) {
-			foreach ($payshortcut_member_orders as $order) {
-				if ($order['title'] == 'Sendright Lite Plan') {
-					return $order;
-				}
-			}
-		}
-
-		return;
+		return session('latestSubscription');
 	}
 
 
@@ -268,6 +267,67 @@ class Account extends Model
 		{
 			return false;
 		}
+	}
+
+	/**
+	 * @param array $data
+	 * 	$data = [
+			'TradeNo' => '17022412335368443',
+			'MerchantOrderNo' => '5097',
+			'Amt' => '6600',
+			'HashIV' => 't8jUsqArVyJOPZcF',
+			'HashKey' => 'YK5drj7GZuYiSgfoPlc24OhHJj5g6I35',
+			'MerchantID_' => 'MS3709347',
+			'url' => 'https://core.spgateway.com/API/CreditCard/Cancel',
+		];
+	 */
+	public static function composeDeactivateButtonForm($data=[])
+	{
+
+		$TradeNo 		 = $data['TradeNo'];
+		$MerchantOrderNo = $data['MerchantOrderNo'];
+		$Amt 		     = $data['Amt'];
+		$HashIV 		 = $data['HashIV'];
+		$HashKey 		 = $data['HashKey'];
+		$MerchantID_     = $data['MerchantID_'];
+		$url             = $data['url']; //'https://ccore.spgateway.com/API/CreditCard/Cancel'; //$data['url'];
+
+
+		$settings = [
+			'HashIV'=> $HashIV, //'t8jUsqArVyJOPZcF',
+			'HashKey'=> $HashKey, //'YK5drj7GZuYiSgfoPlc24OhHJj5g6I35',
+			"MerchantID_" => $MerchantID_, //'MS3709347',
+			'url' => $url, //'https://ccore.spgateway.com/API/CreditCard/Cancel',
+			'PostData_' => '',
+		];
+
+		$post_data_str = [
+			'RespondType' => 'JSON',
+			'Version' => '1.0',
+			'Amt' => $Amt, //6600,
+			'MerchantOrderNo' => $MerchantOrderNo, //'5097',
+			'TradeNo' => $TradeNo, //'17022412335368443',
+			'IndexType' => '1',
+			'TimeStamp' => time(),
+			'NotifyURL' => '',
+		];
+
+		$post_data_str = http_build_query ($post_data_str);
+		// print " prepare encryp  " . $post_data_str;
+
+		$post_data = trim(bin2hex(mcrypt_encrypt(MCRYPT_RIJNDAEL_128, $settings['HashKey'], addpadding($post_data_str), MCRYPT_MODE_CBC, $settings['HashIV'])));
+		// echo " encrypted string " . $post_data;
+		//			<form method='post' action='$settings[url]' ng-submit='deactivateSubmit()'>
+
+
+		$form = "
+
+				<input type='text' value='$post_data' name='PostData_' id='PostData_' />
+				<input type='text' value='$settings[MerchantID_]'  name='MerchantID_'   id='MerchantID_'   />
+				<input type='button' class='button-alt btn btn-danger' value='Deactivate' id='deactivateBilling' />
+
+			";
+		return $form;
 	}
 
 }

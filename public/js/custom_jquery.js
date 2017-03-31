@@ -332,5 +332,46 @@ $(document).ready(function(){
 	// });
 
 
+	$("#deactivateBilling").click(function(){
+
+
+
+		//$( "#target" ).submit(function( event ) {
+		//	alert( "Handler for .submit() called." );
+		//	event.preventDefault();
+		//});
+
+
+
+		var postData = $("#PostData_").val();
+		var merchantId = $("#MerchantID_").val();
+
+
+		console.log(" post data "  + postData);
+		console.log(" post data "  + merchantId);
+		console.log(" post token "  +  $("#csrf-token").text());
+
+
+		$.ajax({
+			url: "http://localhost/rocky/send-right-dev/user/billing/deactivate",
+			headers: {
+				'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+			},
+			method: 'POST',
+			data: { PostData_: postData, MerchantID_: merchantId  },
+			success: function(data){
+				console.log('succes: '+data);
+			}
+
+
+		});
+
+
+
+
+
+
+	});
+
 });
 

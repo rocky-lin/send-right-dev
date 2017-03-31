@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <!-- CSRF Token -->
-    <meta name="csrf-token" content="{{ csrf_token() }}">
+    <meta name="csrf-token" content="{{ csrf_token() }}" >
 
     <title>{{ config('app.name', 'Laravel') }}</title>
 
@@ -47,6 +47,7 @@
  
     <script>
       angular.module("myApp").constant("CSRF_TOKEN", '{{ csrf_token() }}');
+
     </script>
 
 
@@ -55,10 +56,13 @@
 
     <!-- Scripts -->
     <script>
+        window.csrfToken = '<?php print csrf_token();  ?>';
         window.Laravel = <?php echo json_encode([
             'csrfToken' => csrf_token(),
         ]); ?>
     </script>
+
+
 </head>
 <body data-ng-init="document" >
      <input type="hidden" value="{{url('/')}}" id="url_home" />
@@ -180,7 +184,7 @@
      <div style="clear:both"></div>
      <footer class="footer" style=" float:left;">
          <div class="container" >
-             <p class="text-muted">
+             <p class="text-muted" >
                 <p>©2016-2017 All Rights Reserved. Sendright is a registered trademark of The Rocket Science Group. <a href="/legal/privacy">Privacy</a> and <a href="/legal">Terms</a></p>
              </p>
          </div>
