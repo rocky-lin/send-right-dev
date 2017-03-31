@@ -67,15 +67,23 @@
                             <br> Account currently deactivated, please click <a href="{{$sendRightProductLink}}" class="btn btn-success btn-sm">  here </a> to reactivate and subscribe sendright again. 
                         </span>
                     @else  
-                        @if(App\Account::isCurrentFreeVersion() == false) 
-                            <span style="color:red">Trial has expired please click <a href="{{$sendRightProductLink}}" class="btn btn-success btn-sm">  here </a> to subscribe sendright</span>
-                        @else 
+
+                            @if(App\Account::isSubscribedAndValid() == true)
+                                <h4>Next billing </h4>  
+                                <b>{!! $nextPaymentDate !!}</b>  
+                                @if(strpos($nextPaymentDate, "free version")  <= 0)  
+                                {!!  $deactivateButton !!}  
+                                @endif
+                            @else   
+                                <span style="color:red">Trial has expired please click <a href="{{$sendRightProductLink}}" class="btn btn-success btn-sm">  here </a> to subscribe sendright</span>
+                            @endif
+                      {{--   @else 
                             <h4>Next billing </h4>  
                             <b>{!! $nextPaymentDate !!}</b> 
                             @if(strpos($nextPaymentDate, "free version")  <= 0)  
-                                    {!!  $deactivateButton !!}  
+                                {!!  $deactivateButton !!}  
                             @endif 
-                        @endif 
+                        @endif  --}}
                     @endif
 
             </div>

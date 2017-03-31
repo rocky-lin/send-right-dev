@@ -121,12 +121,19 @@ class Account extends Model
 
 	public static function getLatestSubscriptionQueryToPayshortcut()
 	{
+
 		$payshortcut_member = session("payshortcut_member");
-		$payshortcut_member_id = $payshortcut_member['id'];
-		$url = 'http://payshortcut.net/api/order/get/sendright/subscription/' . $payshortcut_member_id . '/Sendright%20Lite%20Plan';
-		$payshortcut_member_orders = curlGetRequest(null, $url, 'full');
-		session(['latestSubscription'=>$payshortcut_member_orders]);
-		return $payshortcut_member_orders;
+
+		if(!empty($payshortcut_member)) {  
+			$payshortcut_member_id = $payshortcut_member['id'];
+			$url = 'http://payshortcut.net/api/order/get/sendright/subscription/' . $payshortcut_member_id . '/Sendright%20Lite%20Plan';
+			$payshortcut_member_orders = curlGetRequest(null, $url, 'full');
+			session(['latestSubscription'=>$payshortcut_member_orders]);
+			return $payshortcut_member_orders;
+		} else { 
+			 session(['latestSubscription'=>false]);
+			return false; 
+		}
 	}
 	public static function getLatestSubscription()
 	{
@@ -171,15 +178,20 @@ class Account extends Model
 
 	public static function getBillingRecords()
 	{
+
 		$payshortcut_member = session("payshortcut_member");
 
-		$payshortcut_member_id = $payshortcut_member['id'];
+		if(!empty($payshortcut_member)) { 
+			$payshortcut_member_id = $payshortcut_member['id'];
 
-		$payShortCutUrl = 'http://payshortcut.net/api/member/get/order';
+			$payShortCutUrl = 'http://payshortcut.net/api/member/get/order';
 
-		$payshortcut_member_orders = curlGetRequest(['id'=>$payshortcut_member_id], $payShortCutUrl);
+			$payshortcut_member_orders = curlGetRequest(['id'=>$payshortcut_member_id], $payShortCutUrl);
 
-		return $payshortcut_member_orders;
+			return $payshortcut_member_orders;
+		} else {
+			return false; 
+		}
 	}
 
 	public static function isAccountHasSubscribed()

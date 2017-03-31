@@ -139,13 +139,17 @@ class RegisterController extends Controller
         }
     } 
 
-    // add new user
-    // create new account
-    // create new user account
-    // send registration email to from sendright
-    // create subscription data  
+    /**
+     * add new user, create new account, create new user account, send registration email to from sendright, create subscription data  
+     */ 
     public function createUserHttp($email, $fullName, $password) 
-    {  
+    {   
+
+
+        /**
+         * Create new account of the new user
+         */
+        print " createUserHttp($email, $fullName, $password) <br>"; 
         $isCreated = $this->create(
             [   
                 'email'=>$email,
@@ -153,8 +157,11 @@ class RegisterController extends Controller
                 'password'=>$password,
             ]
         ); 
-        if($isCreated) {
 
+        /**
+         * status if success of not new user creation
+         */
+        if($isCreated) { 
             $response = Response::json(['ok']);
             $response->header('Content-Type', 'application/json');
             return $response; 

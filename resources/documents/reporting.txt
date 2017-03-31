@@ -27,7 +27,7 @@
     - only create user in sendright if not exist - 30m - 6:02p 
     - create api in sendright and call in payshortcut when success order - 20m - 6:22p
     - set default password  - 10m - 6:32p 
-
+ 
 4. Enable auto renew subscription for agree payment in payshortcut via cronjobs 
    - debug renew subscription  -2hr - 11a 
    - renew only if its not deactivated status - 1hr - 12p
