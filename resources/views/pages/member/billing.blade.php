@@ -62,17 +62,17 @@
                     </tbody>
                 </table>
                 <hr>
-                <h4>Next billing </h4>
-
-                <input type="text" value="" ng-model="test"  ng-model="test"/>
-                @{{test }}
-
-
-                <b>{!! $nextPaymentDate !!}</b>
-
-                @if(strpos($nextPaymentDate, "free version")  <= 0)
-                        {!!  $deactivateButton !!}
-                @endif
+                   @if($deactivateButton  == 'deactivated') 
+                        <span style="color:red">
+                            <br> Account currently deactivated, please click <a href="#" class="btn btn-success btn-sm">  here </a> to reactivate and subscribe sendright again. 
+                        </span>
+                    @else 
+                        <h4>Next billing </h4> 
+                        <b>{!! $nextPaymentDate !!}</b> 
+                        @if(strpos($nextPaymentDate, "free version")  <= 0)  
+                                {!!  $deactivateButton !!}  
+                        @endif 
+                    @endif
 
             </div>
         </div>

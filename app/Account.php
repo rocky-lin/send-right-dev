@@ -222,8 +222,13 @@ class Account extends Model
 
 		//print " type = " . $type;
 
-		if($type == 'basic')
-		{
+		$subscription  = self::getLatestSubscription();
+
+		$status = $subscription['status']; 
+
+		if($status == 'deactivated') {
+			return false;
+		}  else if($type == 'basic') {
 			/** Active subscription */
 			if (self::isAccountHasSubscribed() == true and self::isHasNotExpired() == true and self::getAccountSubscription() == 'basic' )
 			{
@@ -285,6 +290,7 @@ class Account extends Model
 	{
 
 		$TradeNo 		 = $data['TradeNo'];
+		$order_id 		 = $data['order_id'];
 		$MerchantOrderNo = $data['MerchantOrderNo'];
 		$Amt 		     = $data['Amt'];
 		$HashIV 		 = $data['HashIV'];
@@ -322,8 +328,10 @@ class Account extends Model
 
 		$form = "
 
-				<input type='text' value='$post_data' name='PostData_' id='PostData_' />
-				<input type='text' value='$settings[MerchantID_]'  name='MerchantID_'   id='MerchantID_'   />
+				<input type='hidden' value='$url' name='url' id='url' />
+				<input type='hidden' value='$order_id' name='order_id' id='order_id' />
+				<input type='hidden' value='$post_data' name='PostData_' id='PostData_' />
+				<input type='hidden' value='$settings[MerchantID_]'  name='MerchantID_'   id='MerchantID_'   />
 				<input type='button' class='button-alt btn btn-danger' value='Deactivate' id='deactivateBilling' />
 
 			";

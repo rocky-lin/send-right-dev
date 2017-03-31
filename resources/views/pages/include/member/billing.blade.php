@@ -42,10 +42,18 @@
                     </table>
                 </div>
                 <div class="panel-footer">
-                    @if(App\Account::isSubscribedAndValid('basic') === true)
+
+
+                  @if($deactivateButton  == 'deactivated') 
+                        <span style="color:red">
+                            <br> Account currently deactivated, please click <a href="#" class="btn btn-success btn-sm">  here </a> to reactivate and subscribe sendright again. 
+                        </span>
+                        </div>
+              
+                    @elseif(App\Account::isSubscribedAndValid('basic') === true)
                             <button type="submit"  class="btn btn-info"  disabled> Selected </button>  1 month FREE trial </div>
                     @else
-                        <b style="color:red">Expired subscription!</b>
+                        {{-- <b style="color:red">Expired subscription!</b> --}}
                         {{Form::open(['url'=>route('user.billing.confirm'), 'method'=>'post'])}}
                             <input type="hidden" name="name" value="{{$bronze['product']->name}}" />
                             <button type="submit"  class="btn btn-info" > Subscribe </button>  1 month FREE trial</div>

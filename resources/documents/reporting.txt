@@ -1,34 +1,48 @@
+1. Continue with deactivate function via jquery
+ 
+  execute above without ajax but manual
+     - create update order status with ping url in spgateway deactivate subscription - 11:03a
+     - set url and data to spgateway via ajax  - 30  - 11:33a
+     - set return url  allow update specific subscription to deactivated  - 30m - 11:36a 
+     - if success  
+  
+  - click deactivate button 
+    - set url and data to spgateway via ajax   - 30m - 12:06p
+    - set return url  - 40m - 12:42p
  
 
-1. Continue with deactivate function via jquery 
-  - click deactivate button
-    - set url and data to spgateway via ajax
-    - set return url   
-  execute above without ajax but manual 
-     - set url and data to spgateway via ajax
-     - set return url   
-     - if success 
 
   in sendright check if status if found deactivated then 
-     - redirect billing page 
-     - display activate button 
-        - when hit activate button it should redirect to woocomerce product to purchase product again
-        - if login again then it should activate and again allow to use the site again
+     - redirect billing page - 30m - 2:12p
+     - display activate button - 30m - 2:32p 
+        - when hit activate button it should redirect to woocomerce product to purchase product again - 20m - 2:52p 
+        - if login again then it should activate and again allow to use the site again - 10m - 3:12p 
 
 2. Update payshortcut order when subscription is deactivated in sendright
-  - when deactivated sendright billing payshortcut status should update to deactivated 
-  - deactivated should be latest billing
+  - when deactivated sendright billing payshortcut status should update to deactivated  - 30m - 4:42p 
+  - deactivated should be latest billing - 20m - 5:02
 
 3. Payshortcut create user account on Sendirght - 
-    - create api for create user in sendright 
-    - only create user in sendright if not exist 
-    - create api in sendright and call in payshortcut when success order 
-    - set default password 
-4. Enable auto renew subscription for agree payment in payshortcut via cronjobs
-   - debug renew subscription  
-   - renew only if its not deactivated status
-   - renew only if already passed in 1 month or 31 days
-   - if success renew then auto create new subscription in sendright/update created_at column to latest date 
+    - create api for create user in sendright - 30m - 5:32p
+    - only create user in sendright if not exist - 30m - 6:02p 
+    - create api in sendright and call in payshortcut when success order - 20m - 6:22p
+    - set default password  - 10m - 6:32p 
+
+4. Enable auto renew subscription for agree payment in payshortcut via cronjobs 
+   - debug renew subscription  -2hr - 11a 
+   - renew only if its not deactivated status - 1hr - 12p
+   - renew only if already passed in 1 month or 31 days - 2hr - 3p
+   - if success renew then auto create new subscription in sendright/update created_at column to latest date - 1hr - 4p
+   - optimize speed so create batch then allow renew by limit batch - 2hr - 6p
+
+
+
+
+
+
+
+
+
 
 
 

@@ -322,18 +322,17 @@ use App\Mail\OrderShipped;
         $post_data_str = [
             'RespondType' => 'JSON',
             'Version' => '1.0',
-            'Amt' => 6600,
-            'MerchantOrderNo' => '5097',
-            'TradeNo' => '17022412335368443',
+            'Amt' => 100,
+            'MerchantOrderNo' => '2637',
+            'TradeNo' => '17032912552866345',
             'IndexType' => '1',
             'TimeStamp' => time(),
-            'NotifyURL' => 'http://google.com/test',
+            'NotifyURL' => 'http://payshortcut.net/api/order/update/status/179',
         ];
 
-        $post_data_str = http_build_query ($post_data_str);
-        // print " prepare encryp  " . $post_data_str;
+        $post_data_str = http_build_query ($post_data_str); 
         $post_data = trim(bin2hex(mcrypt_encrypt(MCRYPT_RIJNDAEL_128, $settings['HashKey'], addpadding($post_data_str), MCRYPT_MODE_CBC, $settings['HashIV'])));
-        // echo " encrypted string " . $post_data;
+       
         ?>
 
         <form method="post" action="<?php print $settings['url']; ?>"  target="_top">

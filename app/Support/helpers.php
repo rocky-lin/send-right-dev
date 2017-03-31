@@ -58,6 +58,12 @@ if(!function_exists('changeDashToSpaceUcLetter')) {
 if(!function_exists('curlPostRequest')) {
 	function curlPostRequest($postData, $url)
 	{
+ 
+		// print_r_pre($postData, 'post data '); 
+		// print "<br> url <br>"; 
+		// print $url; 
+
+
 		$ch = curl_init($url);
 
 		curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
@@ -90,7 +96,10 @@ if(!function_exists('curlGetRequest')) {
 			$url = $url . '?' . $getData;
 		}
 
-		//print " url " . $url;
+
+
+ 		
+		// print " get url " . $url;
 
 		$ch = curl_init();
 

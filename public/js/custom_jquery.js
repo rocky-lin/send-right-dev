@@ -343,28 +343,34 @@ $(document).ready(function(){
 
 
 
-		var postData = $("#PostData_").val();
+		var postData   = $("#PostData_").val();
 		var merchantId = $("#MerchantID_").val();
+		var order_id   = $("#order_id").val();
+		var url   = $("#url").val();
 
 
-		console.log(" post data "  + postData);
-		console.log(" post data "  + merchantId);
-		console.log(" post token "  +  $("#csrf-token").text());
+		// console.log(" post data "  + postData);
+		// console.log(" post data "  + merchantId);
+		// console.log(" post token "  +  $("#csrf-token").text());
 
 
-		$.ajax({
-			url: "http://localhost/rocky/send-right-dev/user/billing/deactivate",
-			headers: {
-				'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-			},
-			method: 'POST',
-			data: { PostData_: postData, MerchantID_: merchantId  },
-			success: function(data){
-				console.log('succes: '+data);
-			}
-
-
-		});
+		if(confirm("Are you sure you want to deactivate you sendright subscription?")) {   
+			$.ajax({
+				url: "http://localhost/rocky/send-right-dev/user/billing/deactivate",
+				headers: {
+					'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+				},
+				dataType: 'json',
+				method: 'POST',
+				data: { PostData_: postData, MerchantID_: merchantId, order_id:order_id, url:url  },
+				success: function (data){
+			        alert("Successfully deactivated!")
+			    },
+			    error: function (data){ 
+			 		alert("Successfully deactivated!")
+			    } 
+			});
+		} 
 
 
 

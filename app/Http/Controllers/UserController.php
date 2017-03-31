@@ -63,10 +63,14 @@ class UserController extends Controller
         // compsoe deactivate button
         $subscription = Account::getLatestSubscription();
 //         dd($subscription);
-        if($subscription != false) {
+        
+        if ($subscription['status'] == 'deactivated')  {
+           $deactivateButton = 'deactivated';
+        } else if($subscription != false ) {
             $deactivateButton = Account::composeDeactivateButtonForm(
                 $data = [
                     'TradeNo' => $subscription['trade_no'], //'17022412014777462',
+                    'order_id' => $subscription['id'], //'17022412014777462',
                     'MerchantOrderNo' => $subscription['merchant_order_no'], //'5095',
                     'Amt' => $subscription['amt'], //'6600',
                     'HashIV' => 't8jUsqArVyJOPZcF',
