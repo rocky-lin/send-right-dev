@@ -148,8 +148,8 @@ class Account extends Model
 
 		$created_at = Auth::user()->created_at;
 
-		$order = self::getLatestSubscription();
-
+		$order = self::getLatestSubscription(); 
+		
 		if(!empty($order['created_at']))
 		{
 			//print "order is not empty";
@@ -158,12 +158,13 @@ class Account extends Model
 		}
 		else if (!empty($created_at))
 		{
-			//print "order is empty then when user registered created at";
-			return human_readable_date_time($created_at) . ' <br> <b style="color:red">Current free version!</b>';
+			//print "order is empty then when user registered created at " . $created_at; 
+			$date = Helper::createDateTime($created_at);
+			return human_readable_date_time($date->addMonths(1)) . ' <br> <b style="color:red">Current free version!</b>';
 		}
 		else
 		{
-			//print "nothing";
+			print "nothing";
 			return 'Not available';
 		}
 	}
@@ -227,50 +228,35 @@ class Account extends Model
 		$status = $subscription['status']; 
 
 		if($status == 'deactivated') {
-			return false;
-		}  else if($type == 'basic') {
-			/** Active subscription */
-			if (self::isAccountHasSubscribed() == true and self::isHasNotExpired() == true and self::getAccountSubscription() == 'basic' )
-			{
-				//print "with valid subscription";
- 				return true;
-			}
-
-			/** Free version */
-			else if (self::isCurrentFreeVersion()== true)
-			{
-				//print "with free version";
+			return false;  
+		/** Active subscription */
+		} else if (self::isAccountHasSubscribed() == true and self::isHasNotExpired() == true and self::getAccountSubscription() == 'basic' ) { 
 				return true;
-			}
-
+		} else if (self::isCurrentFreeVersion()== true) { 
+			/** Free version */
+			return true;
+		}  else {
 			/** expired */
-			else
-			{
-				//print "with expired version";
-				return false;
-			}
-
-		}
-
-		return false;
+			//print "with expired version";
+			return false;
+		} 
+		//} 
+		// return false;
 	}
 
 	public static function isCurrentFreeVersion()
 	{
-		// 		$user = User::find(User::getUserAccount());
-		//
-		//		$created_at = $user->created_at; //'2017-03-29 03:35:33'; //
-
+		// 		$user = User::find(User::getUserAccount()); 
+		//		$created_at = $user->created_at; //'2017-03-29 03:35:33'; // 
+		 
 		$created_at = Auth::user()->created_at;
 
-		if (30 - ((new \Carbon\Carbon($created_at, 'UTC'))->diffInDays()) < 0)
-		{
-			// echo "The date is older than 30 days";
-			return true;
-		}
-		else
-		{
+		if (30 - ((new \Carbon\Carbon($created_at, 'UTC'))->diffInDays()) < 0) {
+			//echo "The date is older than 30 days";
 			return false;
+		} else {
+			//print "current free version"; 
+			return true;
 		}
 	}
 

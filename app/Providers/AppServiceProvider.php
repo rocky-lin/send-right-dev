@@ -57,6 +57,13 @@ class AppServiceProvider extends ServiceProvider
                     }
                 }
 
+                /**
+                 * Subscription information
+                 */
+                
+                $sendRightProductLink ='http://demo4.iamrockylin.com/shop/uncategorized/sendright-lite-plan/'; 
+
+
                 /**  Use this data anywhere in the project  */
                 $_SESSION['UserId'] = Auth::user()->id;
                 $_SESSION['account_id'] = User::getUserAccount();
@@ -72,7 +79,16 @@ class AppServiceProvider extends ServiceProvider
                 $addOns['is_has_email_mobile_opt_in'] = AddOn::isHasMobileOptIn(); 
                 Subscription::updateSubscriptionExpired(); 
                 $subscription_status = Account::getSubscriptionStatus();
-                $view->with(['subscription_status'=>$subscription_status, 'addOns'=>$addOns, 'userRole'=>User::getUserRole()]);
+
+                $view->with(
+                    [
+                        'subscription_status'=>$subscription_status, 
+                        'addOns'=>$addOns, 
+                        'userRole'=>User::getUserRole(), 
+                        'sendRightProductLink'=>$sendRightProductLink
+                    ]
+                );
+                
             }
         });
     } 

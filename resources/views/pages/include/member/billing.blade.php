@@ -46,7 +46,7 @@
 
                   @if($deactivateButton  == 'deactivated') 
                         <span style="color:red">
-                            <br> Account currently deactivated, please click <a href="#" class="btn btn-success btn-sm">  here </a> to reactivate and subscribe sendright again. 
+                            <br> Account currently deactivated, please click <a href="{{$sendRightProductLink}}" class="btn btn-success btn-sm">  here </a> to reactivate and subscribe sendright again. 
                         </span>
                         </div>
               
