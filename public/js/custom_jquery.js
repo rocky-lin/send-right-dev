@@ -353,10 +353,11 @@ $(document).ready(function(){
 		// console.log(" post data "  + merchantId);
 		// console.log(" post token "  +  $("#csrf-token").text());
 
+		var url_home = $('meta[name="url-home"]').attr('content'); 
 
 		if(confirm("Are you sure you want to deactivate you sendright subscription?")) {   
 			$.ajax({
-				url: "http://localhost/rocky/send-right-dev/user/billing/deactivate",
+				url : url_home + "/user/billing/deactivate",
 				headers: {
 					'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
 				},

@@ -16,6 +16,7 @@ use App\Account;
 use App\Subscription;
 use App\Activity;
 use Response; 
+use Illuminate\Http\Request;
 
 class RegisterController extends Controller
 {
@@ -138,6 +139,34 @@ class RegisterController extends Controller
             return "failed to activated  please click <a href='" . url('/') . "/login' > here </a> to login"; 
         }
     } 
+
+    /**
+     * add new user, create new account, create new user account, send registration email to from sendright, create subscription data  
+     */ 
+    public function createUserHttpPost(Request $request) 
+    {    
+        $newUser =  [   
+            'email'=>$request->get('email'),
+            'name'=>$request->get('name'),
+            'password'=>$request->get('password'),
+        ]; 
+        /**
+         * Create new account of the new user
+         */
+        // print " createUserHttp($email, $fullName, $password) <br>"; 
+        print_r($newUser); 
+        $isCreated = $this->create( $newUser );  
+
+        /**
+         * status if success of not new user creation
+         */
+        if($isCreated) { 
+            $response = Response::json(['ok']);
+            $response->header('Content-Type', 'application/json');
+            return $response; 
+        }   
+    }
+
 
     /**
      * add new user, create new account, create new user account, send registration email to from sendright, create subscription data  

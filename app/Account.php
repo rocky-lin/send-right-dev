@@ -231,9 +231,7 @@ class Account extends Model
 	}
 
 	public static function isSubscribedAndValid($type='basic')
-	{
-
-
+	{ 
 
 		//print " type = " . $type;
 
@@ -242,14 +240,24 @@ class Account extends Model
 		$status = $subscription['status']; 
 
 		if($status == 'deactivated') {
+			//print "<br> currently deactivated";
 			return false;  
 		/** Active subscription */
-		} else if (self::isAccountHasSubscribed() == true and self::isHasNotExpired() == true and self::getAccountSubscription() == 'basic' ) { 
+		} else if (self::isAccountHasSubscribed() == true and self::isHasNotExpired() == true and self::getAccountSubscription() == 'basic' ) {  
+				//print "<br> currently has subscribed and not expired and subscription is basic"; 
 				return true;
-		} else if (self::isCurrentFreeVersion()== true) { 
+
+		} else if (self::isCurrentFreeVersion()== true and self::isAccountHasSubscribed() == false) { 
+
+
+			// check date for trial here 
+			return 'trial not expired'; 
+			//print "<br> free version";
 			/** Free version */
-			return true;
-		}  else {
+		} else if (self::isCurrentFreeVersion()== false and self::isAccountHasSubscribed() == false) { 
+			return 'trial expired';   
+		}  else { 
+			//print "<br> has expired";
 			/** expired */
 			//print "with expired version";
 			return false;

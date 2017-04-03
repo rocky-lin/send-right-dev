@@ -21,3 +21,8 @@ Route::get('/user', function (Request $request) {
  * Full Name, Email and Password
  */
 Route::get('user-new/create/{email?}/{fullname?}/{password?}', 'Auth\RegisterController@createUserHttp');  
+Route::post('user-new/create-post', 'Auth\RegisterController@createUserHttpPost');  
+Route::get('user-new/create-get', function(){
+	return "Test";
+}); 
+
