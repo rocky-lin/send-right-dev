@@ -20,14 +20,17 @@
                 <div class="panel-body">
                     <div class="the-price">
                         <h1>
-                            {{ $bronze['product']->price}}<span class="subscript">/mo</span></h1>
+                            ${{ number_format($subscription['amt']) }} <span class="subscript">/mo</span></h1>
                         <small>1 month FREE trial</small>
                     </div>
                     <table class="table">
+
+                        <tr>
+                        <td> Contacts {{ number_format( str_replace('Send Right Light', '',$subscription['title'])) }}</td>  
                         @foreach($bronze['product']['details'] as $i => $bd)
                             @if($i%2==0)
                                 <tr>
-                                    <td>
+                                    <td>  
                                         {{$bd->name}}
                                     </td>
                                 </tr>

@@ -37,13 +37,16 @@ class AppServiceProvider extends ServiceProvider
         view()->composer('*', function ($view) {
 
             if (Auth::user() ) {
-
-
+ 
                 /**
                  * Query subscription in payshortcut and store to a session
                  */
                 Account::getLatestSubscriptionQueryToPayshortcut();
-
+ 
+                /**
+                 * If total contact exceed with quota for specific subscription trigger this function to save new billing upgrade for queue in payshortcut.net
+                 */
+                Account::billingCheckCurrentSubscriptionTotalContactExceed();
 
                 /**
                  * redirect billing page if, billing is not valid

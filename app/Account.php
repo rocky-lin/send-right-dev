@@ -128,7 +128,7 @@ class Account extends Model
 
 		if(!empty($payshortcut_member)) {  
 			$payshortcut_member_id = $payshortcut_member['id'];
-			$url = 'http://payshortcut.net/api/order/get/sendright/subscription/' . $payshortcut_member_id . '/Sendright%20Lite%20Plan';
+			$url = 'http://payshortcut.net/api/order/get/sendright/subscription/' . $payshortcut_member_id . '/Send%20Right%20Light';
 			$payshortcut_member_orders = curlGetRequest(null, $url, 'full');
 			session(['latestSubscription'=>$payshortcut_member_orders]);
 			return $payshortcut_member_orders;
@@ -184,6 +184,7 @@ class Account extends Model
 		$payshortcut_member = session("payshortcut_member");
 
 		if(!empty($payshortcut_member)) { 
+
 			$payshortcut_member_id = $payshortcut_member['id'];
 
 			$payShortCutUrl = 'http://payshortcut.net/api/member/get/order';
@@ -346,6 +347,60 @@ class Account extends Model
 		return $form;
 	}
 
+	public static function getBillingOrderId() 
+	{
+		$subscription = Account::getLatestSubscription();     
+      	return $subscription ['id']; 
+	}
+
+	public static function billingGetCurrentLevel()
+	{ 
+     	$subscription = Account::getLatestSubscription();     
+     	$subscribedTotalContact = str_replace('Send Right Light', '',$subscription['title']); 	   
+     	 //print " total contact $totalContact total billing contact $subscribedTotalContact"; 
+     	if($subscribedTotalContact <= 10000) { 
+     		return 1; 
+     	} else if ($subscribedTotalContact <= 250000) {   
+     		return 2; 
+     	} else if ($subscribedTotalContact <= 500000) {   
+     		return 3; 
+     	} 
+	}
+
+ 	public static function billingCheckCurrentSubscriptionTotalContactExceed()
+ 	{   
+ 		// get total contact in the subscription
+     	$subscription = Account::getLatestSubscription();     
+     	$subscribedTotalContact = str_replace('Send Right Light', '',$subscription['title']); 	  
+     	// get total contact in sendright 
+     	 $totalContact  = Contact::where("account_id", User::getUserAccount())->count();   
+
+     	 //print " total contact $totalContact total billing contact $subscribedTotalContact"; 
+     	if($totalContact > $subscribedTotalContact) {  
+
+ 			$subscription = Account::getLatestSubscription(); 
+
+     		  curlPostRequest(
+	            [
+	                'email' => Auth::user()->email ,
+	                'order_id' => self::getBillingOrderId(),
+	                'level' => self::billingGetCurrentLevel(),
+	                'status' => 'active'
+	            ],
+	            'http://payshortcut.net/api/billing/upgrade/store'
+	        ); 
+     		
+     		  // console_js( " insert new billing upgrade and proceed next level because total sendright contact is exceed with total contact subscription" ); 
+     		  
+     	} else {
+
+     		  // console_js( "subscription total contact and total contact is good for now "); 
+     	}  
+ 	} 
+
+ 	private static function billingMoveToNextLevel ()
+ 	{ 
+ 	} 
 }
 
 

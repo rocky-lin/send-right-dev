@@ -1,4 +1,15 @@
 <?php 
+
+function console_js($message) {
+?>
+	<script>
+		var msg = '<?php echo $message ?>';  
+		console.log(msg);
+	</script>
+<?php 
+}
+
+
 if(!function_exists('test')) {
 	function test() 
 	{
@@ -96,7 +107,9 @@ if(!function_exists('curlGetRequest')) {
 			$url = $url . '?' . $getData; 
 			$url = urldecode($url); 
 		}
-  
+  		
+  		// print "<br> full url " . $url; 
+
 		$ch = curl_init();
 
 		curl_setopt($ch, CURLOPT_URL, $url);

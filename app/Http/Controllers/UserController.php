@@ -58,11 +58,16 @@ class UserController extends Controller
         $subscriptionStatus =  Account::getSubscriptionStatus();
 
         $payshortcut_member_orders = Account::getBillingRecords();
+
+
+        // dd($payshortcut_member_orders); 
+
+
         $nextPaymentDate           = Account::getNextPaymentDate();
 
         // compsoe deactivate button
         $subscription = Account::getLatestSubscription();
-        //print_r_pre($subscription, 'user controller');
+        // print_r_pre($subscription, 'user controller');
         
         if ($subscription['status'] == 'deactivated')  {
            $deactivateButton = 'deactivated';
@@ -81,7 +86,7 @@ class UserController extends Controller
             );
         }
 
-    	return view('pages/member/billing', compact('bronze', 'subscriptionStatus', 'payshortcut_member_orders', 'nextPaymentDate', 'deactivateButton'));
+    	return view('pages/member/billing', compact('bronze', 'subscriptionStatus', 'payshortcut_member_orders', 'nextPaymentDate', 'deactivateButton', 'subscription'));
 
     }
 

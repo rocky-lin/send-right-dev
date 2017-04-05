@@ -44,7 +44,7 @@
                     <tbody>
                     @if(!empty($payshortcut_member_orders))
                         @foreach($payshortcut_member_orders as $order)
-                            @if($order['title'] == 'Sendright Lite Plan')
+                            @if(in_array($order['title'], ['Sendright Lite Plan', 'Send Right Light 10000', 'Send Right Light 250000', 'Send Right Light 500000']) )
                                 <tr>
                                     <td style="display:none" >{{$order['id']}}</td>
                                     <td>{{$order['title']}}</td>
