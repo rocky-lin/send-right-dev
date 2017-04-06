@@ -1,33 +1,171 @@
+Work with cronjobs triggers for level and subscription 
+
+Create billing_cylcle_batch 
+
+Via billing query user, limit user check by 10 batch
+
+After query based on limit and batch if result is 0 then restore batch with 0
+ 
+Get latest subscription for specific user "send right light 1000, 2500, 5000" for a specific   
+
+Check created_at for latest subscription and see if already passed with 1 month  
+
+If found that date is already passed 1 month then   
+  - check if subscription upgraded on level upgrade database
+  - trigger next payment of the subscription
+  - insert new order with new order info with price and member info, this will allow history of the customer 
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+1. Create table upgrade list with subscription - done
+  - id
+  - email
+  - total contacts
+  - level
+  - order id
+
+2. create product something like  "Send Right Light 10000" - NTD2980, "Send Right Light 250000" - 5980, "Send Right Light 500000" - 9900,   - done
+
+
+
+3. 
+Check what is current subscription and how much it is - 20m - d  
+Display price monthly based on subscription - d  
+Display total contact can be added  - d  
+
+4. check total contact if exceed with max contact for current subscription - 20m - 2:20   - d 
+  - test post request if save or not - w
+  - If its true allow trigger from sendright save info to "payshortcut.net.upgrade_level" - 20m - 2:40 -d 
+  - Create api in payshortcut to save upgrade_level - 20m - 3:00 - d 
+  - Create api in payshortcut to check current upgrade_level didn't match with new trigger, if not then allow add else do nothing   -d 
+  - 30m - 3:30 
+ 
+5. Add billing list info based on level, diplay in subscription billing page  - d
+    - 30m - 4:00
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+
+6. Do subscription change using cronjobs and spgateway - 
+      - do first manual in upgrade  
+      - do cronjobs in upgrade in every 5min   
+
+  Upload to server sendright code, update for level -  
+  Upload to server payshortcut code and update for level 
+ 
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Create new account 
+Eva Mae Suarez  
+evamae@gmail.com
+secret
+
+
+
+
+
+Test with subscription via payshortcut 
+Test with auto create account to sendright when success order in payshortcut and iamrockeyln
+Test allow to login when created account and display next billing with account 
+
+Check expiration date - working
+Show how deactivate works and show functions how it works after deactivate successfully
+To reactivate again do execute order another sendright product
+
+
+
+
+
+
+
+
+Hi Rocky
+
+Update for March 31, 2017
+
 1. Continue with deactivate function via jquery
  
   execute above without ajax but manual
-     - create update order status with ping url in spgateway deactivate subscription - 11:03a
-     - set url and data to spgateway via ajax  - 30  - 11:33a
-     - set return url  allow update specific subscription to deactivated  - 30m - 11:36a 
+     - create update order status with ping url in spgateway deactivate subscription 
+     - set url and data to spgateway via ajax  
+     - set return url  allow update specific subscription to deactivated  
      - if success  
   
   - click deactivate button 
-    - set url and data to spgateway via ajax   - 30m - 12:06p
-    - set return url  - 40m - 12:42p
- 
-
-
+    - set url and data to spgateway via ajax 
+    - set return url 
+  
   in sendright check if status if found deactivated then 
-     - redirect billing page - 30m - 2:12p
-     - display activate button - 30m - 2:32p 
-        - when hit activate button it should redirect to woocomerce product to purchase product again - 20m - 2:52p 
-        - if login again then it should activate and again allow to use the site again - 10m - 3:12p 
+     - redirect billing page 
+     - display activate button  
+        - when hit activate button it should redirect to woocomerce product to purchase product again 
+        - if login again then it should activate and again allow to use the site again 
 
 2. Update payshortcut order when subscription is deactivated in sendright
-  - when deactivated sendright billing payshortcut status should update to deactivated  - 30m - 4:42p 
-  - deactivated should be latest billing - 20m - 5:02
+  - when deactivated sendright billing payshortcut status should update to deactivated 
+  - deactivated should be latest billing 
 
 3. Payshortcut create user account on Sendirght - 
-    - create api for create user in sendright - 30m - 5:32p
-    - only create user in sendright if not exist - 30m - 6:02p 
-    - create api in sendright and call in payshortcut when success order - 20m - 6:22p
-    - set default password  - 10m - 6:32p 
+    - create api for create user in sendright 
+    - only create user in sendright if not exist  
+    - create api in sendright and call in payshortcut when success order 
+    - set default password 
+
+
+
+All updates above are uploaded to server and some are tested but not yet finish testing in online. 
  
+Todo in the weekend
+Will continue doing the test regarding deactivate and billing process  
 4. Enable auto renew subscription for agree payment in payshortcut via cronjobs 
    - debug renew subscription  -2hr - 11a 
    - renew only if its not deactivated status - 1hr - 12p
@@ -36,6 +174,10 @@
    - optimize speed so create batch then allow renew by limit batch - 2hr - 6p
 
 
+Thanks,
+
+Best regards,
+Jesus Erwin Suarez
 
 
 

@@ -87,9 +87,9 @@ if(!function_exists('curlPostRequest')) {
 		curl_close($ch);
 
 		// do anything you want with your response
-		var_dump($response);
-
-		return json_decode($response, true);
+		// var_dump($response); 
+		 
+		return json_decode($response, true); 
 	}
 }
 

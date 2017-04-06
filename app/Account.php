@@ -367,28 +367,29 @@ class Account extends Model
      	} 
 	}
 
- 	public static function billingCheckCurrentSubscriptionTotalContactExceed()
+ 	public static function 	billingCheckCurrentSubscriptionTotalContactExceed()
  	{   
  		// get total contact in the subscription
      	$subscription = Account::getLatestSubscription();     
      	$subscribedTotalContact = str_replace('Send Right Light', '',$subscription['title']); 	  
      	// get total contact in sendright 
      	 $totalContact  = Contact::where("account_id", User::getUserAccount())->count();   
-
-     	 //print " total contact $totalContact total billing contact $subscribedTotalContact"; 
+ 
+     	 // print " total contact $totalContact total billing contact $subscribedTotalContact"; 
      	if($totalContact > $subscribedTotalContact) {  
 
  			$subscription = Account::getLatestSubscription(); 
-
-     		  curlPostRequest(
-	            [
-	                'email' => Auth::user()->email ,
-	                'order_id' => self::getBillingOrderId(),
-	                'level' => self::billingGetCurrentLevel(),
-	                'status' => 'active'
-	            ],
-	            'http://payshortcut.net/api/billing/upgrade/store'
-	        ); 
+ 		 
+	     		  curlPostRequest(
+		            [
+		                'email' => Auth::user()->email ,
+		                'order_id' => self::getBillingOrderId(),
+		                'level' => self::billingGetCurrentLevel(),
+		                'status' => 'active'
+		            ],
+		            'http://payshortcut.net/api/billing/upgrade/store' 
+		        );  
+ 	 
      		
      		  // console_js( " insert new billing upgrade and proceed next level because total sendright contact is exceed with total contact subscription" ); 
      		  
