@@ -3,10 +3,18 @@
    <div class="row main-row-container">  
         <div class="col-md-9 right-side-container">   
             <br><br>
-             <div class="alert alert-danger" role="alert">    
-                <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>   
-                "Oops, there seem to be an error in your billing, Don't worry!  Your email list and campaigns are fine! We just need to sort out a billing issue first.   Please <a href="#">CLICK HERE</a> to update your billing."
-            </div>
+
+
+
+
+                  {{--  <div class="alert alert-danger" role="alert">    
+                      <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>   
+                      "Oops, there seem to be an error in your billing, Don't worry!  Your email list and campaigns are fine! We just need to sort out a billing issue first.   Please <a href="#">CLICK HERE</a> to update your billing."
+                  </div>
+                --}}
+
+
+
      
               <!-- Top level !-->
                   <div class="row ">           
