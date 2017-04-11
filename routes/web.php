@@ -73,6 +73,10 @@ Route::group(['prefix' => 'user' , 'middleware' =>  'auth' ], function() {
 		Route::post('label-detail-delete', 'LabelDetailController@ajaxDelete');
 		Route::resource('label-detail', 'LabelDetailController');
 
+
+
+
+
  		Route::post('campaign/template/select/post', 'CampaignController@postChooseTemplateNew')->name('user.post.campaign.select');
 
 	    Route::post('campaign/templates/post', 'CampaignController@postChooseTemplate')->name('user.post.campaign.choose.template');
@@ -155,6 +159,7 @@ Route::group(['prefix' => 'user' , 'middleware' =>  'auth' ], function() {
 			
 		// create step 1
 			Route::get('campaign/get/all', 'CampaignController@getAllCampaign')->name('user.campaign.get.all');
+			Route::get('campaign/get/report/all', 'CampaignController@getReportAllCampaign')->name('user.campaign.get.report.all');
 			Route::get('campaign/get/all/now', 'CampaignController@getAllCampaignNow')->name('user.campaign.get.all.now');
 
 

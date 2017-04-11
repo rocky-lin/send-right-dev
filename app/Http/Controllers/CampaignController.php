@@ -24,6 +24,8 @@ use Session;
 use App\CampaignTemplate;
 use App\Label;
 use App\LabelDetail;
+use App\Report; 
+
 
 class CampaignController extends Controller
 {
@@ -424,8 +426,22 @@ class CampaignController extends Controller
         // return campaign settings view
         return view('pages/campaign/campaign-settings-optin', ['optinDetails'=>$optinDetails, 'status'=>$campaign->status  , 'listNames'=>List1::getCurrentCampaignListNames(), 'campaign'=>$campaign, 'messangeName'=>'Mobile Opin Settings Successfully Updated.']);  
     }
+
+
+
+
+    /**
+     *  Create campaign 
+     */ 
+    
     public function createSettingsValidate(Request $request) 
-    {   
+    { 
+
+        /**
+         *  Create report status 
+         */
+        Report::createIfNotExist($request->get('campaign_id'), $request->get('campaign_kind'));
+
         // session_start();
         // dd($request->all());
         // print"<pre>";
@@ -491,18 +507,32 @@ class CampaignController extends Controller
 
 
 
-        if($request->get(   'campaign_type') == 'direct send') {
+        if($request->get('campaign_type') == 'direct send') {
             if($request->get('campaign_status') == 'active') {
  
                     $campaignSchedule = new CampaignScheduleController();  
                     $campaignSchedule->directSend($request->get('campaign_id')); 
-
-                $status = "<div class='alert alert-success'> Campaign email sent to contacts...</div>";     
+                    $status = "<div class='alert alert-success'> Campaign email sent to contacts...</div>";     
+                     
+                    // set report as Delivered
+                    Report::updateStatusDelivered($request->get('campaign_id'));   
             } else {
                 $status = "<div class='alert alert-danger'> Sending now failed and must be in active status..</div>"; 
             } 
-        } else {
-            $status = "<div class='alert alert-success'> Campaign email schedule saved..</div>";
+        } else { 
+ 
+             if($request->get('campaign_status') == 'active') {
+                // set report as On Schedule
+                Report::updateStatusOnSchedule($request->get('campaign_id')); 
+                
+               $status = "<div class='alert alert-success'> Campaign email schedule saved..</div>";
+            
+            } else {
+                $status = "<div class='alert alert-success'> Campaign email schedule saved, but current status is inactive.</div>";
+                
+            }
+
+        
         }
 
 
@@ -662,6 +692,96 @@ class CampaignController extends Controller
         return $campaigns;
     }
 
+/**
+ * This will get the campaign reports 
+ * 
+ */
+  public function getReportAllCampaign()
+    { 
+        // get all capaign
+        // $campaigns =  Campaign::getCampaignsByAccount()->toArray(); 
+        $campaigns = Campaign::where('account_id', User::getUserAccount())->where('kind', '!=',  'mobile email optin')->get()->toArray(); 
+
+        // sort campaign to latest created
+        $collection = collect( $campaigns ); 
+        $sorted = $collection->sortBy('id', SORT_REGULAR, true);  
+        $campaigns = $sorted->values()->all();
+             
+        // Get campaign information
+        foreach($campaigns as $index => $campaign)  {  
+
+            // get specific kind assign to a variable        
+            $kind = $campaigns[$index]['kind'];
+
+            // filter and add variable with specific requirements
+            if ($kind == 'auto responder') { 
+                $created_ago = Carbon::createFromTimeStamp(strtotime($campaign['created_at']))->diffForHumans();  
+                $campaigns[$index]['created_ago'] = $created_ago;
+                $campaigns[$index]['next_send'] = '';
+                $campaigns[$index]['total_contacts'] =  count(Campaign::getAllEmailWillRecieveTheCampaign($campaigns[$index]['id'])['contacts']); 
+            } else {   
+                $created_ago = Carbon::createFromTimeStamp(strtotime($campaign['created_at']))->diffForHumans();  
+                    $campaigns[$index]['created_ago'] = $created_ago; 
+                    $campaignSchedule = CampaignSchedule::where('campaign_id', $campaigns[$index]['id'])->first();  
+                    if(!empty($campaignSchedule))  {  
+                        $campaigns[$index]['next_send'] = Helper::createDateTime(CampaignSchedule::where('campaign_id', $campaigns[$index]['id'])->first()->schedule_send)->format('l jS \\of F Y h:i:s A'); 
+                    }   
+                $campaigns[$index]['total_contacts'] =  count(Campaign::getAllEmailWillRecieveTheCampaign($campaigns[$index]['id'])['contacts']); 
+            }
+        
+     
+            /**
+            * Get report statuses  
+            */ 
+            $reportArray1 = Report::where('campaign_id',  $campaigns[$index]['id'])->get();
+            if(count($reportArray1) > 0) {  
+                $reportArray2 = $reportArray1->toArray(); 
+                $report = $reportArray2[0];  
+
+                // $report['last_sent_date_time'] = Helper::toAgo($report['last_sent_date_time']);   
+                 
+
+
+                 if($report['status'] == 'Delivered') {
+                    // delivered 
+                        $report['status'] =  "Delivered(" .  human_readable_date_time($report['last_sent_date_time']) . ')' ; 
+                        $report['last_sent_date_time_ago'] =  (!empty($report['last_sent_date_time'])) ? "Sent about " . Helper::toAgo($report['last_sent_date_time']) : null;   
+                 } else if($report['status'] == 'On Schedule') { 
+                        
+                        // ON SCHEDULE                        
+                            
+                        
+                        // Check campaign schedule next send
+                        $report['last_sent_date_time_ago'] = 'Send this coming ' . $campaigns[$index]['next_send'];    
+                        
+
+
+                 } else {
+                    // pending  
+                    // do nothing 
+                 }
+ 
+                $campaigns[$index]['report'] = $report;  
+            }
+
+
+
+
+
+
+
+
+
+
+            /**
+             * Set campaign list
+             */
+            $campaigns[$index]['list_id_str'] =  List1::getStrName(Campaign::find($campaigns[$index]['id'])->campaignList);  
+        }
+ 
+        // dd($campaigns);  
+        return $campaigns;
+    }
 
 
     public function getAllCampaignSortByKind($kind)

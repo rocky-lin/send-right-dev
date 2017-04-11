@@ -10,6 +10,7 @@
 	use App\EmailAnalytic;
 	use App\CampaignList;
 	use Carbon\Carbon; 
+	use App\Report; 
 	
 	// print "<pre>"; 
 
@@ -165,6 +166,11 @@
 			Campaign::setDefaultValueToSessionClear($_SESSION['campaign']['id']);   
 		} 
 	} 
+
+
+
+   Report::createIfNotExist($_SESSION['campaign']['id'], $_SESSION['campaign']['kind']);
+
 
 
 	//	print "<pre>";

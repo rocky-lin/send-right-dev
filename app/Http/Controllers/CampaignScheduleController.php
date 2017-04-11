@@ -17,6 +17,7 @@ use App\CampaignList;
 use App\Contact;
 use App\AutoResponseDetails;
 use Session;
+use App\Report; 
 
 
 class CampaignScheduleController extends Controller
@@ -229,6 +230,7 @@ class CampaignScheduleController extends Controller
     {
 
         $campaignSendLog = [];
+        $totalSend = 0;
 
 
         if(!empty($campaign)) { 
@@ -236,6 +238,10 @@ class CampaignScheduleController extends Controller
             $campaign = (array) $campaign;     
  
             if($contacts) {  
+
+
+
+
                 foreach ($contacts['contacts'] as $id => $contact) {
                     $maiLResponse = 'processed';
                     $maiLResponse = Mail::to( $contact['email'] )->queue(new CampaignSendMail($contact, $campaign)); 
@@ -247,9 +253,19 @@ class CampaignScheduleController extends Controller
                        // exit;
                       
                     if($maiLResponse == 'processing') {   
-                           // Activity::create(['account_id'=>$campaign['account_id'], 'table_name'=>'campaigns','table_id'=>$campaign['campaign_id'], 'action'=>'Email successfully sent to ' . $contact['email'] . ' campaign status is ' . $campaign['repeat'] ]); 
+
+
+                        // Activity::create(['account_id'=>$campaign['account_id'], 'table_name'=>'campaigns','table_id'=>$campaign['campaign_id'], 'action'=>'Email successfully sent to ' . $contact['email'] . ' campaign status is ' . $campaign['repeat'] ]); 
                         $campaignSendLog[] =  "Campaign  to " . $contact['email'] . ' processed successfully';
-                        
+
+                        // report
+                        if($campaign['repeat'] == 'One Time') {
+                            Report::updateStatusDelivered($campaign['campaign_id']);  
+                            // sent delivered
+                        } 
+ 
+                        // count and increment current total trigger send 
+                        $totalSend++;  
                     } elseif($maiLResponse) { 
 
                         Activity::create(['account_id'=>$campaign['account_id'], 'table_name'=>'campaigns','table_id'=>$campaign['campaign_id'], 'action'=>'Email successfully sent to ' . $contact['email'] . ' campaign status is ' . $campaign['repeat'] ]);
@@ -263,10 +279,15 @@ class CampaignScheduleController extends Controller
                         $campaignSendLog[] =  "Sending campaign  to " . $contact['email'] . ' failed.'; 
                     }
  
-                    $this->pauseInHalfOfSeconds();
-
+                    $this->pauseInHalfOfSeconds(); 
                 }
 
+
+
+                // update total send
+ 
+                 Report::updateTotalSend($campaign['campaign_id'], $totalSend);
+               
                 session(['campaignSendLog' => $campaignSendLog]);
 
             } else {

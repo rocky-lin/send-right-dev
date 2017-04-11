@@ -220,4 +220,25 @@ $factory->define(App\Invoice::class, function (Faker\Generator $faker) {
         'name' => "en",
         'status' => 'active'
     ];
+}); 
+ $factory->define(App\Report::class, function (Faker\Generator $faker) {
+        
+        $status = ['On Schedule', 'Pending', 'Delivered']; 
+
+        return [
+        'account_id' => rand(1, 100),
+        'campaign_id' => rand(1, 100),
+        'total_send' => rand(1, 100),
+        'total_arrival' => rand(1, 100),
+        'total_open' => rand(1, 100),
+        'total_click' => rand(1, 100),
+        'total_unsubscribe' => rand(1, 100),
+        'total_complain' => rand(1, 100),
+        'total_arrival_rate' => rand(1, 100),
+        'total_open_rate' => rand(1, 100),
+        'total_click_rate' => rand(1, 100),
+        'total_unsubscribe_rate' => rand(1, 100),
+        'last_sent_date_time' => Carbon\Carbon::now(),
+        'status' => $status[rand(0,2)],
+    ];
 });

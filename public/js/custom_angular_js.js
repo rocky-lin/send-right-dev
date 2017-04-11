@@ -1793,7 +1793,7 @@ app.controller('myTemplateThemeCtr', ['$scope', '$filter', '$http', '$window', f
 }]);
 
 
-//campaign view
+//campaign report view
 app.controller( 'reportCampaignViewCtr', ['$scope', '$filter', '$http', '$window', function ($scope, $filter, $http, $window) {
     console.log("Campaign views loaded angulajs!..");
     $scope.currentPage = 0;
@@ -1870,9 +1870,9 @@ app.controller( 'reportCampaignViewCtr', ['$scope', '$filter', '$http', '$window
         var url = obj.siteUrl;
 
         if(kind == 'all') {
-            url = url + '/user/campaign/get/all';
+            url = url + '/user/campaign/get/report/all';
         } else   {
-            url = url + '/user/campaign/get/all/by/kind/'+kind;
+            // url = url + '/user/campaign/get/all/by/kind/'+kind;
         }
 
         $http({

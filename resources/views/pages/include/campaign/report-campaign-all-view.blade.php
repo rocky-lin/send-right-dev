@@ -37,14 +37,14 @@
                             {{-- </div> --}}
                         </div>
                         <div class="col-md-3" style="text-align: right"> 
-                                <div class="form-group">
+                              {{--   <div class="form-group">
                                     <select class="form-control" ng-model='list.list_id_str' >
                                         <option value="">Filter By List</option>
                                         @foreach($lists as $list)
                                             <option  >{{$list->name}}</option>
                                         @endforeach
                                     </select>
-                                </div>
+                                </div> --}}
                         </div>
                         <div class="col-md-3" style="text-align: right">
                             <div class="input-group">
@@ -92,29 +92,29 @@
                                         <td><input type="checkbox" data-ng-checked="checked_all"  data-ng-model="checked_all_model[campaign.id]" ng-click="manageCheckStatus()" /></td>
 
                                         <td> 
-                                           <h3> @{{campaign.title }} </h3> <br>
-                                             <h4>Sent about<b> @{{campaign.report.last_sent_date_time}}</b></h6><br>       
+                                           <h3> @{{campaign.title }}</h3> <br>
+                                             @{{campaign.report.last_sent_date_time_ago}}</b></h6><br>       
                                              <small>@{{campaign.report.status}}</small>    
                                          </td>
                                         <td>    
-                                           <b>Total send </b><br> <h3>@{{campaign.report.total_send}}</h3><br>
-                                            <b>Complain </b><br> <h3>@{{campaign.report.total_complain}}</h3>
+                                           <b>Total send </b><br> <h4>@{{campaign.report.total_send}}</h4><br>
+                                            <b>Complain </b><br> <h4>@{{campaign.report.total_complain}}</h4>
                                         </td>
                                             <td>    
-                                           <b>Arrivals</b><br> <h3>@{{campaign.report.total_arrival}}</h3><br>
-                                            <b>Arrival rate</b><br> <h3>@{{campaign.report.total_arrival_rate}}</h3>
+                                           <b>Arrivals</b><br> <h4>@{{campaign.report.total_arrival}}</h4><br>
+                                            <b>Arrival rate</b><br> <h4>@{{campaign.report.total_arrival_rate}}(%)</h4>
                                         </td>
                                             <td>    
-                                           <b>Opens</b><br> <h3>@{{campaign.report.total_open}}</h3><br>
-                                            <b>Opens rate</b><br> <h3>@{{campaign.report.total_open_rate}}</h3>
+                                           <b>Opens</b><br> <h4>@{{campaign.report.total_open}}</h4><br>
+                                            <b>Opens rate</b><br> <h4>@{{campaign.report.total_open_rate}}(%)</h4>
                                         </td>
                                             <td>    
-                                           <b>Click</b><br> <h3>@{{campaign.report.total_click}}</h3><br>
-                                            <b>Click rate</b><br> <h3>@{{campaign.report.total_click_rate}}</h3>
+                                           <b>Click</b><br> <h4>@{{campaign.report.total_click}}</h4><br>
+                                            <b>Click rate</b><br> <h4>@{{campaign.report.total_click_rate}}(%)</h4>
                                         </td>
                                             <td>    
-                                           <b>Unsubscribe</b><br> <h3>@{{campaign.report.total_unsubscribe}}</h3><br>
-                                            <b>Unsubscribe rate</b><br> <h3>@{{campaign.report.total_unsubscribe_rate}}</h3>
+                                           <b>Unsubscribe</b><br> <h4>@{{campaign.report.total_unsubscribe}}</h4><br>
+                                            <b>Unsubscribe rate</b><br> <h4>@{{campaign.report.total_unsubscribe_rate}}(%)</h4>
                                         </td> 
                                     </tr> 
                                 </tbody>
