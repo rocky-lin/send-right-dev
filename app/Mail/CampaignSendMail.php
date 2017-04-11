@@ -50,8 +50,7 @@ class CampaignSendMail extends Mailable
             $this->campaign['content'] =  Campaign::supplyContactFilteres($contactFilterValues, $this->campaign['content']);
         }  
             // print" <pre> "; 
-            // print_r($this->campaign); 
-
+            // print_r($this->campaign);  
             // print $this->campaign['sender_email']; 
             // print"</pre>"; 
             // exit;

@@ -1791,3 +1791,279 @@ app.controller('myTemplateThemeCtr', ['$scope', '$filter', '$http', '$window', f
         });   
     } 
 }]);
+
+
+//campaign view
+app.controller( 'reportCampaignViewCtr', ['$scope', '$filter', '$http', '$window', function ($scope, $filter, $http, $window) {
+    console.log("Campaign views loaded angulajs!..");
+    $scope.currentPage = 0;
+    $scope.pageSize = '20';
+    $scope.data = [];
+    $scope.q = '';
+    $scope.deleteCampaign = [];
+
+    $scope.totalCampaign = 0;
+
+    $scope.filteredTodos = []; 
+    $scope.numPerPage = 10;
+    $scope.maxSize = 10;
+    $scope.showCampaignInitLoader = [];
+
+    $scope.editCampaign = function(campaign) {
+
+        $window.location.href = obj.siteUrl + '/extension/campaign/index.php?id='+campaign.id;
+    };
+    $scope.deleteCampaign = function(campaign) {
+        if(confirm('are you sure you want to delete this campaign?' + campaign.id)){
+            $http({
+                method: 'DELETE',
+                url: obj.siteUrl + '/user/campaign/' + campaign.id,
+                data: {
+                    id: campaign.id
+                },
+                headers: {
+                    'Content-type': 'application/json;charset=utf-8'
+                }
+            })
+                .then(function(response) {
+                    $scope.deleteCampaign[campaign.id] = true;
+                }, function(rejection) {
+                    alert("Ohps! something wrong, please campaign send right support. Thank you!");
+                });
+
+        } else {
+            console.log("cancel delete " + campaign.id);
+        }
+    };
+    $scope.getData = function () {
+
+        return $filter('filter')($scope.data, $scope.q)
+    };
+    $scope.numberOfPages=function() {
+
+        return Math.ceil($scope.getData().length/$scope.pageSize);
+    };
+
+
+
+
+    // When the home page campaign loaded
+    // Sort display all the campaings
+
+
+    //$scope.testingFunc = function (data) {
+
+        //alert("test" + data);
+
+    //};
+
+    $scope.campaignDisplayByKind = function(kind, index) {
+
+        console.log("kind = " + kind);
+        $scope.campaignKindLoader = true;
+        $scope.showCampaignInitLoader[index] = true;
+
+        $scope.myStyle={'display':'block'};
+
+
+        //alert("test");
+        var url = obj.siteUrl;
+
+        if(kind == 'all') {
+            url = url + '/user/campaign/get/all';
+        } else   {
+            url = url + '/user/campaign/get/all/by/kind/'+kind;
+        }
+
+        $http({
+            method: 'GET',
+            url: url,
+        }).then(function successCallback(response) {
+
+            $scope.data = [];
+            $scope.totalCampaign = 0;
+            $scope.myStyle={'display':'none'};
+            // console.log(response);
+            for (var i = 0; i < response.data.length; i++) {
+                $scope.data.push(response.data[i]);
+                $scope.totalCampaign++;
+            }
+            $scope.showCampaignInitLoader[index]= false;
+            $scope.campaignKindLoader = false;
+
+        }, function errorCallback(response) {
+            $scope.myStyle={'display':'none'};
+            //$scope.campaignKindLoader = false;
+            //$scope.showCampaignDraftInitLoader = false;
+            alert("something wrong! please campaign send right support. Thank you!");
+        });
+    };
+ 
+    // initialized data
+    // $scope.campaignDisplayByKind('all');
+
+
+
+    // pagination
+
+    $scope.numPages = function () {
+        return Math.ceil($scope.data.length / $scope.pageSize)-1;
+    };
+
+    var begin = 1;
+
+    console.log( " scope number pages " +  Math.ceil($scope.data.length / $scope.numPerPage));
+
+    // detect where the page selected
+    $scope.$watch('currentPage + numPerPage', function() {
+        var begin = (($scope.currentPage - 1) * $scope.numPerPage)
+            , end = begin + $scope.numPerPage;
+
+        $scope.filteredTodos = $scope.data.slice(begin, end);
+    });
+
+    console.log($scope.data);
+
+    $scope.$watch('pageSize', function () {
+        $scope.numPages();
+        $scope.getData() ;
+    });
+ 
+    // add label  
+    $scope.saveNewLabel = function ()  { 
+        console.log("save new label now name "    + $scope.name  ) ;   
+        if($scope.name == null)  {
+            $scope.label_popup_message = true; 
+        } else {
+            $scope.label_popup_message = false; 
+            // post request to insert new label    
+             $http({
+                method: 'POST',
+                url: obj.siteUrl + '/user/label',
+                data: { type:'campaign', name:$scope.name },
+                headers: {
+                    'Content-type': 'application/json;charset=utf-8'
+                }
+            })
+            .then(function(response) { 
+                $window.location.reload(); 
+                // console.log(response);
+            }, function(rejection) {
+                console.log("Ohps! something wrong, please campaign send right support. Thank you!");
+            }); 
+        } 
+    }
+
+    // delete label 
+    
+    $scope.deleteNewLabel  = function () { 
+        $http({ 
+            method: 'DELETE',  
+            url: obj.siteUrl + '/user/label/'+$scope.label_id,  
+            data: { id:$scope.label_id}, 
+            headers: {
+                'Content-type': 'application/json;charset=utf-8'
+            }  
+        })
+        .then(function(response) { 
+            $window.location.reload();  
+        }, function(rejection) {
+            console.log("Ohps! something wrong, please campaign send right support. Thank you!");
+        });  
+    } 
+
+
+
+    // load label
+    $scope.loadAllByLabel = function(id) {
+         $scope.showCampaignLabelLoader[id] = true;
+      $http({ 
+            method: 'GET',  
+            url: obj.siteUrl + '/user/campaign/get/all/label/'+id,  
+            data: { id:id}, 
+            headers: {
+                'Content-type': 'application/json;charset=utf-8'
+            }   
+         }).then(function successCallback(response) {   
+            $scope.data = [];
+            for (var i = 0; i<response.data.length; i++) {
+                $scope.data.push(response.data[i]); 
+            } 
+             $scope.showCampaignLabelLoader[id] = false;
+        }, function(rejection) {
+            console.log("Ohps! something wrong, please campaign send right support. Thank you!");
+             $scope.showCampaignLabelLoader[id] = false;
+        });    
+    } 
+    
+    /**  click checkbox show label dropdown, check all and check individual */
+    $scope.checked_all = []; 
+    $scope.checked_all_model = []; 
+    $scope.selected_item = [];  
+    $scope.manageCheckStatus = function () {  
+        $scope.selected_item = [];   
+        $scope.selected_item = [];  
+        /**  push data to list of selected item  */
+        $scope.data.forEach(function(item) {      
+            if ($scope.checked_all_model[item.id] == true) {  
+                $scope.selected_item.push(item.id); 
+            } else {  
+            }
+        });     
+        /** show hide list dropdown */
+        if( $scope.selected_item.length > 0) {
+            $scope.assignLabelDropdownShow = true;
+        } else {
+            $scope.assignLabelDropdownShow = false;
+        } 
+        console.log($scope.selected_item);    
+    }  
+    /** Save assignment of label */
+    $scope.assignLabel = function(label_id) {  
+
+        $scope.assignListShow = true; 
+        
+
+        $http({ 
+            method: 'POST',  
+            url: obj.siteUrl + '/user/label-detail',  
+            data: { table_ids:$scope.selected_item, table_name:'campaigns', label_id:$scope.labelSelectedId}, 
+            headers: {
+                'Content-type': 'application/json;charset=utf-8'
+            }   
+        }).then(function successCallback(response) {   
+            alert("successfully added to a list");
+            $scope.assignListShow = false; 
+        }, function(rejection) {
+            console.log("Ohps! something wrong, please campaign send right support. Thank you!"); 
+            $scope.assignListShow = false; 
+        });      
+        console.log("save label assignment now");  
+    };
+
+
+    $scope.campaign_label_hide = [];
+    $scope.removeCampaignFromLabel = function(label_detail){
+        //console.log(" label detail id " + label_detail.id);
+        if(confirm("Are you sure you want to remove this label?")) {
+            $http({
+                method: 'POST',
+                url: obj.siteUrl + '/user/label-detail-delete',
+                data: { id:label_detail.id},
+                headers: {
+                    'Content-type': 'application/json;charset=utf-8'
+                }
+            }).then(function successCallback(response) {
+                $scope.campaign_label_hide[label_detail.id] = true;
+                //alert("successfully added to a list");
+                $scope.assignListShow = false;
+            }, function(rejection) {
+                console.log("Ohps! something wrong, please campaign send right support. Thank you!");
+                $scope.assignListShow = false;
+            });
+
+        } else {
+
+        }
+    }
+}]);

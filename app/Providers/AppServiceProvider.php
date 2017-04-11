@@ -37,29 +37,33 @@ class AppServiceProvider extends ServiceProvider
         view()->composer('*', function ($view) {
 
             if (Auth::user() ) {
- 
-                /**
-                 * Query subscription in payshortcut and store to a session
-                 */
-                Account::getLatestSubscriptionQueryToPayshortcut();
- 
-                /**
-                 * If total contact exceed with quota for specific subscription trigger this function to save new billing upgrade for queue in payshortcut.net
-                 */
-                Account::billingCheckCurrentSubscriptionTotalContactExceed();
+    
+                if(config('settings.check_billing') == true) {  
+                    /**
+                     * Query subscription in payshortcut and store to a session
+                     */
+                    Account::getLatestSubscriptionQueryToPayshortcut();
+     
+                    /**
+                     * If total contact exceed with quota for specific subscription trigger this function to save new billing upgrade for queue in payshortcut.net
+                     */
+                    Account::billingCheckCurrentSubscriptionTotalContactExceed();
 
-                /**
-                 * redirect billing page if, billing is not valid
-                 */
-                if(Account::isSubscribedAndValid() == false) {
-                    if (Route::current()->getName() != 'user.billing') {
-                        $urlBilling = url('user/billing');
-                        ?>
-                        <script>
-                            document.location = '<?php echo $urlBilling; ?>';
-                        </script> <?php
+                    /**
+                     * redirect billing page if, billing is not valid
+                     */
+                    if(Account::isSubscribedAndValid() == false) {
+                        if (Route::current()->getName() != 'user.billing') {
+                            $urlBilling = url('user/billing');
+                            ?>
+                            <script>
+                                document.location = '<?php echo $urlBilling; ?>';
+                            </script> <?php
+                        }
                     }
-                }
+                }     
+
+ 
 
                 /**
                  * Subscription information
@@ -91,8 +95,7 @@ class AppServiceProvider extends ServiceProvider
                         'userRole'=>User::getUserRole(), 
                         'sendRightProductLink'=>$sendRightProductLink
                     ]
-                );
-                
+                ); 
             }
         });
     } 

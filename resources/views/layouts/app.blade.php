@@ -87,12 +87,9 @@
                     <ul class="nav navbar-nav navbar-right"> 
                        <li> <a href="{{ url('/user/contact') }}">Contacts</a>      </li> 
                        <li> <a href="{{ url('/user/list') }}">List</a>      </li> 
-                       <li> <a href="{{ url('/user/form') }}">Form</a>       </li> 
-                       <li> <a href="{{ route('user.campaign.campaign.view') }}">Campaigns</a>       </li> 
-
-                        
-
-
+                       <li> <a href="{{ url('/user/form') }}">Form</a>       </li>  
+                       <li> <a href="{{ url('/user/report?page=campaign') }}">Report</a>       </li>  
+                       <li> <a href="{{ route('user.campaign.campaign.view') }}">Campaigns</a>       </li>  
                             <li class="dropdown hide">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
                                     Campaign  <span class="caret"></span>

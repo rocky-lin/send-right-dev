@@ -32,11 +32,14 @@ class CampaignScheduleController extends Controller
     }
     public function send()
     {     
+
         print "\n start process sending.."; 
         //  get all campaign that on time and also exceeding the time already
         $campaignScheduleReachDeadline = CampaignSchedule::getReachDeadline();  
 
         print "\ntotal reach schedule " . count($campaignScheduleReachDeadline); 
+
+
 
         if(count($campaignScheduleReachDeadline) > 0)  {  
             // get campaign template
@@ -156,7 +159,7 @@ class CampaignScheduleController extends Controller
                 } else {
                     $toMail = $campaign['sender_email'];
                 }
- // print "email " .$toMail;
+                // print "email " .$toMail;
                // exit;
                  if(Mail::to($toMail)->queue(new CampaignSendMail($contact, $campaign))) { 
 
@@ -234,23 +237,32 @@ class CampaignScheduleController extends Controller
  
             if($contacts) {  
                 foreach ($contacts['contacts'] as $id => $contact) {
-
-                    if(Mail::to($contact['email'])->queue(new CampaignSendMail($contact, $campaign))) { 
+                    $maiLResponse = 'processed';
+                    $maiLResponse = Mail::to( $contact['email'] )->queue(new CampaignSendMail($contact, $campaign)); 
+ 
+                       // print "<pre>"; 
+                       // print " email send status";
+                       // print_r($maiLResponse); 
+                       // print "</pre>"; 
+                       // exit;
+                      
+                    if($maiLResponse == 'processing') {   
+                           // Activity::create(['account_id'=>$campaign['account_id'], 'table_name'=>'campaigns','table_id'=>$campaign['campaign_id'], 'action'=>'Email successfully sent to ' . $contact['email'] . ' campaign status is ' . $campaign['repeat'] ]); 
+                        $campaignSendLog[] =  "Campaign  to " . $contact['email'] . ' processed successfully';
+                        
+                    } elseif($maiLResponse) { 
 
                         Activity::create(['account_id'=>$campaign['account_id'], 'table_name'=>'campaigns','table_id'=>$campaign['campaign_id'], 'action'=>'Email successfully sent to ' . $contact['email'] . ' campaign status is ' . $campaign['repeat'] ]);
                         //                        print "\n<br> sent campaign to " . $contact['email'] . ' campaign title ' . $campaign['title'];
-//                        $campaignSendLog[] = "Sent campaign to " . $contact['email'] . ' campaign title ' . $campaign['title'];
+                        //                        $campaignSendLog[] = "Sent campaign to " . $contact['email'] . ' campaign title ' . $campaign['title'];
                         $campaignSendLog[] =  "Sending campaign  to " . $contact['email'] . ' success.';
                     } else {
 
                         Activity::create(['account_id'=>$campaign['account_id'], 'table_name'=>'campaigns','table_id'=>$campaign['campaign_id'], 'action'=>'Email failed sending to ' . $contact['email'] . ' campaign status is ' . $campaign['repeat'] ]);
-                        //                         print "\n<br> failed campaign to " . $contact['email'] . ' campaign title ' . $campaign['title'];
-
-
-                        $campaignSendLog[] =  "Sending campaign  to " . $contact['email'] . ' failed.';
-
+                        // print "\n<br> failed campaign to " . $contact['email'] . ' campaign title ' . $campaign['title']; 
+                        $campaignSendLog[] =  "Sending campaign  to " . $contact['email'] . ' failed.'; 
                     }
-
+ 
                     $this->pauseInHalfOfSeconds();
 
                 }

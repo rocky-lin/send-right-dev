@@ -1,3 +1,83 @@
+Each user account must detect the email reporting and have each report status
+
+Plan task and its requirements about schedule
+Register with mailgun, mandril, smtp  
+Setup to the site with selected email service  
+Test send email with email service selected, and see if success of fail  
+Create database for report  
+Migrate new report database
+ 
+Create controller for report ui 
+Create model for report ui
+Create nav for report ui - 
+
+Create ui
+Develop the ui
+   - add time last sent
+   - add state status of sending
+   - add all the status from total send, arrivals, opens, clicks, unsubscribe, 
+                                  complain, arrival rate, open rate, unsubscribe rate with number below
+    - make function to be called for specific campaign all
+    - get status for report database based on campaign id
+    - create database table with last batch sent
+
+
+
+
+Make function to display proper ui for report
+
+Id, campaign id, total send, total arrival, total Opens, total Clicks, total Unsubscribe complain, total Arrivals rate, total Opens rate, total Clicks rate, total Unsubscribe rate - 10m - 5:30 
+
+Create ui for report
+
+Record total send schedule and direct send - 1hr - 6:30 
+Record total arrival, this is the response status as successfully delivered or not -  1hr - 7:30
+
+Record total open based on trigger when recipient open an email 
+Record trigger if recipient clicked anything inside email
+Record trigger if recipient clicked button unsubscribed
+Calculate total arrival rate based on total send and arrival
+Calculate total open rate based on total send and Opens
+Calculate total Clicks rate based on total send and click
+Calculate total Unsubscribe rate based on total send and Unsubscribe
+
+Record total email send
+Record total email success sent
+Record total email failed sent
+
+not sure for this "we need those number on report On schedule、Pending、Delivered(2017/03/04 12:03:45)" - state of the campaign as report
+ 
+When customer has no billing then format_number is invalid display in biling page https://www.screencast.com/t/RSGKqAN5fNS
+Create list with 1 contact show an error https://www.screencast.com/t/Y3OMrURQUx
+
+ 
+
+
+
+
+
+
+
+
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 Hi Rocky
 

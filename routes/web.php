@@ -57,7 +57,11 @@ Route::post('cash/create', 'CashController@store');
 // Route::get('admin/order/requestPay/{order_id}', 'admin\OrderController@requestPay'); 
 Route::group(['prefix' => 'user' , 'middleware' =>  'auth' ], function() {
 
+	// reporting 
+	 
+	Route::resource("report", 'ReportController');  
 
+ 
 	// billing
 
 		Route::post('billing/deactivate', 'BillingController@deactivate')->name('user.billing.deactivate');
