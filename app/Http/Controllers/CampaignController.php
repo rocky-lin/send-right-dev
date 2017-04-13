@@ -734,45 +734,41 @@ class CampaignController extends Controller
             * Get report statuses  
             */ 
             $reportArray1 = Report::where('campaign_id',  $campaigns[$index]['id'])->get();
+            
             if(count($reportArray1) > 0) {  
+                
                 $reportArray2 = $reportArray1->toArray(); 
-                $report = $reportArray2[0];  
+                $report       = $reportArray2[0];   
 
-                // $report['last_sent_date_time'] = Helper::toAgo($report['last_sent_date_time']);   
-                 
+                /**
+                 * Delivered status then do calculation 
+                 * status that display below the campaign name
+                 */
+                if($report['status'] == 'Delivered') {
+                    $report['status'] =  "Delivered(" .  human_readable_date_time($report['last_sent_date_time']) . ')' ; 
+                    $report['last_sent_date_time_ago'] =  (!empty($report['last_sent_date_time'])) ? "Sent about " . Helper::toAgo($report['last_sent_date_time']) : null;   
+                 } 
 
-
-                 if($report['status'] == 'Delivered') {
-                    // delivered 
-                        $report['status'] =  "Delivered(" .  human_readable_date_time($report['last_sent_date_time']) . ')' ; 
-                        $report['last_sent_date_time_ago'] =  (!empty($report['last_sent_date_time'])) ? "Sent about " . Helper::toAgo($report['last_sent_date_time']) : null;   
-                 } else if($report['status'] == 'On Schedule') { 
-                        
-                        // ON SCHEDULE                        
-                            
-                        
-                        // Check campaign schedule next send
-                        $report['last_sent_date_time_ago'] = 'Send this coming ' . $campaigns[$index]['next_send'];    
-                        
-
-
-                 } else {
-                    // pending  
-                    // do nothing 
-                 }
- 
+                /**
+                 * On Schedule status then do calculation 
+                 * status that display below the campaign name
+                 */
+                else if($report['status'] == 'On Schedule') {  
+                    $report['last_sent_date_time_ago'] = 'Send this coming ' . $campaigns[$index]['next_send'];     
+                }
+                
+                /**
+                 * Pending 
+                 */
+                else {
+                     // do nothing for now
+                } 
+                
+                /**
+                 * Assign updated report to a report array
+                 */
                 $campaigns[$index]['report'] = $report;  
-            }
-
-
-
-
-
-
-
-
-
-
+            } 
             /**
              * Set campaign list
              */

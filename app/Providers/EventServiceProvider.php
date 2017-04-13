@@ -25,8 +25,12 @@ class EventServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+    
+        // boot event
         parent::boot();
-
-        //
+        
+        // boot event test
+        Event::listen('campaign.send', 'App/Http/Controllers/ReportController@testEventTrigger');
+    
     }
 }

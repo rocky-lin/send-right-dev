@@ -1,13 +1,11 @@
 <?php
 
 namespace App\Http\Controllers;
-use Input;
+
 use Illuminate\Http\Request;
-use App\User;
-use App\List1;
-use Event;
-use App\Report; 
-class ReportController extends Controller
+use App\Order;
+
+class OrderController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,20 +13,8 @@ class ReportController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    { 
-        $page = Input::get('page'); 
-
-        if($page == 'campaign') { 
-
-            /**
-             * Get User lists
-             */
-            $lists = List1::where('account_id', User::getUserAccount())->get();
-
-            return view('pages/report/report-campaign', compact('lists'));
-        } else {
-            return 'Other pages';
-        } 
+    {
+        //
     }
 
     /**
@@ -97,25 +83,14 @@ class ReportController extends Controller
         //
     }
 
-
-    public function testEventRoute() {  
-        // print "test";
-        // event('campaign.send');
-    }
-    public function testEventTrigger()
-    {
-        // print "test event";
-    }
     public function debuggingTest()
     {
-        print " getAndUpdateRate " .   Report::getAndUpdateRate(299, 'total_arrival_rate'); 
-        print " getAndUpdateRate " .   Report::getAndUpdateRate(299, 'total_open_rate'); 
-        print " getAndUpdateRate " .   Report::getAndUpdateRate(299, 'total_click_rate'); 
-        print " getAndUpdateRate " .   Report::getAndUpdateRate(299, 'total_unsubscribe_rate'); 
-      
-  
-        
+         $totalRate = Order::getAndUpdateRate(300, 'total_arrival_rate'); 
+         print "Rate " . $totalRate;
+    }
 
-
+    public function test() 
+    { 
+        print "test";
     }
 }

@@ -14,7 +14,8 @@
         "doctrine/dbal": "^2.5",
         "nesbot/carbon": "^1.21",
         "laravel/cashier": "~7.0", 
-		"maras0830/laravel5-pay2go": "dev-master" 
+		"maras0830/laravel5-pay2go": "dev-master",
+        "weblee/mandrill": "dev-master"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",

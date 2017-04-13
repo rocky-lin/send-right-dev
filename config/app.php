@@ -168,6 +168,7 @@ return [
          * Package Service Providers...
          */
         Maatwebsite\Excel\ExcelServiceProvider::class,
+        Weblee\Mandrill\MandrillServiceProvider::class,
 
         //
 
@@ -236,6 +237,7 @@ return [
         'Excel' => Maatwebsite\Excel\Facades\Excel::class,
         'Input' => Illuminate\Support\Facades\Input::class,
         'Pay2Go' => Maras0830\Pay2Go\Pay2Go::class,
+        'MandrillMail'  => Weblee\Mandrill\MandrillFacade::class
     ],
 
 ];

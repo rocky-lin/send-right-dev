@@ -75,11 +75,77 @@ class Report extends Model
 	 */
  	public static function updateStatusOnSchedule($campaignId) {
   		Report::where('campaign_id', $campaignId)->update(['status'=> 'On Schedule']);  
- 	}
+ 	} 
 
-
+	/**
+	 * Set updated total send increment
+	 */
  	public static function updateTotalSend($campaignId, $addNumber)
  	{ 
  		Report::where('campaign_id', $campaignId)->increment('total_send', $addNumber);
+  	}
+ 	
+ 	/**
+ 	 * use parameter rateType below 
+ 	 * total_arrival_rate,total_open_rate, total_click_rate, total_unsubscribe_rate  
+ 	 */
+  	public static function updateCalculationRate($campaignId, $rateType) 
+  	{ 
+  		 $rateTotalName = Report::getTotalRowName($rateType); 
+  		
+  		// get from database
+ 	    $report = Report::where('campaign_id', $campaignId)->first()->toArray(); 
+ 		// dd(	$report) ;
+ 		// do do calculation of percentage	 
+ 			$percentage = Report::getPercentage($report['total_send'], $report[$rateTotalName]);
+ 	 	
+ 	 	// do update to database
+			 Report::where('campaign_id', $campaignId)->update([$rateType=>$percentage]);  
+
+		// return latest percentage
+			return $percentage; 
+  	}
+  	 
+  	 /**
+  	  * Use this parameter as row
+  	  * total_arrival_rate,total_open_rate, total_click_rate, total_unsubscribe_rate  
+      */
+  	public static function getRateDb($campaignId, $rateType) 
+  	{  
+  		// get rate direct from database and return rate 
+  		$report = Report::where('campaign_id', $campaignId)->first()->toArray();
+ 
+  		return $report[$rateType];  
+  	}
+
+  	/**
+  	 * Update total rating and get new total rating
+  	  * total_arrival_rate,total_open_rate, total_click_rate, total_unsubscribe_rate  
+  	 */
+  	public static function getAndUpdateRate($campaignId, $rateType) {
+
+  		// call updateCalculationRate
+  	    Report::updateCalculationRate($campaignId, $rateType); 
+  		
+  		// call getRateDb 
+  		return Report::getRateDb($campaignId, $rateType);
+  	}
+ 
+	private static function getPercentage($y, $x) 
+  	{ 
+		$percentage = 0.0; 
+	 	$percentage =  (double) ($x/$y)*100;  
+	 	return number_format($percentage, 2, '.', '');  
+  	}
+
+  	private static function getTotalRowName($rateRow) 
+  	{
+  		$row = [
+	  		'total_arrival_rate' => 'total_arrival', 
+	  		'total_open_rate' => 'total_open', 
+	  		'total_click_rate' => 'total_click', 
+	  		'total_unsubscribe_rate' => 'total_unsubscribe',  
+  		];  
+  		return $row[$rateRow];
   	}
 }

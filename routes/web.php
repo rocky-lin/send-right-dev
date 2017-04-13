@@ -58,7 +58,7 @@ Route::post('cash/create', 'CashController@store');
 Route::group(['prefix' => 'user' , 'middleware' =>  'auth' ], function() {
 
 	// reporting 
-	 
+    Route::get('event-test', 'ReportController@testEventRoute')->name('event.name.here');  
 	Route::resource("report", 'ReportController');  
 
  
@@ -485,9 +485,21 @@ Route::get('/sortable-div', function(){
 </html>
 	<?php 
 }); 
+
+ 
  
 Route::group(['prefix' => 'debugging' ], function() {     
+
 	Route::get('/data-tables', 'TestPagesController@dataTable'); 
+
+	Route::get('test', function(){
+		print "Test";
+	}); 
+
+	Route::get('order/rate', 'ReportController@debuggingTest'); 
+	
+		
+		
 }); 
 
 /**

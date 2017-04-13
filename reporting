@@ -1,3 +1,35 @@
+
+Record total send schedule and direct send 
+Record total arrival, this is the response status as successfully delivered or not 
+
+Record total open based on trigger when recipient open an email 
+Record trigger if recipient clicked anything inside email
+Record trigger if recipient clicked button unsubscribed
+Calculate total arrival rate based on total send and arrival
+Calculate total open rate based on total send and Opens
+Calculate total Clicks rate based on total send and click
+Calculate total Unsubscribe rate based on total send and Unsubscribe
+
+Record total email send
+Record total email success sent
+Record total email failed sent
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 Each user account must detect the email reporting and have each report status
 
 Plan task and its requirements about schedule
@@ -30,8 +62,8 @@ Id, campaign id, total send, total arrival, total Opens, total Clicks, total Uns
 
 Create ui for report
 
-Record total send schedule and direct send - 1hr - 6:30 
-Record total arrival, this is the response status as successfully delivered or not -  1hr - 7:30
+Record total send schedule and direct send  
+Record total arrival, this is the response status as successfully delivered or not 
 
 Record total open based on trigger when recipient open an email 
 Record trigger if recipient clicked anything inside email

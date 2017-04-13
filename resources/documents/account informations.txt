@@ -137,8 +137,7 @@ account Verification： 0111
 url:http://app.mobileoptin.com/
 usernmae:jesus@supershortcut.com
 password:Mog5945
-
-
+ 
 Mailchimp account 
 email: mrjesuserwinsuarez@gmail.com
 user: ransak2017

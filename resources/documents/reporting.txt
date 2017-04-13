@@ -1,3 +1,43 @@
+Check best email service
+ Mailgun, Mandrill and Sendgrid
+  1. Mailgun - It provide all what we need 
+             - has free 10,000 email monthly, currently has limit of 100/hr but this has to be increase when we have valid address or something
+             - adopt and already setup in laravel sending email
+             - friendly coding 
+  2. Mandrill - need paid mailchimp before we can access and user the service 
+            - not yet setup in laravel sending email
+            - probably its complex 
+  3. Sendgrid - didn't meet our requirements 
+ 
+ Calculate percentage of arrival rate based on arrival and total send
+ Calculate percentage of opens rate based on arrival and total Opens
+ Calculate percentage of click rate based on arrival and total click
+ Calculate percentage of unsubscribe rate based on arrival and total unsubscribe
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 Work with cronjobs triggers for level and subscription
 Create billing_cylcle_batch - 30m
 Via billing query user, limit user check by 10 batch - 1:30h  
@@ -11,11 +51,7 @@ If found that date is already passed 1 month then
 Set up cronjobs call every 1min 5min below for check subscription and auto pay monthly billing cycle - 1h
  
 
-
-
-
-
-
+Ca
 
 
 
