@@ -54,12 +54,24 @@ Route::get('/home', 'HomeController@index');
 Route::get('/home/test', 'HomeController@test');  
 Route::post('cash/create', 'CashController@store'); 
 // Route::get('admin/order', 'admin\OrderController@index');
-// Route::get('admin/order/requestPay/{order_id}', 'admin\OrderController@requestPay'); 
+// Route::get('admin/order/requestPay/{order_id}', 'admin\OrderController@requestPay');
+
+
+Route::get('user/contact/unsubscribe/{email}', 'ContactController@unsubscribe');
+
+
 Route::group(['prefix' => 'user' , 'middleware' =>  'auth' ], function() {
 
-	// reporting 
-    Route::get('event-test', 'ReportController@testEventRoute')->name('event.name.here');  
-	Route::resource("report", 'ReportController');  
+
+	// mailgun
+	Route::get('mailgun/query', 'MailGunController@executeQueriesStatusApi')->name('mailgun.execute.query');
+
+
+	// reporting
+	Route::get('event-test', 'ReportController@testEventRoute')->name('event.name.here');
+	Route::resource("report", 'ReportController');
+
+
 
  
 	// billing
@@ -282,7 +294,7 @@ Route::group(['prefix' => 'user' , 'middleware' =>  'auth' ], function() {
 	route::post('product/select/{product?}', 'ProductController@processSelectedProduct')->name('user.product.select');  
 });    
  
-Route::get('contact/unsubscribe/{email}', 'ContactController@unsubscribe'); 
+
 
 Route::get('optin/{id?}/{url?}', 'CampaignController@mobileOptinUrl')->name('user.campaign.mobile.optin.url')->where(['url'=>'[0-9a-zA-Z-]+']);
 // TESTING CODES AND ROUTES 
@@ -496,8 +508,9 @@ Route::group(['prefix' => 'debugging' ], function() {
 		print "Test";
 	}); 
 
-	Route::get('order/rate', 'ReportController@debuggingTest'); 
-	
+	Route::get('order/rate', 'ReportController@debuggingTest');
+	Route::get('mailgun/query', 'MailGunController@testQuery');
+
 		
 		
 }); 

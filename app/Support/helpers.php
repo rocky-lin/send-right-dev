@@ -186,7 +186,11 @@ if(!function_exists('redirect')) {
 		<?php
 	}
 }
-
-
+if(!function_exists('cmp')) {
+	function cmp($a, $b)
+	{
+		return $b["counter"] - $a["counter"];
+	}
+}
 
 

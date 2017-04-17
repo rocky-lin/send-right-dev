@@ -18,15 +18,22 @@ class MailGunModel extends Model
     {
         $mgClient = new Mailgun('key-e031c2be3c5c39dd733d9ded47e57dbf');
         $domain = 'mail.sendright.net';
+
         $beginDate =  date("D, d F Y, 00:00:00 -0000",strtotime( Carbon::now()->addDay(-60)));
-        $endDate   =  date("D, d F Y, 00:00:00 -0000",strtotime( Carbon::now()));
+        $endDate   =  date("D, d F Y, 00:00:00 -0000",strtotime( Carbon::now()->addDay(1)));
+
+
+        print " end date " . human_readable_date_time($endDate);
+        print " begin date " . human_readable_date_time($beginDate);
+        print "<br><br><br>";
+
         //        exit;
         //        print " biggin date " . $beginDate;
         $queryString = array(
-            'begin'        => $beginDate,
-            'end'          => time(),
-            'ascending'    => 'yes',
-            'limit'        =>  10
+            'begin'        => $endDate,
+            'end'          => $beginDate,
+            'ascending'    => 'no',
+            'limit'        =>  200
         );
 
         # Make the call to the client.
@@ -34,9 +41,10 @@ class MailGunModel extends Model
         //$queryString = array('event' => 'rejected OR failed');
         //# Make the call to the client.
         $result = $mgClient->get("$domain/events", $queryString);
-        //        print "<pre>";
-        //        print_r($result->http_response_body->items);
-        //        print "</pre>";
+//        print "<pre>";
+//        print_r($result->http_response_body->items);
+//        print "</pre>";
+//        exit;
         //        print_r($result);
         return $result->http_response_body->items;
         //        exit;
@@ -50,4 +58,5 @@ class MailGunModel extends Model
         //        return $data;
 
     }
+
 }

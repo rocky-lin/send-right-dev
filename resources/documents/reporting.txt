@@ -1,3 +1,48 @@
+Hi Rocky,
+
+Update for April 13, 2017
+
+We have roadblock with api and retrieve information log for delivered, open, click and etc..
+
+Setup the api in laravel for mailgun
+Contact support regarding the 1 and 2 questions
+Set calculation in one call only for rating
+set get campaign by title and sender
+set latest timestamp save to report in order to identify that this mailgun entry is already recorded
+Filter the result from mailgun log and only get those data we need like event, date, from etc..
+Detect if the entry is already recorded in sendright report
+Setup mail.sendright.net but still we have issue to fix like point address
+
+Please signup mailgun for sendright account and from their i can setup all we need, and so that the data is final in there,
+I can setup this tomorrow if already get the account.
+
+Todo in Saturday,
+Continue with reporting and api integration
+
+
+Thanks,
+
+Best regards,
+Jesus Erwin Suarez
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 Check best email service
  Mailgun, Mandrill and Sendgrid
   1. Mailgun - It provide all what we need 
