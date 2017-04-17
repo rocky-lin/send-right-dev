@@ -28,13 +28,25 @@ MAIL_USERNAME=a2b98b4b2ea114
 MAIL_PASSWORD=793807e9810e6f
 MAIL_ENCRYPTION=null
 
-////////// main gun
+////////// main gun sandbox
 MAIL_DRIVER=smtp
 MAIL_HOST=smtp.mailgun.org
 MAIL_PORT=2525
 MAIL_USERNAME=postmaster@sandboxbdf8cfe9c51e4f9ca2cfed956d2bae00.mailgun.org
 MAIL_PASSWORD=f04a1910800421d1d1f95f8b26025f27
 MAIL_ENCRYPTION=null
+
+
+////////// maingun mail.sendright
+MAIL_DRIVER=smtp
+MAIL_HOST=smtp.mailgun.org
+MAIL_PORT=2525
+MAIL_USERNAME=postmaster@mail.sendright.net
+MAIL_PASSWORD=7075f8f4cfe27eb054b69edbdeb89caa
+MAIL_ENCRYPTION=null
+
+
+
 
 
 PUSHER_APP_ID=

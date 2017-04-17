@@ -4,6 +4,8 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use Carbon\Carbon;
+use App\Campaign;
+use Mockery\CountValidator\Exception;
 
 class Report extends Model
 {
@@ -21,6 +23,7 @@ class Report extends Model
 		'total_open_rate',
 		'total_click_rate',
 		'total_unsubscribe_rate',
+		'last_time_stamp_counted_mailgun_entry',
 		'last_sent_date_time',
 		'status' 
  	]; 
@@ -49,7 +52,8 @@ class Report extends Model
 					 'total_arrival_rate' => 0,
 					 'total_open_rate' => 0,
 					 'total_click_rate' => 0,
-					 'total_unsubscribe_rate' => 0, 
+					 'total_unsubscribe_rate' => 0,
+					 'last_time_stamp_counted_mailgun_entry' =>'',
 					 'status' => 'Pending'
 				]); 
 	 		}  
@@ -132,10 +136,12 @@ class Report extends Model
   	}
  
 	private static function getPercentage($y, $x) 
-  	{ 
-		$percentage = 0.0; 
-	 	$percentage =  (double) ($x/$y)*100;  
-	 	return number_format($percentage, 2, '.', '');  
+  	{
+
+			$percentage = 0.0;
+			$percentage = (double)($x / $y) * 100;
+			return number_format($percentage, 2, '.', '');
+
   	}
 
   	private static function getTotalRowName($rateRow) 
@@ -148,4 +154,26 @@ class Report extends Model
   		];  
   		return $row[$rateRow];
   	}
+
+	public static function reportRatingCalculateUpdateAll($campaignId)
+	{
+		Report::getAndUpdateRate($campaignId, 'total_arrival_rate');
+		Report::getAndUpdateRate($campaignId, 'total_open_rate');
+		Report::getAndUpdateRate($campaignId, 'total_click_rate');
+		Report::getAndUpdateRate($campaignId, 'total_unsubscribe_rate');
+	}
+
+	public static function getByCampaignFromAndTitle($from, $title)
+	{
+
+		$campaign = Campaign::where('sender_email', $from)->where('title', 'like', '%'. $title)->first();
+		print "\nfound " . count($campaign);
+		if( count($campaign) > 0) {
+			return Report::where('campaign_id', $campaign->id)->first();
+		} else {
+			return false;
+		}
+
+	}
+
 }

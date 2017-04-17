@@ -33,7 +33,8 @@
         },
         "files": [
             "app/Support/helpers.php", 
-            "app/Support/Popup.php"
+            "app/Support/Popup.php",
+            "libraries/mailgun-php-master/vendor/autoload.php"
         ] 
     },
     "autoload-dev": {

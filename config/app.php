@@ -185,6 +185,8 @@ return [
         Laravel\Cashier\CashierServiceProvider::class,
         App\Http\ViewComposers\ComposerServiceProvider::class,
         Maras0830\Pay2Go\Providers\Pay2GoServiceProvider::class,
+
+
     ],
 
     /*

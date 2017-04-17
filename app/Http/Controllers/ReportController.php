@@ -111,11 +111,6 @@ class ReportController extends Controller
         print " getAndUpdateRate " .   Report::getAndUpdateRate(299, 'total_arrival_rate'); 
         print " getAndUpdateRate " .   Report::getAndUpdateRate(299, 'total_open_rate'); 
         print " getAndUpdateRate " .   Report::getAndUpdateRate(299, 'total_click_rate'); 
-        print " getAndUpdateRate " .   Report::getAndUpdateRate(299, 'total_unsubscribe_rate'); 
-      
-  
-        
-
-
+        print " getAndUpdateRate " .   Report::getAndUpdateRate(299, 'total_unsubscribe_rate');
     }
 }

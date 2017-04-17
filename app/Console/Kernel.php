@@ -16,7 +16,8 @@ class Kernel extends ConsoleKernel
         Commands\CampaignScheduleSendCommand::class,
         Commands\CampaignAutoResponseSendCommand::class,
         Commands\SubscriptionCheckCommand::class,
-        Commands\MobileOptInSubscribedCommand::class
+        Commands\MobileOptInSubscribedCommand::class,
+        Commands\CampaignReportTriggerCalculateCampaignCommand::class
     ];
 
     /**
@@ -27,8 +28,7 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        // $schedule->command('inspire')
-        //          ->hourly();
+        $schedule->command('campaign:report-trigger-calculate-campaign-status')->everyMinute();
     }
 
     /**

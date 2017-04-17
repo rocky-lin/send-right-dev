@@ -27,7 +27,8 @@ class CreateReportsTable extends Migration
             $table->double('total_open_rate')->nullable();   
             $table->double('total_click_rate')->nullable();  
             $table->double('total_unsubscribe_rate')->nullable();    
-            $table->dateTime('last_sent_date_time')->nullable();   
+            $table->string('last_time_stamp_counted_mailgun_entry')->nullable();
+            $table->dateTime('last_sent_date_time')->nullable();
             $table->string('status')->nullable();   
             $table->timestamps();
         });
